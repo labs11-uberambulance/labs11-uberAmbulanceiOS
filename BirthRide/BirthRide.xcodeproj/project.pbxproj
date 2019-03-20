@@ -10,7 +10,6 @@
 		7B2254BC2242F21800F0B1CC /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2254BB2242F21800F0B1CC /* WelcomeViewController.swift */; };
 		7B2254BE2242F37100F0B1CC /* BirthRideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2254BD2242F37100F0B1CC /* BirthRideModel.swift */; };
 		A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215501F2242CE5C00DDF613 /* AppDelegate.swift */; };
-		A21550222242CE5C00DDF613 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21550212242CE5C00DDF613 /* ViewController.swift */; };
 		A21550252242CE5C00DDF613 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21550232242CE5C00DDF613 /* Main.storyboard */; };
 		A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A21550262242CE5C00DDF613 /* Assets.xcassets */; };
 		A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */; };
@@ -25,7 +24,6 @@
 		7B2254BD2242F37100F0B1CC /* BirthRideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthRideModel.swift; sourceTree = "<group>"; };
 		A215501C2242CE5C00DDF613 /* BirthRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirthRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A215501F2242CE5C00DDF613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A21550212242CE5C00DDF613 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A21550242242CE5C00DDF613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A21550262242CE5C00DDF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A21550292242CE5C00DDF613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,7 +66,6 @@
 			children = (
 				A2E277902242D59A00F3460D /* View Controllers */,
 				A215501F2242CE5C00DDF613 /* AppDelegate.swift */,
-				A21550212242CE5C00DDF613 /* ViewController.swift */,
 				7B2254BD2242F37100F0B1CC /* BirthRideModel.swift */,
 				A21550262242CE5C00DDF613 /* Assets.xcassets */,
 				A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */,
@@ -162,7 +159,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2E277892242D56600F3460D /* DriverRegistrationViewController.swift in Sources */,
-				A21550222242CE5C00DDF613 /* ViewController.swift in Sources */,
 				A2E2778B2242D57500F3460D /* MotherRegistrationViewController.swift in Sources */,
 				A2E2778D2242D57E00F3460D /* CaretakerViewController.swift in Sources */,
 				A2E2778F2242D58900F3460D /* ChooseUserTypeViewController.swift in Sources */,

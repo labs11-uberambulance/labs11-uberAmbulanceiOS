@@ -10,10 +10,14 @@ import UIKit
 
 class WelcomeViewController: UIViewController {
     
+    @IBOutlet weak var welcomeImageOutlet: UIImageView!
     
     
+    @IBOutlet weak var welcomeLabelOutlet: UILabel!
     
+    @IBOutlet weak var textLabelOutlet: UILabel!
     
+    @IBOutlet weak var nextButtonOutlet: UIButton!
     
     
     

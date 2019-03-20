@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="-2609" y="-465"/>
         </scene>
-        <!--View Controller-->
+        <!--Welcome View Controller-->
         <scene sceneID="9gM-QZ-0ku">
             <objects>
-                <viewController id="wmx-01-rdG" sceneMemberID="viewController">
+                <viewController id="wmx-01-rdG" customClass="WelcomeViewController" customModule="BirthRide" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fq9-3X-Mfs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,6 +79,12 @@
                         <viewLayoutGuide key="safeArea" id="bKy-Ht-m1Y"/>
                     </view>
                     <navigationItem key="navigationItem" id="Cv4-T5-u73"/>
+                    <connections>
+                        <outlet property="nextButtonOutlet" destination="A9R-8C-4n8" id="7Rt-cA-xqo"/>
+                        <outlet property="textLabelOutlet" destination="p0X-hz-KbW" id="h2Q-w2-vIb"/>
+                        <outlet property="welcomeImageOutlet" destination="VCw-Nl-gwr" id="XeG-yh-cvy"/>
+                        <outlet property="welcomeLabelOutlet" destination="ns7-bW-gx0" id="N84-xi-MCO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="alC-vd-pPC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
