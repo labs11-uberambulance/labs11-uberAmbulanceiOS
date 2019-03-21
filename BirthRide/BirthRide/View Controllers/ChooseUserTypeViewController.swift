@@ -6,4 +6,19 @@
 //  Copyright © 2019 Austin Cole. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class ChooseUserTypeViewController: UIViewController {
+
+    
+    @IBAction func driverButtonTapped(_ sender: Any) {
+        
+    }
+    @IBAction func pregnantMomButtonTapped(_ sender: Any) {
+        
+    }
+    @IBAction func caregiverButtonTapped(_ sender: Any) {
+        
+    }
+    
+}
