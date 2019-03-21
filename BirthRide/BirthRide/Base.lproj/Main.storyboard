@@ -37,9 +37,6 @@
                                 <rect key="frame" x="164" y="617" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Next"/>
-                                <connections>
-                                    <segue destination="eOW-mZ-ZJm" kind="show" id="vtZ-s6-BbP"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -51,148 +48,6 @@
             </objects>
             <point key="canvasLocation" x="-1930" y="-464"/>
         </scene>
-        <!--Choose User Type View Controller-->
-        <scene sceneID="KmH-V7-xH1">
-            <objects>
-                <viewController id="eOW-mZ-ZJm" customClass="ChooseUserTypeViewController" customModule="BirthRide" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yFV-b1-R46">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="mrN-gE-CYy">
-                                <rect key="frame" x="80" y="248" width="215" height="370"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ubz-LV-0Ma">
-                                        <rect key="frame" x="0.0" y="0.0" width="215" height="98.666666666666671"/>
-                                        <state key="normal" title="Driver"/>
-                                        <connections>
-                                            <action selector="driverButtonTapped:" destination="eOW-mZ-ZJm" eventType="touchUpInside" id="XFk-L9-819"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ca2-qB-czy">
-                                        <rect key="frame" x="0.0" y="135.66666666666669" width="215" height="98.666666666666686"/>
-                                        <state key="normal" title="Pregnant Mom"/>
-                                        <connections>
-                                            <action selector="pregnantMomButtonTapped:" destination="eOW-mZ-ZJm" eventType="touchUpInside" id="ZF9-sG-dRF"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lZO-SB-mWB">
-                                        <rect key="frame" x="0.0" y="271.33333333333337" width="215" height="98.666666666666686"/>
-                                        <state key="normal" title="Caregiver"/>
-                                        <connections>
-                                            <action selector="caregiverButtonTapped:" destination="eOW-mZ-ZJm" eventType="touchUpInside" id="qNo-sL-sqI"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Fen-EN-C0k" firstAttribute="bottom" secondItem="mrN-gE-CYy" secondAttribute="bottom" constant="160" id="3QD-yv-TYY"/>
-                            <constraint firstItem="mrN-gE-CYy" firstAttribute="top" secondItem="Fen-EN-C0k" secondAttribute="top" constant="160" id="NBv-5W-Sxw"/>
-                            <constraint firstItem="Fen-EN-C0k" firstAttribute="trailing" secondItem="mrN-gE-CYy" secondAttribute="trailing" constant="80" id="Xju-Y4-GAm"/>
-                            <constraint firstItem="mrN-gE-CYy" firstAttribute="leading" secondItem="Fen-EN-C0k" secondAttribute="leading" constant="80" id="uRT-Ve-iTe"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Fen-EN-C0k"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tKb-B7-uRx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1220" y="-467"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="ljt-Ao-7Jr">
-            <objects>
-                <tabBarController id="X1R-Vo-chh" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="J1p-Jf-9qo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="dPY-oq-RZu" kind="relationship" relationship="viewControllers" id="Xww-gV-URQ"/>
-                        <segue destination="9pP-zz-aSh" kind="relationship" relationship="viewControllers" id="5RD-s4-CMu"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cyr-SU-pXw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-463" y="-468"/>
-        </scene>
-        <!--Sign In-->
-        <scene sceneID="kK2-oc-MrG">
-            <objects>
-                <viewController id="dPY-oq-RZu" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="up8-bI-5Lo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="OAuth UI Here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MJG-F4-hc0">
-                                <rect key="frame" x="132" y="396" width="110" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="87X-zJ-PqJ"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Sign In" id="lua-ah-oS4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3K7-li-9J0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="366" y="-46"/>
-        </scene>
-        <!--Sign Up-->
-        <scene sceneID="tEc-78-W76">
-            <objects>
-                <viewController id="9pP-zz-aSh" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="squ-6k-JJT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7se-rG-oDc">
-                                <rect key="frame" x="0.0" y="44" width="375" height="685"/>
-                                <connections>
-                                    <segue destination="oxu-xo-7xc" kind="embed" id="9UK-vV-tt3"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Uhv-8W-Jsd" firstAttribute="bottom" secondItem="7se-rG-oDc" secondAttribute="bottom" id="1t5-FM-JUB"/>
-                            <constraint firstItem="7se-rG-oDc" firstAttribute="top" secondItem="Uhv-8W-Jsd" secondAttribute="top" id="QnX-cy-5D8"/>
-                            <constraint firstItem="Uhv-8W-Jsd" firstAttribute="trailing" secondItem="7se-rG-oDc" secondAttribute="trailing" id="f6w-ck-DS3"/>
-                            <constraint firstItem="7se-rG-oDc" firstAttribute="leading" secondItem="Uhv-8W-Jsd" secondAttribute="leading" id="mfO-Ss-RJg"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Uhv-8W-Jsd"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Sign Up" id="WL4-eF-HWU"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rK2-cB-nH8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="365.60000000000002" y="-804.67980295566508"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="i8F-aS-aGA">
-            <objects>
-                <viewController id="oxu-xo-7xc" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Avv-Tk-skC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="685"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="tdK-LX-XuF"/>
-                    </view>
-                    <connections>
-                        <segue destination="mvI-ou-WSG" kind="custom" customClass="Empty" customModule="BirthRide" customModuleProvider="target" id="bxL-bJ-fPg"/>
-                        <segue destination="0qu-kH-AXc" kind="custom" customClass="Empty" customModule="BirthRide" customModuleProvider="target" id="tga-IT-dp0"/>
-                        <segue destination="JHX-1n-yew" kind="custom" customClass="Empty" customModule="BirthRide" customModuleProvider="target" id="iEl-F2-pMo"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pbg-5Y-hTO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="364" y="-1653"/>
-        </scene>
         <!--Mother Sign Up View Controller-->
         <scene sceneID="Lb9-Sa-2ND">
             <objects>
@@ -202,7 +57,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZuK-mm-wV7">
-                                <rect key="frame" x="100" y="164" width="175" height="180"/>
+                                <rect key="frame" x="100" y="164" width="175" height="230"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w7F-oZ-A5d">
                                         <rect key="frame" x="0.0" y="0.0" width="175" height="30"/>
@@ -228,24 +83,38 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Caretaker Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Biv-Lg-laU">
+                                        <rect key="frame" x="0.0" y="200" width="175" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJQ-oy-qRB">
-                                <rect key="frame" x="156" y="364" width="63" height="30"/>
-                                <state key="normal" title="Continue"/>
-                                <connections>
-                                    <segue destination="koy-nD-caY" kind="show" id="WdA-EH-1MW"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="VtD-tP-3UC">
+                                <rect key="frame" x="113.66666666666669" y="402" width="148" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFa-JZ-s6X">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="30"/>
+                                        <state key="normal" title="Caretaker?"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJQ-oy-qRB">
+                                        <rect key="frame" x="85.999999999999986" y="0.0" width="62.000000000000014" height="30"/>
+                                        <state key="normal" title="Continue"/>
+                                        <connections>
+                                            <segue destination="koy-nD-caY" kind="show" id="WdA-EH-1MW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="ZuK-mm-wV7" firstAttribute="leading" secondItem="k98-oJ-Qqy" secondAttribute="leading" constant="100" id="TtL-jq-Jd2"/>
-                            <constraint firstItem="k98-oJ-Qqy" firstAttribute="trailing" secondItem="ZuK-mm-wV7" secondAttribute="trailing" constant="100" id="WdL-iR-H56"/>
-                            <constraint firstItem="bJQ-oy-qRB" firstAttribute="centerX" secondItem="ZuK-mm-wV7" secondAttribute="centerX" id="YLh-8F-j8q"/>
-                            <constraint firstItem="bJQ-oy-qRB" firstAttribute="top" secondItem="ZuK-mm-wV7" secondAttribute="bottom" constant="20" id="kty-jK-JV0"/>
-                            <constraint firstItem="ZuK-mm-wV7" firstAttribute="top" secondItem="k98-oJ-Qqy" secondAttribute="top" constant="120" id="wf2-Yb-hgq"/>
-                            <constraint firstItem="bJQ-oy-qRB" firstAttribute="leading" secondItem="k98-oJ-Qqy" secondAttribute="leading" constant="156" id="x5T-UK-lm9"/>
+                            <constraint firstItem="ZuK-mm-wV7" firstAttribute="top" secondItem="k98-oJ-Qqy" secondAttribute="top" constant="120" id="01K-xl-laN"/>
+                            <constraint firstItem="ZuK-mm-wV7" firstAttribute="leading" secondItem="k98-oJ-Qqy" secondAttribute="leading" constant="100" id="0GO-VE-jqn"/>
+                            <constraint firstItem="VtD-tP-3UC" firstAttribute="top" secondItem="ZuK-mm-wV7" secondAttribute="bottom" constant="8" id="125-Fx-KU4"/>
+                            <constraint firstItem="k98-oJ-Qqy" firstAttribute="trailing" secondItem="ZuK-mm-wV7" secondAttribute="trailing" constant="100" id="Gsz-86-mNh"/>
+                            <constraint firstItem="VtD-tP-3UC" firstAttribute="centerX" secondItem="yAi-Hx-Ofz" secondAttribute="centerX" id="XMo-mK-KwJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="k98-oJ-Qqy"/>
                     </view>
@@ -578,6 +447,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qgc-Dv-OB8"/>
+        <segue reference="WdA-EH-1MW"/>
     </inferredMetricsTieBreakers>
 </document>

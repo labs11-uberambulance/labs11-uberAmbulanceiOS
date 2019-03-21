@@ -1,5 +1,5 @@
 //
-//  ConfirmRideViewController.swift
+//  UserTypeViewController.swift
 //  BirthRide
 //
 //  Created by Austin Cole on 3/21/19.
@@ -7,22 +7,24 @@
 //
 
 import UIKit
-import MapKit
 
-class ConfirmRideViewController: UIViewController {
-    //MARK: IBOutlets
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var estimatedPickupTimeLabel: UILabel!
-    @IBOutlet weak var fareLabel: UILabel!
-    @IBOutlet weak var estimatedFareLabel: UILabel!
-    
+class UserTypeViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+
     //MARK: IBActions
-    @IBAction func requestRideButtonTapped(_ sender: Any) {
+    @IBAction func driverButtonTapped(_ sender: Any) {
+        
+    }
+    @IBAction func pregnantMomButtonTapped(_ sender: Any) {
+        
+    }
+    @IBAction func caregiverButtonTapped(_ sender: Any) {
+        
     }
     
 

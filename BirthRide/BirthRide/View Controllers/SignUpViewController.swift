@@ -1,5 +1,5 @@
 //
-//  ConfirmRideViewController.swift
+//  SignUpViewController.swift
 //  BirthRide
 //
 //  Created by Austin Cole on 3/21/19.
@@ -7,24 +7,17 @@
 //
 
 import UIKit
-import MapKit
 
-class ConfirmRideViewController: UIViewController {
-    //MARK: IBOutlets
-    @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var estimatedPickupTimeLabel: UILabel!
-    @IBOutlet weak var fareLabel: UILabel!
-    @IBOutlet weak var estimatedFareLabel: UILabel!
+class SignUpViewController: UIViewController {
+    ///This is not a true containerView. Here we are going to add the view of the intended viewController as a subView
+    @IBOutlet weak var containerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    //MARK: IBActions
-    @IBAction func requestRideButtonTapped(_ sender: Any) {
-    }
-    
+
 
     /*
     // MARK: - Navigation

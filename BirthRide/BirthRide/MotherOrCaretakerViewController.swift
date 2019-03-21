@@ -1,26 +1,29 @@
 //
-//  MotherSignUpViewController.swift
+//  MotherOrCaretakerViewController.swift
 //  BirthRide
 //
-//  Created by Austin Cole on 3/20/19.
+//  Created by Austin Cole on 3/21/19.
 //  Copyright © 2019 Austin Cole. All rights reserved.
 //
 
 import UIKit
 
-class MotherSignUpViewController: UIViewController {
+class MotherOrCaretakerViewController: UIViewController {
+
     //MARK: IBOutlets
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var addressTextField: UITextField!
-    @IBOutlet weak var phoneNumberTextField: UITextField!
-    @IBOutlet weak var estimatedDueDateTextField: UITextField!
     
+    @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var villageTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var phoneNumberTextField: UITextField!
+    @IBOutlet weak var dueDateTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
+
 
     /*
     // MARK: - Navigation
