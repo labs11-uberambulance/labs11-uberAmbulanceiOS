@@ -12,8 +12,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MotherOrCaretakerViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
                 <outlet property="addressTextField" destination="W2h-IX-mpd" id="cY5-Tm-Vik"/>
+                <outlet property="caretakerTextField" destination="GSc-jJ-13N" id="JIa-tA-bqd"/>
                 <outlet property="dueDateTextField" destination="Hx4-i7-7Tp" id="E5x-Df-Fsk"/>
                 <outlet property="emailTextField" destination="Mkm-N6-RgV" id="LS1-pa-tWb"/>
+                <outlet property="hospitalTextField" destination="UBK-eI-8jI" id="f3H-eV-ie7"/>
                 <outlet property="nameTextField" destination="49n-a9-pVs" id="cdi-ZE-p8d"/>
                 <outlet property="phoneNumberTextField" destination="Wf3-d0-DJL" id="Het-zm-L85"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -31,10 +33,16 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5v-6k-Wta">
                             <rect key="frame" x="0.0" y="0.0" width="75" height="30"/>
                             <state key="normal" title="Caretaker?"/>
+                            <connections>
+                                <action selector="caretakerButtonTapped:" destination="-1" eventType="touchUpInside" id="Zsc-Uh-nAs"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DaL-qS-RCp">
                             <rect key="frame" x="81" y="0.0" width="62" height="30"/>
                             <state key="normal" title="Continue"/>
+                            <connections>
+                                <action selector="continueButtonTapped:" destination="-1" eventType="touchUpInside" id="no7-6d-LNb"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>

@@ -1,5 +1,5 @@
 //
-//  MotherOrCaretakerViewController.swift
+//  GeneralUserRegistrationViewController.swift
 //  BirthRide
 //
 //  Created by Austin Cole on 3/21/19.
@@ -8,22 +8,19 @@
 
 import UIKit
 
-class MotherOrCaretakerViewController: UIViewController {
+///This ViewController will be called when the continue button is hit on either the MotherOrCaretakerViewController or the DriverRegistrationViewController. This ViewController contains the rest of the registration fields.
+class GeneralUserRegistrationViewController: UIViewController {
 
-    //MARK: IBOutlets
-    @IBOutlet weak var nameTextField: UITextField!
-    
-    @IBOutlet weak var addressTextField: UITextField!
-    @IBOutlet weak var villageTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var phoneNumberTextField: UITextField!
-    @IBOutlet weak var dueDateTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
+    @IBAction func addPhotoButton(_ sender: Any) {
+    }
+    @IBAction func doneButton(_ sender: Any) {
+    }
+    
 
     /*
     // MARK: - Navigation

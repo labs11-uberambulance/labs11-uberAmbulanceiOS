@@ -1,26 +1,33 @@
 //
-//  DriverSignUpViewController.swift
+//  MotherOrCaretakerViewController.swift
 //  BirthRide
 //
-//  Created by Austin Cole on 3/20/19.
+//  Created by Austin Cole on 3/21/19.
 //  Copyright © 2019 Austin Cole. All rights reserved.
 //
 
 import UIKit
 
-class DriverSignUpViewController: UIViewController {
+class MotherOrCaretakerRegistrationViewController: UIViewController {
+
     //MARK: IBOutlets
     @IBOutlet weak var nameTextField: UITextField!
+    
     @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var villageTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
-    @IBOutlet weak var priceTextField: UITextField!
+    @IBOutlet weak var dueDateTextField: UITextField!
+    @IBOutlet weak var hospitalTextField: UITextField!
+    @IBOutlet weak var caretakerTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
+    @IBAction func caretakerButtonTapped(_ sender: Any) {
+    }
     @IBAction func continueButtonTapped(_ sender: Any) {
     }
     

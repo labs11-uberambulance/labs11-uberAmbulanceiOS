@@ -1,23 +1,23 @@
 //
-//  CaretakerSignUpViewController.swift
+//  RequestOrSearchDriverViewController.swift
 //  BirthRide
 //
-//  Created by Austin Cole on 3/20/19.
+//  Created by Austin Cole on 3/21/19.
 //  Copyright © 2019 Austin Cole. All rights reserved.
 //
 
 import UIKit
 
-class CaretakerSignUpViewController: UIViewController {
-    //MARK: IBOutlets
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var addressTextField: UITextField!
-    @IBOutlet weak var phoneNumberTextField: UITextField!
-    
+class RequestOrSearchDriverViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    @IBAction func requestADriverTapped(_ sender: Any) {
+    }
+    @IBAction func searchForDriverTapped(_ sender: Any) {
     }
     
 

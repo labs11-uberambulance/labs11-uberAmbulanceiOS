@@ -8,6 +8,7 @@
 
 import UIKit
 
+///This ViewController should be embedded in a TabBarViewController along with the SignInViewController
 class SignUpViewController: UIViewController {
     ///This is not a true containerView. Here we are going to add the view of the intended viewController as a subView
     @IBOutlet weak var containerView: UIView!

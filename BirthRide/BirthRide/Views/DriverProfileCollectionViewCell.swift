@@ -11,6 +11,11 @@ import UIKit
 class DriverProfileCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var driverProfilePictureImageView: UIImageView!
     @IBOutlet weak var driverNameLabel: UILabel!
-    @IBOutlet weak var driverRatingAndDistanceLabel: UILabel!
+    @IBOutlet weak var driverRatingAndEstimatedDistanceLabel: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
 }

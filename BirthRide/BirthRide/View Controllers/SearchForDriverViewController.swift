@@ -1,24 +1,26 @@
 //
-//  RequestDriverOptionsViewController.swift
+//  SearchForDriverViewController.swift
 //  BirthRide
 //
-//  Created by Austin Cole on 3/20/19.
+//  Created by Austin Cole on 3/21/19.
 //  Copyright © 2019 Austin Cole. All rights reserved.
 //
 
 import UIKit
 import MapKit
 
-class RequestDriverOptionsViewController: UIViewController {
+class SearchForDriverViewController: UIViewController {
+    
+    ///This is not a true containerView. Here we are going to add the view of the collectionViewController as a subView
+    @IBOutlet weak var driverProfileCollectionView: UICollectionView!
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var containerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
+
 
     /*
     // MARK: - Navigation

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DriverRegistrationViewController" customModule="BirthRide" customModuleProvider="target">
+            <connections>
+                <outlet property="addressTextField" destination="YfZ-iD-3Rb" id="uVF-Px-Awf"/>
+                <outlet property="bioTextView" destination="3mc-aQ-4Ia" id="tR1-kS-fVe"/>
+                <outlet property="emailTextField" destination="JHX-wN-GcY" id="VE1-2b-Mh8"/>
+                <outlet property="nameTextField" destination="5Wv-qu-EVz" id="krX-UX-Myg"/>
+                <outlet property="phoneNumberTextField" destination="DGR-qr-3Dm" id="WPQ-pJ-1I4"/>
+                <outlet property="priceTextField" destination="SUt-8T-ScW" id="Ixo-0t-uSK"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="PTi-sH-TSN">
+                    <rect key="frame" x="80" y="140" width="215" height="318"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Wv-qu-EVz">
+                            <rect key="frame" x="0.0" y="0.0" width="215" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YfZ-iD-3Rb">
+                            <rect key="frame" x="0.0" y="38" width="215" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JHX-wN-GcY">
+                            <rect key="frame" x="0.0" y="76" width="215" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DGR-qr-3Dm">
+                            <rect key="frame" x="0.0" y="114" width="215" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Price" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SUt-8T-ScW">
+                            <rect key="frame" x="0.0" y="152" width="215" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write here what you would like your passengers to know about you." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3mc-aQ-4Ia">
+                            <rect key="frame" x="0.0" y="190" width="215" height="128"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqG-DJ-UHY">
+                    <rect key="frame" x="157" y="466" width="62" height="30"/>
+                    <state key="normal" title="Continue"/>
+                    <connections>
+                        <action selector="continueButtonTapped:" destination="-1" eventType="touchUpInside" id="AS0-cG-fqh"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="PTi-sH-TSN" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2z6-fg-mKb"/>
+                <constraint firstItem="PTi-sH-TSN" firstAttribute="centerX" secondItem="fqG-DJ-UHY" secondAttribute="centerX" id="3K6-xz-zgd"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fqG-DJ-UHY" secondAttribute="bottom" constant="171" id="4kd-mG-qq1"/>
+                <constraint firstItem="PTi-sH-TSN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="120" id="8hx-2G-CSk"/>
+                <constraint firstItem="fqG-DJ-UHY" firstAttribute="top" secondItem="PTi-sH-TSN" secondAttribute="bottom" constant="8" symbolic="YES" id="8qX-yN-7Cy"/>
+                <constraint firstItem="PTi-sH-TSN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="80" id="Atl-K7-AYG"/>
+                <constraint firstItem="fqG-DJ-UHY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="157" id="u9z-qM-I9S"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>
