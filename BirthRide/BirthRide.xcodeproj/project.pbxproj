@@ -17,6 +17,8 @@
 		A278041222430390001920A0 /* RequestDriverOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041122430390001920A0 /* RequestDriverOptionsViewController.swift */; };
 		A278041422430997001920A0 /* DriverProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041322430997001920A0 /* DriverProfileCollectionViewController.swift */; };
 		A27804162243FDD0001920A0 /* DriverProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27804152243FDD0001920A0 /* DriverProfileCollectionViewCell.swift */; };
+		A278041A22443728001920A0 /* ConfirmRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041822443728001920A0 /* ConfirmRideViewController.swift */; };
+		A278041B22443728001920A0 /* ConfirmRideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278041922443728001920A0 /* ConfirmRideViewController.xib */; };
 		A2E2778F2242D58900F3460D /* ChooseUserTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2778E2242D58900F3460D /* ChooseUserTypeViewController.swift */; };
 		A2E277B82242ED9A00F3460D /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E277B72242ED9A00F3460D /* Empty.swift */; };
 		A2E277BC2242F0B500F3460D /* SignUpContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E277BB2242F0B500F3460D /* SignUpContainerViewController.swift */; };
@@ -38,6 +40,8 @@
 		A278041122430390001920A0 /* RequestDriverOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDriverOptionsViewController.swift; sourceTree = "<group>"; };
 		A278041322430997001920A0 /* DriverProfileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverProfileCollectionViewController.swift; sourceTree = "<group>"; };
 		A27804152243FDD0001920A0 /* DriverProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		A278041822443728001920A0 /* ConfirmRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmRideViewController.swift; sourceTree = "<group>"; };
+		A278041922443728001920A0 /* ConfirmRideViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmRideViewController.xib; sourceTree = "<group>"; };
 		A2E2778E2242D58900F3460D /* ChooseUserTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseUserTypeViewController.swift; sourceTree = "<group>"; };
 		A2E277B72242ED9A00F3460D /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		A2E277BB2242F0B500F3460D /* SignUpContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpContainerViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				A27804152243FDD0001920A0 /* DriverProfileCollectionViewCell.swift */,
+				A278041922443728001920A0 /* ConfirmRideViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -108,6 +113,7 @@
 				A278040F2242F806001920A0 /* GeneralUserDoneWithSignUpViewController.swift */,
 				A278041122430390001920A0 /* RequestDriverOptionsViewController.swift */,
 				A278040D2242F6E6001920A0 /* GeneralUserSignInViewController.swift */,
+				A278041822443728001920A0 /* ConfirmRideViewController.swift */,
 				A278041322430997001920A0 /* DriverProfileCollectionViewController.swift */,
 			);
 			path = "View Controllers";
@@ -174,6 +180,7 @@
 				A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */,
 				A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */,
 				A21550252242CE5C00DDF613 /* Main.storyboard in Resources */,
+				A278041B22443728001920A0 /* ConfirmRideViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A27804162243FDD0001920A0 /* DriverProfileCollectionViewCell.swift in Sources */,
+				A278041A22443728001920A0 /* ConfirmRideViewController.swift in Sources */,
 				A2E277BC2242F0B500F3460D /* SignUpContainerViewController.swift in Sources */,
 				A21550222242CE5C00DDF613 /* ViewController.swift in Sources */,
 				A2E277C22242F0D600F3460D /* DriverSignUpViewController.swift in Sources */,
