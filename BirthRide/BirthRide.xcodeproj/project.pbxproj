@@ -16,6 +16,7 @@
 		A27804102242F806001920A0 /* GeneralUserDoneWithSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278040F2242F806001920A0 /* GeneralUserDoneWithSignUpViewController.swift */; };
 		A278041222430390001920A0 /* RequestDriverOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041122430390001920A0 /* RequestDriverOptionsViewController.swift */; };
 		A278041422430997001920A0 /* DriverProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041322430997001920A0 /* DriverProfileCollectionViewController.swift */; };
+		A27804162243FDD0001920A0 /* DriverProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27804152243FDD0001920A0 /* DriverProfileCollectionViewCell.swift */; };
 		A2E2778F2242D58900F3460D /* ChooseUserTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E2778E2242D58900F3460D /* ChooseUserTypeViewController.swift */; };
 		A2E277B82242ED9A00F3460D /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E277B72242ED9A00F3460D /* Empty.swift */; };
 		A2E277BC2242F0B500F3460D /* SignUpContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E277BB2242F0B500F3460D /* SignUpContainerViewController.swift */; };
@@ -36,6 +37,7 @@
 		A278040F2242F806001920A0 /* GeneralUserDoneWithSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralUserDoneWithSignUpViewController.swift; sourceTree = "<group>"; };
 		A278041122430390001920A0 /* RequestDriverOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDriverOptionsViewController.swift; sourceTree = "<group>"; };
 		A278041322430997001920A0 /* DriverProfileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverProfileCollectionViewController.swift; sourceTree = "<group>"; };
+		A27804152243FDD0001920A0 /* DriverProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		A2E2778E2242D58900F3460D /* ChooseUserTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseUserTypeViewController.swift; sourceTree = "<group>"; };
 		A2E277B72242ED9A00F3460D /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		A2E277BB2242F0B500F3460D /* SignUpContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpContainerViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				A2E277902242D59A00F3460D /* View Controllers */,
+				A27804172243FDD9001920A0 /* Views */,
 				A215501F2242CE5C00DDF613 /* AppDelegate.swift */,
 				A21550212242CE5C00DDF613 /* ViewController.swift */,
 				A21550232242CE5C00DDF613 /* Main.storyboard */,
@@ -84,6 +87,14 @@
 				A215502B2242CE5C00DDF613 /* Info.plist */,
 			);
 			path = BirthRide;
+			sourceTree = "<group>";
+		};
+		A27804172243FDD9001920A0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A27804152243FDD0001920A0 /* DriverProfileCollectionViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A2E277902242D59A00F3460D /* View Controllers */ = {
@@ -173,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A27804162243FDD0001920A0 /* DriverProfileCollectionViewCell.swift in Sources */,
 				A2E277BC2242F0B500F3460D /* SignUpContainerViewController.swift in Sources */,
 				A21550222242CE5C00DDF613 /* ViewController.swift in Sources */,
 				A2E277C22242F0D600F3460D /* DriverSignUpViewController.swift in Sources */,

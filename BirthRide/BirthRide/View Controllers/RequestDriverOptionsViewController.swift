@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import MapKit
 
 class RequestDriverOptionsViewController: UIViewController {
-
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var containerView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

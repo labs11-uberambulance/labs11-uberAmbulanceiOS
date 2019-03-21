@@ -493,6 +493,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TUg-Fs-Pki"/>
                     </view>
+                    <connections>
+                        <outlet property="containerView" destination="b9s-lV-Ofk" id="y7M-Dm-RGN"/>
+                        <outlet property="mapView" destination="PUN-qF-MHd" id="q5o-O4-Uzk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JlB-Qe-Qon" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -513,7 +517,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" id="KSl-dO-xmk">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" id="KSl-dO-xmk" customClass="DriverProfileCollectionViewCell" customModule="BirthRide" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="148" height="129"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -540,6 +544,11 @@
                                         </label>
                                     </subviews>
                                 </view>
+                                <connections>
+                                    <outlet property="driverNameLabel" destination="f2M-PW-Uht" id="hmw-cS-HUp"/>
+                                    <outlet property="driverProfilePictureImageView" destination="VSA-Vv-nCu" id="Bwp-RG-vYd"/>
+                                    <outlet property="driverRatingAndDistanceLabel" destination="GlA-ry-XnX" id="ddE-sQ-Jth"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
