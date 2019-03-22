@@ -9,6 +9,12 @@
 import UIKit
 
 class DriverRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
+    
+    //MARK: Private Properties
+    private var driver: Driver?
+    
+    
+    //MARK: IBOutlets
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -24,6 +30,12 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     @IBAction func continueButtonTapped(_ sender: Any) {
     }
     
+    func transition(userType: UserType?) {
+        let generalUserRegistrationViewController = GeneralUserRegistrationViewController()
+        generalUserRegistrationViewController.driver = driver
+        self.present(generalUserRegistrationViewController, animated: true) {
+        }
+    }
 
     /*
     // MARK: - Navigation

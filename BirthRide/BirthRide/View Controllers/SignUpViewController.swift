@@ -38,11 +38,7 @@ class SignUpViewController: UIViewController {
             containerViewController = MotherOrCaretakerRegistrationViewController()
             guard containerViewController != nil else {return}
             containerView.addSubview((containerViewController?.view)!)
-        case .caregiver:
-            containerViewController = MotherOrCaretakerRegistrationViewController()
-            guard containerViewController != nil else {return}
-            containerView.addSubview((containerViewController?.view)!)
-            break
+
         }
     }
 

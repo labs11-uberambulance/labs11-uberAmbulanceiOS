@@ -23,9 +23,7 @@ class UserTypeViewController: UIViewController, TransitionBetweenViewControllers
     @IBAction func pregnantMomButtonTapped(_ sender: Any) {
         transition(userType: UserType.pregnantMom)
     }
-    @IBAction func caregiverButtonTapped(_ sender: Any) {
-        transition(userType: UserType.caregiver)
-    }
+
     
     func transition(userType: UserType?) {
         let tabBarController = UITabBarController()
