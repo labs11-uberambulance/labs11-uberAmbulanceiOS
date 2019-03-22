@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MotherOrCaretakerViewController" customModule="BirthRide" customModuleProvider="target">
+            <connections>
+                <outlet property="addressTextField" destination="W2h-IX-mpd" id="cY5-Tm-Vik"/>
+                <outlet property="caretakerTextField" destination="GSc-jJ-13N" id="JIa-tA-bqd"/>
+                <outlet property="dueDateTextField" destination="Hx4-i7-7Tp" id="E5x-Df-Fsk"/>
+                <outlet property="emailTextField" destination="Mkm-N6-RgV" id="LS1-pa-tWb"/>
+                <outlet property="hospitalTextField" destination="UBK-eI-8jI" id="f3H-eV-ie7"/>
+                <outlet property="nameTextField" destination="49n-a9-pVs" id="cdi-ZE-p8d"/>
+                <outlet property="phoneNumberTextField" destination="Wf3-d0-DJL" id="Het-zm-L85"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="villageTextField" destination="Wgu-Ee-kg8" id="2ke-6k-2pZ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="vWq-oQ-wYS">
+                    <rect key="frame" x="116" y="404" width="143" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5v-6k-Wta">
+                            <rect key="frame" x="0.0" y="0.0" width="75" height="30"/>
+                            <state key="normal" title="Caretaker?"/>
+                            <connections>
+                                <action selector="caretakerButtonTapped:" destination="-1" eventType="touchUpInside" id="Zsc-Uh-nAs"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DaL-qS-RCp">
+                            <rect key="frame" x="81" y="0.0" width="62" height="30"/>
+                            <state key="normal" title="Continue"/>
+                            <connections>
+                                <action selector="continueButtonTapped:" destination="-1" eventType="touchUpInside" id="no7-6d-LNb"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bqK-I8-MNL">
+                    <rect key="frame" x="100" y="100" width="175" height="296"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="49n-a9-pVs">
+                            <rect key="frame" x="0.0" y="0.0" width="175" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W2h-IX-mpd">
+                            <rect key="frame" x="0.0" y="38" width="175" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Village" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wgu-Ee-kg8">
+                            <rect key="frame" x="0.0" y="76" width="175" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mkm-N6-RgV">
+                            <rect key="frame" x="0.0" y="114" width="175" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wf3-d0-DJL">
+                            <rect key="frame" x="0.0" y="152" width="175" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Due Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hx4-i7-7Tp">
+                            <rect key="frame" x="0.0" y="190" width="175" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hospital" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UBK-eI-8jI">
+                            <rect key="frame" x="0.0" y="228" width="175" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Caretaker Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GSc-jJ-13N">
+                            <rect key="frame" x="0.0" y="266" width="175" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="bqK-I8-MNL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="80" id="0UA-cr-RHK"/>
+                <constraint firstItem="vWq-oQ-wYS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2sZ-aC-9NX"/>
+                <constraint firstItem="bqK-I8-MNL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="bAW-3p-1nD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bqK-I8-MNL" secondAttribute="trailing" constant="100" id="fLS-sY-fnX"/>
+                <constraint firstItem="vWq-oQ-wYS" firstAttribute="top" secondItem="bqK-I8-MNL" secondAttribute="bottom" constant="8" id="vcP-48-8Aw"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

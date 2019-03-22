@@ -1,19 +1,28 @@
 //
-//  RequestDriverOptionsViewController.swift
+//  ConfirmRideViewController.swift
 //  BirthRide
 //
-//  Created by Austin Cole on 3/20/19.
+//  Created by Austin Cole on 3/21/19.
 //  Copyright © 2019 Austin Cole. All rights reserved.
 //
 
 import UIKit
+import MapKit
 
-class RequestDriverOptionsViewController: UIViewController {
-
+class ConfirmRideViewController: UIViewController {
+    //MARK: IBOutlets
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var estimatedPickupTimeLabel: UILabel!
+    @IBOutlet weak var fareLabel: UILabel!
+    @IBOutlet weak var estimatedFareLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    //MARK: IBActions
+    @IBAction func requestRideButtonTapped(_ sender: Any) {
     }
     
 

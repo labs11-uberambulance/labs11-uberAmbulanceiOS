@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConfirmRideViewController" customModule="BirthRide" customModuleProvider="target">
+            <connections>
+                <outlet property="estimatedFareLabel" destination="q2P-cW-19G" id="HeW-7Z-7J8"/>
+                <outlet property="estimatedPickupTimeLabel" destination="ewj-dm-rXJ" id="N6G-TH-r0q"/>
+                <outlet property="fareLabel" destination="6Me-yO-8qx" id="e0y-C4-kea"/>
+                <outlet property="mapView" destination="v9M-hg-9JC" id="CoE-cH-gxt"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="v9M-hg-9JC">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="500" id="KZX-ox-heA"/>
+                        <constraint firstAttribute="width" constant="375" id="zCn-2Y-bDJ"/>
+                    </constraints>
+                </mapView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBG-B0-bR9">
+                    <rect key="frame" x="0.0" y="500" width="375" height="167"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewj-dm-rXJ">
+                            <rect key="frame" x="166" y="8" width="42" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Me-yO-8qx">
+                            <rect key="frame" x="166" y="37" width="42" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2P-cW-19G">
+                            <rect key="frame" x="166" y="66" width="42" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOz-oT-Yb8">
+                            <rect key="frame" x="142" y="95" width="91" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Request Ride">
+                                <color key="titleColor" red="0.65796411040000002" green="0.093575291340000005" blue="0.1132044569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="requestRideButtonTapped:" destination="-1" eventType="touchUpInside" id="gwF-Hv-V7h"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SBG-B0-bR9" secondAttribute="trailing" id="99K-ei-uge"/>
+                <constraint firstItem="v9M-hg-9JC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Mjn-b4-EWE"/>
+                <constraint firstItem="SBG-B0-bR9" firstAttribute="top" secondItem="v9M-hg-9JC" secondAttribute="bottom" id="cBU-Ki-HbY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="v9M-hg-9JC" secondAttribute="trailing" id="h98-D0-YrD"/>
+                <constraint firstItem="SBG-B0-bR9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hXC-4M-QpO"/>
+                <constraint firstItem="v9M-hg-9JC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mVm-cV-xZI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="SBG-B0-bR9" secondAttribute="bottom" id="q0h-8y-iya"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

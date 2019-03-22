@@ -1,19 +1,30 @@
 //
-//  GeneralUserSignInViewController.swift
+//  UserTypeViewController.swift
 //  BirthRide
 //
-//  Created by Austin Cole on 3/20/19.
+//  Created by Austin Cole on 3/21/19.
 //  Copyright © 2019 Austin Cole. All rights reserved.
 //
 
 import UIKit
 
-class GeneralUserSignInViewController: UIViewController {
+class UserTypeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+
+    //MARK: IBActions
+    @IBAction func driverButtonTapped(_ sender: Any) {
+        
+    }
+    @IBAction func pregnantMomButtonTapped(_ sender: Any) {
+        
+    }
+    @IBAction func caregiverButtonTapped(_ sender: Any) {
+        
     }
     
 

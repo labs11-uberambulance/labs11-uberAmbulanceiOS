@@ -1,23 +1,24 @@
 //
-//  GeneralUserDoneWithSignUpViewController.swift
+//  GeneralUserRegistrationViewController.swift
 //  BirthRide
 //
-//  Created by Austin Cole on 3/20/19.
+//  Created by Austin Cole on 3/21/19.
 //  Copyright © 2019 Austin Cole. All rights reserved.
 //
 
 import UIKit
 
-class GeneralUserDoneWithSignUpViewController: UIViewController {
+///This ViewController will be called when the continue button is hit on either the MotherOrCaretakerViewController or the DriverRegistrationViewController. This ViewController contains the rest of the registration fields.
+class GeneralUserRegistrationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    @IBAction func uploadPhotoTapped(_ sender: Any) {
+    @IBAction func addPhotoButton(_ sender: Any) {
     }
-    @IBAction func doneButtonTapped(_ sender: Any) {
+    @IBAction func doneButton(_ sender: Any) {
     }
     
 

@@ -1,19 +1,27 @@
 //
-//  SignUpContainerViewController.swift
+//  DriverRegistrationViewController.swift
 //  BirthRide
 //
-//  Created by Austin Cole on 3/20/19.
+//  Created by Austin Cole on 3/21/19.
 //  Copyright © 2019 Austin Cole. All rights reserved.
 //
 
 import UIKit
 
-class SignUpContainerViewController: UIViewController {
-
+class DriverRegistrationViewController: UIViewController {
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var phoneNumberTextField: UITextField!
+    @IBOutlet weak var priceTextField: UITextField!
+    @IBOutlet weak var bioTextView: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    @IBAction func continueButtonTapped(_ sender: Any) {
     }
     
 

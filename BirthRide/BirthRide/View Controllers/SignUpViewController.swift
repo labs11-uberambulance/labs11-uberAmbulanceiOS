@@ -1,25 +1,24 @@
 //
-//  CaretakerSignUpViewController.swift
+//  SignUpViewController.swift
 //  BirthRide
 //
-//  Created by Austin Cole on 3/20/19.
+//  Created by Austin Cole on 3/21/19.
 //  Copyright © 2019 Austin Cole. All rights reserved.
 //
 
 import UIKit
 
-class CaretakerSignUpViewController: UIViewController {
-    //MARK: IBOutlets
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var addressTextField: UITextField!
-    @IBOutlet weak var phoneNumberTextField: UITextField!
+///This ViewController should be embedded in a TabBarViewController along with the SignInViewController
+class SignUpViewController: UIViewController {
+    ///This is not a true containerView. Here we are going to add the view of the intended viewController as a subView
+    @IBOutlet weak var containerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
+
 
     /*
     // MARK: - Navigation

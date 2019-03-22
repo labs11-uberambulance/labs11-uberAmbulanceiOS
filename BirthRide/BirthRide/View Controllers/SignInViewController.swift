@@ -1,26 +1,22 @@
 //
-//  MotherSignUpViewController.swift
+//  SignInViewController.swift
 //  BirthRide
 //
-//  Created by Austin Cole on 3/20/19.
+//  Created by Austin Cole on 3/21/19.
 //  Copyright © 2019 Austin Cole. All rights reserved.
 //
 
 import UIKit
 
-class MotherSignUpViewController: UIViewController {
-    //MARK: IBOutlets
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var addressTextField: UITextField!
-    @IBOutlet weak var phoneNumberTextField: UITextField!
-    @IBOutlet weak var estimatedDueDateTextField: UITextField!
-    
+///This ViewController should be embedded in a TabBarViewController along with the SignUpViewController
+class SignInViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
+
 
     /*
     // MARK: - Navigation
