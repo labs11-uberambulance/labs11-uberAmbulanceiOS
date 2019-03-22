@@ -28,6 +28,7 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         // Do any additional setup after loading the view.
     }
     @IBAction func continueButtonTapped(_ sender: Any) {
+        transition(userType: nil)
     }
     
     func transition(userType: UserType?) {
