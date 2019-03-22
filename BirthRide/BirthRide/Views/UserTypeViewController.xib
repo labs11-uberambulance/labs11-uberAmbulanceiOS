@@ -23,24 +23,17 @@
                     <rect key="frame" x="80" y="170" width="215" height="347"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcN-0q-6im">
-                            <rect key="frame" x="0.0" y="0.0" width="215" height="102.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="215" height="163.5"/>
                             <state key="normal" title="Driver"/>
                             <connections>
                                 <action selector="driverButtonTapped:" destination="-1" eventType="touchUpInside" id="iQo-N6-9Eq"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dh-IE-elk">
-                            <rect key="frame" x="0.0" y="122.5" width="215" height="102"/>
+                            <rect key="frame" x="0.0" y="183.5" width="215" height="163.5"/>
                             <state key="normal" title="Pregnant Mom"/>
                             <connections>
                                 <action selector="pregnantMomButtonTapped:" destination="-1" eventType="touchUpInside" id="6Cp-O4-YMw"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d8g-Dy-VRK">
-                            <rect key="frame" x="0.0" y="244.5" width="215" height="102.5"/>
-                            <state key="normal" title="Caregiver"/>
-                            <connections>
-                                <action selector="caregiverButtonTapped:" destination="-1" eventType="touchUpInside" id="oNA-78-Qwf"/>
                             </connections>
                         </button>
                     </subviews>

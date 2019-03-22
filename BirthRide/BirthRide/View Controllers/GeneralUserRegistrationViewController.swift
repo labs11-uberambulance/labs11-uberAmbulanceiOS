@@ -11,6 +11,10 @@ import UIKit
 ///This ViewController will be called when the continue button is hit on either the MotherOrCaretakerViewController or the DriverRegistrationViewController. This ViewController contains the rest of the registration fields.
 class GeneralUserRegistrationViewController: UIViewController {
 
+    //MARK: Other Properties
+    var pregnantMom: PregnantMom?
+    var driver: Driver?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

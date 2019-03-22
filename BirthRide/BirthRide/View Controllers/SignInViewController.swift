@@ -10,6 +10,9 @@ import UIKit
 
 ///This ViewController should be embedded in a TabBarViewController along with the SignUpViewController
 class SignInViewController: UIViewController {
+    
+    //MARK: Other Properties
+    var userType: UserType?
 
     override func viewDidLoad() {
         super.viewDidLoad()

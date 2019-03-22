@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DriverRegistrationViewController: UIViewController {
+class DriverRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!

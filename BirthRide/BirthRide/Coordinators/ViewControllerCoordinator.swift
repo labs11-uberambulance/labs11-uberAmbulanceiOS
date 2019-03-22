@@ -9,5 +9,5 @@
 import Foundation
 
 protocol TransitionBetweenViewControllers {
-    func transition()
+    func transition(userType: UserType?)
 }

@@ -33,6 +33,7 @@
 		A27804402244505A001920A0 /* DriverProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278043E2244505A001920A0 /* DriverProfileCollectionViewCell.swift */; };
 		A27804412244505A001920A0 /* DriverProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278043F2244505A001920A0 /* DriverProfileCollectionViewCell.xib */; };
 		A2C19D952245589100FC20F0 /* ViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */; };
+		A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D9722456B8800FC20F0 /* UserType.swift */; };
 		A2E277B82242ED9A00F3460D /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E277B72242ED9A00F3460D /* Empty.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		A278043E2244505A001920A0 /* DriverProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		A278043F2244505A001920A0 /* DriverProfileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCoordinator.swift; sourceTree = "<group>"; };
+		A2C19D9722456B8800FC20F0 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		A2E277B72242ED9A00F3460D /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				A27804172243FDD9001920A0 /* Views */,
 				A2C19D962245589700FC20F0 /* Coordinators */,
 				A215501F2242CE5C00DDF613 /* AppDelegate.swift */,
+				A2C19D9722456B8800FC20F0 /* UserType.swift */,
 				A21550212242CE5C00DDF613 /* ViewController.swift */,
 				A2E277B72242ED9A00F3460D /* Empty.swift */,
 				A21550262242CE5C00DDF613 /* Assets.xcassets */,
@@ -244,6 +247,7 @@
 				A21550222242CE5C00DDF613 /* ViewController.swift in Sources */,
 				A2E277B82242ED9A00F3460D /* Empty.swift in Sources */,
 				A278042222443FF7001920A0 /* SignInViewController.swift in Sources */,
+				A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */,
 				A278042622444093001920A0 /* SignUpViewController.swift in Sources */,
 				A278041422430997001920A0 /* DriverProfileCollectionViewController.swift in Sources */,
 				A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */,
