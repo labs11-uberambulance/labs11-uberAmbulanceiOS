@@ -8,12 +8,14 @@
 
 import UIKit
 
-class MotherOrCaretakerRegistrationViewController: UIViewController {
-
+class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
+    
+    //MARK: Private Properties
+    private var pregnantMom: PregnantMom?
+    
     //MARK: IBOutlets
     @IBOutlet weak var nameTextField: UITextField!
-    
-    @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var villageTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
@@ -29,9 +31,19 @@ class MotherOrCaretakerRegistrationViewController: UIViewController {
     @IBAction func caretakerButtonTapped(_ sender: Any) {
     }
     @IBAction func continueButtonTapped(_ sender: Any) {
+        
+        transition(userType: nil)
     }
     
 
+    //MARK: TransitionBetweenViewControllers Protocol Method
+    func transition(userType: UserType?) {
+        let generalUserRegistrationViewController = GeneralUserRegistrationViewController()
+        generalUserRegistrationViewController.pregnantMom = pregnantMom
+        self.present(generalUserRegistrationViewController, animated: true) {
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

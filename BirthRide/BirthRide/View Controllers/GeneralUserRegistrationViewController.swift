@@ -9,8 +9,14 @@
 import UIKit
 
 ///This ViewController will be called when the continue button is hit on either the MotherOrCaretakerViewController or the DriverRegistrationViewController. This ViewController contains the rest of the registration fields.
-class GeneralUserRegistrationViewController: UIViewController {
+class GeneralUserRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
 
+    //MARK: Private Properties
+    var destinationVC: UIViewController?
+    //MARK: Other Properties
+    var pregnantMom: PregnantMom?
+    var driver: Driver?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,8 +25,25 @@ class GeneralUserRegistrationViewController: UIViewController {
     @IBAction func addPhotoButton(_ sender: Any) {
     }
     @IBAction func doneButton(_ sender: Any) {
+        if pregnantMom == nil {
+        transition(userType: UserType.pregnantMom)
+        } else {
+            transition(userType: driver?.userType)
+        }
     }
     
+    func transition(userType: UserType?) {
+        guard let userType = userType else {return}
+        switch userType {
+        case .driver:
+            break
+        case .pregnantMom:
+            destinationVC = RequestOrSearchDriverViewController()
+            guard let destinationVC = destinationVC else {return}
+            self.present(destinationVC, animated: true) {
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

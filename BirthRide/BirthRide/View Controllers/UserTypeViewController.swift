@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserTypeViewController: UIViewController {
+class UserTypeViewController: UIViewController, TransitionBetweenViewControllers {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,15 +18,38 @@ class UserTypeViewController: UIViewController {
 
     //MARK: IBActions
     @IBAction func driverButtonTapped(_ sender: Any) {
-        
+        transition(userType: UserType.driver)
     }
     @IBAction func pregnantMomButtonTapped(_ sender: Any) {
-        
+        transition(userType: UserType.pregnantMom)
     }
-    @IBAction func caregiverButtonTapped(_ sender: Any) {
-        
-    }
+
     
+    func transition(userType: UserType?) {
+        let tabBarController = UITabBarController()
+        
+        let signUpViewController = SignUpViewController()
+        signUpViewController.userType = userType
+        
+        let signInViewController = SignInViewController()
+        signInViewController.userType = userType
+        
+        tabBarController.addChild(signInViewController)
+        tabBarController.addChild(signUpViewController)
+        
+        let signUpItem = UITabBarItem()
+        signUpItem.title = "Sign Up"
+        let signInItem = UITabBarItem()
+        signInItem.title = "Sign In"
+        
+        signUpViewController.tabBarItem = signUpItem
+        signInViewController.tabBarItem = signInItem
+        
+        self.present(tabBarController, animated: true) {
+            signUpViewController.awakeFromNib()
+            signInViewController.awakeFromNib()
+        }
+    }
 
     /*
     // MARK: - Navigation
