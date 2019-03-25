@@ -16,8 +16,8 @@
 		A278041B22443728001920A0 /* ConfirmRideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278041922443728001920A0 /* ConfirmRideViewController.xib */; };
 		A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041C22443CC5001920A0 /* UserTypeViewController.swift */; };
 		A278041F22443CC5001920A0 /* UserTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278041D22443CC5001920A0 /* UserTypeViewController.xib */; };
-		A278042222443FF7001920A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042022443FF7001920A0 /* SignInViewController.swift */; };
-		A278042322443FF7001920A0 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042122443FF7001920A0 /* SignInViewController.xib */; };
+		A278042222443FF7001920A0 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042022443FF7001920A0 /* AuthorizationViewController.swift */; };
+		A278042322443FF7001920A0 /* AuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042122443FF7001920A0 /* AuthorizationViewController.xib */; };
 		A278042622444093001920A0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042422444093001920A0 /* SignUpViewController.swift */; };
 		A278042722444093001920A0 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042522444093001920A0 /* SignUpViewController.xib */; };
 		A278042A2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27804282244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift */; };
@@ -50,8 +50,8 @@
 		A278041922443728001920A0 /* ConfirmRideViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmRideViewController.xib; sourceTree = "<group>"; };
 		A278041C22443CC5001920A0 /* UserTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeViewController.swift; sourceTree = "<group>"; };
 		A278041D22443CC5001920A0 /* UserTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTypeViewController.xib; sourceTree = "<group>"; };
-		A278042022443FF7001920A0 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		A278042122443FF7001920A0 /* SignInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
+		A278042022443FF7001920A0 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		A278042122443FF7001920A0 /* AuthorizationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorizationViewController.xib; sourceTree = "<group>"; };
 		A278042422444093001920A0 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A278042522444093001920A0 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		A27804282244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherOrCaretakerRegistrationViewController.swift; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 				A278043E2244505A001920A0 /* DriverProfileCollectionViewCell.swift */,
 				A278041922443728001920A0 /* ConfirmRideViewController.xib */,
 				A278041D22443CC5001920A0 /* UserTypeViewController.xib */,
-				A278042122443FF7001920A0 /* SignInViewController.xib */,
+				A278042122443FF7001920A0 /* AuthorizationViewController.xib */,
 				A278042522444093001920A0 /* SignUpViewController.xib */,
 				A27804292244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib */,
 				A278042D224447A6001920A0 /* DriverRegistrationViewController.xib */,
@@ -151,7 +151,7 @@
 				A27804282244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift */,
 				A278042C224447A6001920A0 /* DriverRegistrationViewController.swift */,
 				A278043022444B97001920A0 /* GeneralUserRegistrationViewController.swift */,
-				A278042022443FF7001920A0 /* SignInViewController.swift */,
+				A278042022443FF7001920A0 /* AuthorizationViewController.swift */,
 				A278043622444D5C001920A0 /* RequestOrSearchDriverViewController.swift */,
 				A278043A22444E8E001920A0 /* SearchForDriverViewController.swift */,
 				A278041822443728001920A0 /* ConfirmRideViewController.swift */,
@@ -226,7 +226,7 @@
 				A278041F22443CC5001920A0 /* UserTypeViewController.xib in Resources */,
 				A278043D22444E8E001920A0 /* SearchForDriverViewController.xib in Resources */,
 				A278042B2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib in Resources */,
-				A278042322443FF7001920A0 /* SignInViewController.xib in Resources */,
+				A278042322443FF7001920A0 /* AuthorizationViewController.xib in Resources */,
 				A2C19D9C22459D0700FC20F0 /* Storyboard.storyboard in Resources */,
 				A278041B22443728001920A0 /* ConfirmRideViewController.xib in Resources */,
 				A278043322444B97001920A0 /* GeneralUserRegistrationViewController.xib in Resources */,
@@ -250,7 +250,7 @@
 				A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */,
 				A21550222242CE5C00DDF613 /* ViewController.swift in Sources */,
 				A2E277B82242ED9A00F3460D /* Empty.swift in Sources */,
-				A278042222443FF7001920A0 /* SignInViewController.swift in Sources */,
+				A278042222443FF7001920A0 /* AuthorizationViewController.swift in Sources */,
 				A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */,
 				A278042622444093001920A0 /* SignUpViewController.swift in Sources */,
 				A278041422430997001920A0 /* DriverProfileCollectionViewController.swift in Sources */,
