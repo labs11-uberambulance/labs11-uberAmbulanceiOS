@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.makeKeyAndVisible()
         
         //Use firebase library to configure APIs
-//        FirebaseApp.configure()
+        FirebaseApp.configure()
         return true
     }
 
