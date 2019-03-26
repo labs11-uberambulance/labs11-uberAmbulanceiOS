@@ -10,13 +10,14 @@
 #import "BirthRide-Swift.h"
 
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 
 @interface NetworkingController : NSObject
 
 ///The results of authenticateUserWithToken will be placed here if the user has previously gone through authentication in our app. If this value is non-nil, and if there is a user type, the value of genericUser should be cast as that specific user type. If this value is nil, that means that the user has not authenticated before and instead authenticateUserWithToken created a new user for us.
-@property User *genericUser;
+//@property User *genericUser;
 
 
 /**

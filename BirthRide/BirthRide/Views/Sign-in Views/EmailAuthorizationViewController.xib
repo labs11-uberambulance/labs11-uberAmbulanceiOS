@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmailAuthorizationViewController" customModule="BirthRide" customModuleProvider="target">
+            <connections>
+                <outlet property="emailTextField" destination="WP8-WG-YSm" id="DPY-Mr-tdI"/>
+                <outlet property="passwordTextField" destination="925-MO-QgU" id="bFH-Rr-hC2"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="fiQ-y6-rlp">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="uts-Ch-ixI"/>
+            <point key="canvasLocation" x="105" y="134"/>
+        </view>
+        <viewController id="VmB-X0-a4n">
+            <view key="view" contentMode="scaleToFill" id="2or-Fj-zPZ">
+                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="WP8-WG-YSm">
+                        <rect key="frame" x="16" y="30" width="208" height="30"/>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" textContentType="email"/>
+                    </textField>
+                    <textField opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="top" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="925-MO-QgU">
+                        <rect key="frame" x="16" y="68" width="208" height="30"/>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                    </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iOO-hi-ZuF">
+                        <rect key="frame" x="101.5" y="98" width="37" height="30"/>
+                        <state key="normal" title="Done"/>
+                        <connections>
+                            <action selector="doneButtonTapped:" destination="-1" eventType="touchUpInside" id="c0c-dL-9Kl"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="iOO-hi-ZuF" firstAttribute="bottom" secondItem="bJY-Jo-sO5" secondAttribute="bottom" id="1hf-D7-svj"/>
+                    <constraint firstItem="WP8-WG-YSm" firstAttribute="top" secondItem="bJY-Jo-sO5" secondAttribute="top" constant="30" id="DQU-ag-oAe"/>
+                    <constraint firstItem="WP8-WG-YSm" firstAttribute="leading" secondItem="bJY-Jo-sO5" secondAttribute="leading" constant="16" id="F44-kh-l14"/>
+                    <constraint firstItem="iOO-hi-ZuF" firstAttribute="centerX" secondItem="2or-Fj-zPZ" secondAttribute="centerX" id="Hbv-yK-avD"/>
+                    <constraint firstItem="iOO-hi-ZuF" firstAttribute="top" secondItem="925-MO-QgU" secondAttribute="bottom" id="NVu-Kq-OFK"/>
+                    <constraint firstItem="925-MO-QgU" firstAttribute="leading" secondItem="bJY-Jo-sO5" secondAttribute="leading" constant="16" id="Sex-2c-QtJ"/>
+                    <constraint firstItem="bJY-Jo-sO5" firstAttribute="trailing" secondItem="925-MO-QgU" secondAttribute="trailing" constant="16" id="TlJ-LE-SFF"/>
+                    <constraint firstItem="bJY-Jo-sO5" firstAttribute="trailing" secondItem="WP8-WG-YSm" secondAttribute="trailing" constant="16" id="XI6-2b-pEd"/>
+                    <constraint firstItem="bJY-Jo-sO5" firstAttribute="bottom" secondItem="925-MO-QgU" secondAttribute="bottom" constant="30" id="fc9-05-FCm"/>
+                    <constraint firstItem="925-MO-QgU" firstAttribute="top" secondItem="WP8-WG-YSm" secondAttribute="bottom" constant="8" id="tOg-Ve-QhA"/>
+                </constraints>
+                <viewLayoutGuide key="safeArea" id="bJY-Jo-sO5"/>
+            </view>
+            <size key="freeformSize" width="240" height="128"/>
+            <point key="canvasLocation" x="121.59999999999999" y="149.32533733133434"/>
+        </viewController>
+        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="cfg-pk-DLk">
+            <rect key="frame" x="0.0" y="0.0" width="97" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <nil key="textColor"/>
+            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+            <textInputTraits key="textInputTraits"/>
+        </textField>
+    </objects>
+</document>

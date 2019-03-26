@@ -46,7 +46,7 @@ class PregnantMom: User {
         self.dueDate = dueDate
         self.hospital = hospital
         self.caretakerName = caretakerName
-        super.init(userID: userID!, name: name, googleID: googleID!, phoneNumber: phoneNumber, userType: userType, profilePicture: profilePicture)
+        super.init(userID: userID ?? nil, name: name, googleID: googleID ?? nil, phoneNumber: phoneNumber, userType: userType, profilePicture: profilePicture)
     }
 }
 @objc

@@ -18,7 +18,7 @@
     
 }
 
-- (void)fetchrideWithToken:(NSString *)token withCompletion:(void (^)(NSError * _Nonnull))completionHandler {
+- (void)fetchRideWithToken:(NSString *)token withCompletion:(Ride * _Nonnull (^)(NSError * _Nonnull))completionHandler {
     
 }
 
