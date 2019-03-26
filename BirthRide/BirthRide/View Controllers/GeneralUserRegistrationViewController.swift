@@ -27,7 +27,7 @@ class GeneralUserRegistrationViewController: UIViewController, TransitionBetween
         if pregnantMom == nil {
         transition(userType: UserType.pregnantMom)
         } else {
-            transition(userType: driver?.userType)
+            transition(userType: UserType.driver)
         }
     }
     

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215501F2242CE5C00DDF613 /* AppDelegate.swift */; };
-		A21550222242CE5C00DDF613 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21550212242CE5C00DDF613 /* ViewController.swift */; };
 		A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A21550262242CE5C00DDF613 /* Assets.xcassets */; };
 		A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */; };
 		A278041422430997001920A0 /* DriverProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041322430997001920A0 /* DriverProfileCollectionViewController.swift */; };
@@ -37,13 +36,14 @@
 		A2C19D9C22459D0700FC20F0 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2C19D9B22459D0700FC20F0 /* Storyboard.storyboard */; };
 		A2C19DA3224A7FCF00FC20F0 /* MotherRideStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */; };
 		A2C19DA4224A7FCF00FC20F0 /* MotherRideStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2C19DA2224A7FCF00FC20F0 /* MotherRideStatusViewController.xib */; };
+		A2C19DAF224A881700FC20F0 /* ABCNetworkingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DAE224A881700FC20F0 /* ABCNetworkingController.m */; };
+		A2C19DB1224A935F00FC20F0 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DB0224A935F00FC20F0 /* Ride.swift */; };
 		A2E277B82242ED9A00F3460D /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E277B72242ED9A00F3460D /* Empty.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A215501C2242CE5C00DDF613 /* BirthRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirthRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A215501F2242CE5C00DDF613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A21550212242CE5C00DDF613 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A21550262242CE5C00DDF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A21550292242CE5C00DDF613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A215502B2242CE5C00DDF613 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -73,6 +73,10 @@
 		A2C19D9B22459D0700FC20F0 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherRideStatusViewController.swift; sourceTree = "<group>"; };
 		A2C19DA2224A7FCF00FC20F0 /* MotherRideStatusViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MotherRideStatusViewController.xib; sourceTree = "<group>"; };
+		A2C19DA9224A875000FC20F0 /* BirthRide-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BirthRide-Bridging-Header.h"; sourceTree = "<group>"; };
+		A2C19DAD224A881700FC20F0 /* ABCNetworkingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCNetworkingController.h; sourceTree = "<group>"; };
+		A2C19DAE224A881700FC20F0 /* ABCNetworkingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCNetworkingController.m; sourceTree = "<group>"; };
+		A2C19DB0224A935F00FC20F0 /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		A2E277B72242ED9A00F3460D /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,6 +97,7 @@
 				A2C19D9B22459D0700FC20F0 /* Storyboard.storyboard */,
 				A215501E2242CE5C00DDF613 /* BirthRide */,
 				A215501D2242CE5C00DDF613 /* Products */,
+				A2C19DA9224A875000FC20F0 /* BirthRide-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,8 +116,8 @@
 				A27804172243FDD9001920A0 /* Views */,
 				A2C19D962245589700FC20F0 /* Coordinators */,
 				A215501F2242CE5C00DDF613 /* AppDelegate.swift */,
-				A2C19D9722456B8800FC20F0 /* UserType.swift */,
-				A21550212242CE5C00DDF613 /* ViewController.swift */,
+				A2C19DA7224A86B700FC20F0 /* Controllers */,
+				A2C19DA8224A86C000FC20F0 /* Models */,
 				A2E277B72242ED9A00F3460D /* Empty.swift */,
 				A21550262242CE5C00DDF613 /* Assets.xcassets */,
 				A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */,
@@ -146,6 +151,24 @@
 				A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		A2C19DA7224A86B700FC20F0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A2C19DAD224A881700FC20F0 /* ABCNetworkingController.h */,
+				A2C19DAE224A881700FC20F0 /* ABCNetworkingController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A2C19DA8224A86C000FC20F0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A2C19D9722456B8800FC20F0 /* UserType.swift */,
+				A2C19DB0224A935F00FC20F0 /* Ride.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		A2E277902242D59A00F3460D /* View Controllers */ = {
@@ -198,6 +221,7 @@
 				TargetAttributes = {
 					A215501B2242CE5C00DDF613 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -253,9 +277,9 @@
 				A2C19D952245589100FC20F0 /* ViewControllerCoordinator.swift in Sources */,
 				A278043222444B97001920A0 /* GeneralUserRegistrationViewController.swift in Sources */,
 				A278042A2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift in Sources */,
+				A2C19DB1224A935F00FC20F0 /* Ride.swift in Sources */,
 				A278041A22443728001920A0 /* ConfirmRideViewController.swift in Sources */,
 				A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */,
-				A21550222242CE5C00DDF613 /* ViewController.swift in Sources */,
 				A2E277B82242ED9A00F3460D /* Empty.swift in Sources */,
 				A278042222443FF7001920A0 /* AuthorizationViewController.swift in Sources */,
 				A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */,
@@ -264,6 +288,7 @@
 				A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */,
 				A27804402244505A001920A0 /* DriverProfileCollectionViewCell.swift in Sources */,
 				A2C19DA3224A7FCF00FC20F0 /* MotherRideStatusViewController.swift in Sources */,
+				A2C19DAF224A881700FC20F0 /* ABCNetworkingController.m in Sources */,
 				A278043822444D5C001920A0 /* RequestOrSearchDriverViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,6 +427,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GM5F836QJV;
 				INFOPLIST_FILE = BirthRide/Info.plist;
@@ -411,6 +437,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.AustinCole.BirthRide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BirthRide-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -420,6 +448,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GM5F836QJV;
 				INFOPLIST_FILE = BirthRide/Info.plist;
@@ -429,6 +458,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.AustinCole.BirthRide;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BirthRide-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
