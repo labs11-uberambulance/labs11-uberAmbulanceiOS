@@ -14,7 +14,8 @@ enum UserType: String {
     case driver
 }
 
-class User {
+@objc
+class User: NSObject {
     let userID: Int?
     let name: String
     let googleID: String?
@@ -31,16 +32,16 @@ class User {
         self.profilePicture = profilePicture
     }
 }
-
+@objc
 class PregnantMom: User {
-    var description: String?
+    var locationDescription: String?
     var village: String
     var dueDate: String?
     var hospital: String?
     var caretakerName: String?
 
     init(name: String, description: String?, village: String, phoneNumber: String, dueDate: String?, hospital: String?, caretakerName: String?, profilePicture: UIImage?, userID: Int?, googleID: String?, userType: String) {
-        self.description = description
+        self.locationDescription = description
         self.village = village
         self.dueDate = dueDate
         self.hospital = hospital
@@ -48,6 +49,7 @@ class PregnantMom: User {
         super.init(userID: userID!, name: name, googleID: googleID!, phoneNumber: phoneNumber, userType: userType, profilePicture: profilePicture)
     }
 }
+@objc
 class Driver: User {
     var address: String
     var pricePerKm: Int
