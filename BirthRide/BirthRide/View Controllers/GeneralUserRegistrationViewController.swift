@@ -24,7 +24,7 @@ class GeneralUserRegistrationViewController: UIViewController, TransitionBetween
     @IBAction func addPhotoButton(_ sender: Any) {
     }
     @IBAction func doneButton(_ sender: Any) {
-        if pregnantMom == nil {
+        if pregnantMom != nil {
         transition(userType: UserType.pregnantMom)
         } else {
             transition(userType: UserType.driver)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let userTypeViewController = UserTypeViewController()
         window!.rootViewController = userTypeViewController
         window!.makeKeyAndVisible()
+        
+        //Use firebase library to configure APIs
+//        FirebaseApp.configure()
         return true
     }
 
