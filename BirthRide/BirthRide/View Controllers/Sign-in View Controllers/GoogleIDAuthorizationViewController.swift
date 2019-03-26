@@ -1,5 +1,5 @@
 //
-//  EmailAuthorizationViewController.swift
+//  GoogleIDAuthorizationViewController.swift
 //  BirthRide
 //
 //  Created by Austin Cole on 3/26/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmailAuthorizationViewController: UIViewController {
+class GoogleIDAuthorizationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
