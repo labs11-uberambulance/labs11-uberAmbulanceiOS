@@ -25,13 +25,15 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        caretakerTextField.isHidden = true
         // Do any additional setup after loading the view.
     }
     @IBAction func caretakerButtonTapped(_ sender: Any) {
+        caretakerTextField.isHidden = false
     }
     @IBAction func continueButtonTapped(_ sender: Any) {
-        
+        guard nameTextField != nil, villageTextField != nil, phoneNumberTextField != nil else {return}
+        pregnantMom = PregnantMom(name: nameTextField.text!, description: <#T##String#>, village: villageTextField.text!, phoneNumber: phoneNumberTextField.text!, dueDate: <#T##String#>, hospital: <#T##String#>, caretakerName: <#T##String#>, profilePicture: <#T##UIImage#>, userID: <#T##Int?#>, googleID: <#T##String?#>, userType: <#T##UserType#>)
         transition(userType: nil)
     }
     

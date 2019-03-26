@@ -33,13 +33,13 @@ class User {
 }
 
 class PregnantMom: User {
-    var description: String
+    var description: String?
     var village: String
-    var dueDate: String
-    var hospital: String
-    var caretakerName: String
+    var dueDate: String?
+    var hospital: String?
+    var caretakerName: String?
 
-    init(name: String, description: String, village: String, phoneNumber: String, dueDate: String, hospital: String, caretakerName: String, profilePicture: UIImage, userID: Int?, googleID: String?, userType: UserType) {
+    init(name: String, description: String?, village: String, phoneNumber: String, dueDate: String?, hospital: String?, caretakerName: String, profilePicture: UIImage?, userID: Int?, googleID: String?, userType: UserType) {
         self.description = description
         self.village = village
         self.dueDate = dueDate
