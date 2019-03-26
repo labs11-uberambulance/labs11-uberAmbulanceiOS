@@ -18,6 +18,10 @@
     
 }
 
+- (void)fetchrideWithToken:(NSString *)token withCompletion:(void (^)(NSError * _Nonnull))completionHandler {
+    
+}
+
 - (void)authenticateUserWithToken:(NSString *)token withCompletion:(void (^)(NSError * _Nonnull))completionHandler {
     
 }

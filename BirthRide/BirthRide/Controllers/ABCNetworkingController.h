@@ -9,15 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "BirthRide-Swift.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NetworkingController : NSObject
 
 - (void)fetchNearbyDriversWithLatitude:(double)latitude withLongitude:(double)longitude withCompletion:(void(^)(NSError *error))completionHandler;
 
-- (void)fetchMotherWithToken:(NSString *)token withCompletion:(PregnantMom *(^)(NSError *error))completionHandler;
+- (void)fetchMotherWithToken:(NSString *)token withCompletion:(void (^)(NSError *error))completionHandler;
 
-- (void)fetchMotherWithToken:(NSString *)token withCompletion:(Ride *(^)(NSError *error))completionHandler;
+- (void)fetchrideWithToken:(NSString *)token withCompletion:(void (^)(NSError *error))completionHandler;
 
 - (void)updateUserWithToken:(NSString *)token userType:(NSString *)userType withCompletion:(void(^)(NSError *error))completionHandler;
 

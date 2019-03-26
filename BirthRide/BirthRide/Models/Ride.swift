@@ -17,6 +17,7 @@ enum RideStatus: String {
     case complete
 }
 
+@objc
 class Ride: NSObject {
     let driver: Driver
     let mother: PregnantMom
@@ -24,10 +25,26 @@ class Ride: NSObject {
     var status: RideStatus
     let startAddress: Address
     let destinationAddress: Address
+    
+    init(driver: Driver, mother: PregnantMom, fixedPrice: Double, status: RideStatus, startAddress: Address, destinationAddress: Address) {
+        self.driver = driver
+        self.mother = mother
+        self.fixedPrice = fixedPrice
+        self.status = status
+        self.startAddress = startAddress
+        self.destinationAddress = destinationAddress
+    }
 }
 
-class Address {
-    let description: String
+@objc
+class Address: NSObject {
+    let locationDescription: String
     let village: String
     let plot: String?
+    
+    init(description: String, village: String, plot: String?) {
+        self.locationDescription = description
+        self.village = village
+        self.plot = plot
+    }
 }
