@@ -20,9 +20,9 @@ class User {
     let googleID: String?
     var phoneNumber: String
     var profilePicture: UIImage?
-    let userType: UserType
+    let userType: String
 
-    init(userID: Int?, name: String, googleID: String?, phoneNumber: String, userType: UserType, profilePicture: UIImage?) {
+    init(userID: Int?, name: String, googleID: String?, phoneNumber: String, userType: String, profilePicture: UIImage?) {
         self.userID = userID
         self.name = name
         self.googleID = googleID
@@ -39,7 +39,7 @@ class PregnantMom: User {
     var hospital: String?
     var caretakerName: String?
 
-    init(name: String, description: String?, village: String, phoneNumber: String, dueDate: String?, hospital: String?, caretakerName: String, profilePicture: UIImage?, userID: Int?, googleID: String?, userType: UserType) {
+    init(name: String, description: String?, village: String, phoneNumber: String, dueDate: String?, hospital: String?, caretakerName: String, profilePicture: UIImage?, userID: Int?, googleID: String?, userType: String) {
         self.description = description
         self.village = village
         self.dueDate = dueDate
@@ -54,7 +54,7 @@ class Driver: User {
     var isActive: Bool
     var bio: String
     
-    init(address: String, pricePerKm: Int, isActive: Bool, bio: String, userID: Int?, name: String, googlID: String?, phoneNumber: String, userType: UserType, profilePicture: UIImage?) {
+    init(address: String, pricePerKm: Int, isActive: Bool, bio: String, userID: Int?, name: String, googlID: String?, phoneNumber: String, userType: String, profilePicture: UIImage?) {
         self.address = address
         self.pricePerKm = pricePerKm
         self.isActive = isActive

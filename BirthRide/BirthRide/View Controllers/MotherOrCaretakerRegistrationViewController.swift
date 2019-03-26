@@ -33,7 +33,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     }
     @IBAction func continueButtonTapped(_ sender: Any) {
         guard nameTextField != nil, villageTextField != nil, phoneNumberTextField != nil else {return}
-        pregnantMom = PregnantMom(name: nameTextField.text!, description: <#T##String#>, village: villageTextField.text!, phoneNumber: phoneNumberTextField.text!, dueDate: <#T##String#>, hospital: <#T##String#>, caretakerName: <#T##String#>, profilePicture: <#T##UIImage#>, userID: <#T##Int?#>, googleID: <#T##String?#>, userType: <#T##UserType#>)
+        pregnantMom = PregnantMom(name: nameTextField.text!, description: nil, village: villageTextField.text!, phoneNumber: phoneNumberTextField.text!, dueDate: nil, hospital: nil, caretakerName: nil, profilePicture: nil, userID: nil, googleID: nil, userType: )
         transition(userType: nil)
     }
     
