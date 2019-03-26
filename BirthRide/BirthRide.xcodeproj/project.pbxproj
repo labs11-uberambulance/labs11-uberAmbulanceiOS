@@ -35,6 +35,8 @@
 		A2C19D952245589100FC20F0 /* ViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */; };
 		A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D9722456B8800FC20F0 /* UserType.swift */; };
 		A2C19D9C22459D0700FC20F0 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2C19D9B22459D0700FC20F0 /* Storyboard.storyboard */; };
+		A2C19DA3224A7FCF00FC20F0 /* MotherRideStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */; };
+		A2C19DA4224A7FCF00FC20F0 /* MotherRideStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2C19DA2224A7FCF00FC20F0 /* MotherRideStatusViewController.xib */; };
 		A2E277B82242ED9A00F3460D /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E277B72242ED9A00F3460D /* Empty.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +71,8 @@
 		A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCoordinator.swift; sourceTree = "<group>"; };
 		A2C19D9722456B8800FC20F0 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		A2C19D9B22459D0700FC20F0 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherRideStatusViewController.swift; sourceTree = "<group>"; };
+		A2C19DA2224A7FCF00FC20F0 /* MotherRideStatusViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MotherRideStatusViewController.xib; sourceTree = "<group>"; };
 		A2E277B72242ED9A00F3460D /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				A278043E2244505A001920A0 /* DriverProfileCollectionViewCell.swift */,
-				A278041922443728001920A0 /* ConfirmRideViewController.xib */,
 				A278041D22443CC5001920A0 /* UserTypeViewController.xib */,
 				A278042122443FF7001920A0 /* AuthorizationViewController.xib */,
 				A278042522444093001920A0 /* SignUpViewController.xib */,
@@ -130,6 +133,8 @@
 				A278043122444B97001920A0 /* GeneralUserRegistrationViewController.xib */,
 				A278043722444D5C001920A0 /* RequestOrSearchDriverViewController.xib */,
 				A278043B22444E8E001920A0 /* SearchForDriverViewController.xib */,
+				A278041922443728001920A0 /* ConfirmRideViewController.xib */,
+				A2C19DA2224A7FCF00FC20F0 /* MotherRideStatusViewController.xib */,
 				A278043F2244505A001920A0 /* DriverProfileCollectionViewCell.xib */,
 			);
 			path = Views;
@@ -155,6 +160,7 @@
 				A278043622444D5C001920A0 /* RequestOrSearchDriverViewController.swift */,
 				A278043A22444E8E001920A0 /* SearchForDriverViewController.swift */,
 				A278041822443728001920A0 /* ConfirmRideViewController.swift */,
+				A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */,
 				A278041322430997001920A0 /* DriverProfileCollectionViewController.swift */,
 			);
 			path = "View Controllers";
@@ -229,6 +235,7 @@
 				A278042322443FF7001920A0 /* AuthorizationViewController.xib in Resources */,
 				A2C19D9C22459D0700FC20F0 /* Storyboard.storyboard in Resources */,
 				A278041B22443728001920A0 /* ConfirmRideViewController.xib in Resources */,
+				A2C19DA4224A7FCF00FC20F0 /* MotherRideStatusViewController.xib in Resources */,
 				A278043322444B97001920A0 /* GeneralUserRegistrationViewController.xib in Resources */,
 				A278043922444D5C001920A0 /* RequestOrSearchDriverViewController.xib in Resources */,
 			);
@@ -256,6 +263,7 @@
 				A278041422430997001920A0 /* DriverProfileCollectionViewController.swift in Sources */,
 				A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */,
 				A27804402244505A001920A0 /* DriverProfileCollectionViewCell.swift in Sources */,
+				A2C19DA3224A7FCF00FC20F0 /* MotherRideStatusViewController.swift in Sources */,
 				A278043822444D5C001920A0 /* RequestOrSearchDriverViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
