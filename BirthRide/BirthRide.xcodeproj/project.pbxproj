@@ -33,6 +33,8 @@
 		A27804402244505A001920A0 /* DriverProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278043E2244505A001920A0 /* DriverProfileCollectionViewCell.swift */; };
 		A27804412244505A001920A0 /* DriverProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278043F2244505A001920A0 /* DriverProfileCollectionViewCell.xib */; };
 		A29282BA224AC3D800FF9C28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A29282B9224AC3D800FF9C28 /* GoogleService-Info.plist */; };
+		A29282BD224AC80500FF9C28 /* EmailAuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282BB224AC80500FF9C28 /* EmailAuthorizationViewController.swift */; };
+		A29282BE224AC80500FF9C28 /* EmailAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29282BC224AC80500FF9C28 /* EmailAuthorizationViewController.xib */; };
 		A2C19D952245589100FC20F0 /* ViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */; };
 		A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D9722456B8800FC20F0 /* UserType.swift */; };
 		A2C19DA3224A7FCF00FC20F0 /* MotherRideStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */; };
@@ -72,6 +74,8 @@
 		A278043E2244505A001920A0 /* DriverProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		A278043F2244505A001920A0 /* DriverProfileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		A29282B9224AC3D800FF9C28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A29282BB224AC80500FF9C28 /* EmailAuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthorizationViewController.swift; sourceTree = "<group>"; };
+		A29282BC224AC80500FF9C28 /* EmailAuthorizationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailAuthorizationViewController.xib; sourceTree = "<group>"; };
 		A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCoordinator.swift; sourceTree = "<group>"; };
 		A2C19D9722456B8800FC20F0 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherRideStatusViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +152,8 @@
 				A278043E2244505A001920A0 /* DriverProfileCollectionViewCell.swift */,
 				A278041D22443CC5001920A0 /* UserTypeViewController.xib */,
 				A278042122443FF7001920A0 /* AuthorizationViewController.xib */,
+				A29282BB224AC80500FF9C28 /* EmailAuthorizationViewController.swift */,
+				A29282BC224AC80500FF9C28 /* EmailAuthorizationViewController.xib */,
 				A278042522444093001920A0 /* SignUpViewController.xib */,
 				A27804292244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib */,
 				A278042D224447A6001920A0 /* DriverRegistrationViewController.xib */,
@@ -275,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A27804412244505A001920A0 /* DriverProfileCollectionViewCell.xib in Resources */,
+				A29282BE224AC80500FF9C28 /* EmailAuthorizationViewController.xib in Resources */,
 				A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */,
 				A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */,
 				A278042F224447A6001920A0 /* DriverRegistrationViewController.xib in Resources */,
@@ -361,6 +368,7 @@
 				A278042222443FF7001920A0 /* AuthorizationViewController.swift in Sources */,
 				A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */,
 				A278042622444093001920A0 /* SignUpViewController.swift in Sources */,
+				A29282BD224AC80500FF9C28 /* EmailAuthorizationViewController.swift in Sources */,
 				A278041422430997001920A0 /* DriverProfileCollectionViewController.swift in Sources */,
 				A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */,
 				A27804402244505A001920A0 /* DriverProfileCollectionViewCell.swift in Sources */,
