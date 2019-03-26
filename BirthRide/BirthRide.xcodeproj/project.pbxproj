@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215501F2242CE5C00DDF613 /* AppDelegate.swift */; };
-		A21550222242CE5C00DDF613 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21550212242CE5C00DDF613 /* ViewController.swift */; };
 		A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A21550262242CE5C00DDF613 /* Assets.xcassets */; };
 		A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */; };
 		A278041422430997001920A0 /* DriverProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041322430997001920A0 /* DriverProfileCollectionViewController.swift */; };
@@ -43,7 +42,6 @@
 /* Begin PBXFileReference section */
 		A215501C2242CE5C00DDF613 /* BirthRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirthRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A215501F2242CE5C00DDF613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A21550212242CE5C00DDF613 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A21550262242CE5C00DDF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A21550292242CE5C00DDF613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A215502B2242CE5C00DDF613 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 				A2C19D962245589700FC20F0 /* Coordinators */,
 				A215501F2242CE5C00DDF613 /* AppDelegate.swift */,
 				A2C19D9722456B8800FC20F0 /* UserType.swift */,
-				A21550212242CE5C00DDF613 /* ViewController.swift */,
 				A2E277B72242ED9A00F3460D /* Empty.swift */,
 				A21550262242CE5C00DDF613 /* Assets.xcassets */,
 				A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */,
@@ -255,7 +252,6 @@
 				A278042A2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift in Sources */,
 				A278041A22443728001920A0 /* ConfirmRideViewController.swift in Sources */,
 				A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */,
-				A21550222242CE5C00DDF613 /* ViewController.swift in Sources */,
 				A2E277B82242ED9A00F3460D /* Empty.swift in Sources */,
 				A278042222443FF7001920A0 /* AuthorizationViewController.swift in Sources */,
 				A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */,

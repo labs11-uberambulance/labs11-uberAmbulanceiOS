@@ -9,7 +9,7 @@
 import UIKit
 
 ///The type of user
-enum UserType {
+enum UserType: String {
     case pregnantMom
     case driver
 }
@@ -39,7 +39,7 @@ class PregnantMom: User {
     var hospital: String?
     var caretakerName: String?
 
-    init(name: String, description: String?, village: String, phoneNumber: String, dueDate: String?, hospital: String?, caretakerName: String, profilePicture: UIImage?, userID: Int?, googleID: String?, userType: String) {
+    init(name: String, description: String?, village: String, phoneNumber: String, dueDate: String?, hospital: String?, caretakerName: String?, profilePicture: UIImage?, userID: Int?, googleID: String?, userType: String) {
         self.description = description
         self.village = village
         self.dueDate = dueDate
