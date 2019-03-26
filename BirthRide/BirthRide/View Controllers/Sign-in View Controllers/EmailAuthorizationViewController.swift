@@ -25,9 +25,6 @@ class EmailAuthorizationViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-            // ...
-        }
     }
     
     //MARK: IBActions
