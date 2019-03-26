@@ -10,6 +10,8 @@ import UIKit
 import MapKit
 
 class ConfirmRideViewController: UIViewController {
+    //MARK: Other Properties
+    var pregnantMom: PregnantMom?
     //MARK: IBOutlets
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var estimatedPickupTimeLabel: UILabel!
@@ -23,6 +25,10 @@ class ConfirmRideViewController: UIViewController {
     }
     //MARK: IBActions
     @IBAction func requestRideButtonTapped(_ sender: Any) {
+        let destinationVC = MotherRideStatusViewController()
+        destinationVC.pregnantMom = self.pregnantMom
+        self.present(destinationVC, animated: true) {
+        }
     }
     
 

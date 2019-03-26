@@ -9,15 +9,24 @@
 import UIKit
 
 class RequestOrSearchDriverViewController: UIViewController {
-
+    //MARK: Other Properties
+    var pregnantMom: PregnantMom?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     @IBAction func requestADriverTapped(_ sender: Any) {
+        let destinationVC = ConfirmRideViewController()
+        destinationVC.pregnantMom = self.pregnantMom
     }
     @IBAction func searchForDriverTapped(_ sender: Any) {
+        let destinationVC = SearchForDriverViewController()
+        destinationVC.pregnantMom = self.pregnantMom
+        self.present(destinationVC, animated: true) {
+        }
     }
     
 

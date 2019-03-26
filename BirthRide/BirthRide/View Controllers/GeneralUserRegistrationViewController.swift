@@ -11,8 +11,7 @@ import UIKit
 ///This ViewController will be called when the continue button is hit on either the MotherOrCaretakerViewController or the DriverRegistrationViewController. This ViewController contains the rest of the registration fields.
 class GeneralUserRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
 
-    //MARK: Private Properties
-    var destinationVC: UIViewController?
+
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
     var driver: Driver?
@@ -38,8 +37,8 @@ class GeneralUserRegistrationViewController: UIViewController, TransitionBetween
         case .driver:
             break
         case .pregnantMom:
-            destinationVC = RequestOrSearchDriverViewController()
-            guard let destinationVC = destinationVC else {return}
+            let destinationVC = RequestOrSearchDriverViewController()
+            destinationVC.pregnantMom = self.pregnantMom
             self.present(destinationVC, animated: true) {
             }
         }
