@@ -18,8 +18,8 @@
 		A278041F22443CC5001920A0 /* UserTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278041D22443CC5001920A0 /* UserTypeViewController.xib */; };
 		A278042222443FF7001920A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042022443FF7001920A0 /* SignInViewController.swift */; };
 		A278042322443FF7001920A0 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042122443FF7001920A0 /* SignInViewController.xib */; };
-		A278042622444093001920A0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042422444093001920A0 /* SignUpViewController.swift */; };
-		A278042722444093001920A0 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042522444093001920A0 /* SignUpViewController.xib */; };
+		A278042622444093001920A0 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042422444093001920A0 /* OnboardingViewController.swift */; };
+		A278042722444093001920A0 /* OnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042522444093001920A0 /* OnboardingViewController.xib */; };
 		A278042A2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27804282244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift */; };
 		A278042B2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A27804292244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib */; };
 		A278042E224447A6001920A0 /* DriverRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042C224447A6001920A0 /* DriverRegistrationViewController.swift */; };
@@ -39,6 +39,9 @@
 		A29282C5224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29282C3224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib */; };
 		A29282CA224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */; };
 		A29282CB224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29282C9224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib */; };
+		A29282D2224BE22400FF9C28 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282D0224BE22400FF9C28 /* SignUpViewController.swift */; };
+		A29282D3224BE22400FF9C28 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29282D1224BE22400FF9C28 /* SignUpViewController.xib */; };
+		A29282D5224BE4AB00FF9C28 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282D4224BE4AB00FF9C28 /* AuthenticationController.swift */; };
 		A2C19D952245589100FC20F0 /* ViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */; };
 		A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D9722456B8800FC20F0 /* UserType.swift */; };
 		A2C19DA3224A7FCF00FC20F0 /* MotherRideStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */; };
@@ -47,6 +50,58 @@
 		A2C19DB1224A935F00FC20F0 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DB0224A935F00FC20F0 /* Ride.swift */; };
 		A2E277B82242ED9A00F3460D /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E277B72242ED9A00F3460D /* Empty.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A29282E6224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AF91D005B7A84731D530660701B86C10;
+			remoteInfo = FirebaseAuth;
+		};
+		A29282E8224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E544339490BF9A7904C14BD94B64C7DC;
+			remoteInfo = FirebaseCore;
+		};
+		A29282EA224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8848581FDD440C2260A73A69C2C8E4E2;
+			remoteInfo = GoogleToolboxForMac;
+		};
+		A29282EC224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A3AD26E7CCD02D2FF30C4B22DE21A40A;
+			remoteInfo = GoogleUtilities;
+		};
+		A29282EE224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B97940302A26EDD94D08D0E60395C538;
+			remoteInfo = GTMSessionFetcher;
+		};
+		A29282F0224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0A56A0973A4EBC8FDDD996F8BB35C166;
+			remoteInfo = nanopb;
+		};
+		A29282F2224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FA897E0F8D7DF8DB5E46395F4F43AEED;
+			remoteInfo = "Pods-BirthRide";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1143602FE9BE45AF1AF9D737 /* Pods-BirthRide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirthRide.release.xcconfig"; path = "Target Support Files/Pods-BirthRide/Pods-BirthRide.release.xcconfig"; sourceTree = "<group>"; };
@@ -63,8 +118,8 @@
 		A278041D22443CC5001920A0 /* UserTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTypeViewController.xib; sourceTree = "<group>"; };
 		A278042022443FF7001920A0 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		A278042122443FF7001920A0 /* SignInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
-		A278042422444093001920A0 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		A278042522444093001920A0 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
+		A278042422444093001920A0 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		A278042522444093001920A0 /* OnboardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingViewController.xib; sourceTree = "<group>"; };
 		A27804282244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherOrCaretakerRegistrationViewController.swift; sourceTree = "<group>"; };
 		A27804292244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MotherOrCaretakerRegistrationViewController.xib; sourceTree = "<group>"; };
 		A278042C224447A6001920A0 /* DriverRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverRegistrationViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +139,10 @@
 		A29282C3224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleIDAuthorizationViewController.xib; sourceTree = "<group>"; };
 		A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthorizationViewController.swift; sourceTree = "<group>"; };
 		A29282C9224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneAuthorizationViewController.xib; sourceTree = "<group>"; };
+		A29282D0224BE22400FF9C28 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		A29282D1224BE22400FF9C28 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
+		A29282D4224BE4AB00FF9C28 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
+		A29282D6224C030400FF9C28 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCoordinator.swift; sourceTree = "<group>"; };
 		A2C19D9722456B8800FC20F0 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherRideStatusViewController.swift; sourceTree = "<group>"; };
@@ -159,8 +218,8 @@
 			children = (
 				A278043E2244505A001920A0 /* DriverProfileCollectionViewCell.swift */,
 				A278041D22443CC5001920A0 /* UserTypeViewController.xib */,
-				A29282CD224AD3AF00FF9C28 /* Sign-up Views */,
-				A29282CC224AD39A00FF9C28 /* Sign-in Views */,
+				A29282CD224AD3AF00FF9C28 /* Onboarding Views */,
+				A29282CC224AD39A00FF9C28 /* Authentication Views */,
 				A278043722444D5C001920A0 /* RequestOrSearchDriverViewController.xib */,
 				A278043B22444E8E001920A0 /* SearchForDriverViewController.xib */,
 				A278041922443728001920A0 /* ConfirmRideViewController.xib */,
@@ -170,48 +229,64 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		A29282C6224ACF6B00FF9C28 /* Sign-in View Controllers */ = {
+		A29282C6224ACF6B00FF9C28 /* Authentication View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				A278042022443FF7001920A0 /* SignInViewController.swift */,
+				A29282D0224BE22400FF9C28 /* SignUpViewController.swift */,
 				A29282BB224AC80500FF9C28 /* EmailAuthorizationViewController.swift */,
 				A29282C2224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.swift */,
 				A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */,
 			);
-			path = "Sign-in View Controllers";
+			path = "Authentication View Controllers";
 			sourceTree = "<group>";
 		};
-		A29282C7224ACF7E00FF9C28 /* Sign-up View Controllers */ = {
+		A29282C7224ACF7E00FF9C28 /* Onboarding View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A278042422444093001920A0 /* SignUpViewController.swift */,
+				A278042422444093001920A0 /* OnboardingViewController.swift */,
 				A27804282244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift */,
 				A278042C224447A6001920A0 /* DriverRegistrationViewController.swift */,
 				A278043022444B97001920A0 /* GeneralUserRegistrationViewController.swift */,
 			);
-			path = "Sign-up View Controllers";
+			path = "Onboarding View Controllers";
 			sourceTree = "<group>";
 		};
-		A29282CC224AD39A00FF9C28 /* Sign-in Views */ = {
+		A29282CC224AD39A00FF9C28 /* Authentication Views */ = {
 			isa = PBXGroup;
 			children = (
 				A278042122443FF7001920A0 /* SignInViewController.xib */,
+				A29282D1224BE22400FF9C28 /* SignUpViewController.xib */,
 				A29282BC224AC80500FF9C28 /* EmailAuthorizationViewController.xib */,
 				A29282C3224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib */,
 				A29282C9224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib */,
 			);
-			path = "Sign-in Views";
+			path = "Authentication Views";
 			sourceTree = "<group>";
 		};
-		A29282CD224AD3AF00FF9C28 /* Sign-up Views */ = {
+		A29282CD224AD3AF00FF9C28 /* Onboarding Views */ = {
 			isa = PBXGroup;
 			children = (
-				A278042522444093001920A0 /* SignUpViewController.xib */,
+				A278042522444093001920A0 /* OnboardingViewController.xib */,
 				A27804292244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib */,
 				A278042D224447A6001920A0 /* DriverRegistrationViewController.xib */,
 				A278043122444B97001920A0 /* GeneralUserRegistrationViewController.xib */,
 			);
-			path = "Sign-up Views";
+			path = "Onboarding Views";
+			sourceTree = "<group>";
+		};
+		A29282D7224C030400FF9C28 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A29282E7224C030400FF9C28 /* FirebaseAuth.framework */,
+				A29282E9224C030400FF9C28 /* FirebaseCore.framework */,
+				A29282EB224C030400FF9C28 /* GoogleToolboxForMac.framework */,
+				A29282ED224C030400FF9C28 /* GoogleUtilities.framework */,
+				A29282EF224C030400FF9C28 /* GTMSessionFetcher.framework */,
+				A29282F1224C030400FF9C28 /* nanopb.framework */,
+				A29282F3224C030400FF9C28 /* Pods_BirthRide.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A2C19D962245589700FC20F0 /* Coordinators */ = {
@@ -227,6 +302,7 @@
 			children = (
 				A2C19DAD224A881700FC20F0 /* ABCNetworkingController.h */,
 				A2C19DAE224A881700FC20F0 /* ABCNetworkingController.m */,
+				A29282D4224BE4AB00FF9C28 /* AuthenticationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -244,8 +320,8 @@
 			isa = PBXGroup;
 			children = (
 				A278041C22443CC5001920A0 /* UserTypeViewController.swift */,
-				A29282C7224ACF7E00FF9C28 /* Sign-up View Controllers */,
-				A29282C6224ACF6B00FF9C28 /* Sign-in View Controllers */,
+				A29282C7224ACF7E00FF9C28 /* Onboarding View Controllers */,
+				A29282C6224ACF6B00FF9C28 /* Authentication View Controllers */,
 				A278043622444D5C001920A0 /* RequestOrSearchDriverViewController.swift */,
 				A278043A22444E8E001920A0 /* SearchForDriverViewController.swift */,
 				A278041822443728001920A0 /* ConfirmRideViewController.swift */,
@@ -258,6 +334,7 @@
 		B26E3D48CE5DBFB902640CCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A29282D6224C030400FF9C28 /* Pods.xcodeproj */,
 				A439B999719DA29D34AE9586 /* Pods_BirthRide.framework */,
 			);
 			name = Frameworks;
@@ -275,6 +352,7 @@
 				A21550192242CE5C00DDF613 /* Frameworks */,
 				A215501A2242CE5C00DDF613 /* Resources */,
 				82F08386F5AFA178727AC80B /* [CP] Embed Pods Frameworks */,
+				206A6FA4904CFFD569AD6DB4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -312,12 +390,70 @@
 			mainGroup = A21550132242CE5C00DDF613;
 			productRefGroup = A215501D2242CE5C00DDF613 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A29282D7224C030400FF9C28 /* Products */;
+					ProjectRef = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A215501B2242CE5C00DDF613 /* BirthRide */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A29282E7224C030400FF9C28 /* FirebaseAuth.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseAuth.framework;
+			remoteRef = A29282E6224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A29282E9224C030400FF9C28 /* FirebaseCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseCore.framework;
+			remoteRef = A29282E8224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A29282EB224C030400FF9C28 /* GoogleToolboxForMac.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleToolboxForMac.framework;
+			remoteRef = A29282EA224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A29282ED224C030400FF9C28 /* GoogleUtilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleUtilities.framework;
+			remoteRef = A29282EC224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A29282EF224C030400FF9C28 /* GTMSessionFetcher.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GTMSessionFetcher.framework;
+			remoteRef = A29282EE224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A29282F1224C030400FF9C28 /* nanopb.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = nanopb.framework;
+			remoteRef = A29282F0224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A29282F3224C030400FF9C28 /* Pods_BirthRide.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_BirthRide.framework;
+			remoteRef = A29282F2224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A215501A2242CE5C00DDF613 /* Resources */ = {
@@ -328,10 +464,11 @@
 				A29282BE224AC80500FF9C28 /* EmailAuthorizationViewController.xib in Resources */,
 				A29282CB224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib in Resources */,
 				A29282C5224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib in Resources */,
+				A29282D3224BE22400FF9C28 /* SignUpViewController.xib in Resources */,
 				A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */,
 				A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */,
 				A278042F224447A6001920A0 /* DriverRegistrationViewController.xib in Resources */,
-				A278042722444093001920A0 /* SignUpViewController.xib in Resources */,
+				A278042722444093001920A0 /* OnboardingViewController.xib in Resources */,
 				A278041F22443CC5001920A0 /* UserTypeViewController.xib in Resources */,
 				A278043D22444E8E001920A0 /* SearchForDriverViewController.xib in Resources */,
 				A278042B2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib in Resources */,
@@ -347,6 +484,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		206A6FA4904CFFD569AD6DB4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BirthRide/Pods-BirthRide-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BirthRide/Pods-BirthRide-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		82F08386F5AFA178727AC80B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -357,6 +516,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-BirthRide/Pods-BirthRide-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -365,6 +525,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -402,6 +563,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A29282D2224BE22400FF9C28 /* SignUpViewController.swift in Sources */,
+				A29282D5224BE4AB00FF9C28 /* AuthenticationController.swift in Sources */,
 				A29282CA224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift in Sources */,
 				A278042E224447A6001920A0 /* DriverRegistrationViewController.swift in Sources */,
 				A278043C22444E8E001920A0 /* SearchForDriverViewController.swift in Sources */,
@@ -415,7 +578,7 @@
 				A2E277B82242ED9A00F3460D /* Empty.swift in Sources */,
 				A278042222443FF7001920A0 /* SignInViewController.swift in Sources */,
 				A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */,
-				A278042622444093001920A0 /* SignUpViewController.swift in Sources */,
+				A278042622444093001920A0 /* OnboardingViewController.swift in Sources */,
 				A29282BD224AC80500FF9C28 /* EmailAuthorizationViewController.swift in Sources */,
 				A278041422430997001920A0 /* DriverProfileCollectionViewController.swift in Sources */,
 				A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */,
