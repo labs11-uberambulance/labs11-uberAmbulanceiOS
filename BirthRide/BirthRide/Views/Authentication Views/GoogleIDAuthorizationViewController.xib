@@ -11,8 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GoogleIDAuthorizationViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
-                <outlet property="gmailTextField" destination="SuQ-d6-DaI" id="zzL-8d-5Lt"/>
-                <outlet property="passwordTextField" destination="6d7-AQ-rCb" id="b7i-I8-nL7"/>
+                <outlet property="gidSignInView" destination="cTs-0E-fyf" id="fqp-IZ-Qvt"/>
                 <outlet property="view" destination="ead-hv-cWT" id="mTn-rq-22q"/>
             </connections>
         </placeholder>
@@ -21,38 +20,12 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SdI-ty-PMo">
-                    <rect key="frame" x="20" y="280.5" width="335" height="106"/>
-                    <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Gmail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SuQ-d6-DaI">
-                            <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6d7-AQ-rCb">
-                            <rect key="frame" x="0.0" y="38" width="335" height="30"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0no-DD-9tA">
-                            <rect key="frame" x="0.0" y="76" width="335" height="30"/>
-                            <state key="normal" title="Done"/>
-                            <connections>
-                                <action selector="doneButtonClicked:" destination="-1" eventType="touchUpInside" id="20Q-DE-1S5"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                </stackView>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cTs-0E-fyf" customClass="GIDSignInButton" customModule="BirthRide" customModuleProvider="target">
+                    <rect key="frame" x="67" y="269" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-            <constraints>
-                <constraint firstItem="SdI-ty-PMo" firstAttribute="centerY" secondItem="ead-hv-cWT" secondAttribute="centerY" id="9xj-qJ-4XH"/>
-                <constraint firstItem="gx0-ED-qm2" firstAttribute="trailing" secondItem="SdI-ty-PMo" secondAttribute="trailing" constant="20" id="NIJ-TV-0l0"/>
-                <constraint firstItem="SdI-ty-PMo" firstAttribute="leading" secondItem="gx0-ED-qm2" secondAttribute="leading" constant="20" id="oBD-6l-feU"/>
-                <constraint firstItem="SdI-ty-PMo" firstAttribute="centerX" secondItem="ead-hv-cWT" secondAttribute="centerX" id="v6R-YZ-mDi"/>
-            </constraints>
             <viewLayoutGuide key="safeArea" id="gx0-ED-qm2"/>
             <point key="canvasLocation" x="65" y="-133"/>
         </view>

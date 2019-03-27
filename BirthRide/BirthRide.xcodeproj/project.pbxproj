@@ -51,6 +51,58 @@
 		A2E277B82242ED9A00F3460D /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E277B72242ED9A00F3460D /* Empty.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A29282E6224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AF91D005B7A84731D530660701B86C10;
+			remoteInfo = FirebaseAuth;
+		};
+		A29282E8224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E544339490BF9A7904C14BD94B64C7DC;
+			remoteInfo = FirebaseCore;
+		};
+		A29282EA224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8848581FDD440C2260A73A69C2C8E4E2;
+			remoteInfo = GoogleToolboxForMac;
+		};
+		A29282EC224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A3AD26E7CCD02D2FF30C4B22DE21A40A;
+			remoteInfo = GoogleUtilities;
+		};
+		A29282EE224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B97940302A26EDD94D08D0E60395C538;
+			remoteInfo = GTMSessionFetcher;
+		};
+		A29282F0224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0A56A0973A4EBC8FDDD996F8BB35C166;
+			remoteInfo = nanopb;
+		};
+		A29282F2224C030400FF9C28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FA897E0F8D7DF8DB5E46395F4F43AEED;
+			remoteInfo = "Pods-BirthRide";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		1143602FE9BE45AF1AF9D737 /* Pods-BirthRide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirthRide.release.xcconfig"; path = "Target Support Files/Pods-BirthRide/Pods-BirthRide.release.xcconfig"; sourceTree = "<group>"; };
 		89CC52E63F826F30E55F94FC /* Pods-BirthRide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirthRide.debug.xcconfig"; path = "Target Support Files/Pods-BirthRide/Pods-BirthRide.debug.xcconfig"; sourceTree = "<group>"; };
@@ -90,6 +142,7 @@
 		A29282D0224BE22400FF9C28 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A29282D1224BE22400FF9C28 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		A29282D4224BE4AB00FF9C28 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
+		A29282D6224C030400FF9C28 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCoordinator.swift; sourceTree = "<group>"; };
 		A2C19D9722456B8800FC20F0 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherRideStatusViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +275,20 @@
 			path = "Onboarding Views";
 			sourceTree = "<group>";
 		};
+		A29282D7224C030400FF9C28 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A29282E7224C030400FF9C28 /* FirebaseAuth.framework */,
+				A29282E9224C030400FF9C28 /* FirebaseCore.framework */,
+				A29282EB224C030400FF9C28 /* GoogleToolboxForMac.framework */,
+				A29282ED224C030400FF9C28 /* GoogleUtilities.framework */,
+				A29282EF224C030400FF9C28 /* GTMSessionFetcher.framework */,
+				A29282F1224C030400FF9C28 /* nanopb.framework */,
+				A29282F3224C030400FF9C28 /* Pods_BirthRide.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A2C19D962245589700FC20F0 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +334,7 @@
 		B26E3D48CE5DBFB902640CCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A29282D6224C030400FF9C28 /* Pods.xcodeproj */,
 				A439B999719DA29D34AE9586 /* Pods_BirthRide.framework */,
 			);
 			name = Frameworks;
@@ -322,12 +390,70 @@
 			mainGroup = A21550132242CE5C00DDF613;
 			productRefGroup = A215501D2242CE5C00DDF613 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A29282D7224C030400FF9C28 /* Products */;
+					ProjectRef = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A215501B2242CE5C00DDF613 /* BirthRide */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A29282E7224C030400FF9C28 /* FirebaseAuth.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseAuth.framework;
+			remoteRef = A29282E6224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A29282E9224C030400FF9C28 /* FirebaseCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseCore.framework;
+			remoteRef = A29282E8224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A29282EB224C030400FF9C28 /* GoogleToolboxForMac.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleToolboxForMac.framework;
+			remoteRef = A29282EA224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A29282ED224C030400FF9C28 /* GoogleUtilities.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleUtilities.framework;
+			remoteRef = A29282EC224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A29282EF224C030400FF9C28 /* GTMSessionFetcher.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GTMSessionFetcher.framework;
+			remoteRef = A29282EE224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A29282F1224C030400FF9C28 /* nanopb.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = nanopb.framework;
+			remoteRef = A29282F0224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A29282F3224C030400FF9C28 /* Pods_BirthRide.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Pods_BirthRide.framework;
+			remoteRef = A29282F2224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		A215501A2242CE5C00DDF613 /* Resources */ = {
