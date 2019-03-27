@@ -9,7 +9,7 @@
 import UIKit
 
 ///This ViewController should be embedded in a TabBarViewController along with the SignInViewController
-class SignUpViewController: UIViewController {
+class OnboardingViewController: UIViewController {
     
     //MARK: IBOutlets
     ///This is not a true containerView. Here we are going to add the view of the intended viewController as a subView
@@ -31,6 +31,7 @@ class SignUpViewController: UIViewController {
         guard let userType = userType else {return}
         switch userType {
         case .driver:
+            
             containerViewController = DriverRegistrationViewController()
             guard containerViewController != nil else {return}
             containerView.addSubview((containerViewController?.view)!)

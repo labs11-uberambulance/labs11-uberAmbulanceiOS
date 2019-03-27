@@ -10,6 +10,9 @@ import UIKit
 
 ///This ViewController should be embedded in a TabBarViewController along with the SignUpViewController
 class SignInViewController: UIViewController {
+    //MARK: Private Properties
+    //The viewController methods were not getting called until I added this private variable to the class scope. Originally I was declaring this variable three times in the populateLoginFieldView method. The ViewController methods were not getting hit at all. Now they are. So when using .xib files and placing them into views, you need to have a class-scope property to hold the ViewController. I don't know why.
+    private var loginFieldViewController: UIViewController?
     
     //MARK: Other Properties
     var userType: UserType?
@@ -38,15 +41,18 @@ class SignInViewController: UIViewController {
     private func populateLoginFieldView(loginMethod: SignInMethod) {
         switch loginMethod {
         case .googleID:
-            let loginFieldViewController = GoogleIDAuthorizationViewController()
-            loginFieldView.addSubview(loginFieldViewController.view)
+            loginFieldViewController = GoogleIDAuthorizationViewController()
+            guard loginFieldViewController != nil else {return}
+            loginFieldView.addSubview((loginFieldViewController?.view)!)
         case .email:
-            let loginFieldViewController = EmailAuthorizationViewController()
-            loginFieldView.addSubview(loginFieldViewController.view)
+            loginFieldViewController = EmailAuthorizationViewController()
+            guard loginFieldViewController != nil else {return}
+            loginFieldView.addSubview((loginFieldViewController?.view)!)
 
         case .phoneNumber:
-            let loginFieldViewController = PhoneAuthorizationViewController()
-            loginFieldView.addSubview(loginFieldViewController.view)
+            loginFieldViewController = PhoneAuthorizationViewController()
+            guard loginFieldViewController != nil else {return}
+            loginFieldView.addSubview((loginFieldViewController?.view)!)
         }
     }
     //MARK: Private Enum

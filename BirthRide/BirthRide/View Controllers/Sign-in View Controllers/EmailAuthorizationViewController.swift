@@ -18,7 +18,8 @@ enum LoginErrorType {
 class EmailAuthorizationViewController: UIViewController {
     //MARK: Private Properties
     private var genericUser: User?
-//    private var networkingController: ABCNetworkingController?
+    private var networkingController: ABCNetworkingController?
+    
 
     //MARK: IBOutlets
     @IBOutlet weak var emailTextField: UITextField!
@@ -27,7 +28,7 @@ class EmailAuthorizationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        networkingController = ABCNetworkingController()
+        networkingController = ABCNetworkingController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,13 +44,13 @@ class EmailAuthorizationViewController: UIViewController {
                 self.displayErrorMessage(errorType: .invalidInformation)
             }
             else if let user = authDataResult?.user {
-//                self.networkingController?.authenticateUser(withToken: user.uid, withCompletion: { (error) in
-//                    //This method should return a user. Need to edit it so that it can do that.
-//                    if let error = error {
-//                        self.displayErrorMessage(errorType: .otherError)
-//                        NSLog("%@", error.debugDescription)
-//                    }
-//                })
+                self.networkingController?.authenticateUser(withToken: user.uid, withCompletion: { (error) in
+                    //This method should return a user. Need to edit it so that it can do that.
+                    if let error = error {
+                        self.displayErrorMessage(errorType: .otherError)
+                        NSLog("%@", error.debugDescription)
+                    }
+                })
             }
         }
     }

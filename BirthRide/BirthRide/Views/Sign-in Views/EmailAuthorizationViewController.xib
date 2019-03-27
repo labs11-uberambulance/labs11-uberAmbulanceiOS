@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmailAuthorizationViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
+                <outlet property="emailTextField" destination="mZq-5J-Uhg" id="zFt-L9-Zqx"/>
+                <outlet property="passwordTextField" destination="JMk-Kz-yWD" id="DQ5-SN-BLr"/>
                 <outlet property="view" destination="WOG-16-xKL" id="wlx-fp-ome"/>
             </connections>
         </placeholder>

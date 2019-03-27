@@ -9,14 +9,19 @@
 import UIKit
 
 class PhoneAuthorizationViewController: UIViewController {
-
+    //MARK: IBOutlets
+    @IBOutlet weak var phoneNumberTextField: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
     }
-
+    @IBAction func doneButtonTapped(_ sender: Any) {
+    }
+    
 
     /*
     // MARK: - Navigation

@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GoogleIDAuthorizationViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
+                <outlet property="gmailTextField" destination="SuQ-d6-DaI" id="zzL-8d-5Lt"/>
+                <outlet property="passwordTextField" destination="6d7-AQ-rCb" id="b7i-I8-nL7"/>
                 <outlet property="view" destination="ead-hv-cWT" id="mTn-rq-22q"/>
             </connections>
         </placeholder>
@@ -36,7 +38,10 @@
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0no-DD-9tA">
                             <rect key="frame" x="0.0" y="76" width="335" height="30"/>
-                            <state key="normal" title="Button"/>
+                            <state key="normal" title="Done"/>
+                            <connections>
+                                <action selector="doneButtonClicked:" destination="-1" eventType="touchUpInside" id="20Q-DE-1S5"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>

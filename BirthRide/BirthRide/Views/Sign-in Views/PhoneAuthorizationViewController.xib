@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneAuthorizationViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
+                <outlet property="phoneNumberTextField" destination="dRq-t4-9F2" id="zgB-cP-fYX"/>
                 <outlet property="view" destination="biT-if-wZF" id="EhI-E0-juf"/>
             </connections>
         </placeholder>
@@ -31,6 +32,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6GG-aN-ZPx">
                             <rect key="frame" x="40" y="49" width="37" height="30"/>
                             <state key="normal" title="Done"/>
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="-1" eventType="touchUpInside" id="sRD-K9-7Jg"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>
