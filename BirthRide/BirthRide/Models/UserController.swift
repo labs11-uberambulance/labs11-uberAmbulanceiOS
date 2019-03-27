@@ -8,11 +8,16 @@
 
 import UIKit
 
+//TODO: Refactor all of the networking requests to include the actual user token.
+
 class UserController {
     //MARK: Private Properties
     private let numbersDictionary: Dictionary = ["0": 0, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9]
+    private let networkingController = ABCNetworkingController()
     
-    func configurePregnantMom(user: User, dueDate: String?, hospital: String?, caretakerName: String?) -> PregnantMom {
+    
+    //MARK: Public Methods
+    public func configurePregnantMom(user: User, viewController: UIViewController, dueDate: String?, hospital: String?, caretakerName: String?) -> PregnantMom {
         let newMom = PregnantMom(dueDate: dueDate, hospital: hospital, caretakerName: caretakerName)
         newMom.name = user.name
         newMom.firebaseId = user.firebaseId
@@ -25,29 +30,50 @@ class UserController {
         newMom.latitude = user.latitude
         newMom.longitude = user.longitude
         newMom.email = user.email
+        
+        networkingController.updateUser(withToken: "StringHere", userType: "pregnantMom") { (error) in
+            if let error = error {
+                AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
+                NSLog("%@", error.debugDescription)
+                return
+            }
+        }
+        
         return newMom
     }
-    func updatePregnantMom(pregnantMom: PregnantMom) {
+    public func updatePregnantMom(pregnantMom: PregnantMom) {
         
     }
     
-    func configureDriver(price: Int, bio: String) -> Driver {
+    public func configureDriver(price: Int, bio: String) -> Driver {
         return Driver(price: price, bio: bio)
     }
-    func updateDriver(driver: Driver, viewController: UIViewController, name: String, address: String, email: String, phoneNumber: String, priceString: String, bio: String?) {
-        
+    public func updateDriver(driver: Driver, viewController: UIViewController, name: String?, address: String?, email: String?, phoneNumber: String?, priceString: String?, bio: String?) {
+        guard name != "", address != "", email != "", phoneNumber != "", priceString != "" else {
+            AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: viewController)
+            return
+        }
         driver.name = name
         driver.address = address
         driver.email = email
         driver.phone = phoneNumber
-        driver.price = stringToInt(intString: priceString, viewController: viewController)
+        driver.price = stringToInt(intString: priceString!, viewController: viewController)
         driver.bio = bio
-    }
-    
-    func configureGenericUser() {
+        
+        networkingController.updateUser(withToken: "StringHere", userType: driver.userType ?? "driver") { (error) in
+            if let error = error {
+                AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
+                NSLog("%@", error.debugDescription)
+                return
+            }
+        }
         
     }
-    func updateGenericUser(user: User, name: String?, village: String?, phone: String?, address: String?, email: String?) {
+    
+    public func configureGenericUser() {
+        
+    }
+    public func updateGenericUser(user: User, name: String?, village: String?, phone: String?, address: String?, email: String?) {
         
     }
     //MARK: Private Methods

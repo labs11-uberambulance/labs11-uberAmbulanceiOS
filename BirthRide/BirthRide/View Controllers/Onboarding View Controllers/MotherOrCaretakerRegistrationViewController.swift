@@ -41,9 +41,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         
         UserController().updateGenericUser(user: user, name: nameTextField.text, village: villageTextField.text, phone: phoneNumberTextField.text, address: descriptionTextView.text, email: emailTextField.text)
         
-        UserController().configurePregnantMom(user: user, dueDate: dueDateTextField.text, hospital: hospitalTextField.text, caretakerName: caretakerTextField.text)
-        
-        //TODO: Networking Request Here to send updated user information to server
+        pregnantMom = UserController().configurePregnantMom(user: user, dueDate: dueDateTextField.text, hospital: hospitalTextField.text, caretakerName: caretakerTextField.text)
         
         transition(userType: nil)
     }
