@@ -28,25 +28,25 @@ class UserTypeViewController: UIViewController, TransitionBetweenViewControllers
     func transition(userType: UserType?) {
         let tabBarController = UITabBarController()
         
-        let onboardingViewController = OnboardingViewController()
-        onboardingViewController.userType = userType
+        let signUpViewController = SignUpViewController()
+        signUpViewController.userType = userType
         
         let signInViewController = SignInViewController()
         signInViewController.userType = userType
         
         tabBarController.addChild(signInViewController)
-        tabBarController.addChild(onboardingViewController)
+        tabBarController.addChild(signUpViewController)
         
-        let onboardingItem = UITabBarItem()
-        onboardingItem.title = "Sign Up"
+        let signUpItem = UITabBarItem()
+        signUpItem.title = "Sign Up"
         let signInItem = UITabBarItem()
         signInItem.title = "Sign In"
         
-        onboardingViewController.tabBarItem = onboardingItem
+        signUpViewController.tabBarItem = signUpItem
         signInViewController.tabBarItem = signInItem
         
         self.present(tabBarController, animated: true) {
-            onboardingViewController.awakeFromNib()
+            signUpViewController.awakeFromNib()
             signInViewController.awakeFromNib()
         }
     }

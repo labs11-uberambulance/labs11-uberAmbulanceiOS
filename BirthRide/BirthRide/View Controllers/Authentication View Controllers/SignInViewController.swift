@@ -26,6 +26,10 @@ class SignInViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+            AuthenticationController.shared.isSigningUp = false
+    }
     
     @IBAction func signInWithGoogleIDButtonTapped(_ sender: Any) {
         populateLoginFieldView(loginMethod: .googleID)
