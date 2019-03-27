@@ -49,7 +49,6 @@
 		A2C19DA4224A7FCF00FC20F0 /* MotherRideStatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2C19DA2224A7FCF00FC20F0 /* MotherRideStatusViewController.xib */; };
 		A2C19DAF224A881700FC20F0 /* ABCNetworkingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DAE224A881700FC20F0 /* ABCNetworkingController.m */; };
 		A2C19DB1224A935F00FC20F0 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DB0224A935F00FC20F0 /* Ride.swift */; };
-		A2E277B82242ED9A00F3460D /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E277B72242ED9A00F3460D /* Empty.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,7 +152,6 @@
 		A2C19DAD224A881700FC20F0 /* ABCNetworkingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCNetworkingController.h; sourceTree = "<group>"; };
 		A2C19DAE224A881700FC20F0 /* ABCNetworkingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ABCNetworkingController.m; sourceTree = "<group>"; };
 		A2C19DB0224A935F00FC20F0 /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
-		A2E277B72242ED9A00F3460D /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		A439B999719DA29D34AE9586 /* Pods_BirthRide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BirthRide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -206,7 +204,6 @@
 				A215501F2242CE5C00DDF613 /* AppDelegate.swift */,
 				A2C19DA7224A86B700FC20F0 /* Controllers */,
 				A2C19DA8224A86C000FC20F0 /* Models */,
-				A2E277B72242ED9A00F3460D /* Empty.swift */,
 				A21550262242CE5C00DDF613 /* Assets.xcassets */,
 				A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */,
 				A215502B2242CE5C00DDF613 /* Info.plist */,
@@ -218,15 +215,10 @@
 		A27804172243FDD9001920A0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A278043E2244505A001920A0 /* DriverProfileCollectionViewCell.swift */,
 				A278041D22443CC5001920A0 /* UserTypeViewController.xib */,
 				A29282CD224AD3AF00FF9C28 /* Onboarding Views */,
 				A29282CC224AD39A00FF9C28 /* Authentication Views */,
-				A278043722444D5C001920A0 /* RequestOrSearchDriverViewController.xib */,
-				A278043B22444E8E001920A0 /* SearchForDriverViewController.xib */,
-				A278041922443728001920A0 /* ConfirmRideViewController.xib */,
-				A2C19DA2224A7FCF00FC20F0 /* MotherRideStatusViewController.xib */,
-				A278043F2244505A001920A0 /* DriverProfileCollectionViewCell.xib */,
+				A2928304224C436F00FF9C28 /* Mother-flow Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -291,6 +283,31 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		A2928304224C436F00FF9C28 /* Mother-flow Views */ = {
+			isa = PBXGroup;
+			children = (
+				A278043722444D5C001920A0 /* RequestOrSearchDriverViewController.xib */,
+				A278043B22444E8E001920A0 /* SearchForDriverViewController.xib */,
+				A278041922443728001920A0 /* ConfirmRideViewController.xib */,
+				A2C19DA2224A7FCF00FC20F0 /* MotherRideStatusViewController.xib */,
+				A278043F2244505A001920A0 /* DriverProfileCollectionViewCell.xib */,
+				A278043E2244505A001920A0 /* DriverProfileCollectionViewCell.swift */,
+			);
+			path = "Mother-flow Views";
+			sourceTree = "<group>";
+		};
+		A2928305224C438700FF9C28 /* Mother-flow View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A278043622444D5C001920A0 /* RequestOrSearchDriverViewController.swift */,
+				A278043A22444E8E001920A0 /* SearchForDriverViewController.swift */,
+				A278041822443728001920A0 /* ConfirmRideViewController.swift */,
+				A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */,
+				A278041322430997001920A0 /* DriverProfileCollectionViewController.swift */,
+			);
+			name = "Mother-flow View Controllers";
+			sourceTree = "<group>";
+		};
 		A2C19D962245589700FC20F0 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,11 +342,7 @@
 				A278041C22443CC5001920A0 /* UserTypeViewController.swift */,
 				A29282C7224ACF7E00FF9C28 /* Onboarding View Controllers */,
 				A29282C6224ACF6B00FF9C28 /* Authentication View Controllers */,
-				A278043622444D5C001920A0 /* RequestOrSearchDriverViewController.swift */,
-				A278043A22444E8E001920A0 /* SearchForDriverViewController.swift */,
-				A278041822443728001920A0 /* ConfirmRideViewController.swift */,
-				A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */,
-				A278041322430997001920A0 /* DriverProfileCollectionViewController.swift */,
+				A2928305224C438700FF9C28 /* Mother-flow View Controllers */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -578,7 +591,6 @@
 				A29282C4224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.swift in Sources */,
 				A278041A22443728001920A0 /* ConfirmRideViewController.swift in Sources */,
 				A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */,
-				A2E277B82242ED9A00F3460D /* Empty.swift in Sources */,
 				A278042222443FF7001920A0 /* SignInViewController.swift in Sources */,
 				A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */,
 				A278042622444093001920A0 /* OnboardingViewController.swift in Sources */,
