@@ -42,7 +42,7 @@ class SignInViewController: UIViewController {
             loginFieldView.addSubview(loginFieldViewController.view)
         case .email:
             let loginFieldViewController = EmailAuthorizationViewController()
-            loginFieldView.addSubview(EmailAuthorizationViewController().view)
+            loginFieldView.addSubview(loginFieldViewController.view)
 
         case .phoneNumber:
             let loginFieldViewController = PhoneAuthorizationViewController()
