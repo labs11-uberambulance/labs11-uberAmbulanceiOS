@@ -23,8 +23,15 @@ class AuthenticationController {
     static let shared = AuthenticationController()
     private init() {}
 
+    ///This property is used by the class to decide how to authenticate the user.
     var isSigningUp: Bool = false
     
+    
+    /// This method displays an error message.
+    ///
+    /// - Parameters:
+    ///   - errorType: The type of error. This property takes an enum case to switch between different error messages.
+    ///   - viewController: The viewController calling the method.
     public func displayErrorMessage(errorType: LoginErrorType, viewController: UIViewController) {
         switch errorType {
         case .invalidInformation:
@@ -38,6 +45,13 @@ class AuthenticationController {
         
     }
     
+    
+    /// This method will do all of the networking with Firebase and the BirthRide server to authenticate the user, either whether the user is signing in or signing up. It uses a boolean, isSigningUp, to decide how to authenticate the user.
+    ///
+    /// - Parameters:
+    ///   - email: The email entered by the user to authenticate.
+    ///   - password: The password entered by the user to authenticate.
+    ///   - viewController: The viewController calling the method.
     public func authenticateUser(email: String, password: String, viewController: UIViewController) {
         switch AuthenticationController.shared.isSigningUp {
         case true:
