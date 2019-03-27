@@ -11,42 +11,37 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhoneAuthorizationViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="view" destination="biT-if-wZF" id="EhI-E0-juf"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view contentMode="scaleToFill" id="biT-if-wZF">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="ed2-iD-UVI">
+                    <rect key="frame" x="129" y="294" width="117.5" height="79"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dRq-t4-9F2">
+                            <rect key="frame" x="0.0" y="0.0" width="117.5" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6GG-aN-ZPx">
+                            <rect key="frame" x="40" y="49" width="37" height="30"/>
+                            <state key="normal" title="Done"/>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="ed2-iD-UVI" firstAttribute="centerY" secondItem="biT-if-wZF" secondAttribute="centerY" id="Zob-EV-XUC"/>
+                <constraint firstItem="ed2-iD-UVI" firstAttribute="centerX" secondItem="biT-if-wZF" secondAttribute="centerX" id="aLa-ak-VME"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="9uY-Pe-47O"/>
+            <point key="canvasLocation" x="110" y="154"/>
         </view>
-        <viewController id="lPN-mm-HMy">
-            <view key="view" contentMode="scaleToFill" id="D7U-L2-6H0">
-                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                <subviews>
-                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mVS-hh-14q">
-                        <rect key="frame" x="61.5" y="49" width="117.5" height="30"/>
-                        <nil key="textColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits"/>
-                    </textField>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTK-fa-Tng">
-                        <rect key="frame" x="102" y="98" width="37" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Done"/>
-                    </button>
-                </subviews>
-                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                <constraints>
-                    <constraint firstItem="mVS-hh-14q" firstAttribute="centerY" secondItem="D7U-L2-6H0" secondAttribute="centerY" id="c1k-yY-jcQ"/>
-                    <constraint firstItem="mVS-hh-14q" firstAttribute="centerX" secondItem="D7U-L2-6H0" secondAttribute="centerX" id="hC5-H5-bPL"/>
-                </constraints>
-                <viewLayoutGuide key="safeArea" id="EyO-1W-iiG"/>
-            </view>
-            <size key="freeformSize" width="240" height="128"/>
-            <point key="canvasLocation" x="126" y="185"/>
-        </viewController>
     </objects>
 </document>

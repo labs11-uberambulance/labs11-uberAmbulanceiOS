@@ -16,8 +16,8 @@
 		A278041B22443728001920A0 /* ConfirmRideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278041922443728001920A0 /* ConfirmRideViewController.xib */; };
 		A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041C22443CC5001920A0 /* UserTypeViewController.swift */; };
 		A278041F22443CC5001920A0 /* UserTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278041D22443CC5001920A0 /* UserTypeViewController.xib */; };
-		A278042222443FF7001920A0 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042022443FF7001920A0 /* AuthorizationViewController.swift */; };
-		A278042322443FF7001920A0 /* AuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042122443FF7001920A0 /* AuthorizationViewController.xib */; };
+		A278042222443FF7001920A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042022443FF7001920A0 /* SignInViewController.swift */; };
+		A278042322443FF7001920A0 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042122443FF7001920A0 /* SignInViewController.xib */; };
 		A278042622444093001920A0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042422444093001920A0 /* SignUpViewController.swift */; };
 		A278042722444093001920A0 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042522444093001920A0 /* SignUpViewController.xib */; };
 		A278042A2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27804282244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift */; };
@@ -61,8 +61,8 @@
 		A278041922443728001920A0 /* ConfirmRideViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmRideViewController.xib; sourceTree = "<group>"; };
 		A278041C22443CC5001920A0 /* UserTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeViewController.swift; sourceTree = "<group>"; };
 		A278041D22443CC5001920A0 /* UserTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTypeViewController.xib; sourceTree = "<group>"; };
-		A278042022443FF7001920A0 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
-		A278042122443FF7001920A0 /* AuthorizationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthorizationViewController.xib; sourceTree = "<group>"; };
+		A278042022443FF7001920A0 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		A278042122443FF7001920A0 /* SignInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
 		A278042422444093001920A0 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A278042522444093001920A0 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		A27804282244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherOrCaretakerRegistrationViewController.swift; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 		A29282C6224ACF6B00FF9C28 /* Sign-in View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A278042022443FF7001920A0 /* AuthorizationViewController.swift */,
+				A278042022443FF7001920A0 /* SignInViewController.swift */,
 				A29282BB224AC80500FF9C28 /* EmailAuthorizationViewController.swift */,
 				A29282C2224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.swift */,
 				A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */,
@@ -195,7 +195,7 @@
 		A29282CC224AD39A00FF9C28 /* Sign-in Views */ = {
 			isa = PBXGroup;
 			children = (
-				A278042122443FF7001920A0 /* AuthorizationViewController.xib */,
+				A278042122443FF7001920A0 /* SignInViewController.xib */,
 				A29282BC224AC80500FF9C28 /* EmailAuthorizationViewController.xib */,
 				A29282C3224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib */,
 				A29282C9224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib */,
@@ -335,7 +335,7 @@
 				A278041F22443CC5001920A0 /* UserTypeViewController.xib in Resources */,
 				A278043D22444E8E001920A0 /* SearchForDriverViewController.xib in Resources */,
 				A278042B2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib in Resources */,
-				A278042322443FF7001920A0 /* AuthorizationViewController.xib in Resources */,
+				A278042322443FF7001920A0 /* SignInViewController.xib in Resources */,
 				A278041B22443728001920A0 /* ConfirmRideViewController.xib in Resources */,
 				A2C19DA4224A7FCF00FC20F0 /* MotherRideStatusViewController.xib in Resources */,
 				A278043322444B97001920A0 /* GeneralUserRegistrationViewController.xib in Resources */,
@@ -413,7 +413,7 @@
 				A278041A22443728001920A0 /* ConfirmRideViewController.swift in Sources */,
 				A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */,
 				A2E277B82242ED9A00F3460D /* Empty.swift in Sources */,
-				A278042222443FF7001920A0 /* AuthorizationViewController.swift in Sources */,
+				A278042222443FF7001920A0 /* SignInViewController.swift in Sources */,
 				A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */,
 				A278042622444093001920A0 /* SignUpViewController.swift in Sources */,
 				A29282BD224AC80500FF9C28 /* EmailAuthorizationViewController.swift in Sources */,
