@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 ///This ViewController should be embedded in a TabBarViewController along with the SignUpViewController
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, GIDSignInUIDelegate{
     //MARK: Private Properties
     //The viewController methods were not getting called until I added this private variable to the class scope. Originally I was declaring this variable three times in the populateLoginFieldView method. The ViewController methods were not getting hit at all. Now they are. So when using .xib files and placing them into views, you need to have a class-scope property to hold the ViewController. I don't know why.
     private var loginFieldViewController: UIViewController?
@@ -23,7 +24,8 @@ class SignInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signIn()
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {

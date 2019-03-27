@@ -8,5 +8,6 @@ target 'BirthRide' do
   # Pods for LambdaTimeline
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
+pod 'GoogleSignIn'
 
 end

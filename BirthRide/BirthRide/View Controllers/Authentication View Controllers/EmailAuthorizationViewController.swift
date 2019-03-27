@@ -7,10 +7,6 @@
 //
 
 import UIKit
-import Firebase
-
-//We should take this enum out of this file and put it into a seperate class with the displayAlert methods.
-
 
 class EmailAuthorizationViewController: UIViewController {
     //MARK: Private Properties
@@ -35,7 +31,7 @@ class EmailAuthorizationViewController: UIViewController {
     //MARK: IBActions
     @IBAction func doneButtonTapped(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text else {return}
-        authenticateUser(email: email, password: password)
+        AuthenticationController.shared.authenticateUser(email: email, password: password, viewController: self)
     }
     
     /*

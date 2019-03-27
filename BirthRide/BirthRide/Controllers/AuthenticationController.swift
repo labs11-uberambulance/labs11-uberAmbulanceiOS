@@ -6,9 +6,9 @@
 //  Copyright © 2019 Austin Cole. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import Firebase
+import GoogleSignIn
 
 enum LoginErrorType {
     case invalidInformation
