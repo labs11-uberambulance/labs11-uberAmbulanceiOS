@@ -42,6 +42,7 @@
 		A29282D2224BE22400FF9C28 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282D0224BE22400FF9C28 /* SignUpViewController.swift */; };
 		A29282D3224BE22400FF9C28 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29282D1224BE22400FF9C28 /* SignUpViewController.xib */; };
 		A29282D5224BE4AB00FF9C28 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282D4224BE4AB00FF9C28 /* AuthenticationController.swift */; };
+		A29282F5224C244800FF9C28 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282F4224C244800FF9C28 /* UserController.swift */; };
 		A2C19D952245589100FC20F0 /* ViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */; };
 		A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D9722456B8800FC20F0 /* UserType.swift */; };
 		A2C19DA3224A7FCF00FC20F0 /* MotherRideStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */; };
@@ -143,6 +144,7 @@
 		A29282D1224BE22400FF9C28 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		A29282D4224BE4AB00FF9C28 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		A29282D6224C030400FF9C28 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
+		A29282F4224C244800FF9C28 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCoordinator.swift; sourceTree = "<group>"; };
 		A2C19D9722456B8800FC20F0 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherRideStatusViewController.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				A2C19D9722456B8800FC20F0 /* UserType.swift */,
+				A29282F4224C244800FF9C28 /* UserController.swift */,
 				A2C19DB0224A935F00FC20F0 /* Ride.swift */,
 			);
 			path = Models;
@@ -581,6 +584,7 @@
 				A278042622444093001920A0 /* OnboardingViewController.swift in Sources */,
 				A29282BD224AC80500FF9C28 /* EmailAuthorizationViewController.swift in Sources */,
 				A278041422430997001920A0 /* DriverProfileCollectionViewController.swift in Sources */,
+				A29282F5224C244800FF9C28 /* UserController.swift in Sources */,
 				A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */,
 				A27804402244505A001920A0 /* DriverProfileCollectionViewCell.swift in Sources */,
 				A2C19DA3224A7FCF00FC20F0 /* MotherRideStatusViewController.swift in Sources */,

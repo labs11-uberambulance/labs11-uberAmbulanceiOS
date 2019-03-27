@@ -38,6 +38,8 @@ class PhoneAuthorizationViewController: UIViewController {
         }
     }
     
+    //MARK: Private Methods
+    //FIXME: In order to receive the SMS with the authentication code, the user must put their country code in front. For the US, that means that all mobile US numbers must be preceded by "+1". I should programatically make sure that the number has the relevant country code at the beginning and, if it doesn't, I should add it before using it in the method.
     private func verifyPhoneNumber(phoneNumber: String?) {
         guard phoneNumber != "" else {
             AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: self)
@@ -54,6 +56,7 @@ class PhoneAuthorizationViewController: UIViewController {
 
         }
     }
+    
     private func verifyAuthenticationCodeAndID(verificationCode: String?) {
         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
         guard verificationID != nil else {

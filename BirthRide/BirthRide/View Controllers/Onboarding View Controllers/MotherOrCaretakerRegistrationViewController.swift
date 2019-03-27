@@ -12,6 +12,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
     //MARK: Private Properties
     private var pregnantMom: PregnantMom?
+    private var networkingController = ABCNetworkingController()
     
     //MARK: IBOutlets
     @IBOutlet weak var nameTextField: UITextField!
@@ -33,7 +34,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     }
     @IBAction func continueButtonTapped(_ sender: Any) {
         guard nameTextField.text != "", villageTextField.text != "", phoneNumberTextField.text != "" else {return}
-        pregnantMom = PregnantMom(name: nameTextField.text!, description: nil, village: villageTextField.text!, phoneNumber: phoneNumberTextField.text!, dueDate: nil, hospital: nil, caretakerName: nil, profilePicture: nil, userID: nil, googleID: nil, userType: UserType.pregnantMom.rawValue)
+        pregnantMom = PregnantMom(dueDate: <#T##String?#>, hospital: <#T##String?#>, caretakerName: <#T##String?#>)
         transition(userType: nil)
     }
     
