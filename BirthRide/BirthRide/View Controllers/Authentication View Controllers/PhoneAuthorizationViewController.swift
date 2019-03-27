@@ -15,6 +15,8 @@ class PhoneAuthorizationViewController: UIViewController {
     
     //MARK: Private Properties
     private let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
+    private var genericUser: User?
+    
     //MARK: IBOutlets
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var doneButton: UIButton!

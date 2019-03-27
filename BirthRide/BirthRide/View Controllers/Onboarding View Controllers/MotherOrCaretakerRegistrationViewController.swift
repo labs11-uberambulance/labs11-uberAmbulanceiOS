@@ -14,6 +14,9 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     private var pregnantMom: PregnantMom?
     private var networkingController = ABCNetworkingController()
     
+    //MARK: Other Properties
+    var genericUser: User?
+    
     //MARK: IBOutlets
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
@@ -34,7 +37,14 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     }
     @IBAction func continueButtonTapped(_ sender: Any) {
         guard nameTextField.text != "", villageTextField.text != "", phoneNumberTextField.text != "" else {return}
-        pregnantMom = PregnantMom(dueDate: <#T##String?#>, hospital: <#T##String?#>, caretakerName: <#T##String?#>)
+        guard let user = genericUser else {return}
+        
+        UserController().updateGenericUser(user: user, name: nameTextField.text, village: villageTextField.text, phone: phoneNumberTextField.text, address: descriptionTextView.text, email: emailTextField.text)
+        
+        UserController().configurePregnantMom(user: user, dueDate: dueDateTextField.text, hospital: hospitalTextField.text, caretakerName: caretakerTextField.text)
+        
+        //TODO: Networking Request Here to send updated user information to server
+        
         transition(userType: nil)
     }
     

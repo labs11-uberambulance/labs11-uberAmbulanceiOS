@@ -10,9 +10,7 @@ import UIKit
 
 class EmailAuthorizationViewController: UIViewController {
     //MARK: Private Properties
-    private var genericUser: User?
-    private var networkingController: ABCNetworkingController?
-    
+    private var genericUser: User?    
 
     //MARK: IBOutlets
     @IBOutlet weak var emailTextField: UITextField!
@@ -21,7 +19,6 @@ class EmailAuthorizationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        networkingController = ABCNetworkingController()
     }
     
     override func viewWillAppear(_ animated: Bool) {

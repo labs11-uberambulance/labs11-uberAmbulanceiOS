@@ -10,6 +10,9 @@ import UIKit
 import GoogleSignIn
 
 class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate {
+    //MARK: Private Properties
+    private var genericUser: User?
+    
     //MARK: IBOutlets
     @IBOutlet weak var gidSignInView: UIView!
     
