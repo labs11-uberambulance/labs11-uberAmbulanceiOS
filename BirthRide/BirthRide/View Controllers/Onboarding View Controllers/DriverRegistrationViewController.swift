@@ -34,9 +34,9 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     }
     
     func transition(userType: UserType?) {
-        let generalUserRegistrationViewController = GeneralUserRegistrationViewController()
-        generalUserRegistrationViewController.driver = driver
-        self.present(generalUserRegistrationViewController, animated: true) {
+        let driverPhotoRegistrationViewController = DriverPhotoRegistrationViewController()
+        driverPhotoRegistrationViewController.driver = driver
+        self.present(driverPhotoRegistrationViewController, animated: true) {
         }
     }
 

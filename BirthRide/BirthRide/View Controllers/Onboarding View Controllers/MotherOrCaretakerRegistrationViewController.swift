@@ -41,19 +41,19 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         
         UserController().updateGenericUser(user: user, name: nameTextField.text, village: villageTextField.text, phone: phoneNumberTextField.text, address: descriptionTextView.text, email: emailTextField.text)
         
-        pregnantMom = UserController().configurePregnantMom(user: user, dueDate: dueDateTextField.text, hospital: hospitalTextField.text, caretakerName: caretakerTextField.text)
+        pregnantMom = UserController().configurePregnantMom(user: user, viewController: self, dueDate: dueDateTextField.text, hospital: hospitalTextField.text, caretakerName: caretakerTextField.text)
         
         transition(userType: nil)
     }
     
 
     //MARK: TransitionBetweenViewControllers Protocol Method
-    func transition(userType: UserType?) {
-        let generalUserRegistrationViewController = GeneralUserRegistrationViewController()
-        generalUserRegistrationViewController.pregnantMom = pregnantMom
-        self.present(generalUserRegistrationViewController, animated: true) {
-        }
-    }
+//    func transition(userType: UserType?) {
+//        let generalUserRegistrationViewController = GeneralUserRegistrationViewController()
+//        generalUserRegistrationViewController.pregnantMom = pregnantMom
+//        self.present(generalUserRegistrationViewController, animated: true) {
+//        }
+//    }
     
     /*
     // MARK: - Navigation

@@ -24,7 +24,7 @@
 		A278042B2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A27804292244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib */; };
 		A278042E224447A6001920A0 /* DriverRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042C224447A6001920A0 /* DriverRegistrationViewController.swift */; };
 		A278042F224447A6001920A0 /* DriverRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042D224447A6001920A0 /* DriverRegistrationViewController.xib */; };
-		A278043222444B97001920A0 /* GeneralUserRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278043022444B97001920A0 /* GeneralUserRegistrationViewController.swift */; };
+		A278043222444B97001920A0 /* DriverPhotoRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278043022444B97001920A0 /* DriverPhotoRegistrationViewController.swift */; };
 		A278043322444B97001920A0 /* GeneralUserRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278043122444B97001920A0 /* GeneralUserRegistrationViewController.xib */; };
 		A278043822444D5C001920A0 /* RequestOrSearchDriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278043622444D5C001920A0 /* RequestOrSearchDriverViewController.swift */; };
 		A278043922444D5C001920A0 /* RequestOrSearchDriverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278043722444D5C001920A0 /* RequestOrSearchDriverViewController.xib */; };
@@ -125,7 +125,7 @@
 		A27804292244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MotherOrCaretakerRegistrationViewController.xib; sourceTree = "<group>"; };
 		A278042C224447A6001920A0 /* DriverRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverRegistrationViewController.swift; sourceTree = "<group>"; };
 		A278042D224447A6001920A0 /* DriverRegistrationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverRegistrationViewController.xib; sourceTree = "<group>"; };
-		A278043022444B97001920A0 /* GeneralUserRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralUserRegistrationViewController.swift; sourceTree = "<group>"; };
+		A278043022444B97001920A0 /* DriverPhotoRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverPhotoRegistrationViewController.swift; sourceTree = "<group>"; };
 		A278043122444B97001920A0 /* GeneralUserRegistrationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneralUserRegistrationViewController.xib; sourceTree = "<group>"; };
 		A278043622444D5C001920A0 /* RequestOrSearchDriverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestOrSearchDriverViewController.swift; sourceTree = "<group>"; };
 		A278043722444D5C001920A0 /* RequestOrSearchDriverViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestOrSearchDriverViewController.xib; sourceTree = "<group>"; };
@@ -249,7 +249,7 @@
 				A278042422444093001920A0 /* OnboardingViewController.swift */,
 				A27804282244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift */,
 				A278042C224447A6001920A0 /* DriverRegistrationViewController.swift */,
-				A278043022444B97001920A0 /* GeneralUserRegistrationViewController.swift */,
+				A278043022444B97001920A0 /* DriverPhotoRegistrationViewController.swift */,
 			);
 			path = "Onboarding View Controllers";
 			sourceTree = "<group>";
@@ -572,7 +572,7 @@
 				A278042E224447A6001920A0 /* DriverRegistrationViewController.swift in Sources */,
 				A278043C22444E8E001920A0 /* SearchForDriverViewController.swift in Sources */,
 				A2C19D952245589100FC20F0 /* ViewControllerCoordinator.swift in Sources */,
-				A278043222444B97001920A0 /* GeneralUserRegistrationViewController.swift in Sources */,
+				A278043222444B97001920A0 /* DriverPhotoRegistrationViewController.swift in Sources */,
 				A278042A2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift in Sources */,
 				A2C19DB1224A935F00FC20F0 /* Ride.swift in Sources */,
 				A29282C4224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.swift in Sources */,

@@ -67,15 +67,17 @@ class PregnantMom: User {
 @objc
 class Driver: User {
     ///The value of this property is the maximum price for the ride
-    var price: Int?
+    var price: Int
     var active: Bool
     ///The value of this property has a 500 char limit
     var bio: String?
+    var photo: String?
     
-    init(price: Int, active: Bool = false, bio: String) {
+    init(price: Int, active: Bool = false, bio: String, photo: String?) {
         self.price = price
         self.active = active
         self.bio = bio
+        self.photo = photo
         super.init(id: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil)
     }
 }

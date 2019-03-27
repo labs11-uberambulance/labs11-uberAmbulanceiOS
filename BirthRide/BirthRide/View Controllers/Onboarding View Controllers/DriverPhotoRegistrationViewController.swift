@@ -9,7 +9,7 @@
 import UIKit
 
 ///This ViewController will be called when the continue button is hit on either the MotherOrCaretakerViewController or the DriverRegistrationViewController. This ViewController contains the rest of the registration fields.
-class GeneralUserRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
+class DriverPhotoRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
 
 
     //MARK: Other Properties
