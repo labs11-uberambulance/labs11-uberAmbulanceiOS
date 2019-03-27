@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmailAuthorizationViewController: UIViewController {
+class EmailAuthorizationViewController: UIViewController, TransitionBetweenViewControllers {
     //MARK: Private Properties
     private var genericUser: User?    
 
@@ -29,6 +29,14 @@ class EmailAuthorizationViewController: UIViewController {
     @IBAction func doneButtonTapped(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text else {return}
         AuthenticationController.shared.authenticateUser(email: email, password: password, viewController: self)
+        transition(userType: nil)
+    }
+    
+    func transition(userType: UserType?) {
+        let userTypeViewController = UserTypeViewController()
+        userTypeViewController.user = self.genericUser
+        self.present(userTypeViewController, animated: true) {
+        }
     }
     
     /*

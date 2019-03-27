@@ -46,9 +46,9 @@ class UserController {
     }
     
     public func configureDriver(price: Int, bio: String) -> Driver {
-        return Driver(price: price, bio: bio)
+        return Driver(price: price, bio: bio, photo: nil)
     }
-    public func updateDriver(driver: Driver, viewController: UIViewController, name: String?, address: String?, email: String?, phoneNumber: String?, priceString: String?, bio: String?) {
+    public func updateDriver(driver: Driver, viewController: UIViewController, name: String?, address: String?, email: String?, phoneNumber: String?, priceString: String?, bio: String?, photo: String?) {
         guard name != "", address != "", email != "", phoneNumber != "", priceString != "" else {
             AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: viewController)
             return
@@ -59,6 +59,7 @@ class UserController {
         driver.phone = phoneNumber
         driver.price = stringToInt(intString: priceString!, viewController: viewController)
         driver.bio = bio
+        driver.photo = photo
         
         networkingController.updateUser(withToken: "StringHere", userType: driver.userType ?? "driver") { (error) in
             if let error = error {

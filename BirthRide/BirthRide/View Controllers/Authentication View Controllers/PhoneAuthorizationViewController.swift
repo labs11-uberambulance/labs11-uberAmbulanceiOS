@@ -11,8 +11,7 @@ import Firebase
 
 //Right now we are using reCAPTCHA verification. To enable Apple Push Notifications, we need to use an Apple Developer Program member account, which costs money.
 
-class PhoneAuthorizationViewController: UIViewController {
-    
+class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewControllers {
     //MARK: Private Properties
     private let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
     private var genericUser: User?
@@ -79,6 +78,14 @@ class PhoneAuthorizationViewController: UIViewController {
                 NSLog("%@", error.localizedDescription)
                 return
             }
+        }
+    }
+    
+    //MARK: TransitionBetweenViewControllersDelegate methods
+    func transition(userType: UserType?) {
+        let userTypeViewController = UserTypeViewController()
+        userTypeViewController.user = self.genericUser
+        self.present(userTypeViewController, animated: true) {
         }
     }
     

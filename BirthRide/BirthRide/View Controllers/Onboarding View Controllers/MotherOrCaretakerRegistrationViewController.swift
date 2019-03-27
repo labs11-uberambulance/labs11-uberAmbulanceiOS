@@ -48,12 +48,12 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
 
     //MARK: TransitionBetweenViewControllers Protocol Method
-//    func transition(userType: UserType?) {
+    func transition(userType: UserType?) {
 //        let generalUserRegistrationViewController = GeneralUserRegistrationViewController()
 //        generalUserRegistrationViewController.pregnantMom = pregnantMom
 //        self.present(generalUserRegistrationViewController, animated: true) {
 //        }
-//    }
+    }
     
     /*
     // MARK: - Navigation

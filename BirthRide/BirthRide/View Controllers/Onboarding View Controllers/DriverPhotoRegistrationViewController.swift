@@ -9,39 +9,62 @@
 import UIKit
 
 ///This ViewController will be called when the continue button is hit on either the MotherOrCaretakerViewController or the DriverRegistrationViewController. This ViewController contains the rest of the registration fields.
-class DriverPhotoRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
-
+class DriverPhotoRegistrationViewController: UIViewController, TransitionBetweenViewControllers, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    //MARK: Private Properties
+    var image: UIImage? {
+        didSet {
+            updateImageView()
+        }
+    }
 
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
     var driver: Driver?
+    
+    //MARK: IBOutlets
+    @IBOutlet weak var photoImageView: UIImageView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
+    //MARK: IBActions
     @IBAction func addPhotoButton(_ sender: Any) {
+        choosePhoto()
     }
     @IBAction func doneButton(_ sender: Any) {
-        if pregnantMom != nil {
-        transition(userType: UserType.pregnantMom)
-        } else {
             transition(userType: UserType.driver)
-        }
     }
     
-    func transition(userType: UserType?) {
-        guard let userType = userType else {return}
-        switch userType {
-        case .driver:
-            break
-        case .pregnantMom:
-            let destinationVC = RequestOrSearchDriverViewController()
-            destinationVC.pregnantMom = self.pregnantMom
-            self.present(destinationVC, animated: true) {
-            }
+    //MARK: Private Methods
+    private func choosePhoto() {
+        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary)  else{
+            print("photo library is unavailable")
+            return
         }
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
+    }
+    private func updateImageView() {
+        photoImageView.image = image
+    }
+    
+    //MARK: UIImagePickerControllerDelegateMethods
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        image = info[.originalImage] as? UIImage
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    //MARK: TransitionBetweenViewControllers methods
+    func transition(userType: UserType?) {
     }
 
     /*
