@@ -21,6 +21,7 @@ class OnboardingViewController: UIViewController {
     //MARK: Other Properties
     var userType: UserType?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewControllerAndView()

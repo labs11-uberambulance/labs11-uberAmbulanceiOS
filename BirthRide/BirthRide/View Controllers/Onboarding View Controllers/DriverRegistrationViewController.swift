@@ -28,13 +28,15 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         // Do any additional setup after loading the view.
     }
     @IBAction func continueButtonTapped(_ sender: Any) {
+        guard let driver = driver else {return}
+        UserController().updateDriver(driver: driver, viewController: self, name: nameTextField.text, address: addressTextField.text, email: emailTextField.text, phoneNumber: phoneNumberTextField.text, priceString: priceTextField.text, bio: bioTextView.text, photo: nil)
         transition(userType: nil)
     }
     
     func transition(userType: UserType?) {
-        let generalUserRegistrationViewController = GeneralUserRegistrationViewController()
-        generalUserRegistrationViewController.driver = driver
-        self.present(generalUserRegistrationViewController, animated: true) {
+        let driverPhotoRegistrationViewController = DriverPhotoRegistrationViewController()
+        driverPhotoRegistrationViewController.driver = driver
+        self.present(driverPhotoRegistrationViewController, animated: true) {
         }
     }
 

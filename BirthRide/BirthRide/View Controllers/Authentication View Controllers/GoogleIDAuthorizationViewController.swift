@@ -9,7 +9,10 @@
 import UIKit
 import GoogleSignIn
 
-class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate {
+class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate, TransitionBetweenViewControllers {
+    //MARK: Private Properties
+    private var genericUser: User?
+    
     //MARK: IBOutlets
     @IBOutlet weak var gidSignInView: UIView!
     
@@ -19,6 +22,18 @@ class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().signIn()
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func doneButtonTapped(_ sender: Any) {
+        transition(userType: nil)
+    }
+    
+    //MARK: TransitionBetweenViewControllers methods
+    func transition(userType: UserType?) {
+        let userTypeViewController = UserTypeViewController()
+        userTypeViewController.user = self.genericUser
+        self.present(userTypeViewController, animated: true) {
+        }
     }
 
 

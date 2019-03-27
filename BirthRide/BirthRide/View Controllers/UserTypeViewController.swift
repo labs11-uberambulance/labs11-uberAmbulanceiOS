@@ -10,6 +10,9 @@ import UIKit
 
 class UserTypeViewController: UIViewController, TransitionBetweenViewControllers {
 
+    //MARK: Other Properties
+    var user: User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

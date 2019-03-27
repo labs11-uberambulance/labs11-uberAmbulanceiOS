@@ -11,10 +11,11 @@ import Firebase
 
 //Right now we are using reCAPTCHA verification. To enable Apple Push Notifications, we need to use an Apple Developer Program member account, which costs money.
 
-class PhoneAuthorizationViewController: UIViewController {
-    
+class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewControllers {
     //MARK: Private Properties
     private let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
+    private var genericUser: User?
+    
     //MARK: IBOutlets
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
@@ -38,6 +39,8 @@ class PhoneAuthorizationViewController: UIViewController {
         }
     }
     
+    //MARK: Private Methods
+    //FIXME: In order to receive the SMS with the authentication code, the user must put their country code in front. For the US, that means that all mobile US numbers must be preceded by "+1". I should programatically make sure that the number has the relevant country code at the beginning and, if it doesn't, I should add it before using it in the method.
     private func verifyPhoneNumber(phoneNumber: String?) {
         guard phoneNumber != "" else {
             AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: self)
@@ -54,6 +57,7 @@ class PhoneAuthorizationViewController: UIViewController {
 
         }
     }
+    
     private func verifyAuthenticationCodeAndID(verificationCode: String?) {
         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
         guard verificationID != nil else {
@@ -74,6 +78,14 @@ class PhoneAuthorizationViewController: UIViewController {
                 NSLog("%@", error.localizedDescription)
                 return
             }
+        }
+    }
+    
+    //MARK: TransitionBetweenViewControllersDelegate methods
+    func transition(userType: UserType?) {
+        let userTypeViewController = UserTypeViewController()
+        userTypeViewController.user = self.genericUser
+        self.present(userTypeViewController, animated: true) {
         }
     }
     

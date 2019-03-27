@@ -8,11 +8,9 @@
 
 import UIKit
 
-class EmailAuthorizationViewController: UIViewController {
+class EmailAuthorizationViewController: UIViewController, TransitionBetweenViewControllers {
     //MARK: Private Properties
-    private var genericUser: User?
-    private var networkingController: ABCNetworkingController?
-    
+    private var genericUser: User?    
 
     //MARK: IBOutlets
     @IBOutlet weak var emailTextField: UITextField!
@@ -21,7 +19,6 @@ class EmailAuthorizationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        networkingController = ABCNetworkingController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +29,14 @@ class EmailAuthorizationViewController: UIViewController {
     @IBAction func doneButtonTapped(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text else {return}
         AuthenticationController.shared.authenticateUser(email: email, password: password, viewController: self)
+        transition(userType: nil)
+    }
+    
+    func transition(userType: UserType?) {
+        let userTypeViewController = UserTypeViewController()
+        userTypeViewController.user = self.genericUser
+        self.present(userTypeViewController, animated: true) {
+        }
     }
     
     /*
