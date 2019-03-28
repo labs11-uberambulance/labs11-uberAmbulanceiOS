@@ -78,6 +78,22 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
                 NSLog("%@", error.localizedDescription)
                 return
             }
+            guard let authResult = authResult else {
+                AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: self)
+                return
+            }
+            authResult.user.getIDToken(completion: { (idToken, error) in
+                if let error = error {
+                    NSLog("Error in PhoneAuthorizationViewController.verifyAuthenticationCodeandID")
+                    NSLog(error.localizedDescription)
+                    return
+                }
+                guard let idToken = idToken else {
+                    NSLog("idToken is nil in PhoneAuthorizationViewController.verifyAuthenticationCodeandID")
+                    return
+                }
+                AuthenticationController.shared.userToken = idToken
+            })
         }
     }
     

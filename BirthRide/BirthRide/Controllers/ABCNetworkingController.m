@@ -55,7 +55,8 @@
         NSString *userType = [[NSString alloc] init];
         NSMutableArray *userArray = [[NSMutableArray alloc] init];
         if (data != nil) {
-            NSDictionary *parsedData = [NSJSONSerialization JSONObjectWithData:data options:0 error: nil];
+            NSDictionary *parsedData = [[NSDictionary alloc] init];
+            parsedData = [NSJSONSerialization JSONObjectWithData:data options:0 error: nil];
             if ([parsedData[@"user_type"]  isEqual: @"pregnantMom"]) {
                 PregnantMom *pregnantMom = [PregnantMom alloc];
                 [userArray addObject:pregnantMom];

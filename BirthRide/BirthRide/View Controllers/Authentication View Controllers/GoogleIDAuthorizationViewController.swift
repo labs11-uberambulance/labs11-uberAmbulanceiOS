@@ -21,6 +21,7 @@ class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().signIn()
+        AuthenticationController.shared.userToken = GIDSignIn.sharedInstance()?.currentUser.authentication.accessToken
         // Do any additional setup after loading the view.
     }
     

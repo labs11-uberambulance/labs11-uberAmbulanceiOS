@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let driverPhotoRegistrationViewController = DriverPhotoRegistrationViewController()
-        window!.rootViewController = driverPhotoRegistrationViewController
+        let userTypeViewController = UserTypeViewController()
+        window!.rootViewController = userTypeViewController
         window!.makeKeyAndVisible()
         
         //Use firebase library to configure APIs

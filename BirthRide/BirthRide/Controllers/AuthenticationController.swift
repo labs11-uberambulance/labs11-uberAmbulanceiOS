@@ -84,6 +84,7 @@ class AuthenticationController {
         viewController.present(alert, animated: true, completion: nil)
     }
     
+    //MARK: Sign-in methods
     private func authenticateUserSignIn(email: String, password: String, viewController: UIViewController) {
         Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
             if email == "" || password == "" {
@@ -113,8 +114,16 @@ class AuthenticationController {
             
         }
     }
+    private func authenticateUserSignIn(viewController: UIViewController) {
+        authenticationNetworkingRequest(viewController: viewController)
+    }
+    private func authenticateUserSignIn(phoneNumber: String, viewController: UIViewController) {
+        
+    }
     
     
+    
+    //MARK: Sign-up methods
     private func authenticateUserSignUp(email: String, password: String,viewController: UIViewController) {
         Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
             if email == "" || password == "" {
