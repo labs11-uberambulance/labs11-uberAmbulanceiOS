@@ -23,6 +23,11 @@ class AuthenticationController {
     static let shared = AuthenticationController()
     private init() {}
     
+    //MARK: Private Properties
+    private var pregnantMom: PregnantMom?
+    private var driver: Driver?
+    private var genericUser: User?
+    
     ///This property is used by the class to decide how to authenticate the user.
     public var isSigningUp: Bool = false
     public var userToken: String?
@@ -105,12 +110,31 @@ class AuthenticationController {
                     let backgroundOperationQueue = OperationQueue()
                     backgroundOperationQueue.addOperation({
                         guard let userToken = self.userToken else {return}
-                        ABCNetworkingController().authenticateUser(withToken: userToken, withCompletion: { (error) in
-                            //FIXME: This method should return a user. Need to edit it so that it can do that.
+                        ABCNetworkingController().authenticateUser(withToken: userToken, withCompletion: { (error, user, userType)  in
                             if let error = error {
                                 AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
                                 NSLog("%@", error.localizedDescription)
                             }
+                            guard let user = user else {
+                            
+                            AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
+                            NSLog("user is nil in AuthenticationController.authenticateUserSignIn.")
+                            return
+                            }
+                            guard let userType = userType else {
+                                AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
+                                NSLog("userType is nil in AuthenticationController.authenticateUserSignIn.")
+                                return
+                            }
+                            switch userType {
+                            case "driver":
+                                self.driver = user as? Driver
+                            case "pregnantMom":
+                                self.pregnantMom = user as? PregnantMom
+                            default:
+                                self.genericUser = user as? User
+                            }
+                            
                         })
                     })
                     
@@ -135,7 +159,7 @@ class AuthenticationController {
                 return
             }
             if let user = authDataResult?.user {
-                ABCNetworkingController().authenticateUser(withToken: user.uid, withCompletion: { (error) in
+                ABCNetworkingController().authenticateUser(withToken: user.uid, withCompletion: { (error, user, userType) in
                     //FIXME: This method should return a user. Need to edit it so that it can do that.
                     if let error = error {
                         AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
