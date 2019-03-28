@@ -322,6 +322,7 @@
 				A2C19DAD224A881700FC20F0 /* ABCNetworkingController.h */,
 				A2C19DAE224A881700FC20F0 /* ABCNetworkingController.m */,
 				A29282D4224BE4AB00FF9C28 /* AuthenticationController.swift */,
+				A29282F4224C244800FF9C28 /* UserController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -330,7 +331,6 @@
 			isa = PBXGroup;
 			children = (
 				A2C19D9722456B8800FC20F0 /* UserType.swift */,
-				A29282F4224C244800FF9C28 /* UserController.swift */,
 				A2C19DB0224A935F00FC20F0 /* Ride.swift */,
 			);
 			path = Models;
