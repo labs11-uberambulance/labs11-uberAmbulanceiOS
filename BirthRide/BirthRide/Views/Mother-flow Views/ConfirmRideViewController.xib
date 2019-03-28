@@ -14,7 +14,7 @@
                 <outlet property="estimatedFareLabel" destination="q2P-cW-19G" id="HeW-7Z-7J8"/>
                 <outlet property="estimatedPickupTimeLabel" destination="ewj-dm-rXJ" id="N6G-TH-r0q"/>
                 <outlet property="fareLabel" destination="6Me-yO-8qx" id="e0y-C4-kea"/>
-                <outlet property="mapView" destination="v9M-hg-9JC" id="CoE-cH-gxt"/>
+                <outlet property="mapView" destination="Hkd-bl-f4O" id="cNu-SN-fuP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,13 +23,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="v9M-hg-9JC">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="500" id="KZX-ox-heA"/>
-                        <constraint firstAttribute="width" constant="375" id="zCn-2Y-bDJ"/>
-                    </constraints>
-                </mapView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBG-B0-bR9">
                     <rect key="frame" x="0.0" y="500" width="375" height="167"/>
                     <subviews>
@@ -66,16 +59,23 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="167" id="AOq-3q-0tQ"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hkd-bl-f4O" customClass="GMSMapView">
+                    <rect key="frame" x="0.0" y="20" width="375" height="480"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SBG-B0-bR9" secondAttribute="trailing" id="99K-ei-uge"/>
-                <constraint firstItem="v9M-hg-9JC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Mjn-b4-EWE"/>
-                <constraint firstItem="SBG-B0-bR9" firstAttribute="top" secondItem="v9M-hg-9JC" secondAttribute="bottom" id="cBU-Ki-HbY"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="v9M-hg-9JC" secondAttribute="trailing" id="h98-D0-YrD"/>
+                <constraint firstItem="SBG-B0-bR9" firstAttribute="top" secondItem="Hkd-bl-f4O" secondAttribute="bottom" id="HhS-qy-WF0"/>
+                <constraint firstItem="Hkd-bl-f4O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="R71-ue-kFY"/>
+                <constraint firstItem="Hkd-bl-f4O" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Rzi-dG-9M6"/>
                 <constraint firstItem="SBG-B0-bR9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hXC-4M-QpO"/>
-                <constraint firstItem="v9M-hg-9JC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="mVm-cV-xZI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Hkd-bl-f4O" secondAttribute="trailing" id="nnu-OE-ECX"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="SBG-B0-bR9" secondAttribute="bottom" id="q0h-8y-iya"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-class SearchForDriverViewController: UIViewController {
+class SearchForDriverViewController: UIViewController, GMSMapViewDelegate {
     //MARK: Private Properties
     private let dummyArrayOfDrivers = [["latitude": 0.327825,
     "longitude": 39.022479,
@@ -39,7 +39,10 @@ class SearchForDriverViewController: UIViewController {
         super.viewDidLoad()
         configureMapView()
         createMarkers()
+        mapView.delegate = self
     }
+    
+    //MARK: Private Methods
     private func configureMapView() {
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
         mapView.camera = camera
@@ -53,15 +56,23 @@ class SearchForDriverViewController: UIViewController {
             marker.map = mapView
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    //MARK: GMSMapViewDelegate methods
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        transition(userType: nil, marker: marker)
+        return true
     }
-    */
+    //MARK: TransitionBetweenViewControllers methods
+    func transition(userType: UserType?, marker: GMSMarker) {
+        let destinationVC = ConfirmRideViewController()
+        for dummyDriver in dummyArrayOfDrivers {
+            if dummyDriver["latitude"] as! CLLocationDegrees == marker.position.latitude && dummyDriver["longitude"] as! CLLocationDegrees == marker.position.longitude {
+                destinationVC.driver = dummyDriver
+            }
+        }
+        
+        self.present(destinationVC, animated: true) {
+        }
+    }
 
 }

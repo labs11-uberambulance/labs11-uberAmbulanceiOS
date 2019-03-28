@@ -21,6 +21,7 @@ class RequestOrSearchDriverViewController: UIViewController {
     @IBAction func requestADriverTapped(_ sender: Any) {
         let destinationVC = ConfirmRideViewController()
         destinationVC.pregnantMom = self.pregnantMom
+        self.present(destinationVC, animated: true)
     }
     @IBAction func searchForDriverTapped(_ sender: Any) {
         let destinationVC = SearchForDriverViewController()
