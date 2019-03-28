@@ -38,9 +38,15 @@ class ConfirmRideViewController: UIViewController {
     private func configureMapView() {
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
         mapView.camera = camera
+        
         let driverMarker = GMSMarker()
         driverMarker.position = CLLocationCoordinate2D(latitude: driver?["latitude"] as! CLLocationDegrees, longitude: driver?["longitude"] as! CLLocationDegrees)
         driverMarker.map = mapView
+        
+        let userMarker = GMSMarker()
+        userMarker.icon = GMSMarker.markerImage(with: .blue)
+        userMarker.position = CLLocationManager().location?.coordinate ?? CLLocationCoordinate2D(latitude: 1.5, longitude: 36.9)
+        userMarker.map = mapView
     }
     private func configureLabels() {
         estimatedPickupTimeLabel.text = "5 minutes"
