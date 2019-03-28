@@ -44,6 +44,18 @@
 		A29282D5224BE4AB00FF9C28 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282D4224BE4AB00FF9C28 /* AuthenticationController.swift */; };
 		A29282F5224C244800FF9C28 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282F4224C244800FF9C28 /* UserController.swift */; };
 		A292831C224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.m in Sources */ = {isa = PBXBuildFile; fileRef = A292831B224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.m */; };
+		A292831E224D63AE00FF9C28 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A292831D224D63AE00FF9C28 /* AVFoundation.framework */; };
+		A2928320224D63B400FF9C28 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A292831F224D63B400FF9C28 /* CoreData.framework */; };
+		A2928322224D63BB00FF9C28 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2928321224D63BB00FF9C28 /* CoreLocation.framework */; };
+		A2928324224D63C000FF9C28 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2928323224D63C000FF9C28 /* CoreText.framework */; };
+		A2928326224D63C500FF9C28 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2928325224D63C500FF9C28 /* GLKit.framework */; };
+		A2928328224D63CB00FF9C28 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2928327224D63CB00FF9C28 /* ImageIO.framework */; };
+		A292832A224D63F000FF9C28 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A2928329224D63F000FF9C28 /* libc++.tbd */; };
+		A292832C224D63F800FF9C28 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A292832B224D63F700FF9C28 /* libicucore.tbd */; };
+		A292832E224D63FE00FF9C28 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A292832D224D63FE00FF9C28 /* libz.tbd */; };
+		A2928330224D640300FF9C28 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A292832F224D640300FF9C28 /* OpenGLES.framework */; };
+		A2928332224D640900FF9C28 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2928331224D640900FF9C28 /* QuartzCore.framework */; };
+		A2928334224D641200FF9C28 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2928333224D641200FF9C28 /* SystemConfiguration.framework */; };
 		A2C19D952245589100FC20F0 /* ViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */; };
 		A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D9722456B8800FC20F0 /* UserType.swift */; };
 		A2C19DA3224A7FCF00FC20F0 /* MotherRideStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */; };
@@ -149,6 +161,18 @@
 		A2928318224D327A00FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+ConvertFromSnakeCaseToCamelCase.m"; sourceTree = "<group>"; };
 		A292831A224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+ConvertFromSnakeCaseToCamelCase.h"; sourceTree = "<group>"; };
 		A292831B224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+ConvertFromSnakeCaseToCamelCase.m"; sourceTree = "<group>"; };
+		A292831D224D63AE00FF9C28 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A292831F224D63B400FF9C28 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A2928321224D63BB00FF9C28 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A2928323224D63C000FF9C28 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		A2928325224D63C500FF9C28 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		A2928327224D63CB00FF9C28 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		A2928329224D63F000FF9C28 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		A292832B224D63F700FF9C28 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		A292832D224D63FE00FF9C28 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		A292832F224D640300FF9C28 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		A2928331224D640900FF9C28 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A2928333224D641200FF9C28 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCoordinator.swift; sourceTree = "<group>"; };
 		A2C19D9722456B8800FC20F0 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		A2C19DA1224A7FCF00FC20F0 /* MotherRideStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherRideStatusViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +189,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2928334224D641200FF9C28 /* SystemConfiguration.framework in Frameworks */,
+				A2928332224D640900FF9C28 /* QuartzCore.framework in Frameworks */,
+				A2928330224D640300FF9C28 /* OpenGLES.framework in Frameworks */,
+				A292832E224D63FE00FF9C28 /* libz.tbd in Frameworks */,
+				A292832C224D63F800FF9C28 /* libicucore.tbd in Frameworks */,
+				A292832A224D63F000FF9C28 /* libc++.tbd in Frameworks */,
+				A2928328224D63CB00FF9C28 /* ImageIO.framework in Frameworks */,
+				A2928326224D63C500FF9C28 /* GLKit.framework in Frameworks */,
+				A2928324224D63C000FF9C28 /* CoreText.framework in Frameworks */,
+				A2928322224D63BB00FF9C28 /* CoreLocation.framework in Frameworks */,
+				A2928320224D63B400FF9C28 /* CoreData.framework in Frameworks */,
+				A292831E224D63AE00FF9C28 /* AVFoundation.framework in Frameworks */,
 				53E46459FC4938BE08DBD546 /* Pods_BirthRide.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				A215501E2242CE5C00DDF613 /* BirthRide */,
+				A215501F2242CE5C00DDF613 /* AppDelegate.swift */,
 				A215501D2242CE5C00DDF613 /* Products */,
 				A2C19DA9224A875000FC20F0 /* BirthRide-Bridging-Header.h */,
 				A1BAC622660EAFD4765D62F9 /* Pods */,
@@ -206,7 +243,6 @@
 				A2E277902242D59A00F3460D /* View Controllers */,
 				A27804172243FDD9001920A0 /* Views */,
 				A2C19D962245589700FC20F0 /* Coordinators */,
-				A215501F2242CE5C00DDF613 /* AppDelegate.swift */,
 				A2C19DA7224A86B700FC20F0 /* Controllers */,
 				A2C19DA8224A86C000FC20F0 /* Models */,
 				A2928316224D327600FF9C28 /* Categories */,
@@ -377,6 +413,18 @@
 		B26E3D48CE5DBFB902640CCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A2928333224D641200FF9C28 /* SystemConfiguration.framework */,
+				A2928331224D640900FF9C28 /* QuartzCore.framework */,
+				A292832F224D640300FF9C28 /* OpenGLES.framework */,
+				A292832D224D63FE00FF9C28 /* libz.tbd */,
+				A292832B224D63F700FF9C28 /* libicucore.tbd */,
+				A2928329224D63F000FF9C28 /* libc++.tbd */,
+				A2928327224D63CB00FF9C28 /* ImageIO.framework */,
+				A2928325224D63C500FF9C28 /* GLKit.framework */,
+				A2928323224D63C000FF9C28 /* CoreText.framework */,
+				A2928321224D63BB00FF9C28 /* CoreLocation.framework */,
+				A292831F224D63B400FF9C28 /* CoreData.framework */,
+				A292831D224D63AE00FF9C28 /* AVFoundation.framework */,
 				A29282D6224C030400FF9C28 /* Pods.xcodeproj */,
 				A439B999719DA29D34AE9586 /* Pods_BirthRide.framework */,
 			);

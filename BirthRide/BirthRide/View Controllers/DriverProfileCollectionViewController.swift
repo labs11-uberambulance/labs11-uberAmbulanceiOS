@@ -8,18 +8,31 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "DriverProfileCell"
 
 class DriverProfileCollectionViewController: UICollectionViewController {
+    //MARK: Private Properties
+    private let dummyArrayOfDrivers = [["latitude": 0.327825,
+                                        "longitude": 39.022479,
+                                        "name": "Frederick",
+                                        "rateAndDistance": "$10, 2km"
+        ], ["latitude": 1.488886,
+            "longitude": 37.036951,
+            "name": "Connor",
+            "rateAndDistance": "$8.50, 1.5km"
+        ], ["latitude": 0.471944,
+            "longitude": 36.453422,
+            "name": "Samuel",
+            "rateAndDistance": "$11, 0.75km"
+        ]]
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        self.collectionView.register(UINib(nibName: "DriverProfileCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: "DriverProfileCell")
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView.reloadData()
 
         // Do any additional setup after loading the view.
     }
@@ -38,19 +51,21 @@ class DriverProfileCollectionViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return dummyArrayOfDrivers.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! DriverProfileCollectionViewCell
     
-        // Configure the cell
+        cell.driverNameLabel.text = dummyArrayOfDrivers[indexPath.row]["name"] as? String
+        cell.driverRatingAndEstimatedDistanceLabel.text = dummyArrayOfDrivers[indexPath.row]["rateAndDistance"] as? String
+        cell.driverProfilePictureImageView.image = UIImage(named: "placeholder_image")
     
         return cell
     }
