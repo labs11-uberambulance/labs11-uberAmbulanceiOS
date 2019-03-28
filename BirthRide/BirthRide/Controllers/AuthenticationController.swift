@@ -17,14 +17,15 @@ enum LoginErrorType {
 }
 
 class AuthenticationController {
-   
+    
     //MARK: Singleton
     ///This property is the shared singleton instance of the class.
     static let shared = AuthenticationController()
     private init() {}
-
+    
     ///This property is used by the class to decide how to authenticate the user.
-    var isSigningUp: Bool = false
+    public var isSigningUp: Bool = false
+    public var userToken: String?
     
     
     /// This method displays an error message.
@@ -90,17 +91,37 @@ class AuthenticationController {
                 return
             }
             if let user = authDataResult?.user {
-                ABCNetworkingController().authenticateUser(withToken: user.uid, withCompletion: { (error) in
-                    //FIXME: This method should return a user. Need to edit it so that it can do that.
+                user.getIDToken(completion: { (idToken, error) in
                     if let error = error {
-                        AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
-                        NSLog("%@", error.debugDescription)
+                        NSLog("Error getting token in AuthenticationController.authenticateUserSignIn: \(error.localizedDescription)")
+                        return
                     }
-                })
+                    guard let idToken = idToken else {
+                        NSLog("Token is nil in AuthinticatinoController.authenticateUserSignIn.")
+                        return
+                    }
+                    self.userToken = idToken
+                    
+                    let backgroundOperationQueue = OperationQueue()
+                    backgroundOperationQueue.addOperation({
+                        guard let userToken = self.userToken else {return}
+                        ABCNetworkingController().authenticateUser(withToken: userToken, withCompletion: { (error) in
+                            //FIXME: This method should return a user. Need to edit it so that it can do that.
+                            if let error = error {
+                                AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
+                                NSLog("%@", error.localizedDescription)
+                            }
+                        })
+                    })
+                    
+                    
+                }
+                )
             }
+            
         }
-        
     }
+    
     
     private func authenticateUserSignUp(email: String, password: String,viewController: UIViewController) {
         Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
@@ -118,11 +139,10 @@ class AuthenticationController {
                     //FIXME: This method should return a user. Need to edit it so that it can do that.
                     if let error = error {
                         AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
-                        NSLog("%@", error.debugDescription)
+                        NSLog("%@", error.localizedDescription)
                     }
                 })
             }
         }
     }
-
 }

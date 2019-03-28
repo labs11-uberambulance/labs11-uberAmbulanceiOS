@@ -34,7 +34,7 @@ class UserController {
         networkingController.updateUser(withToken: "StringHere", userType: "pregnantMom") { (error) in
             if let error = error {
                 AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
-                NSLog("%@", error.debugDescription)
+                NSLog("%@", error.localizedDescription)
                 return
             }
         }
@@ -64,7 +64,7 @@ class UserController {
         networkingController.updateUser(withToken: "StringHere", userType: driver.userType ?? "driver") { (error) in
             if let error = error {
                 AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
-                NSLog("%@", error.debugDescription)
+                NSLog("%@", error.localizedDescription)
                 return
             }
         }
