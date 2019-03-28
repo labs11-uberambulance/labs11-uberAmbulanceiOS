@@ -17,14 +17,20 @@ enum LoginErrorType {
 }
 
 class AuthenticationController {
-   
+    
     //MARK: Singleton
     ///This property is the shared singleton instance of the class.
     static let shared = AuthenticationController()
     private init() {}
-
+    
+    //MARK: Private Properties
+    private var pregnantMom: PregnantMom?
+    private var driver: Driver?
+    private var genericUser: User?
+    
     ///This property is used by the class to decide how to authenticate the user.
-    var isSigningUp: Bool = false
+    public var isSigningUp: Bool = false
+    public var userToken: String?
     
     
     /// This method displays an error message.
@@ -78,6 +84,7 @@ class AuthenticationController {
         viewController.present(alert, animated: true, completion: nil)
     }
     
+    //MARK: Sign-in methods
     private func authenticateUserSignIn(email: String, password: String, viewController: UIViewController) {
         Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
             if email == "" || password == "" {
@@ -90,18 +97,33 @@ class AuthenticationController {
                 return
             }
             if let user = authDataResult?.user {
-                ABCNetworkingController().authenticateUser(withToken: user.uid, withCompletion: { (error) in
-                    //FIXME: This method should return a user. Need to edit it so that it can do that.
+                user.getIDToken(completion: { (idToken, error) in
                     if let error = error {
-                        AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
-                        NSLog("%@", error.debugDescription)
+                        NSLog("Error getting token in AuthenticationController.authenticateUserSignIn: \(error.localizedDescription)")
+                        return
                     }
-                })
+                    guard let idToken = idToken else {
+                        NSLog("Token is nil in AuthinticatinoController.authenticateUserSignIn.")
+                        return
+                    }
+                    self.userToken = idToken
+                    self.authenticationNetworkingRequest(viewController: viewController)
+                }
+                )
             }
+            
         }
+    }
+    private func authenticateUserSignIn(viewController: UIViewController) {
+        authenticationNetworkingRequest(viewController: viewController)
+    }
+    private func authenticateUserSignIn(phoneNumber: String, viewController: UIViewController) {
         
     }
     
+    
+    
+    //MARK: Sign-up methods
     private func authenticateUserSignUp(email: String, password: String,viewController: UIViewController) {
         Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
             if email == "" || password == "" {
@@ -114,15 +136,46 @@ class AuthenticationController {
                 return
             }
             if let user = authDataResult?.user {
-                ABCNetworkingController().authenticateUser(withToken: user.uid, withCompletion: { (error) in
+                ABCNetworkingController().authenticateUser(withToken: user.uid, withCompletion: { (error, user, userType) in
                     //FIXME: This method should return a user. Need to edit it so that it can do that.
                     if let error = error {
                         AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
-                        NSLog("%@", error.debugDescription)
+                        NSLog("%@", error.localizedDescription)
                     }
                 })
             }
         }
     }
-
+    private func authenticationNetworkingRequest(viewController: UIViewController) {
+        let backgroundOperationQueue = OperationQueue()
+        backgroundOperationQueue.addOperation({
+            guard let userToken = self.userToken else {return}
+            ABCNetworkingController().authenticateUser(withToken: userToken, withCompletion: { (error, user, userType)  in
+                if let error = error {
+                    AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
+                    NSLog("%@", error.localizedDescription)
+                }
+                guard let user = user else {
+                    
+                    AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
+                    NSLog("user is nil in AuthenticationController.authenticateUserSignIn.")
+                    return
+                }
+                guard let userType = userType else {
+                    AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
+                    NSLog("userType is nil in AuthenticationController.authenticateUserSignIn.")
+                    return
+                }
+                switch userType {
+                case "driver":
+                    self.driver = user as? Driver
+                case "pregnantMom":
+                    self.pregnantMom = user as? PregnantMom
+                default:
+                    self.genericUser = user as? User
+                }
+                
+            })
+        })
+    }
 }

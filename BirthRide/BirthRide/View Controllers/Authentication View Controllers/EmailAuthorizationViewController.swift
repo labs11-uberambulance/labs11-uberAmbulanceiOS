@@ -29,7 +29,7 @@ class EmailAuthorizationViewController: UIViewController, TransitionBetweenViewC
     @IBAction func doneButtonTapped(_ sender: Any) {
         guard let email = emailTextField.text, let password = passwordTextField.text else {return}
         AuthenticationController.shared.authenticateUser(email: email, password: password, viewController: self)
-        transition(userType: nil)
+//        transition(userType: nil)
     }
     
     func transition(userType: UserType?) {

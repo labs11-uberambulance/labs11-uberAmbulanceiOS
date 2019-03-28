@@ -16,10 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ABCNetworkingController : NSObject
 
-///The results of authenticateUserWithToken will be placed here if the user has previously gone through authentication in our app. If this value is non-nil, and if there is a user type, the value of genericUser should be cast as that specific user type. If this value is nil, that means that the user has not authenticated before and instead authenticateUserWithToken created a new user for us.
-//@property User *genericUser;
-
-
 /**
  This method will fetch a list of drivers nearby the coordinate location of the mother.
 
@@ -36,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param token The authentication token associated with the user. This parameter is used to find the ride associated with the user.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished. The return value of this completion handler is the fetched Ride object.
  */
-- (void)fetchRideWithToken:(NSString *)token withCompletion:(Ride *(^)(NSError * _Nullable *error))completionHandler;
+- (void)fetchRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, Ride *ride))completionHandler;
 
 
 /**
@@ -46,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param userType The type of the user, either mother or driver.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)updateUserWithToken:(NSString *)token userType:(NSString *)userType withCompletion:(void(^)(NSError * _Nullable *error))completionHandler;
+- (void)updateUserWithToken:(NSString *)token userType:(NSString *)userType withCompletion:(void(^)(NSError * _Nullable error))completionHandler;
 
 ///This method will create a ride on the server.
 /**
@@ -55,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param token The authentication token associated with the user. This parameter is used to associate the created ride with a specific user.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)createRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable *error))completionHandler;
+- (void)createRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error))completionHandler;
 
 
 /**
@@ -64,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param token The authentication token associated with the user. This parameter is used to find and update the correct ride on the server that is associated with this authentication token's user.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)updateRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable *error))completionHandler;
+- (void)updateRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error))completionHandler;
 
 
 /**
@@ -73,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param token The authentication token associated with the user. This parameter is used to find the existing user associated with it or, if not associated user is found, to create in the database a new user associated with it.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)authenticateUserWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable *error))completionHandler;
+- (void)authenticateUserWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, id _Nullable user, NSString * _Nullable userType))completionHandler;
 
 @end
 

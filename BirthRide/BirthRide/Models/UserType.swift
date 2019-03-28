@@ -57,6 +57,7 @@ class PregnantMom: User {
     ///This property must match a location findable by google maps API
     var hospital: String?
 
+    @objc
     init(dueDate: String?, hospital: String?, caretakerName: String?) {
         self.dueDate = dueDate
         self.hospital = hospital
@@ -73,6 +74,7 @@ class Driver: User {
     var bio: String?
     var photo: String?
     
+    @objc
     init(price: Int, active: Bool = false, bio: String, photo: String?) {
         self.price = price
         self.active = active
