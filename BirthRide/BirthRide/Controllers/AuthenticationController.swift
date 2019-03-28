@@ -106,39 +106,7 @@ class AuthenticationController {
                         return
                     }
                     self.userToken = idToken
-                    
-                    let backgroundOperationQueue = OperationQueue()
-                    backgroundOperationQueue.addOperation({
-                        guard let userToken = self.userToken else {return}
-                        ABCNetworkingController().authenticateUser(withToken: userToken, withCompletion: { (error, user, userType)  in
-                            if let error = error {
-                                AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
-                                NSLog("%@", error.localizedDescription)
-                            }
-                            guard let user = user else {
-                            
-                            AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
-                            NSLog("user is nil in AuthenticationController.authenticateUserSignIn.")
-                            return
-                            }
-                            guard let userType = userType else {
-                                AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
-                                NSLog("userType is nil in AuthenticationController.authenticateUserSignIn.")
-                                return
-                            }
-                            switch userType {
-                            case "driver":
-                                self.driver = user as? Driver
-                            case "pregnantMom":
-                                self.pregnantMom = user as? PregnantMom
-                            default:
-                                self.genericUser = user as? User
-                            }
-                            
-                        })
-                    })
-                    
-                    
+                    self.authenticationNetworkingRequest(viewController: viewController)
                 }
                 )
             }
@@ -168,5 +136,37 @@ class AuthenticationController {
                 })
             }
         }
+    }
+    private func authenticationNetworkingRequest(viewController: UIViewController) {
+        let backgroundOperationQueue = OperationQueue()
+        backgroundOperationQueue.addOperation({
+            guard let userToken = self.userToken else {return}
+            ABCNetworkingController().authenticateUser(withToken: userToken, withCompletion: { (error, user, userType)  in
+                if let error = error {
+                    AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
+                    NSLog("%@", error.localizedDescription)
+                }
+                guard let user = user else {
+                    
+                    AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
+                    NSLog("user is nil in AuthenticationController.authenticateUserSignIn.")
+                    return
+                }
+                guard let userType = userType else {
+                    AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
+                    NSLog("userType is nil in AuthenticationController.authenticateUserSignIn.")
+                    return
+                }
+                switch userType {
+                case "driver":
+                    self.driver = user as? Driver
+                case "pregnantMom":
+                    self.pregnantMom = user as? PregnantMom
+                default:
+                    self.genericUser = user as? User
+                }
+                
+            })
+        })
     }
 }
