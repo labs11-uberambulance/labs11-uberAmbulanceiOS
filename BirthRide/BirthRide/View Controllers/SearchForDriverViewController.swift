@@ -24,6 +24,7 @@ class SearchForDriverViewController: UIViewController, GMSMapViewDelegate {
             "name": "Samuel",
             "rateAndDistance": "$11, 0.75km"
         ]]
+    private var driverProfileCollectionViewController: DriverProfileCollectionViewController?
     
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
@@ -40,6 +41,20 @@ class SearchForDriverViewController: UIViewController, GMSMapViewDelegate {
         configureMapView()
         createMarkers()
         mapView.delegate = self
+        driverProfileCollectionViewController = DriverProfileCollectionViewController()
+        driverProfileCollectionView.dataSource = driverProfileCollectionViewController
+        driverProfileCollectionView.delegate = driverProfileCollectionViewController
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: 100, height: 100)
+        flowLayout.scrollDirection = .horizontal
+        let collectionView = UICollectionView.init(frame: driverProfileCollectionView.frame, collectionViewLayout: flowLayout)
+        
+        driverProfileCollectionViewController?.collectionView = collectionView
+        driverProfileCollectionViewController?.collectionView.frame(forAlignmentRect: driverProfileCollectionView.frame)
+            
+        driverProfileCollectionView = driverProfileCollectionViewController?.collectionView
+        driverProfileCollectionViewController?.viewDidLoad()
     }
     
     //MARK: Private Methods
