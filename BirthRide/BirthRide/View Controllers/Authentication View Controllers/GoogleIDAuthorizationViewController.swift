@@ -10,32 +10,54 @@ import UIKit
 import GoogleSignIn
 
 class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate, TransitionBetweenViewControllers {
+    
     //MARK: Private Properties
     private var genericUser: User?
-    
+    private var gidSignInButton: GIDSignInButton?
+    private var gestureRecognizer: UITapGestureRecognizer?
     //MARK: IBOutlets
-    @IBOutlet weak var gidSignInView: UIView!
+    @IBOutlet weak var configureView: UIView!
+    
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
-        GIDSignIn.sharedInstance().signIn()
-        AuthenticationController.shared.userToken = GIDSignIn.sharedInstance()?.currentUser.authentication.accessToken
-        // Do any additional setup after loading the view.
+        GIDSignIn.sharedInstance()?.signInSilently()
+        
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
         transition(userType: nil)
+//        transition(userType: nil)
+    }
+    
+    
+    //MARK: Private Methods
+    private func configureGIDSignInButton() {
+        gidSignInButton = GIDSignInButton()
+        gidSignInButton?.frame = configureView.frame
+        gidSignInButton?.colorScheme = .dark
+        gidSignInButton?.style = .standard
+        self.view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(gidSignInButton!)
+        gidSignInButton?.addGestureRecognizer(gestureRecognizer!)
+//        gidSignInButton?.addTarget(self, action: , for: )
+        
+    }
+    @objc private func gidSignInButtonTapped() {
+        NSLog("hooray")
     }
     
     //MARK: TransitionBetweenViewControllers methods
     func transition(userType: UserType?) {
-        let userTypeViewController = UserTypeViewController()
-        userTypeViewController.user = self.genericUser
-        self.present(userTypeViewController, animated: true) {
+        let destinationVC = OnboardingViewController()
+        destinationVC.user = self.genericUser
+        self.present(destinationVC, animated: true) {
         }
     }
+    
+    //MARK: GIDSignInUIDelegate Methods
 
 
     /*
