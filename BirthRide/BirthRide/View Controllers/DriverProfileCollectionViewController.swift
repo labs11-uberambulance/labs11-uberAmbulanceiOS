@@ -29,9 +29,8 @@ class DriverProfileCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView.register(UINib(nibName: "DriverProfileCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: "DriverProfileCell")
+        self.collectionView.register(UINib(nibName: "DriverProfileCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.reloadData()
 
         // Do any additional setup after loading the view.
@@ -61,6 +60,7 @@ class DriverProfileCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! DriverProfileCollectionViewCell
     
         cell.driverNameLabel.text = dummyArrayOfDrivers[indexPath.row]["name"] as? String
