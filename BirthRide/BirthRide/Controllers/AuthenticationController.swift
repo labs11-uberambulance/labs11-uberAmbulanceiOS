@@ -58,12 +58,20 @@ class AuthenticationController {
     ///   - email: The email entered by the user to authenticate.
     ///   - password: The password entered by the user to authenticate.
     ///   - viewController: The viewController calling the method.
-    public func authenticateUser(email: String, password: String, viewController: UIViewController) {
+    public func authenticateUser(email: String?, password: String?, viewController: UIViewController) {
         switch AuthenticationController.shared.isSigningUp {
         case true:
+            if email != nil {
             authenticateUserSignUp(email: email, password: password, viewController: viewController)
+            } else {
+                authenticationNetworkingRequest(viewController: viewController)
+            }
         case false:
+            if email != nil {
             authenticateUserSignIn(email: email, password: password, viewController: viewController)
+            } else {
+                authenticationNetworkingRequest(viewController: viewController)
+            }
         }
     }
     
@@ -85,7 +93,8 @@ class AuthenticationController {
     }
     
     //MARK: Sign-in methods
-    private func authenticateUserSignIn(email: String, password: String, viewController: UIViewController) {
+    private func authenticateUserSignIn(email: String?, password: String?, viewController: UIViewController) {
+        guard let email = email, let password = password else {return}
         Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
             if email == "" || password == "" {
                 AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: viewController)
@@ -124,7 +133,8 @@ class AuthenticationController {
     
     
     //MARK: Sign-up methods
-    private func authenticateUserSignUp(email: String, password: String,viewController: UIViewController) {
+    private func authenticateUserSignUp(email: String?, password: String?,viewController: UIViewController) {
+        guard let email = email, let password = password else {return}
         Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
             if email == "" || password == "" {
                 AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: viewController)

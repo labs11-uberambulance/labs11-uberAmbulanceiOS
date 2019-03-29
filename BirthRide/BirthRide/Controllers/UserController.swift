@@ -22,7 +22,7 @@ class UserController {
         newMom.name = user.name
         newMom.firebaseId = user.firebaseId
         newMom.address = user.address
-        newMom.id = user.id
+        newMom.userID = user.userID
         newMom.login = user.login
         newMom.phone = user.phone
         newMom.userType = user.userType

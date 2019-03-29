@@ -14,10 +14,10 @@ enum UserType: String {
     case driver
 }
 
-@objc
+@objcMembers
 class User: NSObject {
     ///This property will be set by the backend. I will get it back when I first create the user.
-    var id: Int?
+    var userID: NSNumber?
     var name: String?
     ///This property will contain the email or phone number of the user, depending on login type
     var login: String?
@@ -29,15 +29,15 @@ class User: NSObject {
     ///The value of the property must match location findable by google maps API
     var village: String?
     ///This property should be populated immediately upon receiving the id from the backend.
-    var latitude: Double?
+    var latitude: NSNumber?
     ///This property should be populated immediately upon receiving the id from the backend.
-    var longitude: Double?
+    var longitude: NSNumber?
     
     var email: String?
 
-    init(id: Int?, name: String?, login: String?, firebaseId: String?, phone: String?, userType: String?, address: String?, village: String?, latitude: Double?, longitude: Double?, email: String?) {
+    required init(userID: NSNumber?, name: String?, login: String?, firebaseId: String?, phone: String?, userType: String?, address: String?, village: String?, latitude: NSNumber?, longitude: NSNumber?, email: String?) {
         super.init()
-        self.id = id
+        self.userID = userID
         self.name = name
         self.login = login
         self.phone = phone
@@ -48,8 +48,9 @@ class User: NSObject {
         self.longitude = longitude
         self.email = email
     }
+
 }
-@objc
+@objcMembers
 class PregnantMom: User {
     var caretakerName: String?
     ///This property must have the format: YYYY-MM-DD
@@ -57,30 +58,41 @@ class PregnantMom: User {
     ///This property must match a location findable by google maps API
     var hospital: String?
 
-    @objc
-    init(dueDate: String?, hospital: String?, caretakerName: String?) {
+    required init(dueDate: String?, hospital: String?, caretakerName: String?) {
         self.dueDate = dueDate
         self.hospital = hospital
         self.caretakerName = caretakerName
-        super.init(id: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil)
+        super.init(userID: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil)
     }
+    
+    required init(userID: NSNumber?, name: String?, login: String?, firebaseId: String?, phone: String?, userType: String?, address: String?, village: String?, latitude: NSNumber?, longitude: NSNumber?, email: String?) {
+        fatalError("init(userID:name:login:firebaseId:phone:userType:address:village:latitude:longitude:email:) has not been implemented")
+    }
+    
+   
 }
-@objc
+@objcMembers
 class Driver: User {
     ///The value of this property is the maximum price for the ride
-    var price: Int
-    var active: Bool
+    var price: Int?
+    var active: Bool?
     ///The value of this property has a 500 char limit
     var bio: String?
     var photo: String?
     
     @objc
-    init(price: Int, active: Bool = false, bio: String, photo: String?) {
+    required init(price: Int, active: Bool = false, bio: String, photo: String?) {
         self.price = price
         self.active = active
         self.bio = bio
         self.photo = photo
-        super.init(id: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil)
+        super.init(userID: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil)
     }
+    
+    required init(userID: NSNumber?, name: String?, login: String?, firebaseId: String?, phone: String?, userType: String?, address: String?, village: String?, latitude: NSNumber?, longitude: NSNumber?, email: String?) {
+        fatalError("init(userID:name:login:firebaseId:phone:userType:address:village:latitude:longitude:email:) has not been implemented")
+    }
+    
+    
 }
 

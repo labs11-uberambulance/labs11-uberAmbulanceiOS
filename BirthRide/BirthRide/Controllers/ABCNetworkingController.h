@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param token The authentication token associated with the user. This parameter is used to find the existing user associated with it or, if not associated user is found, to create in the database a new user associated with it.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)authenticateUserWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, id _Nullable user, NSString * _Nullable userType))completionHandler;
+- (void)authenticateUserWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, NSArray *_Nullable userArray, NSString * _Nullable userType))completionHandler;
 
 @end
 

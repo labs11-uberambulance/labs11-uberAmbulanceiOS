@@ -38,7 +38,7 @@
 
 //I was getting errors when I was trying to pass the error into my completionHandler. It was an ARC error. The problem was that I was adding in an extra "asterisk", or saying that there was an extra pointer. The completionHandler couldn't take the error in that way. This is what it looked like when I was getting the error: NSError * _Nullable *error. That second asterisk was tripping me up.
 
-- (void)authenticateUserWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, id _Nullable user, NSString * _Nullable userType))completionHandler {
+- (void)authenticateUserWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, NSArray *_Nullable userArray, NSString * _Nullable userType))completionHandler {
     
     NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/users"];
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
@@ -53,37 +53,51 @@
             return;
         }
         NSString *userType = [[NSString alloc] init];
+        NSString *userTypeKey = [[NSString alloc] init];
         NSMutableArray *userArray = [[NSMutableArray alloc] init];
         if (data != nil) {
             NSDictionary *parsedData = [[NSDictionary alloc] init];
             parsedData = [NSJSONSerialization JSONObjectWithData:data options:0 error: nil];
-            if ([parsedData[@"user_type"]  isEqual: @"pregnantMom"]) {
+            if ([parsedData[@"user"][@"user_type"]  isEqual: @"mothers"]) {
                 PregnantMom *pregnantMom = [PregnantMom alloc];
-                [userArray addObject:pregnantMom];
-                userType = @"pregnantMom";
-            } else if ([parsedData[@"user_type"]  isEqual: @"driver"]) {
+                userType = @"mothers";
+                userTypeKey = @"motherData";
+            } else if ([parsedData[@"user"][@"user_type"]  isEqual: @"drivers"]) {
                 Driver *driver = [Driver alloc];
-                [userArray addObject:driver];
-                userType = @"driver";
-            } else {
-                User *user = [User alloc];
-                [userArray addObject:user];
-                userType = @"user";
+                userType = @"drivers";
+                userTypeKey = @"driverData";
             }
+            User *user = [User alloc];
+
+            userType = nil;
             //This `enumerateKeysAndObj...` will iterate over all the keys of the dictionary for me
-            [parsedData enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
+            [parsedData[@"user"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
                 if ([key containsString:@"_"]) {
                     key = [key convertFromSnakeCaseToCamelCase];
                 }
+                if ([key isEqualToString:@"id"]) {
+                    user.userID = parsedData[@"user"][key];
+                };
                 //What is a selector? A selector is a METHOD. A message is a METHOD + ARGUMENTS. Line 59 is, at RUNTIME, CREATING a NEW METHOD using the KEY.
                 SEL selector = NSSelectorFromString(key);
-                //On line 80 we are sending a MESSAGE to the OBJECT using the SELECTOR to ASK the OBJECT if it contains a property with the NAME of the SELECTOR
-                if ([userArray[0] respondsToSelector:selector]) {
-                    //On line 82 we are LOOKING FOR a method called `setProperty` to SET the PROPERTY with the VALUE. IF THIS METHOD IS NOT FOUND the selector GENERATES a METHOD called `setProperty` to SET the value of the PARAMETER matching the KEY
-                    [userArray[0] setValue:value forKey:key];
+                //On line 81 we are sending a MESSAGE to the OBJECT using the SELECTOR to ASK the OBJECT if it contains a property with the NAME of the SELECTOR
+                if ([user respondsToSelector: selector]) {
+                    //On line 83 we are LOOKING FOR a method called `setProperty` to SET the PROPERTY with the VALUE. IF THIS METHOD IS NOT FOUND the selector GENERATES a METHOD called `setProperty` to SET the value of the PARAMETER matching the KEY
+                    [user setValue:value forKey:key];
                 }
             }];
-            completionHandler(nil, userArray[0], userType);
+            if (userType != nil) {
+            [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
+                if ([key containsString:@"_"]) {
+                    key = [key convertFromSnakeCaseToCamelCase];
+                }
+                SEL selector = NSSelectorFromString(key);
+                if ([userArray[1] respondsToSelector:selector]) {
+                    [userArray[1] setValue:value forKey:key];
+                }
+            }];
+            };
+            completionHandler(nil, userArray, userType);
         };
         
         

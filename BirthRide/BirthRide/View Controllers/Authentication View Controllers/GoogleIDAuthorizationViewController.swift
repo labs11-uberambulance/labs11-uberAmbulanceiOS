@@ -51,7 +51,7 @@ class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate
     
     //MARK: TransitionBetweenViewControllers methods
     func transition(userType: UserType?) {
-        let destinationVC = OnboardingViewController()
+        let destinationVC = UserTypeViewController()
         destinationVC.user = self.genericUser
         self.present(destinationVC, animated: true) {
         }

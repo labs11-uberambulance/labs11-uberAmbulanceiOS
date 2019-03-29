@@ -93,6 +93,7 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
                     return
                 }
                 AuthenticationController.shared.userToken = idToken
+                AuthenticationController.shared.authenticateUser(email: nil, password: nil, viewController: self)
             })
         }
     }
