@@ -18,7 +18,7 @@ class UserController {
     
     //MARK: Public Methods
     public func configurePregnantMom(user: User, viewController: UIViewController, dueDate: String?, hospital: String?, caretakerName: String?) -> PregnantMom {
-        let newMom = PregnantMom(dueDate: dueDate, hospital: hospital, caretakerName: caretakerName)
+        let newMom = PregnantMom(dueDate: dueDate, hospital: hospital, caretakerName: caretakerName, motherID: nil)
         newMom.name = user.name
         newMom.firebaseId = user.firebaseId
         newMom.address = user.address
@@ -46,7 +46,7 @@ class UserController {
     }
     
     public func configureDriver(price: Int, bio: String) -> Driver {
-        return Driver(price: price, bio: bio, photo: nil)
+        return Driver(price: price, bio: bio, photo: nil, driverID: nil)
     }
     public func updateDriver(driver: Driver, viewController: UIViewController, name: String?, address: String?, email: String?, phoneNumber: String?, priceString: String?, bio: String?, photo: String?) {
         guard name != "", address != "", email != "", phoneNumber != "", priceString != "" else {

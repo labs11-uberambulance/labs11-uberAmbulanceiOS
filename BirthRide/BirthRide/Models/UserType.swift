@@ -35,7 +35,7 @@ class User: NSObject {
     
     var email: String?
 
-    required init(userID: NSNumber?, name: String?, login: String?, firebaseId: String?, phone: String?, userType: String?, address: String?, village: String?, latitude: NSNumber?, longitude: NSNumber?, email: String?) {
+    init(userID: NSNumber?, name: String?, login: String?, firebaseId: String?, phone: String?, userType: String?, address: String?, village: String?, latitude: NSNumber?, longitude: NSNumber?, email: String?) {
         super.init()
         self.userID = userID
         self.name = name
@@ -57,19 +57,16 @@ class PregnantMom: User {
     var dueDate: String?
     ///This property must match a location findable by google maps API
     var hospital: String?
+    
+    var motherID: NSNumber?
 
-    required init(dueDate: String?, hospital: String?, caretakerName: String?) {
+    required init(dueDate: String?, hospital: String?, caretakerName: String?, motherID: NSNumber?) {
         self.dueDate = dueDate
         self.hospital = hospital
         self.caretakerName = caretakerName
+        self.motherID = motherID
         super.init(userID: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil)
     }
-    
-    required init(userID: NSNumber?, name: String?, login: String?, firebaseId: String?, phone: String?, userType: String?, address: String?, village: String?, latitude: NSNumber?, longitude: NSNumber?, email: String?) {
-        fatalError("init(userID:name:login:firebaseId:phone:userType:address:village:latitude:longitude:email:) has not been implemented")
-    }
-    
-   
 }
 @objcMembers
 class Driver: User {
@@ -80,18 +77,18 @@ class Driver: User {
     var bio: String?
     var photo: String?
     
+    var driverID: NSNumber?
+    
     @objc
-    required init(price: Int, active: Bool = false, bio: String, photo: String?) {
+    required init(price: Int, active: Bool = false, bio: String, photo: String?, driverID: NSNumber?) {
         self.price = price
         self.active = active
         self.bio = bio
         self.photo = photo
+        self.driverID = driverID
         super.init(userID: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil)
     }
-    
-    required init(userID: NSNumber?, name: String?, login: String?, firebaseId: String?, phone: String?, userType: String?, address: String?, village: String?, latitude: NSNumber?, longitude: NSNumber?, email: String?) {
-        fatalError("init(userID:name:login:firebaseId:phone:userType:address:village:latitude:longitude:email:) has not been implemented")
-    }
+
     
     
 }

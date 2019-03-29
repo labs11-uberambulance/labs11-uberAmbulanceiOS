@@ -59,15 +59,15 @@
             NSDictionary *parsedData = [[NSDictionary alloc] init];
             parsedData = [NSJSONSerialization JSONObjectWithData:data options:0 error: nil];
             if ([parsedData[@"user"][@"user_type"]  isEqual: @"mothers"]) {
-                PregnantMom *pregnantMom = [PregnantMom alloc];
                 userType = @"mothers";
                 userTypeKey = @"motherData";
             } else if ([parsedData[@"user"][@"user_type"]  isEqual: @"drivers"]) {
-                Driver *driver = [Driver alloc];
                 userType = @"drivers";
                 userTypeKey = @"driverData";
             }
             User *user = [User alloc];
+            PregnantMom *pregnantMom = [PregnantMom alloc];
+            Driver *driver = [Driver alloc];
 
             userType = nil;
             //This `enumerateKeysAndObj...` will iterate over all the keys of the dictionary for me
@@ -86,16 +86,39 @@
                     [user setValue:value forKey:key];
                 }
             }];
-            if (userType != nil) {
-            [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
-                if ([key containsString:@"_"]) {
-                    key = [key convertFromSnakeCaseToCamelCase];
+            [userArray addObject:user];
+            if (user.userType != nil) {
+                if ([user.userType isEqualToString:@"mothers"]) {
+                    [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
+                        if ([key containsString:@"_"]) {
+                            key = [key convertFromSnakeCaseToCamelCase];
+                        }
+                        if ([key isEqualToString:@"id"]) {
+                            pregnantMom.motherID = parsedData[@"user"][key];
+                        };
+                        SEL selector = NSSelectorFromString(key);
+                        if ([pregnantMom respondsToSelector:selector]) {
+                            [pregnantMom setValue:value forKey:key];
+                        }
+                    }];
+                    [userArray addObject:pregnantMom];
+                };
+                if ([user.userType isEqualToString:@"drivers"]) {
+                    [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
+                        if ([key containsString:@"_"]) {
+                            key = [key convertFromSnakeCaseToCamelCase];
+                        }
+                        if ([key isEqualToString:@"id"]) {
+                            driver.driverID = parsedData[@"user"][key];
+                        };
+                        SEL selector = NSSelectorFromString(key);
+                        if ([driver respondsToSelector:selector]) {
+                            [driver setValue:value forKey:key];
+                        }
+                    }];
+                    [userArray addObject:driver];
                 }
-                SEL selector = NSSelectorFromString(key);
-                if ([userArray[1] respondsToSelector:selector]) {
-                    [userArray[1] setValue:value forKey:key];
-                }
-            }];
+            
             };
             completionHandler(nil, userArray, userType);
         };
