@@ -20,6 +20,7 @@ class OnboardingViewController: UIViewController {
     
     //MARK: Other Properties
     var userType: UserType?
+    var user: User?
     
     
     override func viewDidLoad() {

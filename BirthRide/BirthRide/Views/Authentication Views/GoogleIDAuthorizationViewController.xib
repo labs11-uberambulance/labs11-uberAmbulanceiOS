@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GoogleIDAuthorizationViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
-                <outlet property="gidSignInView" destination="cTs-0E-fyf" id="fqp-IZ-Qvt"/>
+                <outlet property="configureView" destination="cTs-0E-fyf" id="I3s-ou-mf9"/>
                 <outlet property="view" destination="ead-hv-cWT" id="mTn-rq-22q"/>
             </connections>
         </placeholder>
@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cTs-0E-fyf" customClass="GIDSignInButton" customModule="BirthRide" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cTs-0E-fyf">
                     <rect key="frame" x="67.5" y="270" width="240" height="127"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="240" id="Kth-vl-ryv"/>
