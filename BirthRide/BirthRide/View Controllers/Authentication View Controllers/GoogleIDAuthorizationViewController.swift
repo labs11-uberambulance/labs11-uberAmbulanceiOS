@@ -19,7 +19,7 @@ class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate
     @IBOutlet weak var configureView: UIView!
     
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
@@ -29,7 +29,7 @@ class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate
     
     @IBAction func doneButtonTapped(_ sender: Any) {
         transition(userType: nil)
-//        transition(userType: nil)
+        //        transition(userType: nil)
     }
     
     
@@ -44,12 +44,21 @@ class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate
         gidSignInButton?.addGestureRecognizer(gestureRecognizer!)
         
     }
-
+    
     //MARK: TransitionBetweenViewControllers methods
     func transition(userType: UserType?) {
-        let destinationVC = OnboardingViewController()
-        destinationVC.user = self.genericUser
-        self.present(destinationVC, animated: true) {
+        if AuthenticationController.shared.driver == nil && AuthenticationController.shared.pregnantMom == nil {
+            let destinationVC = UserTypeViewController()
+            destinationVC.user = self.genericUser
+            self.present(destinationVC, animated: true) {
+            }
+        } else if AuthenticationController.shared.driver != nil {
+            let destinationVC = RequestOrSearchDriverViewController()
+        } else if AuthenticationController.shared.pregnantMom != nil {
+            let destinationVC = RequestOrSearchDriverViewController()
+            destinationVC.pregnantMom = AuthenticationController.shared.pregnantMom
+            self.present(destinationVC, animated: true) {
+            }
         }
     }
     

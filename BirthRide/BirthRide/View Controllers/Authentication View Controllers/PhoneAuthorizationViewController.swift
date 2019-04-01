@@ -24,19 +24,23 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
     }
     @IBAction func doneButtonTapped(_ sender: Any) {
-        if doneButton.titleLabel?.text == "Continue" {
-            let phoneNumber = phoneNumberTextField.text
-            verifyPhoneNumber(phoneNumber: phoneNumber!)
-            phoneNumberTextField.placeholder = "Verification Code"
-            doneButton.setTitle("Done", for: .normal)
+        if AuthenticationController.shared.genericUser == nil {
+            if doneButton.titleLabel?.text == "Continue" {
+                let phoneNumber = phoneNumberTextField.text
+                verifyPhoneNumber(phoneNumber: phoneNumber!)
+                phoneNumberTextField.placeholder = "Verification Code"
+                doneButton.setTitle("Done", for: .normal)
+            } else {
+                let verificationCode = phoneNumberTextField.text
+                verifyAuthenticationCodeAndID(verificationCode: verificationCode)
+            }
         } else {
-            let verificationCode = phoneNumberTextField.text
-            verifyAuthenticationCodeAndID(verificationCode: verificationCode)
+            transition(userType: nil)
         }
     }
     
@@ -54,7 +58,7 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
             if let newVerifcationID = verificationID {
                 UserDefaults.standard.set(newVerifcationID, forKey: "authVerificationID")
             }
-
+            
         }
     }
     
@@ -91,21 +95,30 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     
     //MARK: TransitionBetweenViewControllersDelegate methods
     func transition(userType: UserType?) {
-        let userTypeViewController = UserTypeViewController()
-        userTypeViewController.user = self.genericUser
-        self.present(userTypeViewController, animated: true) {
+        if AuthenticationController.shared.driver == nil && AuthenticationController.shared.pregnantMom == nil {
+            let destinationVC = UserTypeViewController()
+            destinationVC.user = self.genericUser
+            self.present(destinationVC, animated: true) {
+            }
+        } else if AuthenticationController.shared.driver != nil {
+            let destinationVC = RequestOrSearchDriverViewController()
+        } else if AuthenticationController.shared.pregnantMom != nil {
+            let destinationVC = RequestOrSearchDriverViewController()
+            destinationVC.pregnantMom = AuthenticationController.shared.pregnantMom
+            self.present(destinationVC, animated: true) {
+            }
         }
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

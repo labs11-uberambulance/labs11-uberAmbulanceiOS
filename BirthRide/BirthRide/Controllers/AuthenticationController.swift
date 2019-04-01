@@ -46,8 +46,8 @@ class AuthenticationController {
     ///
     /// - Parameter viewController: This UIViewControllerProperty is used to determine the viewController in which the error messages should be displayed.
     private func authenticationNetworkingRequest() {
-        let backgroundOperationQueue = OperationQueue()
-        backgroundOperationQueue.addOperation({
+//        let backgroundOperationQueue = OperationQueue()
+//        backgroundOperationQueue.addOperation({
             guard let userToken = self.userToken else {return}
             ABCNetworkingController().authenticateUser(withToken: userToken, withCompletion: { (error, userArray, userType)  in
                 if let error = error {
@@ -72,7 +72,7 @@ class AuthenticationController {
                     break
                 }
                 
-            })
+//            })
         })
     }
 }
