@@ -42,32 +42,23 @@ class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate
         self.view.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(gidSignInButton!)
         gidSignInButton?.addGestureRecognizer(gestureRecognizer!)
-//        gidSignInButton?.addTarget(self, action: , for: )
         
     }
-    @objc private func gidSignInButtonTapped() {
-        NSLog("hooray")
-    }
-    
+
     //MARK: TransitionBetweenViewControllers methods
     func transition(userType: UserType?) {
-        let destinationVC = UserTypeViewController()
+        let destinationVC = OnboardingViewController()
         destinationVC.user = self.genericUser
         self.present(destinationVC, animated: true) {
         }
     }
     
+    //I need the GIDSignInUIDelegate because I need to know when the sign-in occurs to get the accessToken from the GIDSignIn object that I may perform authentication.
+    
     //MARK: GIDSignInUIDelegate Methods
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
+        let accessToken = signIn.currentUser.authentication.accessToken
+        AuthenticationController.shared.userToken = accessToken
+        AuthenticationController.shared.authenticateUser(email: nil, password: nil, viewController: self)
     }
-    */
-
 }

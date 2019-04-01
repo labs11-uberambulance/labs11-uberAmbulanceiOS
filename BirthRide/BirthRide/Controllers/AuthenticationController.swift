@@ -68,7 +68,7 @@ class AuthenticationController {
             }
         case false:
             if email != nil {
-            authenticateUserSignIn(email: email, password: password, viewController: viewController)
+                authenticateUserSignIn(email: email, password: password, viewController: viewController)
             } else {
                 authenticationNetworkingRequest(viewController: viewController)
             }
@@ -94,7 +94,9 @@ class AuthenticationController {
     
     //MARK: Sign-in methods
     private func authenticateUserSignIn(email: String?, password: String?, viewController: UIViewController) {
-        guard let email = email, let password = password else {return}
+        guard let email = email, let password = password else {
+            self.authenticationNetworkingRequest(viewController: viewController)
+        }
         Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
             if email == "" || password == "" {
                 AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: viewController)
@@ -160,12 +162,12 @@ class AuthenticationController {
         let backgroundOperationQueue = OperationQueue()
         backgroundOperationQueue.addOperation({
             guard let userToken = self.userToken else {return}
-            ABCNetworkingController().authenticateUser(withToken: userToken, withCompletion: { (error, user, userType)  in
+            ABCNetworkingController().authenticateUser(withToken: userToken, withCompletion: { (error, userArray, userType)  in
                 if let error = error {
                     AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
                     NSLog("%@", error.localizedDescription)
                 }
-                guard let user = user else {
+                guard let userArray = userArray else {
                     
                     AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
                     NSLog("user is nil in AuthenticationController.authenticateUserSignIn.")
@@ -176,13 +178,14 @@ class AuthenticationController {
                     NSLog("userType is nil in AuthenticationController.authenticateUserSignIn.")
                     return
                 }
+                self.genericUser = userArray[0] as? User
                 switch userType {
-                case "driver":
-                    self.driver = user as? Driver
-                case "pregnantMom":
-                    self.pregnantMom = user as? PregnantMom
+                case "drivers":
+                    self.driver = userArray[1] as? Driver
+                case "mothers":
+                    self.pregnantMom = userArray[1] as? PregnantMom
                 default:
-                    self.genericUser = user as? User
+                    break
                 }
                 
             })

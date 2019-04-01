@@ -20,8 +20,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let userTypeViewController = UserTypeViewController()
-        window!.rootViewController = userTypeViewController
+        
+        
+        
+        let tabBarController = UITabBarController()
+        
+        let signUpViewController = SignUpViewController()
+        
+        let signInViewController = SignInViewController()
+        
+        tabBarController.addChild(signInViewController)
+        tabBarController.addChild(signUpViewController)
+        
+        let signUpItem = UITabBarItem()
+        signUpItem.title = "Sign Up"
+        let signInItem = UITabBarItem()
+        signInItem.title = "Sign In"
+        
+        signUpViewController.tabBarItem = signUpItem
+        signInViewController.tabBarItem = signInItem
+        
+        
+        let rootViewController = tabBarController
+        window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
         
         //Enable the GoogleMaps and GooglePlaces APIs
@@ -35,6 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.signOut()
+        
+        
+        
+        
+        
+        
+        
         
         return true
     }
@@ -84,5 +112,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 print ("Error signing out: %@", signOutError)
             }
         }
+    }
+    
+    private func transition(userType: UserType?) {
+        
     }
 }

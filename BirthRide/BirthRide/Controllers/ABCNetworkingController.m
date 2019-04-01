@@ -86,7 +86,7 @@
                     [user setValue:value forKey:key];
                 }
             }];
-            [userArray addObject:user];
+            [userArray insertObject:user atIndex:0];
             if (user.userType != nil) {
                 if ([user.userType isEqualToString:@"mothers"]) {
                     [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
