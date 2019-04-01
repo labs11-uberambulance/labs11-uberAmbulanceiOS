@@ -24,12 +24,10 @@ class AuthenticationController {
     private init() {}
     
     //MARK: Private Properties
-    private var pregnantMom: PregnantMom?
-    private var driver: Driver?
-    private var genericUser: User?
+    public var pregnantMom: PregnantMom?
+    public var driver: Driver?
+    public var genericUser: User?
     
-    ///This property is used by the class to decide how to authenticate the user.
-    public var isSigningUp: Bool = false
     public var userToken: String?
     
     
@@ -58,21 +56,8 @@ class AuthenticationController {
     ///   - email: The email entered by the user to authenticate.
     ///   - password: The password entered by the user to authenticate.
     ///   - viewController: The viewController calling the method.
-    public func authenticateUser(email: String?, password: String?, viewController: UIViewController) {
-        switch AuthenticationController.shared.isSigningUp {
-        case true:
-            if email != nil {
-            authenticateUserSignUp(email: email, password: password, viewController: viewController)
-            } else {
-                authenticationNetworkingRequest(viewController: viewController)
-            }
-        case false:
-            if email != nil {
-                authenticateUserSignIn(email: email, password: password, viewController: viewController)
-            } else {
-                authenticationNetworkingRequest(viewController: viewController)
-            }
-        }
+    public func authenticateUser(viewController: UIViewController) {
+        authenticationNetworkingRequest(viewController: viewController)
     }
     
     //MARK: Private Methods
@@ -92,72 +77,9 @@ class AuthenticationController {
         viewController.present(alert, animated: true, completion: nil)
     }
     
-    //MARK: Sign-in methods
-    private func authenticateUserSignIn(email: String?, password: String?, viewController: UIViewController) {
-        guard let email = email, let password = password else {
-            self.authenticationNetworkingRequest(viewController: viewController)
-        }
-        Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
-            if email == "" || password == "" {
-                AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: viewController)
-                return
-            }
-            if let error = error {
-                NSLog("%@",error.localizedDescription)
-                AuthenticationController.shared.displayErrorMessage(errorType: .invalidInformation, viewController: viewController)
-                return
-            }
-            if let user = authDataResult?.user {
-                user.getIDToken(completion: { (idToken, error) in
-                    if let error = error {
-                        NSLog("Error getting token in AuthenticationController.authenticateUserSignIn: \(error.localizedDescription)")
-                        return
-                    }
-                    guard let idToken = idToken else {
-                        NSLog("Token is nil in AuthinticatinoController.authenticateUserSignIn.")
-                        return
-                    }
-                    self.userToken = idToken
-                    self.authenticationNetworkingRequest(viewController: viewController)
-                }
-                )
-            }
-            
-        }
-    }
-    private func authenticateUserSignIn(viewController: UIViewController) {
-        authenticationNetworkingRequest(viewController: viewController)
-    }
-    private func authenticateUserSignIn(phoneNumber: String, viewController: UIViewController) {
-        
-    }
-    
-    
-    
-    //MARK: Sign-up methods
-    private func authenticateUserSignUp(email: String?, password: String?,viewController: UIViewController) {
-        guard let email = email, let password = password else {return}
-        Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
-            if email == "" || password == "" {
-                AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: viewController)
-                return
-            }
-            if let error = error {
-                NSLog("%@",error.localizedDescription)
-                AuthenticationController.shared.displayErrorMessage(errorType: .invalidInformation, viewController: viewController)
-                return
-            }
-            if let user = authDataResult?.user {
-                ABCNetworkingController().authenticateUser(withToken: user.uid, withCompletion: { (error, user, userType) in
-                    //FIXME: This method should return a user. Need to edit it so that it can do that.
-                    if let error = error {
-                        AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
-                        NSLog("%@", error.localizedDescription)
-                    }
-                })
-            }
-        }
-    }
+    /// This method will perform a networking request to authenticate with the back-end. The networking request returns a userArray. From this userArray the user and driver/pregnantMom properties of the AuthenticationController are populated.
+    ///
+    /// - Parameter viewController: This UIViewControllerProperty is used to determine the viewController in which the error messages should be displayed.
     private func authenticationNetworkingRequest(viewController: UIViewController) {
         let backgroundOperationQueue = OperationQueue()
         backgroundOperationQueue.addOperation({

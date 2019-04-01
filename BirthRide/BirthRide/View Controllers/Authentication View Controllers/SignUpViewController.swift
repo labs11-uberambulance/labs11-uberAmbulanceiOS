@@ -34,9 +34,6 @@ class SignUpViewController: UIViewController {
     @IBAction func signUpWithGoogleIDButtonTapped(_ sender: Any) {
         populateLoginFieldView(loginMethod: .googleID)
     }
-    @IBAction func signUpWithEmailTapped(_ sender: Any) {
-        populateLoginFieldView(loginMethod: .email)
-    }
     @IBAction func signUpWithPhoneNumberTapped(_ sender: Any) {
         populateLoginFieldView(loginMethod: .phoneNumber)
     }
@@ -48,11 +45,6 @@ class SignUpViewController: UIViewController {
             signUpFieldViewController = GoogleIDAuthorizationViewController()
             guard signUpFieldViewController != nil else {return}
             signUpFieldView.addSubview((signUpFieldViewController?.view)!)
-        case .email:
-            signUpFieldViewController = EmailAuthorizationViewController()
-            guard signUpFieldViewController != nil else {return}
-            signUpFieldView.addSubview((signUpFieldViewController?.view)!)
-            
         case .phoneNumber:
             signUpFieldViewController = PhoneAuthorizationViewController()
             guard signUpFieldViewController != nil else {return}
@@ -62,18 +54,6 @@ class SignUpViewController: UIViewController {
     //MARK: Private Enum
     private enum SignInMethod {
         case googleID
-        case email
         case phoneNumber
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
