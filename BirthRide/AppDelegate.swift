@@ -98,8 +98,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 // ...
                 return
             }
-            // User is signed in
-            // ...
+            
+            
+            let accessToken = signIn.currentUser.authentication.accessToken
+            AuthenticationController.shared.userToken = accessToken
+            AuthenticationController.shared.authenticateUser()
         }
         
         func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

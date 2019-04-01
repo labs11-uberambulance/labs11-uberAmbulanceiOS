@@ -54,11 +54,4 @@ class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate
     }
     
     //I need the GIDSignInUIDelegate because I need to know when the sign-in occurs to get the accessToken from the GIDSignIn object that I may perform authentication.
-    
-    //MARK: GIDSignInUIDelegate Methods
-    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
-        let accessToken = signIn.currentUser.authentication.accessToken
-        AuthenticationController.shared.userToken = accessToken
-        AuthenticationController.shared.authenticateUser(email: nil, password: nil, viewController: self)
-    }
 }

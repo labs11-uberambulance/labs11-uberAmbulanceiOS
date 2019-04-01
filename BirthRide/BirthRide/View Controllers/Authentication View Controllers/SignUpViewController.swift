@@ -28,7 +28,7 @@ class SignUpViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        AuthenticationController.shared.isSigningUp = true
+        
     }
     
     @IBAction func signUpWithGoogleIDButtonTapped(_ sender: Any) {

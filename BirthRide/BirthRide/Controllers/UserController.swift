@@ -33,7 +33,6 @@ class UserController {
         
         networkingController.updateUser(withToken: "StringHere", userType: "pregnantMom") { (error) in
             if let error = error {
-                AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
                 NSLog("%@", error.localizedDescription)
                 return
             }
@@ -50,7 +49,6 @@ class UserController {
     }
     public func updateDriver(driver: Driver, viewController: UIViewController, name: String?, address: String?, email: String?, phoneNumber: String?, priceString: String?, bio: String?, photo: String?) {
         guard name != "", address != "", email != "", phoneNumber != "", priceString != "" else {
-            AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: viewController)
             return
         }
         driver.name = name
@@ -63,7 +61,6 @@ class UserController {
         
         networkingController.updateUser(withToken: "StringHere", userType: driver.userType ?? "driver") { (error) in
             if let error = error {
-                AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
                 NSLog("%@", error.localizedDescription)
                 return
             }
@@ -85,7 +82,6 @@ class UserController {
         var multiplier = 1
         for string in stringArray {
             guard let int = numbersDictionary[string] else {
-                AuthenticationController.shared.displayErrorMessage(errorType: .invalidInformation, viewController: viewController)
                 return 0
             }
             intArray.append(int)

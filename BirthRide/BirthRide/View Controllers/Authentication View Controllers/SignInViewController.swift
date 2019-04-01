@@ -27,7 +27,6 @@ class SignInViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-            AuthenticationController.shared.isSigningUp = false
     }
     
     @IBAction func signInWithGoogleIDButtonTapped(_ sender: Any) {
