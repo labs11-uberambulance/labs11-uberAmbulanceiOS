@@ -10,7 +10,7 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
-class ConfirmRideViewController: UIViewController {
+class RequestRideViewController: UIViewController {
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
     var driver: [String: Any]?
@@ -22,19 +22,24 @@ class ConfirmRideViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureMapView()
-        configureLabels()
+        ABCNetworkingController().fetchNearbyDrivers(withLatitude: 3, withLongitude: 3) { (error) in
+            if let error = error {
+                NSLog(error.localizedDescription)
+                return
+            }
+            DispatchQueue.main.async {
+            self.configureMapView()
+            self.configureLabels()
+            }
+        }
+        
         
         // Do any additional setup after loading the view.
     }
     //MARK: IBActions
     @IBAction func requestRideButtonTapped(_ sender: Any) {
-        let destinationVC = MotherRideStatusViewController()
-        destinationVC.pregnantMom = self.pregnantMom
         guard let userToken = AuthenticationController.shared.userToken else {return}
         ABCNetworkingController().createRide(withToken: userToken) { (error) in
-        }
-        self.present(destinationVC, animated: true) {
         }
     }
     

@@ -48,7 +48,9 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     //MARK: TransitionBetweenViewControllers Protocol Method
     func transition(userType: UserType?) {
         let destinationVC = RequestOrSearchDriverViewController()
-        self.present(destinationVC, animated: true) {
+        let navController = UINavigationController(rootViewController: destinationVC)
+        navController.isNavigationBarHidden = false
+        self.present(navController, animated: true) {
         }
     }
     

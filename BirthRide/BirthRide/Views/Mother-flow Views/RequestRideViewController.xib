@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConfirmRideViewController" customModule="BirthRide" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RequestRideViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
                 <outlet property="estimatedFareLabel" destination="q2P-cW-19G" id="HeW-7Z-7J8"/>
                 <outlet property="estimatedPickupTimeLabel" destination="ewj-dm-rXJ" id="N6G-TH-r0q"/>
@@ -52,7 +52,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOz-oT-Yb8">
                             <rect key="frame" x="142" y="97" width="91" height="30"/>
                             <state key="normal" title="Request Ride">
-                                <color key="titleColor" red="0.65796411040000002" green="0.093575291340000005" blue="0.1132044569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" red="1" green="0.274480418" blue="0.21762272320000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="requestRideButtonTapped:" destination="-1" eventType="touchUpInside" id="gwF-Hv-V7h"/>
@@ -85,6 +85,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="SBG-B0-bR9" secondAttribute="bottom" id="q0h-8y-iya"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="125.59999999999999" y="53.523238380809602"/>
         </view>
     </objects>
 </document>
