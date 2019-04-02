@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-
-
+@class PregnantMom;
+@class Driver;
+@class User;
 @class Ride;
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param longitude The longitude of the mother's coordinates.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)fetchNearbyDriversWithLatitude:(double)latitude withLongitude:(double)longitude withCompletion:(void(^)( NSError * _Nullable error))completionHandler;
+- (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable error))completionHandler;
 
 
 /**
@@ -35,22 +36,29 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)fetchRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, Ride *ride))completionHandler;
 
 
+/**
+ This method is a POST request to the server. It will onboard the user with the user-type and mother/driver information.
+ 
+ @param token This is the firebase token that you receive during the authentication process.
+ @param userID This is the userID that is passed back from the initial BE authentication GET request. It is used in the urlRequest.
+ @param user This is the user, containing the information that is general to every user.
+ @param driver This is left nil unless the user is a driver.
+ @param mother This is left nil unless the user is a mother.
+ @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
+ */
+- (void)onboardUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withUser: (User *)user withDriver:(Driver * _Nullable)driver withMother:(PregnantMom * _Nullable)mother withCompletion:(void (^)(NSError * _Nullable))completionHandler;
 
 /**
- <#Description#>
+ This method is a PUT request to the server. It will update the user and mother/driver-specific information.
 
- @param token <#token description#>
- @param name <#name description#>
- @param phone <#phone description#>
- @param userType <#userType description#>
- @param address <#address description#>
- @param village <#village description#>
- @param email <#email description#>
- @param latitude <#latitude description#>
- @param longitude <#longitude description#>
- @param completionHandler <#completionHandler description#>
+ @param token This is the firebase token that you receive during the authentication process.
+ @param userID This is the userID that is passed back from the initial BE authentication GET request. It is used in the urlRequest.
+ @param user This is the user, containing the information that is general to every user.
+ @param driver This is left nil unless the user is a driver.
+ @param mother This is left nil unless the user is a mother.
+ @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)updateUserWithToken:(NSString *)token withName:(NSString *)name withPhone:(NSString *)phone withUserType:(NSString *)userType withAddress:(NSString *)address withVillage:(NSString *)village withEmail:(NSString *)email withLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void(^)(NSError * _Nullable error))completionHandler;
+- (void)updateUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withUser: (User *)user withDriver:(Driver * _Nullable)driver withMother:(PregnantMom * _Nullable)mother withCompletion:(void (^)(NSError * _Nullable))completionHandler;
 
 ///This method will create a ride on the server.
 /**
@@ -59,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param token The authentication token associated with the user. This parameter is used to associate the created ride with a specific user.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)createRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error))completionHandler;
+- (void)createRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error))completionHandler ;
 
 
 /**
