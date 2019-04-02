@@ -18,11 +18,11 @@ class UserController {
     
     //MARK: Public Methods
     public func configurePregnantMom(user: User, viewController: UIViewController, dueDate: String?, hospital: String?, caretakerName: String?) -> PregnantMom {
-        let newMom = PregnantMom(dueDate: dueDate, hospital: hospital, caretakerName: caretakerName)
+        let newMom = PregnantMom(dueDate: dueDate, hospital: hospital, caretakerName: caretakerName, motherID: nil)
         newMom.name = user.name
         newMom.firebaseId = user.firebaseId
         newMom.address = user.address
-        newMom.id = user.id
+        newMom.userID = user.userID
         newMom.login = user.login
         newMom.phone = user.phone
         newMom.userType = user.userType
@@ -31,9 +31,8 @@ class UserController {
         newMom.longitude = user.longitude
         newMom.email = user.email
         
-        networkingController.updateUser(withToken: "StringHere", userType: "pregnantMom") { (error) in
+        networkingController.updateUser(withToken: "StringHere", withName: "pregnantMom", withPhone: "", withUserType: "", withAddress: "", withVillage: "", withEmail: "", withLatitude: 1, withLongitude: 1) { (error) in
             if let error = error {
-                AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
                 NSLog("%@", error.localizedDescription)
                 return
             }
@@ -46,11 +45,10 @@ class UserController {
     }
     
     public func configureDriver(price: Int, bio: String) -> Driver {
-        return Driver(price: price, bio: bio, photo: nil)
+        return Driver(price: price, bio: bio, photo: nil, driverID: nil)
     }
     public func updateDriver(driver: Driver, viewController: UIViewController, name: String?, address: String?, email: String?, phoneNumber: String?, priceString: String?, bio: String?, photo: String?) {
         guard name != "", address != "", email != "", phoneNumber != "", priceString != "" else {
-            AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: viewController)
             return
         }
         driver.name = name
@@ -61,9 +59,8 @@ class UserController {
         driver.bio = bio
         driver.photo = photo
         
-        networkingController.updateUser(withToken: "StringHere", userType: driver.userType ?? "driver") { (error) in
+        networkingController.updateUser(withToken: "StringHere", withName: "", withPhone: "", withUserType: "", withAddress: "", withVillage: "", withEmail: "", withLatitude: 1, withLongitude: 1) { (error) in
             if let error = error {
-                AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
                 NSLog("%@", error.localizedDescription)
                 return
             }
@@ -85,7 +82,6 @@ class UserController {
         var multiplier = 1
         for string in stringArray {
             guard let int = numbersDictionary[string] else {
-                AuthenticationController.shared.displayErrorMessage(errorType: .invalidInformation, viewController: viewController)
                 return 0
             }
             intArray.append(int)

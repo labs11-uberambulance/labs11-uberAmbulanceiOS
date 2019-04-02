@@ -10,12 +10,7 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
-enum LoginErrorType {
-    case invalidInformation
-    case requiredFieldsEmpty
-    case otherError
-}
-
+@objcMembers
 class AuthenticationController {
     
     //MARK: Singleton
@@ -24,32 +19,12 @@ class AuthenticationController {
     private init() {}
     
     //MARK: Private Properties
-    private var pregnantMom: PregnantMom?
-    private var driver: Driver?
-    private var genericUser: User?
+    public var pregnantMom: PregnantMom?
+    public var driver: Driver?
+    public var genericUser: User?
     
-    ///This property is used by the class to decide how to authenticate the user.
-    public var isSigningUp: Bool = false
     public var userToken: String?
-    
-    
-    /// This method displays an error message.
-    ///
-    /// - Parameters:
-    ///   - errorType: The type of error. This property takes an enum case to switch between different error messages.
-    ///   - viewController: The viewController calling the method.
-    public func displayErrorMessage(errorType: LoginErrorType, viewController: UIViewController) {
-        switch errorType {
-        case .invalidInformation:
-            presentInvalidInformationAlert(viewController: viewController)
-        case .otherError:
-            presentOtherLoginErrorAlert(viewController: viewController)
-        case .requiredFieldsEmpty:
-            presentRequiredFieldsEmpty(viewController: viewController)
-        }
-        
-        
-    }
+
     
     
     /// This method will do all of the networking with Firebase and the BirthRide server to authenticate the user, either whether the user is signing in or signing up. It uses a boolean, isSigningUp, to decide how to authenticate the user.
@@ -58,124 +33,41 @@ class AuthenticationController {
     ///   - email: The email entered by the user to authenticate.
     ///   - password: The password entered by the user to authenticate.
     ///   - viewController: The viewController calling the method.
-    public func authenticateUser(email: String, password: String, viewController: UIViewController) {
-        switch AuthenticationController.shared.isSigningUp {
-        case true:
-            authenticateUserSignUp(email: email, password: password, viewController: viewController)
-        case false:
-            authenticateUserSignIn(email: email, password: password, viewController: viewController)
-        }
+    public func authenticateUser() {
+        authenticationNetworkingRequest()
     }
     
-    //MARK: Private Methods
-    private func presentInvalidInformationAlert(viewController: UIViewController) {
-        let alert = UIAlertController(title: "Alert", message: "Your login information was invalid. Please try again or sign up for an account.", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
-        viewController.present(alert, animated: true, completion: nil)
-    }
-    private func presentOtherLoginErrorAlert(viewController: UIViewController) {
-        let alert = UIAlertController(title: "Alert", message: "There was an error processing the information. Please try again.", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
-        viewController.present(alert, animated: true, completion: nil)
-    }
-    private func presentRequiredFieldsEmpty(viewController: UIViewController) {
-        let alert = UIAlertController(title: "Alert", message: "It is required to fill out all fields. Please try again.", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
-        viewController.present(alert, animated: true, completion: nil)
-    }
-    
-    //MARK: Sign-in methods
-    private func authenticateUserSignIn(email: String, password: String, viewController: UIViewController) {
-        Auth.auth().signIn(withEmail: email, password: password) { (authDataResult, error) in
-            if email == "" || password == "" {
-                AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: viewController)
-                return
-            }
-            if let error = error {
-                NSLog("%@",error.localizedDescription)
-                AuthenticationController.shared.displayErrorMessage(errorType: .invalidInformation, viewController: viewController)
-                return
-            }
-            if let user = authDataResult?.user {
-                user.getIDToken(completion: { (idToken, error) in
-                    if let error = error {
-                        NSLog("Error getting token in AuthenticationController.authenticateUserSignIn: \(error.localizedDescription)")
-                        return
-                    }
-                    guard let idToken = idToken else {
-                        NSLog("Token is nil in AuthinticatinoController.authenticateUserSignIn.")
-                        return
-                    }
-                    self.userToken = idToken
-                    self.authenticationNetworkingRequest(viewController: viewController)
-                }
-                )
-            }
-            
-        }
-    }
-    private func authenticateUserSignIn(viewController: UIViewController) {
-        authenticationNetworkingRequest(viewController: viewController)
-    }
-    private func authenticateUserSignIn(phoneNumber: String, viewController: UIViewController) {
-        
-    }
-    
-    
-    
-    //MARK: Sign-up methods
-    private func authenticateUserSignUp(email: String, password: String,viewController: UIViewController) {
-        Auth.auth().createUser(withEmail: email, password: password) { (authDataResult, error) in
-            if email == "" || password == "" {
-                AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: viewController)
-                return
-            }
-            if let error = error {
-                NSLog("%@",error.localizedDescription)
-                AuthenticationController.shared.displayErrorMessage(errorType: .invalidInformation, viewController: viewController)
-                return
-            }
-            if let user = authDataResult?.user {
-                ABCNetworkingController().authenticateUser(withToken: user.uid, withCompletion: { (error, user, userType) in
-                    //FIXME: This method should return a user. Need to edit it so that it can do that.
-                    if let error = error {
-                        AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
-                        NSLog("%@", error.localizedDescription)
-                    }
-                })
-            }
-        }
-    }
-    private func authenticationNetworkingRequest(viewController: UIViewController) {
-        let backgroundOperationQueue = OperationQueue()
-        backgroundOperationQueue.addOperation({
+    /// This method will perform a networking request to authenticate with the back-end. The networking request returns a userArray. From this userArray the user and driver/pregnantMom properties of the AuthenticationController are populated.
+    ///
+    /// - Parameter viewController: This UIViewControllerProperty is used to determine the viewController in which the error messages should be displayed.
+    private func authenticationNetworkingRequest() {
+//        let backgroundOperationQueue = OperationQueue()
+//        backgroundOperationQueue.addOperation({
             guard let userToken = self.userToken else {return}
-            ABCNetworkingController().authenticateUser(withToken: userToken, withCompletion: { (error, user, userType)  in
+            ABCNetworkingController().authenticateUser(withToken: userToken, withCompletion: { (error, userArray, userType)  in
                 if let error = error {
-                    AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
                     NSLog("%@", error.localizedDescription)
+                    return
                 }
-                guard let user = user else {
-                    
-                    AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
+                guard let userArray = userArray else {
                     NSLog("user is nil in AuthenticationController.authenticateUserSignIn.")
                     return
                 }
                 guard let userType = userType else {
-                    AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: viewController)
                     NSLog("userType is nil in AuthenticationController.authenticateUserSignIn.")
                     return
                 }
+                self.genericUser = userArray[0] as? User
                 switch userType {
-                case "driver":
-                    self.driver = user as? Driver
-                case "pregnantMom":
-                    self.pregnantMom = user as? PregnantMom
+                case "drivers":
+                    self.driver = userArray[1] as? Driver
+                case "mothers":
+                    self.pregnantMom = userArray[1] as? PregnantMom
                 default:
-                    self.genericUser = user as? User
+                    break
                 }
                 
-            })
+//            })
         })
     }
 }

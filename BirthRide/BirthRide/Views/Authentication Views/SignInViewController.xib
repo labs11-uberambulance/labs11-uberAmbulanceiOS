@@ -28,21 +28,14 @@
                     <rect key="frame" x="94.5" y="405.5" width="186" height="106"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ppk-ve-S1D">
-                            <rect key="frame" x="0.0" y="0.0" width="186" height="30"/>
+                            <rect key="frame" x="0.0" y="0.0" width="186" height="49"/>
                             <state key="normal" title="SIgn in with Google ID"/>
                             <connections>
                                 <action selector="signInWithGoogleIDButtonTapped:" destination="-1" eventType="touchUpInside" id="4dZ-15-VnR"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oTq-0D-Bhr">
-                            <rect key="frame" x="0.0" y="38" width="186" height="30"/>
-                            <state key="normal" title="Sign in with Email"/>
-                            <connections>
-                                <action selector="signInWithEmailTapped:" destination="-1" eventType="touchUpInside" id="Jhh-tM-WJK"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTq-mt-3mS">
-                            <rect key="frame" x="0.0" y="76" width="186" height="30"/>
+                            <rect key="frame" x="0.0" y="57" width="186" height="49"/>
                             <state key="normal" title="Sign in with Phone Number"/>
                             <connections>
                                 <action selector="signInWithPhoneNumberTapped:" destination="-1" eventType="touchUpInside" id="PGQ-mw-B0Q"/>

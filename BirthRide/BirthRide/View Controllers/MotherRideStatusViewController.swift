@@ -11,6 +11,7 @@ import UIKit
 class MotherRideStatusViewController: UIViewController {
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
+    var ride: Ride?
     
     override func viewDidLoad() {
         super.viewDidLoad()

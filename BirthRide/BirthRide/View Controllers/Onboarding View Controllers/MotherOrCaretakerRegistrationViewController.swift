@@ -15,7 +15,6 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     private var networkingController = ABCNetworkingController()
     
     //MARK: Other Properties
-    var genericUser: User?
     
     //MARK: IBOutlets
     @IBOutlet weak var nameTextField: UITextField!
@@ -37,22 +36,22 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     }
     @IBAction func continueButtonTapped(_ sender: Any) {
         guard nameTextField.text != "", villageTextField.text != "", phoneNumberTextField.text != "" else {return}
-        guard let user = genericUser else {return}
-        
+        guard let user = AuthenticationController.shared.genericUser else {return}
+
         UserController().updateGenericUser(user: user, name: nameTextField.text, village: villageTextField.text, phone: phoneNumberTextField.text, address: descriptionTextView.text, email: emailTextField.text)
-        
+
         pregnantMom = UserController().configurePregnantMom(user: user, viewController: self, dueDate: dueDateTextField.text, hospital: hospitalTextField.text, caretakerName: caretakerTextField.text)
-        
+
         transition(userType: nil)
     }
     
 
     //MARK: TransitionBetweenViewControllers Protocol Method
     func transition(userType: UserType?) {
-//        let generalUserRegistrationViewController = GeneralUserRegistrationViewController()
-//        generalUserRegistrationViewController.pregnantMom = pregnantMom
-//        self.present(generalUserRegistrationViewController, animated: true) {
-//        }
+        let destinationVC = RequestOrSearchDriverViewController()
+        destinationVC.pregnantMom = pregnantMom
+        self.present(destinationVC, animated: true) {
+        }
     }
     
     /*

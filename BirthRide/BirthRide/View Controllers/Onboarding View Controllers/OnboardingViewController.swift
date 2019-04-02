@@ -18,11 +18,6 @@ class OnboardingViewController: UIViewController {
     //MARK: Private Properties
     var containerViewController: UIViewController?
     
-    //MARK: Other Properties
-    var userType: UserType?
-    var user: User?
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewControllerAndView()
@@ -30,29 +25,26 @@ class OnboardingViewController: UIViewController {
     }
     
     func setUpViewControllerAndView() {
-        guard let userType = userType else {return}
-        switch userType {
-        case .driver:
-            
-            containerViewController = DriverRegistrationViewController()
-            guard containerViewController != nil else {return}
-            containerView.addSubview((containerViewController?.view)!)
-        case .pregnantMom:
-            containerViewController = MotherOrCaretakerRegistrationViewController()
-            guard containerViewController != nil else {return}
-            containerView.addSubview((containerViewController?.view)!)
-
+        if AuthenticationController.shared.genericUser?.userType == "drivers" {
+        containerViewController = DriverRegistrationViewController()
+        guard containerViewController != nil else {return}
+        containerView.addSubview((containerViewController?.view)!)
         }
+        else {
+        containerViewController = MotherOrCaretakerRegistrationViewController()
+        guard containerViewController != nil else {return}
+        containerView.addSubview((containerViewController?.view)!)
     }
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destination.
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 }

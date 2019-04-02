@@ -21,11 +21,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8BX-hY-C2L">
-                    <rect key="frame" x="0.0" y="20" width="375" height="377.5"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="415.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="QQ2-Vo-Yur">
-                    <rect key="frame" x="94.5" y="405.5" width="186" height="106"/>
+                    <rect key="frame" x="94.5" y="443.5" width="186" height="68"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JX5-cq-cBG">
                             <rect key="frame" x="0.0" y="0.0" width="186" height="30"/>
@@ -34,15 +34,8 @@
                                 <action selector="signUpWithGoogleIDButtonTapped:" destination="-1" eventType="touchUpInside" id="Cmh-eI-SHR"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ka-Vo-HYh">
-                            <rect key="frame" x="0.0" y="38" width="186" height="30"/>
-                            <state key="normal" title="Sign in with Email"/>
-                            <connections>
-                                <action selector="signUpWithEmailTapped:" destination="-1" eventType="touchUpInside" id="msH-vI-JYW"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AlN-Xv-NJj">
-                            <rect key="frame" x="0.0" y="76" width="186" height="30"/>
+                            <rect key="frame" x="0.0" y="38" width="186" height="30"/>
                             <state key="normal" title="Sign in with Phone Number"/>
                             <connections>
                                 <action selector="signUpWithPhoneNumberTapped:" destination="-1" eventType="touchUpInside" id="y05-zX-sO4"/>

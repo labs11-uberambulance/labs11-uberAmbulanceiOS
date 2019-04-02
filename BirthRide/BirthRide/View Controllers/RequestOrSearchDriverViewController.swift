@@ -9,6 +9,20 @@
 import UIKit
 
 class RequestOrSearchDriverViewController: UIViewController {
+    //MARK: Private Properties
+    private let dummyArrayOfDrivers = [["latitude": 0.327825,
+                                        "longitude": 39.022479,
+                                        "name": "Frederick",
+                                        "rateAndDistance": "$10, 2km"
+        ], ["latitude": 1.488886,
+            "longitude": 37.036951,
+            "name": "Connor",
+            "rateAndDistance": "$8.50, 1.5km"
+        ], ["latitude": 0.471944,
+            "longitude": 36.453422,
+            "name": "Samuel",
+            "rateAndDistance": "$11, 0.75km"
+        ]]
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
     
@@ -21,6 +35,7 @@ class RequestOrSearchDriverViewController: UIViewController {
     @IBAction func requestADriverTapped(_ sender: Any) {
         let destinationVC = ConfirmRideViewController()
         destinationVC.pregnantMom = self.pregnantMom
+        destinationVC.driver = findNearestDriver()
         self.present(destinationVC, animated: true)
     }
     @IBAction func searchForDriverTapped(_ sender: Any) {
@@ -30,15 +45,7 @@ class RequestOrSearchDriverViewController: UIViewController {
         }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func findNearestDriver() -> [String: Any] {
+        return dummyArrayOfDrivers.randomElement()!
     }
-    */
-
 }

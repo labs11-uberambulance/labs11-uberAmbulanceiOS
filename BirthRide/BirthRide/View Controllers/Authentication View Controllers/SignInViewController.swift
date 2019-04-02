@@ -27,14 +27,10 @@ class SignInViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-            AuthenticationController.shared.isSigningUp = false
     }
     
     @IBAction func signInWithGoogleIDButtonTapped(_ sender: Any) {
         populateLoginFieldView(loginMethod: .googleID)
-    }
-    @IBAction func signInWithEmailTapped(_ sender: Any) {
-        populateLoginFieldView(loginMethod: .email)
     }
     @IBAction func signInWithPhoneNumberTapped(_ sender: Any) {
         populateLoginFieldView(loginMethod: .phoneNumber)
@@ -47,11 +43,6 @@ class SignInViewController: UIViewController {
             loginFieldViewController = GoogleIDAuthorizationViewController()
             guard loginFieldViewController != nil else {return}
             loginFieldView.addSubview((loginFieldViewController?.view)!)
-        case .email:
-            loginFieldViewController = EmailAuthorizationViewController()
-            guard loginFieldViewController != nil else {return}
-            loginFieldView.addSubview((loginFieldViewController?.view)!)
-
         case .phoneNumber:
             loginFieldViewController = PhoneAuthorizationViewController()
             guard loginFieldViewController != nil else {return}
@@ -61,7 +52,6 @@ class SignInViewController: UIViewController {
     //MARK: Private Enum
     private enum SignInMethod {
         case googleID
-        case email
         case phoneNumber
     }
 

@@ -11,8 +11,14 @@
 @implementation NSString (ConvertFromSnakeCaseToCamelCase)
 
 - (NSString *)convertFromSnakeCaseToCamelCase {
-    NSString *newString = [[self stringByReplacingOccurrencesOfString:@"_" withString:@" "] capitalizedString];
-    return [[newString stringByReplacingOccurrencesOfString:@" " withString:@""] lowercaseString];
+    NSArray *newStringArray = [self componentsSeparatedByString:@"_"];
+    NSMutableArray *newStringMutableArray = [newStringArray mutableCopy];
+    for (int i = 1; i < newStringArray.count; i++) {
+        NSString *newString = [newStringArray[i] capitalizedString];
+        [newStringMutableArray removeObjectAtIndex: i];
+        [newStringMutableArray insertObject:newString atIndex:i];
+    }
+    return [newStringMutableArray componentsJoinedByString:@""];
 }
 
 @end

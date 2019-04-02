@@ -11,10 +11,11 @@ import GoogleMaps
 
 class SearchForDriverViewController: UIViewController, GMSMapViewDelegate {
     //MARK: Private Properties
+    private var driverProfileCollectionViewController: DriverProfileCollectionViewController?
     private let dummyArrayOfDrivers = [["latitude": 0.327825,
-    "longitude": 39.022479,
-    "name": "Frederick",
-    "rateAndDistance": "$10, 2km"
+                                        "longitude": 39.022479,
+                                        "name": "Frederick",
+                                        "rateAndDistance": "$10, 2km"
         ], ["latitude": 1.488886,
             "longitude": 37.036951,
             "name": "Connor",
@@ -24,10 +25,10 @@ class SearchForDriverViewController: UIViewController, GMSMapViewDelegate {
             "name": "Samuel",
             "rateAndDistance": "$11, 0.75km"
         ]]
-    private var driverProfileCollectionViewController: DriverProfileCollectionViewController?
     
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
+    
     ///This is not a true containerView. Here we are going to add the view of the collectionViewController as a subView
     @IBOutlet weak var driverProfileCollectionView: UICollectionView!
     @IBOutlet weak var mapView: GMSMapView!

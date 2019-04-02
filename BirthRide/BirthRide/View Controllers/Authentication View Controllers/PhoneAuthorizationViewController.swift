@@ -15,6 +15,7 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     //MARK: Private Properties
     private let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
     private var genericUser: User?
+    private var pregnantMom: PregnantMom?
     
     //MARK: IBOutlets
     @IBOutlet weak var phoneNumberTextField: UITextField!
@@ -23,19 +24,23 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
     }
     @IBAction func doneButtonTapped(_ sender: Any) {
-        if doneButton.titleLabel?.text == "Continue" {
-            let phoneNumber = phoneNumberTextField.text
-            verifyPhoneNumber(phoneNumber: phoneNumber!)
-            phoneNumberTextField.placeholder = "Verification Code"
-            doneButton.setTitle("Done", for: .normal)
+        if AuthenticationController.shared.genericUser == nil {
+            if doneButton.titleLabel?.text == "Continue" {
+                let phoneNumber = phoneNumberTextField.text
+                verifyPhoneNumber(phoneNumber: phoneNumber!)
+                phoneNumberTextField.placeholder = "Verification Code"
+                doneButton.setTitle("Done", for: .normal)
+            } else {
+                let verificationCode = phoneNumberTextField.text
+                verifyAuthenticationCodeAndID(verificationCode: verificationCode)
+            }
         } else {
-            let verificationCode = phoneNumberTextField.text
-            verifyAuthenticationCodeAndID(verificationCode: verificationCode)
+            transition(userType: nil)
         }
     }
     
@@ -43,7 +48,6 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     //FIXME: In order to receive the SMS with the authentication code, the user must put their country code in front. For the US, that means that all mobile US numbers must be preceded by "+1". I should programatically make sure that the number has the relevant country code at the beginning and, if it doesn't, I should add it before using it in the method.
     private func verifyPhoneNumber(phoneNumber: String?) {
         guard phoneNumber != "" else {
-            AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: self)
             return
         }
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber!, uiDelegate: nil) { (verificationID, error) in
@@ -54,34 +58,25 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
             if let newVerifcationID = verificationID {
                 UserDefaults.standard.set(newVerifcationID, forKey: "authVerificationID")
             }
-
+            
         }
     }
     
     private func verifyAuthenticationCodeAndID(verificationCode: String?) {
         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
-        guard verificationID != nil else {
-            AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: self)
-            return
-        }
-        guard verificationCode != "" else {
-            AuthenticationController.shared.displayErrorMessage(errorType: .requiredFieldsEmpty, viewController: self)
-            return
-        }
+        guard verificationID != nil else {return}
+        guard verificationCode != "" else {return}
         let credential = PhoneAuthProvider.provider().credential(
             withVerificationID: verificationID!,
             verificationCode: verificationCode!)
         
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
             if let error = error {
-                AuthenticationController.shared.displayErrorMessage(errorType: .invalidInformation, viewController: self)
                 NSLog("%@", error.localizedDescription)
                 return
             }
-            guard let authResult = authResult else {
-                AuthenticationController.shared.displayErrorMessage(errorType: .otherError, viewController: self)
-                return
-            }
+            guard let authResult = authResult else {return}
+            
             authResult.user.getIDToken(completion: { (idToken, error) in
                 if let error = error {
                     NSLog("Error in PhoneAuthorizationViewController.verifyAuthenticationCodeandID")
@@ -93,27 +88,37 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
                     return
                 }
                 AuthenticationController.shared.userToken = idToken
+                AuthenticationController.shared.authenticateUser()
             })
         }
     }
     
     //MARK: TransitionBetweenViewControllersDelegate methods
     func transition(userType: UserType?) {
-        let userTypeViewController = UserTypeViewController()
-        userTypeViewController.user = self.genericUser
-        self.present(userTypeViewController, animated: true) {
+        if AuthenticationController.shared.driver == nil && AuthenticationController.shared.pregnantMom == nil {
+            let destinationVC = UserTypeViewController()
+            destinationVC.user = self.genericUser
+            self.present(destinationVC, animated: true) {
+            }
+        } else if AuthenticationController.shared.driver != nil {
+            let destinationVC = RequestOrSearchDriverViewController()
+        } else if AuthenticationController.shared.pregnantMom != nil {
+            let destinationVC = RequestOrSearchDriverViewController()
+            destinationVC.pregnantMom = AuthenticationController.shared.pregnantMom
+            self.present(destinationVC, animated: true) {
+            }
         }
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
