@@ -11,14 +11,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MotherOrCaretakerViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
-                <outlet property="caretakerTextField" destination="GSc-jJ-13N" id="JIa-tA-bqd"/>
-                <outlet property="descriptionTextView" destination="ggB-mM-GMS" id="dtY-zh-yT6"/>
-                <outlet property="dueDateTextField" destination="Hx4-i7-7Tp" id="E5x-Df-Fsk"/>
-                <outlet property="hospitalTextField" destination="UBK-eI-8jI" id="f3H-eV-ie7"/>
-                <outlet property="nameTextField" destination="49n-a9-pVs" id="cdi-ZE-p8d"/>
-                <outlet property="phoneNumberTextField" destination="Wf3-d0-DJL" id="Het-zm-L85"/>
+                <outlet property="careTakerTextField" destination="GSc-jJ-13N" id="yg2-x2-73h"/>
+                <outlet property="descriptionTextView" destination="ggB-mM-GMS" id="A0X-c5-e5j"/>
+                <outlet property="dueDateTextField" destination="Hx4-i7-7Tp" id="n9e-bX-yr8"/>
+                <outlet property="hospitalTextField" destination="UBK-eI-8jI" id="dSr-za-r4Z"/>
+                <outlet property="nameTextField" destination="49n-a9-pVs" id="4SM-2w-SgT"/>
+                <outlet property="phoneTextField" destination="Wf3-d0-DJL" id="Sok-Ch-Qn8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="villageTextField" destination="Wgu-Ee-kg8" id="2ke-6k-2pZ"/>
+                <outlet property="villageTextField" destination="Wgu-Ee-kg8" id="Si0-En-KvY"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

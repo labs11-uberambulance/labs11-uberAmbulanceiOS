@@ -23,7 +23,6 @@ class UserController {
         newMom.firebaseId = user.firebaseId
         newMom.address = user.address
         newMom.userID = user.userID
-        newMom.login = user.login
         newMom.phone = user.phone
         newMom.userType = user.userType
         newMom.village = user.village
@@ -31,12 +30,30 @@ class UserController {
         newMom.longitude = user.longitude
         newMom.email = user.email
         
-        networkingController.updateUser(withToken: "StringHere", withName: "pregnantMom", withPhone: "", withUserType: "", withAddress: "", withVillage: "", withEmail: "", withLatitude: 1, withLongitude: 1) { (error) in
-            if let error = error {
-                NSLog("%@", error.localizedDescription)
-                return
+        guard let token = AuthenticationController.shared.userToken,
+        let userID = AuthenticationController.shared.genericUser?.userID else {return newMom}
+        
+        let onboardAndUpdateUserOperationQueue = OperationQueue()
+        let onboardOperation: BlockOperation = BlockOperation {
+            self.networkingController.onboardUser(withToken: token, withUserID: userID, with: user, with: nil, withMother: newMom) { (error) in
+                if let error = error {
+                    NSLog(error.localizedDescription)
+                    return
+                }
             }
         }
+        let updateOperation: BlockOperation = BlockOperation {
+            self.networkingController.updateUser(withToken: token, withUserID: userID, with: user, with: nil, withMother: newMom) { (error) in
+                if let error = error {
+                    NSLog(error.localizedDescription)
+                    return
+                }
+            }
+        }
+        updateOperation.addDependency(onboardOperation)
+        onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation], waitUntilFinished: true)
+        
+        
         
         return newMom
     }
@@ -59,12 +76,7 @@ class UserController {
         driver.bio = bio
         driver.photo = photo
         
-        networkingController.updateUser(withToken: "StringHere", withName: "", withPhone: "", withUserType: "", withAddress: "", withVillage: "", withEmail: "", withLatitude: 1, withLongitude: 1) { (error) in
-            if let error = error {
-                NSLog("%@", error.localizedDescription)
-                return
-            }
-        }
+        
         
     }
     

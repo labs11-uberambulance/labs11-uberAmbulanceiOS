@@ -12,11 +12,6 @@
 
 
 @implementation ABCNetworkingController
-
-- (void)fetchMotherWithToken:(NSString *)token withCompletion:(void (^)(NSError * _Nonnull))completionHandler {
-    
-}
-
 - (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable error))completionHandler {
     
     NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/drivers"];
