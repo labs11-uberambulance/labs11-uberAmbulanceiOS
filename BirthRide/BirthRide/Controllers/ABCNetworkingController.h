@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-
-
+@class PregnantMom;
+@class Driver;
+@class User;
 @class Ride;
 NS_ASSUME_NONNULL_BEGIN
 
@@ -34,47 +35,30 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)fetchRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, Ride *ride))completionHandler;
 
-/**
- This method is a POST request to the server. It will update the user with driver-specific information.
-
- @param token This is the firebase token that you receive during the authentication process.
- @param userID This is the userID that is passed back from the initial BE authentication GET request.
- @param price This is the maximum price that the driver will charge.
- @param isActive This is a boolean determining whether or not the driver is currently active.
- @param bio This is an optional biography of the driver.
- @param photoURL This is the url, in the form of a string, of the driver's profile photo.
- */
-- (void)onboardDriverUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withPrice:(NSNumber *)price withActive:(NSNumber *)isActive withBio:(NSString *)bio withPhoto:(NSString *)photoURL;
-
 
 /**
- This method is a POST request to the server. It will update the user with mother-specific information.
-
+ This method is a POST request to the server. It will onboard the user with the user-type and mother/driver information.
+ 
  @param token This is the firebase token that you receive during the authentication process.
- @param userID This is the userID that is passed back from the initial BE authentication GET request.
- @param caretakerName This is the name from the optional caretaker field.
- @param dueDate This is the mother's due date.
- @param hospital This is the mother's preferred hospital.
+ @param userID This is the userID that is passed back from the initial BE authentication GET request. It is used in the urlRequest.
+ @param user This is the user, containing the information that is general to every user.
+ @param driver This is left nil unless the user is a driver.
+ @param mother This is left nil unless the user is a mother.
+ @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)onboardMotherUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withCaretaker:(NSString *)caretakerName withDueDate:(NSString *)dueDate withHospital:(NSString *)hospital;
-
+- (void)onboardUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withUser: (User *)user withDriver:(Driver * _Nullable)driver withMother:(PregnantMom * _Nullable)mother withCompletion:(void (^)(NSError * _Nullable))completionHandler;
 
 /**
- This method is a PUT request to the server. It will update the general user information and the user-specific information(driver/mother).
+ This method is a PUT request to the server. It will update the user and mother/driver-specific information.
 
  @param token This is the firebase token that you receive during the authentication process.
- @param userID This is the userID that is passed back from the initial BE authentication GET request.
- @param name The name of the user.
- @param phone The phone number of the user.
- @param userType The user type.
- @param address The address of the user, or a description of the user's location.
- @param village The village of the user.
- @param email The email address of the user.
- @param latitude The latitude of the user's address last-known location.
- @param longitude The longitude of the user's address or last-known location.
- @param completionHandler Use this completion handler to handle anything you want done after the networking request has completed.
+ @param userID This is the userID that is passed back from the initial BE authentication GET request. It is used in the urlRequest.
+ @param user This is the user, containing the information that is general to every user.
+ @param driver This is left nil unless the user is a driver.
+ @param mother This is left nil unless the user is a mother.
+ @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)updateDriverUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withName:(NSString *)name withPhone:(NSString *)phone withUserType:(NSString *)userType withAddress:(NSString *)address withVillage:(NSString *)village withEmail:(NSString *)email withLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void(^)(NSError * _Nullable error))completionHandler;
+- (void)updateUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withUser: (User *)user withDriver:(Driver * _Nullable)driver withMother:(PregnantMom * _Nullable)mother withCompletion:(void (^)(NSError * _Nullable))completionHandler;
 
 ///This method will create a ride on the server.
 /**
@@ -83,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param token The authentication token associated with the user. This parameter is used to associate the created ride with a specific user.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)createRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error))completionHandler;
+- (void)createRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error))completionHandler ;
 
 
 /**

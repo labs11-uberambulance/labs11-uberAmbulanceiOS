@@ -25,16 +25,94 @@
     
 }
 
-- (void)onboardMotherUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withCaretaker:(NSString *)caretakerName withDueDate:(NSString *)dueDate withHospital:(NSString *)hospital {
+- (void)onboardUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withUser:(User *)user withDriver:(Driver *)driver withMother:(PregnantMom *)mother withCompletion:(void (^)(NSError * _Nullable))completionHandler {
+    
+    NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/users/onboard"];
+    NSURL *appendedURL = [baseURL URLByAppendingPathComponent: userID.stringValue];
+    NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:appendedURL];
+    [requestURL setHTTPMethod:@"POST"];
+    [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
+
+    if (mother == nil && driver == nil) {
+        return;
+    }
+    if (driver != nil) {
+        NSData *driverData = [[NSData alloc] init];
+        driverData = [NSJSONSerialization dataWithJSONObject: driver options:NSJSONWritingPrettyPrinted error: NULL];
+        NSDictionary *userDictionary = @{
+                           @"user_type": @"driver",
+                           @"driverData": driverData
+                           };
+        NSData *dictionaryData = [[NSData alloc] init];
+        dictionaryData = [NSJSONSerialization dataWithJSONObject:userDictionary options:NSJSONWritingPrettyPrinted error: NULL];
+        [requestURL setHTTPBody:dictionaryData];
+    }
+    else {
+        NSData *motherData = [[NSData alloc] init];
+        motherData = [NSJSONSerialization dataWithJSONObject:mother options:NSJSONWritingPrettyPrinted error: NULL];
+        NSDictionary *userDictionary = @{
+                                         @"user_type": @"mother",
+                                         @"motherData": motherData
+                                         };
+        NSData *dictionaryData = [[NSData alloc] init];
+        dictionaryData = [NSJSONSerialization dataWithJSONObject:userDictionary options:NSJSONWritingPrettyPrinted error: NULL];
+        [requestURL setHTTPBody:dictionaryData];
+    }
+    
+    [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"%@", error.localizedDescription);
+            return;
+        }
+    }] resume];
     
 }
 
-- (void)onboardDriverUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withPrice:(NSNumber *)price withActive:(NSNumber *)isActive withBio:(NSString *)bio withPhoto:(NSString *)photoURL {
+- (void)updateUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withUser: (User *)user withDriver:(Driver * _Nullable)driver withMother:(PregnantMom * _Nullable)mother withCompletion:(void (^)(NSError * _Nullable))completionHandler {
     
-}
-
-- (void)updateDriverUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withName:(NSString *)name withPhone:(NSString *)phone withUserType:(NSString *)userType withAddress:(NSString *)address withVillage:(NSString *)village withEmail:(NSString *)email withLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable))completionHandler {
+    NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/users/update"];
+    NSURL *appendedURL = [baseURL URLByAppendingPathComponent: userID.stringValue];
+    NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:appendedURL];
+    [requestURL setHTTPMethod:@"PUT"];
+    [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
     
+    if (mother == nil && driver == nil) {
+        return;
+    }
+    
+    NSData *userData = [[NSData alloc] init];
+    userData = [NSJSONSerialization dataWithJSONObject:userData options:NSJSONWritingPrettyPrinted error:NULL];
+    NSDictionary *jsonDictionary = @{};
+    
+    if (driver != nil) {
+        NSData *driverData = [[NSData alloc] init];
+        driverData = [NSJSONSerialization dataWithJSONObject: driver options:NSJSONWritingPrettyPrinted error: NULL];
+        jsonDictionary = @{
+                                         @"user": userData,
+                                         @"driver": driverData
+                                         };
+        NSData *dictionaryData = [[NSData alloc] init];
+        dictionaryData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error: NULL];
+        [requestURL setHTTPBody:dictionaryData];
+    }
+    else {
+        NSData *motherData = [[NSData alloc] init];
+        motherData = [NSJSONSerialization dataWithJSONObject:mother options:NSJSONWritingPrettyPrinted error: NULL];
+        jsonDictionary = @{
+                                         @"user": userData,
+                                         @"mother": motherData
+                                         };
+        NSData *dictionaryData = [[NSData alloc] init];
+        dictionaryData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error: NULL];
+        [requestURL setHTTPBody:dictionaryData];
+    }
+    
+    [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"%@", error.localizedDescription);
+            return;
+        }
+    }] resume];
 }
 
 - (void)createRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error))completionHandler {
