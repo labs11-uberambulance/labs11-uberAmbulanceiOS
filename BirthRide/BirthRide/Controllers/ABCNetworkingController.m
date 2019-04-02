@@ -17,8 +17,25 @@
     
 }
 
-- (void)fetchNearbyDriversWithLatitude:(double)latitude withLongitude:(double)longitude withCompletion:(void (^)(NSError * _Nullable error))completionHandler {
+- (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable error))completionHandler {
     
+    NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/drivers"];
+    NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
+    [requestURL setHTTPMethod:@"POST"];
+    NSData *coordinateData = [[NSData alloc] init];
+    NSDictionary *coordinateDictionary = @{
+                                           @"latitude": latitude,
+                                           @"longitude": longitude
+                                           };
+    coordinateData = [NSJSONSerialization dataWithJSONObject:coordinateDictionary options:NSJSONWritingPrettyPrinted error: NULL];
+    [requestURL setHTTPBody:coordinateData];
+    
+    [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"%@", error.localizedDescription);
+            return;
+        }
+    }] resume];
 }
 
 - (void)fetchRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, Ride *ride))completionHandler {
