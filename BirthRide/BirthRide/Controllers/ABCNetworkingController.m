@@ -10,6 +10,7 @@
 #import "BirthRide-Swift.h"
 #import "NSString+ConvertFromSnakeCaseToCamelCase.h"
 
+
 @implementation ABCNetworkingController
 
 - (void)fetchMotherWithToken:(NSString *)token withCompletion:(void (^)(NSError * _Nonnull))completionHandler {
@@ -24,15 +25,15 @@
     
 }
 
-- (void)updateUserWithToken:(NSString *)token withName:(NSString *)name withPhone:(NSString *)phone withUserType:(NSString *)userType withAddress:(NSString *)address withVillage:(NSString *)village withEmail:(NSString *)email withLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void(^)(NSError * _Nullable error))completionHandler {
-    NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/users/onboard/"];
-    NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
-    [requestURL setHTTPMethod:@"GET"];
-}
-- (void)onboardPregnantMomWithToken:(NSString *)token withcaretakerName:(NSString *)caretakerName withdueDate:(NSString *)dueDate withHospital:(NSString *)hospital withCompletion:(void(^)(NSError * _Nullable error))completionHandler {
+- (void)onboardMotherUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withCaretaker:(NSString *)caretakerName withDueDate:(NSString *)dueDate withHospital:(NSString *)hospital {
     
 }
-- (void)onboardDriverWithToken:(NSString *)token withPrice:(NSNumber *)price withActive:(NSNumber *)isActive withBio:(NSString *)bio withphotoURL:(NSString *)photoUrl {
+
+- (void)onboardDriverUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withPrice:(NSNumber *)price withActive:(NSNumber *)isActive withBio:(NSString *)bio withPhoto:(NSString *)photoURL {
+    
+}
+
+- (void)updateDriverUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withName:(NSString *)name withPhone:(NSString *)phone withUserType:(NSString *)userType withAddress:(NSString *)address withVillage:(NSString *)village withEmail:(NSString *)email withLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable))completionHandler {
     
 }
 
@@ -100,9 +101,6 @@
                         if ([key containsString:@"_"]) {
                             key = [key convertFromSnakeCaseToCamelCase];
                         }
-                        if ([key isEqualToString:@"id"]) {
-                            [pregnantMom setValue:parsedData[@"motherData"][key] forKey:@"motherID"];
-                        };
                         SEL selector = NSSelectorFromString(key);
                         if ([pregnantMom respondsToSelector:selector]) {
                             [pregnantMom setValue:value forKey:key];
@@ -115,9 +113,6 @@
                         if ([key containsString:@"_"]) {
                             key = [key convertFromSnakeCaseToCamelCase];
                         }
-                        if ([key isEqualToString:@"id"]) {
-                            driver.driverID = parsedData[@"user"][key];
-                        };
                         SEL selector = NSSelectorFromString(key);
                         if ([driver respondsToSelector:selector]) {
                             [driver setValue:value forKey:key];

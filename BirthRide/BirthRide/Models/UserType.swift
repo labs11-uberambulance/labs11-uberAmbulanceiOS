@@ -19,8 +19,8 @@ class User: NSObject {
     ///This property will be set by the backend. I will get it back when I first create the user.
     var userID: NSNumber?
     var name: String?
-    ///This property will contain the email or phone number of the user, depending on login type
-    var login: String?
+    ///This property will contain the email or phone number of the user, depending on login type. This property is unneeded on the FE.
+//    var login: String?
     var firebaseId: String?
     var phone: String?
     var userType: String?
@@ -39,7 +39,7 @@ class User: NSObject {
         super.init()
         self.userID = userID
         self.name = name
-        self.login = login
+//        self.login = login
         self.phone = phone
         self.userType = userType
         self.address = address
@@ -57,14 +57,11 @@ class PregnantMom: User {
     var dueDate: String?
     ///This property must match a location findable by google maps API
     var hospital: String?
-    
-    var motherID: NSNumber?
 
     required init(dueDate: String?, hospital: String?, caretakerName: String?, motherID: NSNumber?) {
         self.dueDate = dueDate
         self.hospital = hospital
         self.caretakerName = caretakerName
-        self.motherID = motherID
         super.init(userID: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil)
     }
 }
@@ -77,15 +74,12 @@ class Driver: User {
     var bio: String?
     var photo: String?
     
-    var driverID: NSNumber?
-    
     @objc
     required init(price: Int, active: Bool = false, bio: String, photo: String?, driverID: NSNumber?) {
         self.price = price
         self.active = active
         self.bio = bio
         self.photo = photo
-        self.driverID = driverID
         super.init(userID: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil)
     }
 
