@@ -31,6 +31,9 @@ class ConfirmRideViewController: UIViewController {
     @IBAction func requestRideButtonTapped(_ sender: Any) {
         let destinationVC = MotherRideStatusViewController()
         destinationVC.pregnantMom = self.pregnantMom
+        guard let userToken = AuthenticationController.shared.userToken else {return}
+        ABCNetworkingController().createRide(withToken: userToken) { (error) in
+        }
         self.present(destinationVC, animated: true) {
         }
     }

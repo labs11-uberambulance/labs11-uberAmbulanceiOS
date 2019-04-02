@@ -10,12 +10,7 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
-enum LoginErrorType {
-    case invalidInformation
-    case requiredFieldsEmpty
-    case otherError
-}
-
+@objcMembers
 class AuthenticationController {
     
     //MARK: Singleton

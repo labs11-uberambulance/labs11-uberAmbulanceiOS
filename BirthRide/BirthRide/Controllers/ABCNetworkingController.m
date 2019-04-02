@@ -24,7 +24,15 @@
     
 }
 
-- (void)updateUserWithToken:(NSString *)token userType:(NSString *)userType withCompletion:(void(^)(NSError * _Nullable error))completionHandler {
+- (void)updateUserWithToken:(NSString *)token withName:(NSString *)name withPhone:(NSString *)phone withUserType:(NSString *)userType withAddress:(NSString *)address withVillage:(NSString *)village withEmail:(NSString *)email withLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void(^)(NSError * _Nullable error))completionHandler {
+    NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/users/onboard/"];
+    NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
+    [requestURL setHTTPMethod:@"GET"];
+}
+- (void)onboardPregnantMomWithToken:(NSString *)token withcaretakerName:(NSString *)caretakerName withdueDate:(NSString *)dueDate withHospital:(NSString *)hospital withCompletion:(void(^)(NSError * _Nullable error))completionHandler {
+    
+}
+- (void)onboardDriverWithToken:(NSString *)token withPrice:(NSNumber *)price withActive:(NSNumber *)isActive withBio:(NSString *)bio withphotoURL:(NSString *)photoUrl {
     
 }
 

@@ -31,7 +31,7 @@ class UserController {
         newMom.longitude = user.longitude
         newMom.email = user.email
         
-        networkingController.updateUser(withToken: "StringHere", userType: "pregnantMom") { (error) in
+        networkingController.updateUser(withToken: "StringHere", withName: "pregnantMom", withPhone: "", withUserType: "", withAddress: "", withVillage: "", withEmail: "", withLatitude: 1, withLongitude: 1) { (error) in
             if let error = error {
                 NSLog("%@", error.localizedDescription)
                 return
@@ -59,7 +59,7 @@ class UserController {
         driver.bio = bio
         driver.photo = photo
         
-        networkingController.updateUser(withToken: "StringHere", userType: driver.userType ?? "driver") { (error) in
+        networkingController.updateUser(withToken: "StringHere", withName: "", withPhone: "", withUserType: "", withAddress: "", withVillage: "", withEmail: "", withLatitude: 1, withLongitude: 1) { (error) in
             if let error = error {
                 NSLog("%@", error.localizedDescription)
                 return

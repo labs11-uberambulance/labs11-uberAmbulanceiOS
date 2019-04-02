@@ -35,14 +35,22 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)fetchRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, Ride *ride))completionHandler;
 
 
-/**
- This method will update the user associated with the passed-in authentication token. The definition of this method definition is a work-in-progress.
 
- @param token The authentication token associated with the user. This parameter is used to find the appropriate user in the database.
- @param userType The type of the user, either mother or driver.
- @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
+/**
+ <#Description#>
+
+ @param token <#token description#>
+ @param name <#name description#>
+ @param phone <#phone description#>
+ @param userType <#userType description#>
+ @param address <#address description#>
+ @param village <#village description#>
+ @param email <#email description#>
+ @param latitude <#latitude description#>
+ @param longitude <#longitude description#>
+ @param completionHandler <#completionHandler description#>
  */
-- (void)updateUserWithToken:(NSString *)token userType:(NSString *)userType withCompletion:(void(^)(NSError * _Nullable error))completionHandler;
+- (void)updateUserWithToken:(NSString *)token withName:(NSString *)name withPhone:(NSString *)phone withUserType:(NSString *)userType withAddress:(NSString *)address withVillage:(NSString *)village withEmail:(NSString *)email withLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void(^)(NSError * _Nullable error))completionHandler;
 
 ///This method will create a ride on the server.
 /**
