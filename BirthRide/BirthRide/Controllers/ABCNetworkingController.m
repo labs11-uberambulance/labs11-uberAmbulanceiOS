@@ -14,7 +14,7 @@
 
 
 @implementation ABCNetworkingController
-- (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable, NSArray * _Nullable))completionHandler {
+- (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler {
     
     NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/drivers"];
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];

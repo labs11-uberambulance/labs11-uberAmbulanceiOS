@@ -11,9 +11,16 @@ import GoogleMaps
 import GooglePlaces
 
 class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
+    //MARK: Private Properties
+    private var driversArray: [Driver] = [] {
+        didSet {
+            configureMapView()
+            configureLabels()
+        }
+    }
+    private var count = 0
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
-    var driver: [String: Any]?
     let locationManager = CLLocationManager()
     //MARK: IBOutlets
     @IBOutlet weak var mapView: GMSMapView!
@@ -23,12 +30,8 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ABCNetworkingController().fetchNearbyDrivers(withLatitude: 3, withLongitude: 3) { (error, driversArray)  in
-            if let error = error {
-                NSLog(error.localizedDescription)
-                return
-            }
-        }
+        locationManager.delegate = self
+        locationManager.requestLocation()
 
         
         // Do any additional setup after loading the view.
@@ -51,12 +54,15 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     private func configureLabels() {
+        guard let price = driversArray[count].price else {return}
         estimatedPickupTimeLabel.text = "Estimated Pickup Time: 5 minutes"
-        estimatedFareLabel.text = "Estimated Fare: 10"
+        estimatedFareLabel.text = "Estimated Fare: \(price)"
         nameLabel.text = "Frederick"
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        
         let location = locations.last
         let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
         
@@ -64,7 +70,24 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         
         //Finally stop updating location otherwise it will come again and again in this delegate
         self.locationManager.stopUpdatingLocation()
+        ABCNetworkingController().fetchNearbyDrivers(withLatitude: location?.coordinate.latitude as! NSNumber, withLongitude: location?.coordinate.longitude as! NSNumber) { (error, fetchedDriversArray)  in
+            if let error = error {
+                NSLog(error.localizedDescription)
+                return
+            }
+            guard let driversArray = fetchedDriversArray else {
+                return
+            }
+            self.driversArray = driversArray
+        }
     }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
+    }
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         NSLog("Error udpating location in RequestRideViewController.locationManager:didFailWithError:")
         NSLog(error.localizedDescription)
