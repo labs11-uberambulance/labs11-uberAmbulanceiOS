@@ -17,6 +17,7 @@ class DriverWorkViewController: UIViewController {
     @IBOutlet weak var acceptRideButton: UIButton!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var rideInformationView: UIView!
+    @IBOutlet weak var searchingForRidesLabel: UILabel!
     
     //MARK: Private Properties
     private var ride: Ride?
@@ -30,7 +31,12 @@ class DriverWorkViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         isWorkingSwitch.isOn = false
-        rideInformationView.isHidden = true
+        requestTimeLabel.isHidden = true
+        startVillageLabel.isHidden = true
+        destinationLabel.isHidden = true
+        acceptRideButton.isHidden = true
+        searchingForRidesLabel.isHidden = true
+        mapView.isHidden = true
         // Do any additional setup after loading the view.
     }
 
@@ -43,6 +49,7 @@ class DriverWorkViewController: UIViewController {
         case true:
             if ride == nil {
                 animateLoadingView()
+                searchingForRidesLabel.isHidden = false
             }
         case false:
             if rideInformationView.isHidden == true {

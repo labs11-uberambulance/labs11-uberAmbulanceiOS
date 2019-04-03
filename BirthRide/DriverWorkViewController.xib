@@ -17,6 +17,7 @@
                 <outlet property="mapView" destination="CLh-Nb-Wy4" id="rsg-S1-ttO"/>
                 <outlet property="requestTimeLabel" destination="Is1-Hq-Niy" id="C0Z-8A-eJg"/>
                 <outlet property="rideInformationView" destination="9Jg-Cz-vPL" id="l4V-ZV-3uk"/>
+                <outlet property="searchingForRidesLabel" destination="5Kb-Pe-aHQ" id="vc6-cB-8rx"/>
                 <outlet property="startVillageLabel" destination="xag-G2-RxG" id="etT-6w-DPM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -47,11 +48,11 @@
                     <rect key="frame" x="0.0" y="111" width="375" height="556"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLh-Nb-Wy4" customClass="GMSMapView">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="256"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="356"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="30l-zd-L8i">
-                            <rect key="frame" x="135" y="264" width="105" height="115.5"/>
+                            <rect key="frame" x="135" y="364" width="105" height="115.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Is1-Hq-Niy">
                                     <rect key="frame" x="0.0" y="0.0" width="105" height="20.5"/>
@@ -81,15 +82,24 @@
                             </subviews>
                             <color key="tintColor" red="1" green="0.274480418" blue="0.21762272320000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </stackView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching for rides..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Kb-Pe-aHQ">
+                            <rect key="frame" x="77" y="344" width="221" height="30"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="5Kb-Pe-aHQ" secondAttribute="bottom" constant="182" id="03U-iq-57C"/>
                         <constraint firstItem="30l-zd-L8i" firstAttribute="top" secondItem="CLh-Nb-Wy4" secondAttribute="bottom" constant="8" id="5ke-Gp-TXb"/>
+                        <constraint firstItem="5Kb-Pe-aHQ" firstAttribute="centerX" secondItem="9Jg-Cz-vPL" secondAttribute="centerX" id="64g-LV-CUr"/>
                         <constraint firstAttribute="trailing" secondItem="CLh-Nb-Wy4" secondAttribute="trailing" id="97B-3A-Xdb"/>
-                        <constraint firstAttribute="bottom" secondItem="CLh-Nb-Wy4" secondAttribute="bottom" constant="300" id="DCH-WL-wRH"/>
+                        <constraint firstAttribute="bottom" secondItem="CLh-Nb-Wy4" secondAttribute="bottom" constant="200" id="DCH-WL-wRH"/>
                         <constraint firstItem="30l-zd-L8i" firstAttribute="centerX" secondItem="9Jg-Cz-vPL" secondAttribute="centerX" id="Khl-Vq-MV2"/>
                         <constraint firstItem="CLh-Nb-Wy4" firstAttribute="top" secondItem="9Jg-Cz-vPL" secondAttribute="top" id="Ozu-7N-YM1"/>
                         <constraint firstItem="CLh-Nb-Wy4" firstAttribute="leading" secondItem="9Jg-Cz-vPL" secondAttribute="leading" id="kua-Uq-SQr"/>
+                        <constraint firstItem="5Kb-Pe-aHQ" firstAttribute="leading" secondItem="9Jg-Cz-vPL" secondAttribute="leading" constant="77" id="oTG-VT-MuT"/>
                     </constraints>
                 </view>
             </subviews>
@@ -104,5 +114,13 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
+        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zPz-By-9Qh">
+            <rect key="frame" x="0.0" y="0.0" width="42" height="21"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+            <nil key="textColor"/>
+            <nil key="highlightedColor"/>
+            <point key="canvasLocation" x="518" y="-36"/>
+        </label>
     </objects>
 </document>
