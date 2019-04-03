@@ -23,12 +23,13 @@ class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().uiDelegate = self
-        GIDSignIn.sharedInstance()?.signInSilently()
+        GIDSignIn.sharedInstance()?.signIn()
         
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
         transition(userType: nil)
+        AuthenticationController.shared.authenticateUser()
         //        transition(userType: nil)
     }
     

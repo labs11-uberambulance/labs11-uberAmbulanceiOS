@@ -12,12 +12,7 @@
 
 
 @implementation ABCNetworkingController
-
-- (void)fetchMotherWithToken:(NSString *)token withCompletion:(void (^)(NSError * _Nonnull))completionHandler {
-    
-}
-
-- (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable error))completionHandler {
+- (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable, NSArray * _Nullable))completionHandler {
     
     NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/drivers"];
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
@@ -32,9 +27,18 @@
     
     [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error != nil) {
-            NSLog(@"%@", error.localizedDescription);
+            NSLog(@"Error in ABCNetworkingController.m.fetchNearbyDriversWithLatitude:");
+            completionHandler(error, nil);
             return;
         }
+        if (data == nil) {
+            NSLog(@"Data is nil in ABCNetworkingController.m.fetchNearbyDriversWithLatitude:");
+            completionHandler(nil, nil);
+            return;
+        }
+        NSArray<Driver *> *driversArray = [[NSArray alloc] init];
+        driversArray = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
+        
     }] resume];
 }
 
@@ -132,17 +136,17 @@
     }] resume];
 }
 
-- (void)createRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error))completionHandler {
+- (void)createRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable))completionHandler {
     
 }
 
-- (void)updateRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error))completionHandler {
+- (void)updateRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable))completionHandler {
     
 }
 
 //I was getting errors when I was trying to pass the error into my completionHandler. It was an ARC error. The problem was that I was adding in an extra "asterisk", or saying that there was an extra pointer. The completionHandler couldn't take the error in that way. This is what it looked like when I was getting the error: NSError * _Nullable *error. That second asterisk was tripping me up.
 
-- (void)authenticateUserWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, NSArray *_Nullable userArray, NSString * _Nullable userType))completionHandler {
+- (void)authenticateUserWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable, NSArray *_Nullable, NSString * _Nullable))completionHandler {
     
     NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/users"];
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];

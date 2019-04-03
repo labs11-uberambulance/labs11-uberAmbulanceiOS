@@ -84,11 +84,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         // ...
         if let error = error {
-            // ...
+            NSLog(error.localizedDescription)
             return
         }
         
+        
         guard let authentication = user.authentication else { return }
+        AuthenticationController.shared.userToken = authentication.accessToken
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
         // ...
@@ -108,6 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
             // Perform any operations when the user disconnects from app here.
             // ...
+            signIn.signOut()
             let firebaseAuth = Auth.auth()
             do {
                 try firebaseAuth.signOut()

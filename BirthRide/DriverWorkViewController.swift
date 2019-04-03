@@ -1,18 +1,14 @@
 //
-//  MotherRideStatusViewController.swift
-//  BirthRide
+//  DriverWorkViewController.swift
+//  
 //
-//  Created by Austin Cole on 3/26/19.
-//  Copyright © 2019 Austin Cole. All rights reserved.
+//  Created by Austin Cole on 4/2/19.
 //
 
 import UIKit
 
-class MotherRideStatusViewController: UIViewController {
-    //MARK: Other Properties
-    var pregnantMom: PregnantMom?
-    var ride: Ride?
-    
+class DriverWorkViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
