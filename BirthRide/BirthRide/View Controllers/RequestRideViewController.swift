@@ -18,22 +18,18 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     //MARK: IBOutlets
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var estimatedPickupTimeLabel: UILabel!
-    @IBOutlet weak var fareLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var estimatedFareLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        ABCNetworkingController().fetchNearbyDrivers(withLatitude: 3, withLongitude: 3) { (error) in
-//            if let error = error {
-//                NSLog(error.localizedDescription)
-//                return
-//            }
-//            DispatchQueue.main.async {
-                self.configureMapView()
-//                self.configureLabels()
-//            }
-//        }
-        
+        ABCNetworkingController().fetchNearbyDrivers(withLatitude: 3, withLongitude: 3) { (error, driversArray)  in
+            if let error = error {
+                NSLog(error.localizedDescription)
+                return
+            }
+        }
+
         
         // Do any additional setup after loading the view.
     }
@@ -55,9 +51,9 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     private func configureLabels() {
-        estimatedPickupTimeLabel.text = "5 minutes"
-        estimatedFareLabel.text = driver?["rateAndDistance"] as? String
-        fareLabel.text = driver?["name"] as? String
+        estimatedPickupTimeLabel.text = "Estimated Pickup Time: 5 minutes"
+        estimatedFareLabel.text = "Estimated Fare: 10"
+        nameLabel.text = "Frederick"
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

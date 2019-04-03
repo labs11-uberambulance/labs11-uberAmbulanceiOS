@@ -41,6 +41,7 @@
         }
         NSArray<Driver *> *driversArray = [[NSArray alloc] init];
         driversArray = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
+        completionHandler(nil, driversArray);
         
     }] resume];
 }
