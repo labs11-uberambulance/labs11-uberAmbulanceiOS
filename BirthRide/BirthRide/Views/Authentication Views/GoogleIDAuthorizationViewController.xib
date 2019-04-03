@@ -28,7 +28,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rz3-xA-MkG">
-                    <rect key="frame" x="169" y="405" width="37" height="30"/>
+                    <rect key="frame" x="169" y="318.5" width="37" height="30"/>
                     <state key="normal" title="Done"/>
                     <connections>
                         <action selector="doneButtonTapped:" destination="-1" eventType="touchUpInside" id="SBg-HD-fIY"/>
@@ -39,9 +39,8 @@
             <constraints>
                 <constraint firstItem="cTs-0E-fyf" firstAttribute="centerX" secondItem="ead-hv-cWT" secondAttribute="centerX" id="0sB-la-YEN"/>
                 <constraint firstItem="Rz3-xA-MkG" firstAttribute="centerX" secondItem="ead-hv-cWT" secondAttribute="centerX" id="HVr-XY-Rip"/>
-                <constraint firstItem="gx0-ED-qm2" firstAttribute="bottom" secondItem="Rz3-xA-MkG" secondAttribute="bottom" constant="232" id="WjG-3c-rYi"/>
+                <constraint firstItem="Rz3-xA-MkG" firstAttribute="centerY" secondItem="ead-hv-cWT" secondAttribute="centerY" id="beZ-yZ-cEk"/>
                 <constraint firstItem="cTs-0E-fyf" firstAttribute="centerY" secondItem="ead-hv-cWT" secondAttribute="centerY" id="v5s-xv-GYk"/>
-                <constraint firstItem="Rz3-xA-MkG" firstAttribute="top" secondItem="cTs-0E-fyf" secondAttribute="bottom" constant="8" id="xKP-7y-Ktv"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="gx0-ED-qm2"/>
             <point key="canvasLocation" x="65" y="-133"/>

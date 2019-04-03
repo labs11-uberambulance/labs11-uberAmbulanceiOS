@@ -9,7 +9,7 @@
 import UIKit
 import GoogleSignIn
 
-class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate, TransitionBetweenViewControllers {
+class GoogleIDAuthorizationViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelegate, TransitionBetweenViewControllers {
     
     //MARK: Private Properties
     private var genericUser: User?
@@ -22,30 +22,16 @@ class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance()?.uiDelegate = self
         GIDSignIn.sharedInstance()?.signIn()
+        
         
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        transition(userType: nil)
-        AuthenticationController.shared.authenticateUser()
         //        transition(userType: nil)
     }
-    
-    
-    //MARK: Private Methods
-    private func configureGIDSignInButton() {
-        gidSignInButton = GIDSignInButton()
-        gidSignInButton?.frame = configureView.frame
-        gidSignInButton?.colorScheme = .dark
-        gidSignInButton?.style = .standard
-        self.view.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(gidSignInButton!)
-        gidSignInButton?.addGestureRecognizer(gestureRecognizer!)
-        
-    }
-    
     //MARK: TransitionBetweenViewControllers methods
     func transition(userType: UserType?) {
         if AuthenticationController.shared.driver == nil && AuthenticationController.shared.pregnantMom == nil {
@@ -63,5 +49,10 @@ class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate
         }
     }
     
-    //I need the GIDSignInUIDelegate because I need to know when the sign-in occurs to get the accessToken from the GIDSignIn object that I may perform authentication.
+    
+    //MARK: GIDSignInDelegate Methods
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        transition(userType: nil)
+        AuthenticationController.shared.authenticateUser()
+    }
 }
