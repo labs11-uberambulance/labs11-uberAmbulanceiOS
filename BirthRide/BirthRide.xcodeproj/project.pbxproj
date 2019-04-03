@@ -14,6 +14,7 @@
 		A200D9BF225546B300E1B551 /* IndeterminateLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200D9BD225546B300E1B551 /* IndeterminateLoadingView.swift */; };
 		A200D9C52255496E00E1B551 /* DriverWorkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A200D9C32255496E00E1B551 /* DriverWorkViewController.xib */; };
 		A200D9C62255496E00E1B551 /* DriverWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200D9C42255496E00E1B551 /* DriverWorkViewController.swift */; };
+		A200D9C8225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200D9C7225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift */; };
 		A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215501F2242CE5C00DDF613 /* AppDelegate.swift */; };
 		A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A21550262242CE5C00DDF613 /* Assets.xcassets */; };
 		A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */; };
@@ -118,6 +119,7 @@
 		A200D9BD225546B300E1B551 /* IndeterminateLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndeterminateLoadingView.swift; sourceTree = "<group>"; };
 		A200D9C32255496E00E1B551 /* DriverWorkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DriverWorkViewController.xib; sourceTree = "<group>"; };
 		A200D9C42255496E00E1B551 /* DriverWorkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverWorkViewController.swift; sourceTree = "<group>"; };
+		A200D9C7225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DriverWorkViewController+LoadingUI.swift"; sourceTree = "<group>"; };
 		A215501C2242CE5C00DDF613 /* BirthRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirthRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A215501F2242CE5C00DDF613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A21550262242CE5C00DDF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		A200D9C0225546FE00E1B551 /* Loading UI */ = {
 			isa = PBXGroup;
 			children = (
+				A200D9C7225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift */,
 				A200D9BD225546B300E1B551 /* IndeterminateLoadingView.swift */,
 				A200D9BC225546B300E1B551 /* PolarPoint.swift */,
 			);
@@ -666,6 +669,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A200D9C8225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift in Sources */,
 				A29282D2224BE22400FF9C28 /* SignUpViewController.swift in Sources */,
 				A29282D5224BE4AB00FF9C28 /* AuthenticationController.swift in Sources */,
 				A29282CA224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift in Sources */,

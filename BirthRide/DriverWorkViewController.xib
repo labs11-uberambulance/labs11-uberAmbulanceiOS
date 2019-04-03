@@ -11,6 +11,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DriverWorkViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
+                <outlet property="acceptRideButton" destination="AhT-O6-eMu" id="TyW-QD-zBX"/>
+                <outlet property="destinationLabel" destination="ewj-ng-AQT" id="Ohb-dR-pur"/>
+                <outlet property="isWorkingSwitch" destination="ZDg-5C-d3Y" id="reT-dj-9FS"/>
+                <outlet property="mapView" destination="CLh-Nb-Wy4" id="rsg-S1-ttO"/>
+                <outlet property="requestTimeLabel" destination="Is1-Hq-Niy" id="C0Z-8A-eJg"/>
+                <outlet property="rideInformationView" destination="9Jg-Cz-vPL" id="l4V-ZV-3uk"/>
+                <outlet property="startVillageLabel" destination="xag-G2-RxG" id="etT-6w-DPM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,13 +37,16 @@
                         </label>
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZDg-5C-d3Y">
                             <rect key="frame" x="157.5" y="0.0" width="51" height="31"/>
+                            <connections>
+                                <action selector="isWorkingSwitchToggled:" destination="-1" eventType="valueChanged" id="7dT-fN-TTP"/>
+                            </connections>
                         </switch>
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Jg-Cz-vPL">
                     <rect key="frame" x="0.0" y="111" width="375" height="556"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLh-Nb-Wy4">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CLh-Nb-Wy4" customClass="GMSMapView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="256"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -64,6 +74,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AhT-O6-eMu">
                                     <rect key="frame" x="11" y="85.5" width="83" height="30"/>
                                     <state key="normal" title="Accept Ride"/>
+                                    <connections>
+                                        <action selector="acceptRideButtonTapped:" destination="-1" eventType="touchUpInside" id="K8I-hJ-lQY"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="tintColor" red="1" green="0.274480418" blue="0.21762272320000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

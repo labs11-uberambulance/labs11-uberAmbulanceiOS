@@ -68,7 +68,7 @@ internal class IndeterminateLoadingView: UIView, CAAnimationDelegate {
         animation.toValue = 1.0
         animation.duration = duration
         animation.delegate = self
-        animation.isRemovedOnCompletion = false
+        animation.isRemovedOnCompletion = true
         animation.timingFunction = CAMediaTimingFunction(name: timing)
         shapeLayer.add(animation, forKey: keyPath)
     }
