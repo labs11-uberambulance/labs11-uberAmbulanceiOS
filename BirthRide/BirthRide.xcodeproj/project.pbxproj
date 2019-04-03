@@ -11,7 +11,6 @@
 		A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215501F2242CE5C00DDF613 /* AppDelegate.swift */; };
 		A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A21550262242CE5C00DDF613 /* Assets.xcassets */; };
 		A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */; };
-		A278041422430997001920A0 /* DriverProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041322430997001920A0 /* DriverProfileCollectionViewController.swift */; };
 		A278041A22443728001920A0 /* RequestRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041822443728001920A0 /* RequestRideViewController.swift */; };
 		A278041B22443728001920A0 /* RequestRideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278041922443728001920A0 /* RequestRideViewController.xib */; };
 		A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041C22443CC5001920A0 /* UserTypeViewController.swift */; };
@@ -26,8 +25,6 @@
 		A278042F224447A6001920A0 /* DriverRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042D224447A6001920A0 /* DriverRegistrationViewController.xib */; };
 		A278043222444B97001920A0 /* DriverPhotoRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278043022444B97001920A0 /* DriverPhotoRegistrationViewController.swift */; };
 		A278043322444B97001920A0 /* DriverPhotoRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278043122444B97001920A0 /* DriverPhotoRegistrationViewController.xib */; };
-		A27804402244505A001920A0 /* DriverProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278043E2244505A001920A0 /* DriverProfileCollectionViewCell.swift */; };
-		A27804412244505A001920A0 /* DriverProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278043F2244505A001920A0 /* DriverProfileCollectionViewCell.xib */; };
 		A29282BA224AC3D800FF9C28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A29282B9224AC3D800FF9C28 /* GoogleService-Info.plist */; };
 		A29282C4224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282C2224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.swift */; };
 		A29282C5224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29282C3224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib */; };
@@ -116,7 +113,6 @@
 		A21550262242CE5C00DDF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A21550292242CE5C00DDF613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A215502B2242CE5C00DDF613 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A278041322430997001920A0 /* DriverProfileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverProfileCollectionViewController.swift; sourceTree = "<group>"; };
 		A278041822443728001920A0 /* RequestRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRideViewController.swift; sourceTree = "<group>"; };
 		A278041922443728001920A0 /* RequestRideViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestRideViewController.xib; sourceTree = "<group>"; };
 		A278041C22443CC5001920A0 /* UserTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeViewController.swift; sourceTree = "<group>"; };
@@ -131,8 +127,6 @@
 		A278042D224447A6001920A0 /* DriverRegistrationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverRegistrationViewController.xib; sourceTree = "<group>"; };
 		A278043022444B97001920A0 /* DriverPhotoRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverPhotoRegistrationViewController.swift; sourceTree = "<group>"; };
 		A278043122444B97001920A0 /* DriverPhotoRegistrationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverPhotoRegistrationViewController.xib; sourceTree = "<group>"; };
-		A278043E2244505A001920A0 /* DriverProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverProfileCollectionViewCell.swift; sourceTree = "<group>"; };
-		A278043F2244505A001920A0 /* DriverProfileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverProfileCollectionViewCell.xib; sourceTree = "<group>"; };
 		A29282B9224AC3D800FF9C28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A29282C2224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleIDAuthorizationViewController.swift; sourceTree = "<group>"; };
 		A29282C3224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleIDAuthorizationViewController.xib; sourceTree = "<group>"; };
@@ -317,8 +311,6 @@
 			isa = PBXGroup;
 			children = (
 				A278041922443728001920A0 /* RequestRideViewController.xib */,
-				A278043F2244505A001920A0 /* DriverProfileCollectionViewCell.xib */,
-				A278043E2244505A001920A0 /* DriverProfileCollectionViewCell.swift */,
 			);
 			path = "Mother-flow Views";
 			sourceTree = "<group>";
@@ -327,7 +319,6 @@
 			isa = PBXGroup;
 			children = (
 				A278041822443728001920A0 /* RequestRideViewController.swift */,
-				A278041322430997001920A0 /* DriverProfileCollectionViewController.swift */,
 			);
 			name = "Mother-flow View Controllers";
 			sourceTree = "<group>";
@@ -556,7 +547,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A27804412244505A001920A0 /* DriverProfileCollectionViewCell.xib in Resources */,
 				A29282CB224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib in Resources */,
 				A29282C5224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib in Resources */,
 				A29282D3224BE22400FF9C28 /* SignUpViewController.xib in Resources */,
@@ -673,10 +663,8 @@
 				A278042222443FF7001920A0 /* SignInViewController.swift in Sources */,
 				A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */,
 				A278042622444093001920A0 /* OnboardingViewController.swift in Sources */,
-				A278041422430997001920A0 /* DriverProfileCollectionViewController.swift in Sources */,
 				A29282F5224C244800FF9C28 /* UserController.swift in Sources */,
 				A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */,
-				A27804402244505A001920A0 /* DriverProfileCollectionViewCell.swift in Sources */,
 				A292831C224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.m in Sources */,
 				A2C19DAF224A881700FC20F0 /* ABCNetworkingController.m in Sources */,
 			);
