@@ -11,8 +11,10 @@
 #import "NSString+ConvertFromSnakeCaseToCamelCase.h"
 
 
+
+
 @implementation ABCNetworkingController
-- (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable, NSArray * _Nullable))completionHandler {
+- (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler {
     
     NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/drivers"];
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
@@ -22,6 +24,7 @@
                                            @"latitude": latitude,
                                            @"longitude": longitude
                                            };
+    
     coordinateData = [NSJSONSerialization dataWithJSONObject:coordinateDictionary options:NSJSONWritingPrettyPrinted error: NULL];
     [requestURL setHTTPBody:coordinateData];
     
@@ -38,6 +41,7 @@
         }
         NSArray<Driver *> *driversArray = [[NSArray alloc] init];
         driversArray = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
+        completionHandler(nil, driversArray);
         
     }] resume];
 }
@@ -188,7 +192,7 @@
                 //What is a selector? A selector is a METHOD. A message is a METHOD + ARGUMENTS. Line 59 is, at RUNTIME, CREATING a NEW METHOD using the KEY.
                 SEL selector = NSSelectorFromString(key);
                 //On line 83 we are sending a MESSAGE to the OBJECT using the SELECTOR to ASK the OBJECT if it contains a property with the NAME of the SELECTOR
-                if ([user respondsToSelector: selector]) {
+                if ([user respondsToSelector: selector] && value != NSNull.null) {
                     //On line 85 we are LOOKING FOR a method called `setProperty` to SET the PROPERTY with the VALUE. IF THIS METHOD IS NOT FOUND the selector GENERATES a METHOD called `setProperty` to SET the value of the PARAMETER matching the KEY
                     [user setValue:value forKey:key];
                 }
@@ -201,7 +205,7 @@
                             key = [key convertFromSnakeCaseToCamelCase];
                         }
                         SEL selector = NSSelectorFromString(key);
-                        if ([pregnantMom respondsToSelector:selector]) {
+                        if ([pregnantMom respondsToSelector:selector] && value != NSNull.null) {
                             [pregnantMom setValue:value forKey:key];
                         }
                     }];
@@ -213,7 +217,7 @@
                             key = [key convertFromSnakeCaseToCamelCase];
                         }
                         SEL selector = NSSelectorFromString(key);
-                        if ([driver respondsToSelector:selector]) {
+                        if ([driver respondsToSelector:selector] && value != NSNull.null) {
                             [driver setValue:value forKey:key];
                         }
                     }];

@@ -10,29 +10,32 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
-class RequestRideViewController: UIViewController {
+class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
+    //MARK: Private Properties
+    private var driversArray: [Driver] = [] {
+        didSet {
+            configureMapView()
+            configureLabels()
+        }
+    }
+    private var count = 0
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
-    var driver: [String: Any]?
+    let locationManager = CLLocationManager()
     //MARK: IBOutlets
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var estimatedPickupTimeLabel: UILabel!
-    @IBOutlet weak var fareLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var estimatedFareLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ABCNetworkingController().fetchNearbyDrivers(withLatitude: 3, withLongitude: 3) { (error) in
-            if let error = error {
-                NSLog(error.localizedDescription)
-                return
-            }
-            DispatchQueue.main.async {
-            self.configureMapView()
-            self.configureLabels()
-            }
-        }
-        
+        locationManager.delegate = self
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+
         
         // Do any additional setup after loading the view.
     }
@@ -42,23 +45,82 @@ class RequestRideViewController: UIViewController {
         ABCNetworkingController().createRide(withToken: userToken) { (error) in
         }
     }
+    @IBAction func nextDriverButtonTapped(_ sender: Any) {
+        guard driversArray.count > 0 else {return}
+        if count == driversArray.count - 1 {
+            count = 0
+        } else {
+            count += 1
+        }
+        configureLabels()
+        //Call configureMapView again to update the map with a marker where the driver is located
+        configureMapView()
+    }
+    @IBAction func lastDriverButtonTapped(_ sender: Any) {
+        guard driversArray.count > 0 else {return}
+        if count == 0 {
+            count = driversArray.count - 1
+        } else {
+            count -= 1
+        }
+        configureLabels()
+        configureMapView()
+    }
+    
+    
+    
+    
+    
+    
     
     private func configureMapView() {
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
-        mapView.camera = camera
-        
-        let driverMarker = GMSMarker()
-        driverMarker.position = CLLocationCoordinate2D(latitude: driver?["latitude"] as! CLLocationDegrees, longitude: driver?["longitude"] as! CLLocationDegrees)
-        driverMarker.map = mapView
-        
+        mapView.animate(to: camera)
+
         let userMarker = GMSMarker()
         userMarker.icon = GMSMarker.markerImage(with: .blue)
         userMarker.position = CLLocationManager().location?.coordinate ?? CLLocationCoordinate2D(latitude: 1.5, longitude: 36.9)
         userMarker.map = mapView
     }
+    
     private func configureLabels() {
-        estimatedPickupTimeLabel.text = "5 minutes"
-        estimatedFareLabel.text = driver?["rateAndDistance"] as? String
-        fareLabel.text = driver?["name"] as? String
+        guard let price = driversArray[count].price else {return}
+        estimatedPickupTimeLabel.text = "Estimated Pickup Time: 5 minutes"
+        estimatedFareLabel.text = "Estimated Fare: \(price)"
+        nameLabel.text = "Frederick"
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        
+        let location = locations.last
+        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
+        
+        self.mapView?.animate(to: camera)
+        
+        //Finally stop updating location otherwise it will come again and again in this delegate
+        self.locationManager.stopUpdatingLocation()
+        ABCNetworkingController().fetchNearbyDrivers(withLatitude: location?.coordinate.latitude as! NSNumber, withLongitude: location?.coordinate.longitude as! NSNumber) { (error, fetchedDriversArray)  in
+            if let error = error {
+                NSLog(error.localizedDescription)
+                return
+            }
+            guard let driversArray = fetchedDriversArray else {
+                return
+            }
+            self.driversArray = driversArray
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        NSLog("Error udpating location in RequestRideViewController.locationManager:didFailWithError:")
+        NSLog(error.localizedDescription)
+        return
     }
 }

@@ -49,6 +49,8 @@ class SignInViewController: UIViewController {
             loginFieldView.addSubview((loginFieldViewController?.view)!)
         }
     }
+    
+    
     //MARK: Private Enum
     private enum SignInMethod {
         case googleID

@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param longitude The longitude of the mother's coordinates.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable error))completionHandler;
+- (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler ;
 
 
 /**

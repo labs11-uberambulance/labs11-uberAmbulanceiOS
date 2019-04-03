@@ -1,3 +1,5 @@
 import UIKit
 
-var str = "Hello, playground"
+var str = "Hello, playGround"
+
+print(str.lowercased())

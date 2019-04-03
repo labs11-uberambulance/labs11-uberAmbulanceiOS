@@ -11,14 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MotherOrCaretakerViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
-                <outlet property="careTakerTextField" destination="GSc-jJ-13N" id="yg2-x2-73h"/>
-                <outlet property="descriptionTextView" destination="ggB-mM-GMS" id="A0X-c5-e5j"/>
-                <outlet property="dueDateTextField" destination="Hx4-i7-7Tp" id="n9e-bX-yr8"/>
-                <outlet property="hospitalTextField" destination="UBK-eI-8jI" id="dSr-za-r4Z"/>
-                <outlet property="nameTextField" destination="49n-a9-pVs" id="4SM-2w-SgT"/>
-                <outlet property="phoneTextField" destination="Wf3-d0-DJL" id="Sok-Ch-Qn8"/>
+                <outlet property="caretakerTextField" destination="GSc-jJ-13N" id="IDH-n9-HVJ"/>
+                <outlet property="nameTextField" destination="49n-a9-pVs" id="9eW-Yc-Yyg"/>
+                <outlet property="phoneTextField" destination="Wf3-d0-DJL" id="Ez7-l2-zI6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="villageTextField" destination="Wgu-Ee-kg8" id="Si0-En-KvY"/>
+                <outlet property="villageTextField" destination="Wgu-Ee-kg8" id="Yf5-ig-3np"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -26,58 +23,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bqK-I8-MNL">
-                    <rect key="frame" x="100" y="80" width="175" height="356"/>
-                    <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="49n-a9-pVs">
-                            <rect key="frame" x="0.0" y="0.0" width="175" height="30"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Village" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wgu-Ee-kg8">
-                            <rect key="frame" x="0.0" y="38" width="175" height="30"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wf3-d0-DJL">
-                            <rect key="frame" x="0.0" y="76" width="175" height="30"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Due Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hx4-i7-7Tp">
-                            <rect key="frame" x="0.0" y="114" width="175" height="30"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hospital" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UBK-eI-8jI">
-                            <rect key="frame" x="0.0" y="152" width="175" height="30"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Describe where you live here..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ggB-mM-GMS">
-                            <rect key="frame" x="0.0" y="190" width="175" height="128"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        </textView>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Caretaker Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GSc-jJ-13N">
-                            <rect key="frame" x="0.0" y="326" width="175" height="30"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="356" id="nkP-sc-wWV"/>
-                    </constraints>
-                </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="vWq-oQ-wYS">
-                    <rect key="frame" x="116" y="444" width="143" height="30"/>
+                    <rect key="frame" x="116" y="221" width="143" height="30"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5v-6k-Wta">
                             <rect key="frame" x="0.0" y="0.0" width="75" height="30"/>
@@ -95,14 +42,98 @@
                         </button>
                     </subviews>
                 </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="qy1-Rk-p4O">
+                    <rect key="frame" x="20" y="60" width="335" height="141"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GdR-Ju-IZg">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZOs-1p-ffp">
+                                    <rect key="frame" x="0.0" y="0.0" width="129" height="30"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="49n-a9-pVs">
+                                    <rect key="frame" x="137" y="0.0" width="198" height="30"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W6O-Qg-HG2">
+                            <rect key="frame" x="0.0" y="37" width="335" height="30"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Village:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4e-WX-yPh">
+                                    <rect key="frame" x="0.0" y="0.0" width="129" height="30"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Village" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wgu-Ee-kg8">
+                                    <rect key="frame" x="137" y="0.0" width="198" height="30"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="flx-q6-iws">
+                            <rect key="frame" x="0.0" y="74" width="335" height="30"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone #:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oNY-zn-P8g">
+                                    <rect key="frame" x="0.0" y="0.0" width="129" height="30"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wf3-d0-DJL">
+                                    <rect key="frame" x="137" y="0.0" width="198" height="30"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IA6-AU-Juq">
+                            <rect key="frame" x="0.0" y="111" width="335" height="30"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caretaker Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8c-8w-2ya">
+                                    <rect key="frame" x="0.0" y="0.0" width="129" height="30"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Caretaker Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GSc-jJ-13N">
+                                    <rect key="frame" x="137" y="0.0" width="198" height="30"/>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="W6O-Qg-HG2" firstAttribute="width" secondItem="GdR-Ju-IZg" secondAttribute="width" id="1TS-d4-WOm"/>
+                        <constraint firstItem="Wgu-Ee-kg8" firstAttribute="width" secondItem="49n-a9-pVs" secondAttribute="width" id="4zr-jp-R6f"/>
+                        <constraint firstItem="O8c-8w-2ya" firstAttribute="width" secondItem="ZOs-1p-ffp" secondAttribute="width" id="5FE-M8-poe"/>
+                        <constraint firstItem="flx-q6-iws" firstAttribute="width" secondItem="GdR-Ju-IZg" secondAttribute="width" id="HlX-vn-N3h"/>
+                        <constraint firstItem="GSc-jJ-13N" firstAttribute="width" secondItem="49n-a9-pVs" secondAttribute="width" id="RC1-zb-kvQ"/>
+                        <constraint firstItem="Wf3-d0-DJL" firstAttribute="width" secondItem="49n-a9-pVs" secondAttribute="width" id="Tfx-EB-lDZ"/>
+                        <constraint firstItem="oNY-zn-P8g" firstAttribute="width" secondItem="ZOs-1p-ffp" secondAttribute="width" id="bdi-sW-AiH"/>
+                        <constraint firstItem="IA6-AU-Juq" firstAttribute="width" secondItem="GdR-Ju-IZg" secondAttribute="width" id="eRI-n1-4FL"/>
+                        <constraint firstItem="i4e-WX-yPh" firstAttribute="width" secondItem="ZOs-1p-ffp" secondAttribute="width" id="gsa-Sy-3RL"/>
+                    </constraints>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="bqK-I8-MNL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="7Eh-kl-U9e"/>
-                <constraint firstItem="bqK-I8-MNL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="60" id="9fd-5O-YM0"/>
-                <constraint firstItem="vWq-oQ-wYS" firstAttribute="top" secondItem="bqK-I8-MNL" secondAttribute="bottom" constant="8" id="DpP-Vo-ZoK"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bqK-I8-MNL" secondAttribute="trailing" constant="100" id="P70-Te-f4w"/>
-                <constraint firstItem="vWq-oQ-wYS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="PZE-Nb-tVK"/>
+                <constraint firstItem="qy1-Rk-p4O" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="Cdn-Q7-cUC"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qy1-Rk-p4O" secondAttribute="trailing" constant="20" id="Hew-2j-2d6"/>
+                <constraint firstItem="vWq-oQ-wYS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Jhh-lz-eOV"/>
+                <constraint firstItem="qy1-Rk-p4O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="dxl-8K-UMR"/>
+                <constraint firstItem="vWq-oQ-wYS" firstAttribute="top" secondItem="qy1-Rk-p4O" secondAttribute="bottom" constant="20" id="qBN-9b-17N"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>

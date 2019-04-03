@@ -46,6 +46,7 @@ class AuthenticationController {
             guard let userToken = self.userToken else {return}
             ABCNetworkingController().authenticateUser(withToken: userToken, withCompletion: { (error, userArray, userType)  in
                 if let error = error {
+                    NSLog("error in AuthenticationController.authenticateUserSignIn.")
                     NSLog("%@", error.localizedDescription)
                     return
                 }

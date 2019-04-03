@@ -8,11 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		53E46459FC4938BE08DBD546 /* Pods_BirthRide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A439B999719DA29D34AE9586 /* Pods_BirthRide.framework */; };
+		A200D9B3225517B100E1B551 /* RequestRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200D9B1225517B100E1B551 /* RequestRideViewController.swift */; };
+		A200D9B4225517B100E1B551 /* RequestRideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A200D9B2225517B100E1B551 /* RequestRideViewController.xib */; };
+		A200D9BE225546B300E1B551 /* PolarPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200D9BC225546B300E1B551 /* PolarPoint.swift */; };
+		A200D9BF225546B300E1B551 /* IndeterminateLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200D9BD225546B300E1B551 /* IndeterminateLoadingView.swift */; };
+		A200D9C52255496E00E1B551 /* DriverWorkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A200D9C32255496E00E1B551 /* DriverWorkViewController.xib */; };
+		A200D9C62255496E00E1B551 /* DriverWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200D9C42255496E00E1B551 /* DriverWorkViewController.swift */; };
+		A200D9C8225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200D9C7225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift */; };
 		A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215501F2242CE5C00DDF613 /* AppDelegate.swift */; };
 		A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A21550262242CE5C00DDF613 /* Assets.xcassets */; };
 		A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */; };
-		A278041A22443728001920A0 /* RequestRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041822443728001920A0 /* RequestRideViewController.swift */; };
-		A278041B22443728001920A0 /* RequestRideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278041922443728001920A0 /* RequestRideViewController.xib */; };
 		A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041C22443CC5001920A0 /* UserTypeViewController.swift */; };
 		A278041F22443CC5001920A0 /* UserTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278041D22443CC5001920A0 /* UserTypeViewController.xib */; };
 		A278042222443FF7001920A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042022443FF7001920A0 /* SignInViewController.swift */; };
@@ -108,13 +113,18 @@
 /* Begin PBXFileReference section */
 		1143602FE9BE45AF1AF9D737 /* Pods-BirthRide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirthRide.release.xcconfig"; path = "Target Support Files/Pods-BirthRide/Pods-BirthRide.release.xcconfig"; sourceTree = "<group>"; };
 		89CC52E63F826F30E55F94FC /* Pods-BirthRide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirthRide.debug.xcconfig"; path = "Target Support Files/Pods-BirthRide/Pods-BirthRide.debug.xcconfig"; sourceTree = "<group>"; };
+		A200D9B1225517B100E1B551 /* RequestRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRideViewController.swift; sourceTree = "<group>"; };
+		A200D9B2225517B100E1B551 /* RequestRideViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestRideViewController.xib; sourceTree = "<group>"; };
+		A200D9BC225546B300E1B551 /* PolarPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolarPoint.swift; sourceTree = "<group>"; };
+		A200D9BD225546B300E1B551 /* IndeterminateLoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndeterminateLoadingView.swift; sourceTree = "<group>"; };
+		A200D9C32255496E00E1B551 /* DriverWorkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DriverWorkViewController.xib; sourceTree = "<group>"; };
+		A200D9C42255496E00E1B551 /* DriverWorkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverWorkViewController.swift; sourceTree = "<group>"; };
+		A200D9C7225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DriverWorkViewController+LoadingUI.swift"; sourceTree = "<group>"; };
 		A215501C2242CE5C00DDF613 /* BirthRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirthRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A215501F2242CE5C00DDF613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A21550262242CE5C00DDF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A21550292242CE5C00DDF613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A215502B2242CE5C00DDF613 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A278041822443728001920A0 /* RequestRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRideViewController.swift; sourceTree = "<group>"; };
-		A278041922443728001920A0 /* RequestRideViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestRideViewController.xib; sourceTree = "<group>"; };
 		A278041C22443CC5001920A0 /* UserTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeViewController.swift; sourceTree = "<group>"; };
 		A278041D22443CC5001920A0 /* UserTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTypeViewController.xib; sourceTree = "<group>"; };
 		A278042022443FF7001920A0 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -154,8 +164,6 @@
 		A2928331224D640900FF9C28 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A2928333224D641200FF9C28 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A29283502253F35500FF9C28 /* BirthRide.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BirthRide.entitlements; sourceTree = "<group>"; };
-		A292835622542A3400FF9C28 /* DriverWorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverWorkViewController.swift; sourceTree = "<group>"; };
-		A292835822542A5E00FF9C28 /* DriverWorkViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverWorkViewController.xib; sourceTree = "<group>"; };
 		A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCoordinator.swift; sourceTree = "<group>"; };
 		A2C19D9722456B8800FC20F0 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		A2C19DA9224A875000FC20F0 /* BirthRide-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BirthRide-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -198,6 +206,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A200D9C0225546FE00E1B551 /* Loading UI */ = {
+			isa = PBXGroup;
+			children = (
+				A200D9C7225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift */,
+				A200D9BD225546B300E1B551 /* IndeterminateLoadingView.swift */,
+				A200D9BC225546B300E1B551 /* PolarPoint.swift */,
+			);
+			path = "Loading UI";
+			sourceTree = "<group>";
+		};
 		A21550132242CE5C00DDF613 = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +245,7 @@
 				A2C19D962245589700FC20F0 /* Coordinators */,
 				A2C19DA7224A86B700FC20F0 /* Controllers */,
 				A2C19DA8224A86C000FC20F0 /* Models */,
+				A200D9C0225546FE00E1B551 /* Loading UI */,
 				A2928316224D327600FF9C28 /* Categories */,
 				A2928319224D327A00FF9C28 /* Categories */,
 				A21550262242CE5C00DDF613 /* Assets.xcassets */,
@@ -243,8 +262,8 @@
 				A278041D22443CC5001920A0 /* UserTypeViewController.xib */,
 				A29282CD224AD3AF00FF9C28 /* Onboarding Views */,
 				A29282CC224AD39A00FF9C28 /* Authentication Views */,
-				A2928304224C436F00FF9C28 /* Mother-flow Views */,
 				A292835922542A5E00FF9C28 /* Driver-flow Views */,
+				A2928304224C436F00FF9C28 /* Mother-flow Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -310,7 +329,7 @@
 		A2928304224C436F00FF9C28 /* Mother-flow Views */ = {
 			isa = PBXGroup;
 			children = (
-				A278041922443728001920A0 /* RequestRideViewController.xib */,
+				A200D9B2225517B100E1B551 /* RequestRideViewController.xib */,
 			);
 			path = "Mother-flow Views";
 			sourceTree = "<group>";
@@ -318,7 +337,7 @@
 		A2928305224C438700FF9C28 /* Mother-flow View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A278041822443728001920A0 /* RequestRideViewController.swift */,
+				A200D9B1225517B100E1B551 /* RequestRideViewController.swift */,
 			);
 			name = "Mother-flow View Controllers";
 			sourceTree = "<group>";
@@ -346,7 +365,7 @@
 		A292835722542A3400FF9C28 /* Driver-flow View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A292835622542A3400FF9C28 /* DriverWorkViewController.swift */,
+				A200D9C42255496E00E1B551 /* DriverWorkViewController.swift */,
 			);
 			name = "Driver-flow View Controllers";
 			path = ../..;
@@ -355,7 +374,7 @@
 		A292835922542A5E00FF9C28 /* Driver-flow Views */ = {
 			isa = PBXGroup;
 			children = (
-				A292835822542A5E00FF9C28 /* DriverWorkViewController.xib */,
+				A200D9C32255496E00E1B551 /* DriverWorkViewController.xib */,
 			);
 			name = "Driver-flow Views";
 			path = ../..;
@@ -549,15 +568,16 @@
 			files = (
 				A29282CB224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib in Resources */,
 				A29282C5224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib in Resources */,
+				A200D9B4225517B100E1B551 /* RequestRideViewController.xib in Resources */,
 				A29282D3224BE22400FF9C28 /* SignUpViewController.xib in Resources */,
 				A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */,
+				A200D9C52255496E00E1B551 /* DriverWorkViewController.xib in Resources */,
 				A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */,
 				A278042F224447A6001920A0 /* DriverRegistrationViewController.xib in Resources */,
 				A278042722444093001920A0 /* OnboardingViewController.xib in Resources */,
 				A278041F22443CC5001920A0 /* UserTypeViewController.xib in Resources */,
 				A278042B2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib in Resources */,
 				A278042322443FF7001920A0 /* SignInViewController.xib in Resources */,
-				A278041B22443728001920A0 /* RequestRideViewController.xib in Resources */,
 				A278043322444B97001920A0 /* DriverPhotoRegistrationViewController.xib in Resources */,
 				A29282BA224AC3D800FF9C28 /* GoogleService-Info.plist in Resources */,
 			);
@@ -649,6 +669,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A200D9C8225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift in Sources */,
 				A29282D2224BE22400FF9C28 /* SignUpViewController.swift in Sources */,
 				A29282D5224BE4AB00FF9C28 /* AuthenticationController.swift in Sources */,
 				A29282CA224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift in Sources */,
@@ -658,12 +679,15 @@
 				A278042A2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift in Sources */,
 				A2C19DB1224A935F00FC20F0 /* Ride.swift in Sources */,
 				A29282C4224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.swift in Sources */,
-				A278041A22443728001920A0 /* RequestRideViewController.swift in Sources */,
 				A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */,
 				A278042222443FF7001920A0 /* SignInViewController.swift in Sources */,
+				A200D9BF225546B300E1B551 /* IndeterminateLoadingView.swift in Sources */,
 				A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */,
 				A278042622444093001920A0 /* OnboardingViewController.swift in Sources */,
+				A200D9C62255496E00E1B551 /* DriverWorkViewController.swift in Sources */,
 				A29282F5224C244800FF9C28 /* UserController.swift in Sources */,
+				A200D9BE225546B300E1B551 /* PolarPoint.swift in Sources */,
+				A200D9B3225517B100E1B551 /* RequestRideViewController.swift in Sources */,
 				A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */,
 				A292831C224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.m in Sources */,
 				A2C19DAF224A881700FC20F0 /* ABCNetworkingController.m in Sources */,
