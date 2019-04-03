@@ -53,18 +53,46 @@ class User: NSObject {
 @objcMembers
 class PregnantMom: NSObject {
     var caretakerName: String?
-    ///This property must have the format: YYYY-MM-DD
-    var dueDate: String?
-    var destinationLatitude: NSNumber?
-    var destinationLongitude: NSNumber?
+//    ///This property must have the format: YYYY-MM-DD
+//    var dueDate: String?
+    var start: Start?
+    var destination: Destination?
+    
 
-    required init(dueDate: String?, destinationLatitude: NSNumber?, destinationLongitude: NSNumber?, caretakerName: String?, motherID: NSNumber?) {
-        self.dueDate = dueDate
-        self.destinationLatitude = destinationLatitude
-        self.destinationLongitude = destinationLongitude
+    required init(start: Start?, destination: Destination?, caretakerName: String?) {
+        self.start = start
+        self.destination = destination
         self.caretakerName = caretakerName
     }
 }
+@objcMembers
+class Start: NSObject {
+    var latLong: String?
+    var name: String?
+    var startDescription: String?
+    
+    init(latLong: String, name: String, startDescription: String?) {
+        super.init()
+        self.latLong = latLong
+        self.name = name
+        self.startDescription = startDescription
+    }
+}
+
+@objcMembers
+class Destination: NSObject {
+    var latLong: String?
+    var name: String?
+    var destinationDescription: String?
+    
+    init(latLong: String, name: String, destinationDescription: String?) {
+        super.init()
+        self.latLong = latLong
+        self.name = name
+        self.destinationDescription = destinationDescription
+    }
+}
+
 @objcMembers
 class Driver: NSObject {
     ///The value of this property is the maximum price for the ride
