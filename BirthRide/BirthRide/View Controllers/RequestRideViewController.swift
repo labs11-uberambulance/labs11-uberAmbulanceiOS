@@ -42,6 +42,31 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         ABCNetworkingController().createRide(withToken: userToken) { (error) in
         }
     }
+    @IBAction func nextDriverButtonTapped(_ sender: Any) {
+        if count == driversArray.count - 1 {
+            count = 0
+        } else {
+            count += 1
+        }
+        configureLabels()
+        //Call configureMapView again to update the map with a marker where the driver is located
+        configureMapView()
+    }
+    @IBAction func lastDriverButtonTapped(_ sender: Any) {
+        if count == 0 {
+            count = driversArray.count - 1
+        } else {
+            count -= 1
+        }
+        configureLabels()
+        configureMapView()
+    }
+    
+    
+    
+    
+    
+    
     
     private func configureMapView() {
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
