@@ -30,6 +30,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         // Do any additional setup after loading the view.
     }
     @IBAction func caretakerButtonTapped(_ sender: Any) {
+        //FIXME: Currently, all of the text fields are hidden until this button is hit.
         caretakerTextField.isHidden = false
     }
     @IBAction func continueButtonTapped(_ sender: Any) {

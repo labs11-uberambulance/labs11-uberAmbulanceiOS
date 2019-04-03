@@ -17,10 +17,6 @@ class DriverPhotoRegistrationViewController: UIViewController, TransitionBetween
         }
     }
 
-    //MARK: Other Properties
-    var pregnantMom: PregnantMom?
-    var driver: Driver?
-    
     //MARK: IBOutlets
     @IBOutlet weak var photoImageView: UIImageView!
     

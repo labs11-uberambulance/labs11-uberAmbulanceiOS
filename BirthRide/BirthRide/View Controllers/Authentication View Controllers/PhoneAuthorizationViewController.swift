@@ -72,6 +72,7 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
         
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
             if let error = error {
+                NSLog("Error in PhoneAuthorizationViewController.verifyAuthenticationCodeAndID")
                 NSLog("%@", error.localizedDescription)
                 return
             }
@@ -97,16 +98,14 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     func transition(userType: UserType?) {
         if AuthenticationController.shared.driver == nil && AuthenticationController.shared.pregnantMom == nil {
             let destinationVC = UserTypeViewController()
-            destinationVC.user = self.genericUser
             self.present(destinationVC, animated: true) {
             }
         } else if AuthenticationController.shared.driver != nil {
-            let destinationVC = RequestRideViewController()
+            let destinationVC = DriverWorkViewController()
+            self.present(destinationVC, animated: true, completion: nil)
         } else if AuthenticationController.shared.pregnantMom != nil {
             let destinationVC = RequestRideViewController()
-            destinationVC.pregnantMom = AuthenticationController.shared.pregnantMom
-            self.present(destinationVC, animated: true) {
-            }
+            self.present(destinationVC, animated: true, completion: nil)
         }
     }
     
