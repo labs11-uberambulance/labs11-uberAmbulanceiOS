@@ -31,6 +31,9 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
 
         
@@ -43,6 +46,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     @IBAction func nextDriverButtonTapped(_ sender: Any) {
+        guard driversArray.count > 0 else {return}
         if count == driversArray.count - 1 {
             count = 0
         } else {
@@ -53,6 +57,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         configureMapView()
     }
     @IBAction func lastDriverButtonTapped(_ sender: Any) {
+        guard driversArray.count > 0 else {return}
         if count == 0 {
             count = driversArray.count - 1
         } else {
