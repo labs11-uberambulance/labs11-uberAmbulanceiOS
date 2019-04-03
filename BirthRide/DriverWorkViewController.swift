@@ -20,7 +20,11 @@ class DriverWorkViewController: UIViewController {
     @IBOutlet weak var searchingForRidesLabel: UILabel!
     
     //MARK: Private Properties
-    private var ride: Ride?
+    private var ride: Ride? {
+        didSet {
+            updateViews()
+        }
+    }
     
     //MARK: Other Properties
     var isSubviewOfSuperview = false
@@ -52,17 +56,20 @@ class DriverWorkViewController: UIViewController {
                 searchingForRidesLabel.isHidden = false
             }
         case false:
-            if rideInformationView.isHidden == true {
+            if mapView.isHidden == true {
                 stopAnimatingLoadingView()
+                searchingForRidesLabel.isHidden = true
             }
         }
     }
     
     //MARK: Private Methods
     private func updateViews() {
-        
+        configureLabels()
+        configureMapView()
     }
     private func configureMapView() {
+        mapView.isHidden = false
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
         mapView.animate(to: camera)
         
@@ -73,7 +80,14 @@ class DriverWorkViewController: UIViewController {
         
     }
     private func configureLabels() {
+        if mapView.isHidden == true {
+        requestTimeLabel.isHidden = false
+        startVillageLabel.isHidden = false
+        destinationLabel.isHidden = false
+        acceptRideButton.isHidden = false
+        searchingForRidesLabel.isHidden = false
         
+        }
     }
     
     

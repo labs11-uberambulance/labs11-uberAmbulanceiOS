@@ -19,32 +19,19 @@ enum RideStatus: String {
 
 @objc
 class Ride: NSObject {
-    let driver: Driver
-    let mother: PregnantMom
-    let fixedPrice: Double
-    var status: RideStatus
-    let startAddress: Address
-    let destinationAddress: Address
+    var rideId: NSNumber?
+    var waitMin: NSNumber?
+    var startVillage: String?
+    var startAddress: String?
+    var destination: String?
+    var destinationAddress: String?
     
-    init(driver: Driver, mother: PregnantMom, fixedPrice: Double, status: RideStatus, startAddress: Address, destinationAddress: Address) {
-        self.driver = driver
-        self.mother = mother
-        self.fixedPrice = fixedPrice
-        self.status = status
+    init(rideID: NSNumber, waitMin: NSNumber, startVillage: String, startAddress: String, destination: String, destinationAddress: String) {
+        self.rideId = rideID
+        self.waitMin = waitMin
+        self.startVillage = startVillage
         self.startAddress = startAddress
+        self.destination = destination
         self.destinationAddress = destinationAddress
-    }
-}
-
-@objc
-class Address: NSObject {
-    let locationDescription: String
-    let village: String
-    let plot: String?
-    
-    init(description: String, village: String, plot: String?) {
-        self.locationDescription = description
-        self.village = village
-        self.plot = plot
     }
 }
