@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		53E46459FC4938BE08DBD546 /* Pods_BirthRide.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A439B999719DA29D34AE9586 /* Pods_BirthRide.framework */; };
+		A200D9B3225517B100E1B551 /* RequestRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200D9B1225517B100E1B551 /* RequestRideViewController.swift */; };
+		A200D9B4225517B100E1B551 /* RequestRideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A200D9B2225517B100E1B551 /* RequestRideViewController.xib */; };
 		A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215501F2242CE5C00DDF613 /* AppDelegate.swift */; };
 		A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A21550262242CE5C00DDF613 /* Assets.xcassets */; };
 		A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */; };
-		A278041A22443728001920A0 /* RequestRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041822443728001920A0 /* RequestRideViewController.swift */; };
-		A278041B22443728001920A0 /* RequestRideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278041922443728001920A0 /* RequestRideViewController.xib */; };
 		A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041C22443CC5001920A0 /* UserTypeViewController.swift */; };
 		A278041F22443CC5001920A0 /* UserTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278041D22443CC5001920A0 /* UserTypeViewController.xib */; };
 		A278042222443FF7001920A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042022443FF7001920A0 /* SignInViewController.swift */; };
@@ -108,13 +108,13 @@
 /* Begin PBXFileReference section */
 		1143602FE9BE45AF1AF9D737 /* Pods-BirthRide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirthRide.release.xcconfig"; path = "Target Support Files/Pods-BirthRide/Pods-BirthRide.release.xcconfig"; sourceTree = "<group>"; };
 		89CC52E63F826F30E55F94FC /* Pods-BirthRide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirthRide.debug.xcconfig"; path = "Target Support Files/Pods-BirthRide/Pods-BirthRide.debug.xcconfig"; sourceTree = "<group>"; };
+		A200D9B1225517B100E1B551 /* RequestRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRideViewController.swift; sourceTree = "<group>"; };
+		A200D9B2225517B100E1B551 /* RequestRideViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestRideViewController.xib; sourceTree = "<group>"; };
 		A215501C2242CE5C00DDF613 /* BirthRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirthRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A215501F2242CE5C00DDF613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A21550262242CE5C00DDF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A21550292242CE5C00DDF613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A215502B2242CE5C00DDF613 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A278041822443728001920A0 /* RequestRideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRideViewController.swift; sourceTree = "<group>"; };
-		A278041922443728001920A0 /* RequestRideViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RequestRideViewController.xib; sourceTree = "<group>"; };
 		A278041C22443CC5001920A0 /* UserTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeViewController.swift; sourceTree = "<group>"; };
 		A278041D22443CC5001920A0 /* UserTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTypeViewController.xib; sourceTree = "<group>"; };
 		A278042022443FF7001920A0 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -310,7 +310,7 @@
 		A2928304224C436F00FF9C28 /* Mother-flow Views */ = {
 			isa = PBXGroup;
 			children = (
-				A278041922443728001920A0 /* RequestRideViewController.xib */,
+				A200D9B2225517B100E1B551 /* RequestRideViewController.xib */,
 			);
 			path = "Mother-flow Views";
 			sourceTree = "<group>";
@@ -318,7 +318,7 @@
 		A2928305224C438700FF9C28 /* Mother-flow View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A278041822443728001920A0 /* RequestRideViewController.swift */,
+				A200D9B1225517B100E1B551 /* RequestRideViewController.swift */,
 			);
 			name = "Mother-flow View Controllers";
 			sourceTree = "<group>";
@@ -549,6 +549,7 @@
 			files = (
 				A29282CB224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib in Resources */,
 				A29282C5224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib in Resources */,
+				A200D9B4225517B100E1B551 /* RequestRideViewController.xib in Resources */,
 				A29282D3224BE22400FF9C28 /* SignUpViewController.xib in Resources */,
 				A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */,
 				A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */,
@@ -557,7 +558,6 @@
 				A278041F22443CC5001920A0 /* UserTypeViewController.xib in Resources */,
 				A278042B2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib in Resources */,
 				A278042322443FF7001920A0 /* SignInViewController.xib in Resources */,
-				A278041B22443728001920A0 /* RequestRideViewController.xib in Resources */,
 				A278043322444B97001920A0 /* DriverPhotoRegistrationViewController.xib in Resources */,
 				A29282BA224AC3D800FF9C28 /* GoogleService-Info.plist in Resources */,
 			);
@@ -658,12 +658,12 @@
 				A278042A2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift in Sources */,
 				A2C19DB1224A935F00FC20F0 /* Ride.swift in Sources */,
 				A29282C4224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.swift in Sources */,
-				A278041A22443728001920A0 /* RequestRideViewController.swift in Sources */,
 				A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */,
 				A278042222443FF7001920A0 /* SignInViewController.swift in Sources */,
 				A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */,
 				A278042622444093001920A0 /* OnboardingViewController.swift in Sources */,
 				A29282F5224C244800FF9C28 /* UserController.swift in Sources */,
+				A200D9B3225517B100E1B551 /* RequestRideViewController.swift in Sources */,
 				A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */,
 				A292831C224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.m in Sources */,
 				A2C19DAF224A881700FC20F0 /* ABCNetworkingController.m in Sources */,

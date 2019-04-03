@@ -11,6 +11,8 @@
 #import "NSString+ConvertFromSnakeCaseToCamelCase.h"
 
 
+
+
 @implementation ABCNetworkingController
 - (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable, NSArray * _Nullable))completionHandler {
     
@@ -22,6 +24,7 @@
                                            @"latitude": latitude,
                                            @"longitude": longitude
                                            };
+    
     coordinateData = [NSJSONSerialization dataWithJSONObject:coordinateDictionary options:NSJSONWritingPrettyPrinted error: NULL];
     [requestURL setHTTPBody:coordinateData];
     
