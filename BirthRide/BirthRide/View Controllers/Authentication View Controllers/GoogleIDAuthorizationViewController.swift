@@ -54,9 +54,9 @@ class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate
             self.present(destinationVC, animated: true) {
             }
         } else if AuthenticationController.shared.driver != nil {
-            let destinationVC = RequestOrSearchDriverViewController()
+            let destinationVC = RequestRideViewController()
         } else if AuthenticationController.shared.pregnantMom != nil {
-            let destinationVC = RequestOrSearchDriverViewController()
+            let destinationVC = RequestRideViewController()
             destinationVC.pregnantMom = AuthenticationController.shared.pregnantMom
             self.present(destinationVC, animated: true) {
             }

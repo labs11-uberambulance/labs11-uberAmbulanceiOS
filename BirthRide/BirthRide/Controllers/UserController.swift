@@ -17,21 +17,12 @@ class UserController {
     
     
     //MARK: Public Methods
-    public func configurePregnantMom(user: User, viewController: UIViewController, dueDate: String?, hospital: String?, caretakerName: String?) -> PregnantMom {
-        let newMom = PregnantMom(dueDate: dueDate, hospital: hospital, caretakerName: caretakerName, motherID: nil)
-        newMom.name = user.name
-        newMom.firebaseId = user.firebaseId
-        newMom.address = user.address
-        newMom.userID = user.userID
-        newMom.phone = user.phone
-        newMom.userType = user.userType
-        newMom.village = user.village
-        newMom.latitude = user.latitude
-        newMom.longitude = user.longitude
-        newMom.email = user.email
+    public func configurePregnantMom( viewController: UIViewController, dueDate: String?, hospital: String?, caretakerName: String?) -> PregnantMom {
+        let newMom = PregnantMom(dueDate: dueDate, destinationLatitude: 1, destinationLongitude: 1, caretakerName: caretakerName, motherID: nil)
         
         guard let token = AuthenticationController.shared.userToken,
-        let userID = AuthenticationController.shared.genericUser?.userID else {return newMom}
+        let user = AuthenticationController.shared.genericUser,
+        let userID = user.userID else {return newMom}
         
         let onboardAndUpdateUserOperationQueue = OperationQueue()
         let onboardOperation: BlockOperation = BlockOperation {
@@ -64,20 +55,21 @@ class UserController {
     public func configureDriver(price: Int, bio: String) -> Driver {
         return Driver(price: price, bio: bio, photo: nil, driverID: nil)
     }
-    public func updateDriver(driver: Driver, viewController: UIViewController, name: String?, address: String?, email: String?, phoneNumber: String?, priceString: String?, bio: String?, photo: String?) {
+    public func updateDriver(viewController: UIViewController, name: String?, address: String?, email: String?, phoneNumber: String?, priceString: String?, bio: String?, photo: String?) {
         guard name != "", address != "", email != "", phoneNumber != "", priceString != "" else {
             return
         }
-        driver.name = name
-        driver.address = address
-        driver.email = email
-        driver.phone = phoneNumber
+        guard let driver = AuthenticationController.shared.driver,
+        let user = AuthenticationController.shared.genericUser else {
+            return
+        }
         driver.price = stringToInt(intString: priceString!, viewController: viewController)
         driver.bio = bio
         driver.photo = photo
-        
-        
-        
+        user.name = name
+        user.address = address
+        user.email = email
+        user.phone = phoneNumber
     }
     
     public func configureGenericUser() {

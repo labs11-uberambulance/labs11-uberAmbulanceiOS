@@ -243,8 +243,8 @@
 				A278041D22443CC5001920A0 /* UserTypeViewController.xib */,
 				A29282CD224AD3AF00FF9C28 /* Onboarding Views */,
 				A29282CC224AD39A00FF9C28 /* Authentication Views */,
-				A2928304224C436F00FF9C28 /* Mother-flow Views */,
 				A292835922542A5E00FF9C28 /* Driver-flow Views */,
+				A2928304224C436F00FF9C28 /* Mother-flow Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";

@@ -39,7 +39,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
 
         UserController().updateGenericUser(user: user, name: nameTextField.text, village: villageTextField.text, phone: phoneTextField.text, address: descriptionTextView.text, email: nil)
 
-        AuthenticationController.shared.pregnantMom = UserController().configurePregnantMom(user: user, viewController: self, dueDate: dueDateTextField.text, hospital: hospitalTextField.text, caretakerName: careTakerTextField.text)
+        AuthenticationController.shared.pregnantMom = UserController().configurePregnantMom(viewController: self, dueDate: dueDateTextField.text, hospital: hospitalTextField.text, caretakerName: careTakerTextField.text)
 
         transition(userType: nil)
     }
@@ -47,10 +47,8 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
 
     //MARK: TransitionBetweenViewControllers Protocol Method
     func transition(userType: UserType?) {
-        let destinationVC = RequestOrSearchDriverViewController()
-        let navController = UINavigationController(rootViewController: destinationVC)
-        navController.isNavigationBarHidden = false
-        self.present(navController, animated: true) {
+        let destinationVC = RequestRideViewController()
+        self.present(destinationVC, animated: true) {
         }
     }
     

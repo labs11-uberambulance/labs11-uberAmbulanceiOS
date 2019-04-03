@@ -51,22 +51,22 @@ class User: NSObject {
 
 }
 @objcMembers
-class PregnantMom: User {
+class PregnantMom: NSObject {
     var caretakerName: String?
     ///This property must have the format: YYYY-MM-DD
     var dueDate: String?
-    ///This property must match a location findable by google maps API
-    var hospital: String?
+    var destinationLatitude: NSNumber?
+    var destinationLongitude: NSNumber?
 
-    required init(dueDate: String?, hospital: String?, caretakerName: String?, motherID: NSNumber?) {
+    required init(dueDate: String?, destinationLatitude: NSNumber?, destinationLongitude: NSNumber?, caretakerName: String?, motherID: NSNumber?) {
         self.dueDate = dueDate
-        self.hospital = hospital
+        self.destinationLatitude = destinationLatitude
+        self.destinationLongitude = destinationLongitude
         self.caretakerName = caretakerName
-        super.init(userID: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil)
     }
 }
 @objcMembers
-class Driver: User {
+class Driver: NSObject {
     ///The value of this property is the maximum price for the ride
     var price: Int?
     var active: Bool?
@@ -80,7 +80,6 @@ class Driver: User {
         self.active = active
         self.bio = bio
         self.photo = photo
-        super.init(userID: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil)
     }
 
     
