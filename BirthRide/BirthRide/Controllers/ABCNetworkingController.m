@@ -140,29 +140,7 @@
     }] resume];
 }
 
-- (void)createRideWithToken:(NSString *)token withMother:(PregnantMom *)mother withDriver:(Driver *)driver withUser:(User *)user withCompletion:(void(^)(NSError * _Nullable))completionHandler {
-    
-    NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/rides/new-ride"];
-    
-    NSDate *currentTime = [[NSDate init] alloc];
-    
-    NSDictionary *newRideDictionary = @{
-                                        @"driver_id": driver.driverId,
-                                        @"mother_id": mother.motherId,
-                                        @"wait_min": @(20),
-                                        @"request_time": currentTime.description,
-                                        @"start_village": user.village,
-                                        @"start_address": mother.start.startDescription,
-                                        @"destination": mother.destination.name,
-                                        @"destination_address": mother.destination.destinationDescription
-                                        };
-    
-    NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
-    [requestURL setHTTPBody:<#(NSData * _Nullable)#>]
-    
-    
-    
-}
+
 
 - (void)updateRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable))completionHandler {
     
