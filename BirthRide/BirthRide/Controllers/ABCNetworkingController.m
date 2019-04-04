@@ -71,14 +71,32 @@
         [requestURL setHTTPBody:dictionaryData];
     }
     else {
-        NSData *motherData = [[NSData alloc] init];
-        motherData = [NSJSONSerialization dataWithJSONObject:mother options:NSJSONWritingPrettyPrinted error: NULL];
-        NSDictionary *userDictionary = @{
-                                         @"user_type": @"mother",
-                                         @"motherData": motherData
+        
+        NSNull *noData = [[NSNull alloc] init];
+        
+        NSDictionary *dataDictionary = @{
+                                         @"user_type": @"mothers",
+                                         @"motherData": @{
+                                                 @"mother_id":noData,
+                                                 @"caretaker_name": @"test",
+                                                 @"start": @{
+                                                         @"latlng": mother.start.latLong,
+                                                         @"name": @"test",
+                                                         @"descr": noData
+                                                         },
+                                                 @"destination": @{
+                                                         @"latlng": mother.destination.latLong,
+                                                         @"name": @"test",
+                                                         @"descr": noData
+                                                         }
+                                                 }
                                          };
+        
+        
+        
+        
         NSData *dictionaryData = [[NSData alloc] init];
-        dictionaryData = [NSJSONSerialization dataWithJSONObject:userDictionary options:NSJSONWritingPrettyPrinted error: NULL];
+        dictionaryData = [NSJSONSerialization dataWithJSONObject:dataDictionary options:NSJSONWritingPrettyPrinted error: NULL];
         [requestURL setHTTPBody:dictionaryData];
     }
     
@@ -145,6 +163,8 @@
     NSURL *baseURL = [[NSURL alloc] initWithString:@"https://birthrider-backend.herokuapp.com/request/driver"];
     NSURL *completeBaseURL = [baseURL URLByAppendingPathComponent: driver.firebaseId];
     NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:completeBaseURL];
+    [requestURL setHTTPMethod:@"POST"];
+    [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
     
     NSDictionary *newRideDictionary = @{
                                         @"end": mother.destination.latLong,
