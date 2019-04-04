@@ -17,8 +17,12 @@ class UserController {
     
     
     //MARK: Public Methods
-    public func configurePregnantMom( viewController: UIViewController, dueDate: String?, hospital: String?, caretakerName: String?) -> PregnantMom {
-        let newMom = PregnantMom(dueDate: dueDate, destinationLatitude: 1, destinationLongitude: 1, caretakerName: caretakerName, motherID: nil)
+    public func configurePregnantMom( viewController: UIViewController, startLatLong: String, destinationLatLong: String, startDescription: String?) -> PregnantMom {
+        
+        let testStart = Start(latLong: startLatLong, name: "", startDescription: "")
+        let testDestination = Destination(latLong: "", name: "", destinationDescription: "")
+        
+        let newMom = PregnantMom(start: testStart, destination: testDestination, caretakerName: nil)
         
         guard let token = AuthenticationController.shared.userToken,
         let user = AuthenticationController.shared.genericUser,
