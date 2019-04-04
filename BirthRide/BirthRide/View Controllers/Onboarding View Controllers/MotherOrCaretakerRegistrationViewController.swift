@@ -88,6 +88,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         let lat = "\(place.coordinate.latitude)"
         let long = "\(place.coordinate.longitude)"
         AuthenticationController.shared.pregnantMom?.destination?.latLong = "\(lat), \(long)"
+        AuthenticationController.shared.pregnantMom?.destination?.name = place.name
         createDestinationMapMarker(coordinate: place.coordinate)
         resultsController.dismiss(animated: true, completion: nil)
     }

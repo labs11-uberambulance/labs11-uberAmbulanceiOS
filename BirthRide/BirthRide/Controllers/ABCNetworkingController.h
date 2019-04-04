@@ -65,9 +65,11 @@ NS_ASSUME_NONNULL_BEGIN
  This method will create a new ride and will associate the ride with the user associated with the passed-in authentication token.
 
  @param token The authentication token associated with the user. This parameter is used to associate the created ride with a specific user.
+ @param mother The mother that is requesting the ride.
+ @param driver The driver that the mother has requested.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)createRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error))completionHandler ;
+- (void)createRideWithToken:(NSString *)token withMother:(PregnantMom *)mother withDriver:(Driver *)driver withCompletion:(void(^)(NSError * _Nullable))completionHandler ;
 
 
 /**
