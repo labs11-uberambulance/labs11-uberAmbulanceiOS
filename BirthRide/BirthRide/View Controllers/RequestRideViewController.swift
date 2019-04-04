@@ -97,9 +97,10 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         nameLabel.text = "Frederick"
     }
     private func fetchDrivers(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        guard let token = AuthenticationController.shared.userToken else {return}
+        guard let token = AuthenticationController.shared.userToken,
+        let mother = AuthenticationController.shared.pregnantMom else {return}
         
-        ABCNetworkingController().fetchNearbyDrivers(withToken: token, withLatitude: latitude as NSNumber, withLongitude: longitude as NSNumber) { (error, fetchedDriversArray)  in
+        ABCNetworkingController().fetchNearbyDrivers(withToken: token, withMother: mother, withCompletion: { (error, fetchedDriversArray)  in
             if let error = error {
                 NSLog(error.localizedDescription)
                 return
@@ -108,7 +109,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
                 return
             }
             self.driversArray = driversArray
-        }
+        })
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -117,6 +118,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
             guard let latLongString: NSString = AuthenticationController.shared.pregnantMom?.start?.latLong else {return}
             let latLongArray: [NSString] = latLongString.components(separatedBy: ", ") as [NSString]
             fetchDrivers(latitude: latLongArray[0].doubleValue, longitude: latLongArray[1].doubleValue)
+            return
         }
         let camera = GMSCameraPosition.camera(withLatitude: (location.coordinate.latitude), longitude: (location.coordinate.longitude), zoom: 17.0)
         

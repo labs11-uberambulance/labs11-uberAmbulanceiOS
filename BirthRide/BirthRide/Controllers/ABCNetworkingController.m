@@ -14,18 +14,18 @@
 
 
 @implementation ABCNetworkingController
-- (void)fetchNearbyDriversWithToken:(NSString *)token WithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler {
+- (void)fetchNearbyDriversWithToken:(NSString *)token withMother:(PregnantMom *)mother withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler {
     
     NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/rides/drivers"];
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
     [requestURL setHTTPMethod:@"POST"];
-    NSData *coordinateData = [[NSData alloc] init];
-    NSDictionary *coordinateDictionary = @{
-                                           @"latitude": latitude,
-                                           @"longitude": longitude
-                                           };
+    [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
     
-    coordinateData = [NSJSONSerialization dataWithJSONObject:coordinateDictionary options:NSJSONWritingPrettyPrinted error: NULL];
+    NSData *coordinateData = [[NSData alloc] init];
+    
+    NSString *coordinateString = mother.start.latLong;
+    
+    coordinateData = [NSJSONSerialization dataWithJSONObject:coordinateString options:NSJSONWritingPrettyPrinted error: NULL];
     [requestURL setHTTPBody:coordinateData];
     
     [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
