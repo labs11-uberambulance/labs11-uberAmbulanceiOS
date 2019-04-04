@@ -99,6 +99,7 @@ class Destination: NSObject {
 class Driver: NSObject {
     var driverId: NSNumber?
     ///The value of this property is the maximum price for the ride
+    var firebaseId: String?
     var price: Int?
     var active: Bool?
     ///The value of this property has a 500 char limit
@@ -106,12 +107,13 @@ class Driver: NSObject {
     var photo: String?
     
     @objc
-    required init(price: Int, active: Bool = false, bio: String, photo: String?, driverId: NSNumber?) {
+    required init(price: Int, active: Bool = false, bio: String, photo: String?, driverId: NSNumber?, firebaseId: String?) {
         self.price = price
         self.active = active
         self.bio = bio
         self.photo = photo
         self.driverId = driverId
+        self.firebaseId = firebaseId
     }
 
     

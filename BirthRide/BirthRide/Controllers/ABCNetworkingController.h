@@ -60,18 +60,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)updateUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withUser: (User *)user withDriver:(Driver * _Nullable)driver withMother:(PregnantMom * _Nullable)mother withCompletion:(void (^)(NSError * _Nullable))completionHandler;
 
-///This method will create a ride on the server.
-/**
- This method will create a new ride and will associate the ride with the user associated with the passed-in authentication token.
 
- @param token The authentication token associated with the user. This parameter is used to associate the created ride with a specific user.
- @param mother The mother that is requesting the ride.
- @param driver The driver that the mother has requested.
+/**
+ This method will create a new ride with the requested driver's firebaseID and send it to the backend. The backend will then send text messages through Twillio for any further interactions.
+
+ @param token The mother's firebaseToken
+ @param driver The dreiver that the mother has requested.
+ @param mother The current mother object of the user who is using the app.
+ @param user The current user who is using the app.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)createRideWithToken:(NSString *)token withMother:(PregnantMom *)mother withDriver:(Driver *)driver withCompletion:(void(^)(NSError * _Nullable))completionHandler ;
-
-
+- (void)requestDriverWithToken:(NSString *)token withDriver:(Driver *)driver withMother:(PregnantMom *)mother withUser:(User *)user withCompletion:(void (^)(NSError * _Nullable))completionHandler;
 /**
  This method will update an existing ride that is associated with the passed-in authentication token.
 

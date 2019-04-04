@@ -42,8 +42,6 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     //MARK: IBActions
     @IBAction func requestRideButtonTapped(_ sender: Any) {
         guard let userToken = AuthenticationController.shared.userToken else {return}
-        ABCNetworkingController().createRide(withToken: userToken) { (error) in
-        }
     }
     @IBAction func nextDriverButtonTapped(_ sender: Any) {
         guard driversArray.count > 0 else {return}

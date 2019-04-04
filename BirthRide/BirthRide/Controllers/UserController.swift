@@ -57,7 +57,7 @@ class UserController {
     }
     
     public func configureDriver(price: Int, bio: String) -> Driver {
-        return Driver(price: price, bio: bio, photo: nil, driverId: nil)
+        return Driver(price: price, bio: bio, photo: nil, driverId: nil, firebaseId: nil)
     }
     public func updateDriver(viewController: UIViewController, name: String?, address: String?, email: String?, phoneNumber: String?, priceString: String?, bio: String?, photo: String?) {
         guard name != "", address != "", email != "", phoneNumber != "", priceString != "" else {
