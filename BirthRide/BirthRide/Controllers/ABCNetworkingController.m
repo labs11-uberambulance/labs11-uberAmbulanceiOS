@@ -14,9 +14,9 @@
 
 
 @implementation ABCNetworkingController
-- (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler {
+- (void)fetchNearbyDriversWithToken:(NSString *)token WithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler {
     
-    NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/drivers"];
+    NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/rides/drivers"];
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
     [requestURL setHTTPMethod:@"POST"];
     NSData *coordinateData = [[NSData alloc] init];
@@ -39,8 +39,8 @@
             completionHandler(nil, nil);
             return;
         }
+        NSDictionary *driversDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
         NSArray<Driver *> *driversArray = [[NSArray alloc] init];
-        driversArray = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
         completionHandler(nil, driversArray);
         
     }] resume];

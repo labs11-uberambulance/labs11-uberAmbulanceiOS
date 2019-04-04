@@ -20,11 +20,12 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  This method will fetch a list of drivers nearby the coordinate location of the mother.
 
+@param token The authentication token associated with the user. This parameter is used to find the ride associated with the user.
  @param latitude The latitude of the mother's coordinates.
  @param longitude The longitude of the mother's coordinates.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler ;
+- (void)fetchNearbyDriversWithToken:(NSString *)token WithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler ;
 
 
 /**

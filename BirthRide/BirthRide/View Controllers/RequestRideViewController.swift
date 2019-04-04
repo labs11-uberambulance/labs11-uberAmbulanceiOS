@@ -111,7 +111,11 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        guard let location = locations.last else {return}
+        guard let location = locations.last else {
+            let latLongString: NSString = AuthenticationController.shared.pregnantMom?.start?.latLong
+            let latLongArray = latLongString?.components(separatedBy: ", ")
+            fetchDrivers(latitude: (latLongArray?[0] as NSString).doubleValue, longitude: (latLongArray?[1] as NSString).doubleValue)
+        }
         let camera = GMSCameraPosition.camera(withLatitude: (location.coordinate.latitude), longitude: (location.coordinate.longitude), zoom: 17.0)
         
         self.mapView?.animate(to: camera)
