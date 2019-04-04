@@ -35,13 +35,22 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
-
+        
         
         // Do any additional setup after loading the view.
     }
     //MARK: IBActions
     @IBAction func requestRideButtonTapped(_ sender: Any) {
-        guard let userToken = AuthenticationController.shared.userToken else {return}
+        guard let userToken = AuthenticationController.shared.userToken,
+            let mother = AuthenticationController.shared.pregnantMom,
+            let user = AuthenticationController.shared.genericUser else {return}
+        ABCNetworkingController().requestDriver(withToken: userToken, with: driversArray[count], withMother: mother, with: user) { (error) in
+            if let error = error {
+                NSLog("error in RequestRideViewController.requestRideButtonTapped")
+                NSLog(error.localizedDescription)
+                return
+            }
+        }
     }
     @IBAction func nextDriverButtonTapped(_ sender: Any) {
         guard driversArray.count > 0 else {return}
@@ -74,7 +83,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     private func configureMapView() {
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
         mapView.animate(to: camera)
-
+        
         let userMarker = GMSMarker()
         userMarker.icon = GMSMarker.markerImage(with: .blue)
         userMarker.position = CLLocationManager().location?.coordinate ?? CLLocationCoordinate2D(latitude: 1.5, longitude: 36.9)
@@ -87,18 +96,8 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         estimatedFareLabel.text = "Estimated Fare: \(price)"
         nameLabel.text = "Frederick"
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        
-        let location = locations.last
-        let camera = GMSCameraPosition.camera(withLatitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!, zoom: 17.0)
-        
-        self.mapView?.animate(to: camera)
-        
-        //Finally stop updating location otherwise it will come again and again in this delegate
-        self.locationManager.stopUpdatingLocation()
-        ABCNetworkingController().fetchNearbyDrivers(withLatitude: location?.coordinate.latitude as! NSNumber, withLongitude: location?.coordinate.longitude as! NSNumber) { (error, fetchedDriversArray)  in
+    private func fetchDrivers(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        ABCNetworkingController().fetchNearbyDrivers(withLatitude: latitude as NSNumber, withLongitude: longitude as NSNumber) { (error, fetchedDriversArray)  in
             if let error = error {
                 NSLog(error.localizedDescription)
                 return
@@ -108,6 +107,19 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
             }
             self.driversArray = driversArray
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        guard let location = locations.last else {return}
+        let camera = GMSCameraPosition.camera(withLatitude: (location.coordinate.latitude), longitude: (location.coordinate.longitude), zoom: 17.0)
+        
+        self.mapView?.animate(to: camera)
+        
+        //Finally stop updating location otherwise it will come again and again in this delegate
+        self.locationManager.stopUpdatingLocation()
+        
+        fetchDrivers(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
