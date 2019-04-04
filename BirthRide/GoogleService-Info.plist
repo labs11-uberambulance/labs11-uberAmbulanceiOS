@@ -2,14 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
-	<string>ca-app-pub-3940256099942544/2934735716</string>
-	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
-	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>211505911643-4kmvk3818hqhpra61b8vbmaenff50auo.apps.googleusercontent.com</string>
+	<string>211505911643-t6425mt1llj0kopm8f05a5ph5r5ul1gp.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.211505911643-4kmvk3818hqhpra61b8vbmaenff50auo</string>
+	<string>com.googleusercontent.apps.211505911643-t6425mt1llj0kopm8f05a5ph5r5ul1gp</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>211505911643-409t3rlvtvqhsquduo2p4vt4ddk84nj3.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBSQTIJ3-uwCJmPtf0tcbePQxR1Kjo9aUU</string>
 	<key>GCM_SENDER_ID</key>
@@ -23,17 +21,17 @@
 	<key>STORAGE_BUCKET</key>
 	<string>birth-ride.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:211505911643:ios:a92558b2d26f6bf9</string>
+	<string>1:211505911643:ios:7e1f4ca31820ecc1</string>
 	<key>DATABASE_URL</key>
 	<string>https://birth-ride.firebaseio.com</string>
 </dict>

@@ -12,7 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MotherOrCaretakerViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
                 <outlet property="caretakerTextField" destination="GSc-jJ-13N" id="IDH-n9-HVJ"/>
-                <outlet property="mapView" destination="Rfj-Jp-kJD" id="oyA-qP-SNg"/>
+                <outlet property="mapContainerView" destination="EwS-m6-FAh" id="Fvx-h3-jQj"/>
+                <outlet property="mapView" destination="XZf-Hx-CvW" id="sWZ-1Y-3xB"/>
                 <outlet property="nameTextField" destination="49n-a9-pVs" id="9eW-Yc-Yyg"/>
                 <outlet property="phoneTextField" destination="Wf3-d0-DJL" id="Ez7-l2-zI6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -24,29 +25,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="vWq-oQ-wYS">
-                    <rect key="frame" x="116" y="467" width="143" height="30"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5v-6k-Wta">
-                            <rect key="frame" x="0.0" y="0.0" width="75" height="30"/>
-                            <state key="normal" title="Caretaker?"/>
-                            <connections>
-                                <action selector="caretakerButtonTapped:" destination="-1" eventType="touchUpInside" id="Zsc-Uh-nAs"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DaL-qS-RCp">
-                            <rect key="frame" x="81" y="0.0" width="62" height="30"/>
-                            <state key="normal" title="Continue"/>
-                            <connections>
-                                <action selector="continueButtonTapped:" destination="-1" eventType="touchUpInside" id="no7-6d-LNb"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="143" id="V1T-FJ-kzN"/>
-                        <constraint firstAttribute="height" constant="30" id="mcn-9u-g9d"/>
-                    </constraints>
-                </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="qy1-Rk-p4O">
                     <rect key="frame" x="20" y="60" width="335" height="141"/>
                     <subviews>
@@ -120,26 +98,56 @@
                         </stackView>
                     </subviews>
                 </stackView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rfj-Jp-kJD" customClass="GMSMapView">
-                    <rect key="frame" x="20" y="209" width="335" height="250"/>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="vWq-oQ-wYS">
+                    <rect key="frame" x="116" y="515" width="143" height="30"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5v-6k-Wta">
+                            <rect key="frame" x="0.0" y="0.0" width="75" height="30"/>
+                            <state key="normal" title="Caretaker?"/>
+                            <connections>
+                                <action selector="caretakerButtonTapped:" destination="-1" eventType="touchUpInside" id="Zsc-Uh-nAs"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DaL-qS-RCp">
+                            <rect key="frame" x="81" y="0.0" width="62" height="30"/>
+                            <state key="normal" title="Continue"/>
+                            <connections>
+                                <action selector="continueButtonTapped:" destination="-1" eventType="touchUpInside" id="no7-6d-LNb"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EwS-m6-FAh">
+                    <rect key="frame" x="0.0" y="209" width="375" height="298"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZf-Hx-CvW" customClass="GMSMapView">
+                            <rect key="frame" x="0.0" y="56" width="375" height="242"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="250" id="EEf-Ms-6Yk"/>
+                        <constraint firstAttribute="trailing" secondItem="XZf-Hx-CvW" secondAttribute="trailing" id="1Ry-Xw-Nnx"/>
+                        <constraint firstItem="XZf-Hx-CvW" firstAttribute="leading" secondItem="EwS-m6-FAh" secondAttribute="leading" id="Zc0-hX-WxB"/>
+                        <constraint firstItem="XZf-Hx-CvW" firstAttribute="top" secondItem="EwS-m6-FAh" secondAttribute="top" constant="56" id="kgD-79-dCx"/>
+                        <constraint firstAttribute="bottom" secondItem="XZf-Hx-CvW" secondAttribute="bottom" id="vtb-vT-DKG"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qy1-Rk-p4O" secondAttribute="trailing" constant="20" id="1aP-UR-Opb"/>
-                <constraint firstItem="Rfj-Jp-kJD" firstAttribute="top" secondItem="qy1-Rk-p4O" secondAttribute="bottom" constant="8" id="CmS-CC-y4g"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Rfj-Jp-kJD" secondAttribute="trailing" constant="20" id="Cov-xx-1G8"/>
-                <constraint firstItem="vWq-oQ-wYS" firstAttribute="top" secondItem="Rfj-Jp-kJD" secondAttribute="bottom" constant="8" id="DKz-sJ-Wdd"/>
-                <constraint firstItem="Rfj-Jp-kJD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="RQh-re-nXg"/>
-                <constraint firstItem="qy1-Rk-p4O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="U8o-bi-Shc"/>
-                <constraint firstItem="vWq-oQ-wYS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="oF6-lA-PHK"/>
-                <constraint firstItem="qy1-Rk-p4O" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="xhc-YP-F0g"/>
+                <constraint firstItem="EwS-m6-FAh" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="7Nb-fm-EK4"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qy1-Rk-p4O" secondAttribute="trailing" constant="20" id="8am-8A-6WI"/>
+                <constraint firstItem="EwS-m6-FAh" firstAttribute="top" secondItem="qy1-Rk-p4O" secondAttribute="bottom" constant="8" id="Fpx-LM-fo3"/>
+                <constraint firstItem="vWq-oQ-wYS" firstAttribute="top" secondItem="EwS-m6-FAh" secondAttribute="bottom" constant="8" id="MAb-v6-ElT"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vWq-oQ-wYS" secondAttribute="bottom" constant="122" id="NWs-iq-5o7"/>
+                <constraint firstItem="vWq-oQ-wYS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Vo2-0S-8bX"/>
+                <constraint firstItem="qy1-Rk-p4O" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="qKB-IQ-vsG"/>
+                <constraint firstItem="EwS-m6-FAh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="u1D-Ts-dBS"/>
+                <constraint firstItem="qy1-Rk-p4O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="vVQ-ye-Wdj"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="7.2000000000000002" y="53.523238380809602"/>
         </view>
     </objects>
 </document>

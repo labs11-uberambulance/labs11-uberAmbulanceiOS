@@ -9,7 +9,7 @@
 import UIKit
 import GoogleSignIn
 
-class GoogleIDAuthorizationViewController: UIViewController,GIDSignInDelegate, GIDSignInUIDelegate, TransitionBetweenViewControllers {
+class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate, TransitionBetweenViewControllers {
     
     //MARK: Private Properties
     private var genericUser: User?
@@ -22,7 +22,6 @@ class GoogleIDAuthorizationViewController: UIViewController,GIDSignInDelegate, G
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.uiDelegate = self
         GIDSignIn.sharedInstance()?.signIn()
         
@@ -49,8 +48,5 @@ class GoogleIDAuthorizationViewController: UIViewController,GIDSignInDelegate, G
     
     
     //MARK: GIDSignInDelegate Methods
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        transition(userType: nil)
-        AuthenticationController.shared.authenticateUser()
-    }
+
 }

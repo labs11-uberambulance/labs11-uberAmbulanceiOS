@@ -142,6 +142,10 @@
 
 - (void)createRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable))completionHandler {
     
+    NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/rides/new-ride"];
+    
+    
+    
 }
 
 - (void)updateRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable))completionHandler {
@@ -204,6 +208,9 @@
                         if ([key containsString:@"_"]) {
                             key = [key convertFromSnakeCaseToCamelCase];
                         }
+                        if ([key isEqualToString:@"id"]) {
+                            pregnantMom.motherId = parsedData[@"motherData"][key];
+                        };
                         SEL selector = NSSelectorFromString(key);
                         if ([pregnantMom respondsToSelector:selector] && value != NSNull.null) {
                             [pregnantMom setValue:value forKey:key];

@@ -21,8 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        
-        
         let tabBarController = UITabBarController()
         
         let signUpViewController = SignUpViewController()
@@ -90,7 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         
         guard let authentication = user.authentication else { return }
-        AuthenticationController.shared.userToken = authentication.accessToken
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
         // ...
@@ -102,7 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
             
             
-            let accessToken = signIn.currentUser.authentication.accessToken
+            let accessToken = signIn.currentUser.authentication.idToken
             AuthenticationController.shared.userToken = accessToken
             AuthenticationController.shared.authenticateUser()
         }
