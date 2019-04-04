@@ -29,7 +29,24 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         // Do any additional setup after loading the view.
     }
     @IBAction func continueButtonTapped(_ sender: Any) {
-        UserController().updateDriver(viewController: self, name: nameTextField.text, address: addressTextField.text, email: emailTextField.text, phoneNumber: phoneNumberTextField.text, priceString: priceTextField.text, bio: bioTextView.text, photo: nil)
+        
+        guard let name = nameTextField?.text,
+            let address = addressTextField.text,
+            let email = emailTextField.text,
+            let phoneNumber = phoneNumberTextField.text,
+            let price = priceTextField.text,
+            let bio = bioTextView.text else {
+                return
+        }
+        
+        let otherName = name as NSString
+        let otherAddress = address as NSString
+        let otherEmail = email as NSString
+        let otherPhone = phoneNumber as NSString
+        let otherPrice = price as NSString
+        let otherBio = bio as NSString
+        
+        UserController().updateDriver(viewController: self, name: otherName, address: otherAddress, email: otherEmail, phoneNumber: otherPhone, priceString: otherPrice, bio: otherBio, photo: nil)
         transition(userType: nil)
     }
     

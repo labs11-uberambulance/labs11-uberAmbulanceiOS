@@ -17,7 +17,7 @@ class UserController {
     
     
     //MARK: Public Methods
-    public func configurePregnantMom( viewController: UIViewController, startLatLong: String, destinationLatLong: String, startDescription: String?) -> PregnantMom {
+    public func configurePregnantMom( viewController: UIViewController, startLatLong: NSString, destinationLatLong: NSString, startDescription: NSString?) -> PregnantMom {
         
         let testStart = Start(latLong: startLatLong, name: "", startDescription: "")
         let testDestination = Destination(latLong: "", name: "", destinationDescription: "")
@@ -58,10 +58,10 @@ class UserController {
         
     }
     
-    public func configureDriver(price: Int, bio: String) -> Driver {
+    public func configureDriver(price: Int, bio: NSString) -> Driver {
         return Driver(price: price, bio: bio, photo: nil, driverId: nil, firebaseId: nil)
     }
-    public func updateDriver(viewController: UIViewController, name: String?, address: String?, email: String?, phoneNumber: String?, priceString: String?, bio: String?, photo: String?) {
+    public func updateDriver(viewController: UIViewController, name: NSString?, address: NSString?, email: NSString?, phoneNumber: NSString?, priceString: NSString?, bio: NSString?, photo: NSString?) {
         guard name != "", address != "", email != "", phoneNumber != "", priceString != "" else {
             return
         }
@@ -69,7 +69,7 @@ class UserController {
         let user = AuthenticationController.shared.genericUser else {
             return
         }
-        driver.price = stringToInt(intString: priceString!, viewController: viewController)
+        driver.price = stringToInt(intString: priceString! as String, viewController: viewController)
         driver.bio = bio
         driver.photo = photo
         user.name = name
