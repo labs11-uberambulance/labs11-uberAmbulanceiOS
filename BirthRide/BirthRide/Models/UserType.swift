@@ -52,6 +52,7 @@ class User: NSObject {
 }
 @objcMembers
 class PregnantMom: NSObject {
+    var motherId: NSNumber?
     var caretakerName: String?
 //    ///This property must have the format: YYYY-MM-DD
 //    var dueDate: String?
@@ -59,10 +60,11 @@ class PregnantMom: NSObject {
     var destination: Destination?
     
 
-    required init(start: Start?, destination: Destination?, caretakerName: String?) {
+    required init(start: Start?, destination: Destination?, caretakerName: String?, motherId: NSNumber?) {
         self.start = start
         self.destination = destination
         self.caretakerName = caretakerName
+        self.motherId = motherId
     }
 }
 @objcMembers
@@ -95,7 +97,9 @@ class Destination: NSObject {
 
 @objcMembers
 class Driver: NSObject {
+    var driverId: NSNumber?
     ///The value of this property is the maximum price for the ride
+    var firebaseId: String?
     var price: Int?
     var active: Bool?
     ///The value of this property has a 500 char limit
@@ -103,11 +107,13 @@ class Driver: NSObject {
     var photo: String?
     
     @objc
-    required init(price: Int, active: Bool = false, bio: String, photo: String?, driverID: NSNumber?) {
+    required init(price: Int, active: Bool = false, bio: String, photo: String?, driverId: NSNumber?, firebaseId: String?) {
         self.price = price
         self.active = active
         self.bio = bio
         self.photo = photo
+        self.driverId = driverId
+        self.firebaseId = firebaseId
     }
 
     

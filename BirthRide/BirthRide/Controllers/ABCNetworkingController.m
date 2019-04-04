@@ -46,9 +46,7 @@
     }] resume];
 }
 
-- (void)fetchRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, Ride *ride))completionHandler {
-    
-}
+
 
 - (void)onboardUserWithToken:(NSString *)token withUserID:(NSNumber *)userID withUser:(User *)user withDriver:(Driver *)driver withMother:(PregnantMom *)mother withCompletion:(void (^)(NSError * _Nullable))completionHandler {
     
@@ -140,7 +138,38 @@
     }] resume];
 }
 
-- (void)createRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable))completionHandler {
+
+
+- (void)requestDriverWithToken:(NSString *)token withDriver:(Driver *)driver withMother:(PregnantMom *)mother withUser:(User *)user withCompletion:(void (^)(NSError * _Nullable))completionHandler {
+    
+    NSURL *baseURL = [[NSURL alloc] initWithString:@"https://birthrider-backend.herokuapp.com/request/driver"];
+    NSURL *completeBaseURL = [baseURL URLByAppendingPathComponent: driver.firebaseId];
+    NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:completeBaseURL];
+    
+    NSDictionary *newRideDictionary = @{
+                                        @"end": mother.destination.latLong,
+                                        @"start": mother.start.latLong,
+                                        @"hospital": mother.destination.name,
+                                        @"name": user.name,
+                                        @"phone": user.phone,
+                                        };
+    
+    NSData *newRideData = [[NSData alloc] init];
+    newRideData = [NSJSONSerialization dataWithJSONObject:newRideDictionary options:NSJSONWritingPrettyPrinted error:nil];
+    
+    [requestURL setHTTPBody:newRideData];
+    
+    [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error != nil) {
+            NSLog(@"Error in ABCNetworkingController.requestDriverWithToken");
+            NSLog(@"%@", error.localizedDescription);
+            completionHandler(error);
+            return;
+        }
+    }] resume];
+}
+
+- (void)fetchRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, Ride *ride))completionHandler {
     
 }
 
@@ -204,6 +233,9 @@
                         if ([key containsString:@"_"]) {
                             key = [key convertFromSnakeCaseToCamelCase];
                         }
+                        if ([key isEqualToString:@"id"]) {
+                            pregnantMom.motherId = parsedData[@"motherData"][key];
+                        };
                         SEL selector = NSSelectorFromString(key);
                         if ([pregnantMom respondsToSelector:selector] && value != NSNull.null) {
                             [pregnantMom setValue:value forKey:key];
@@ -216,6 +248,9 @@
                         if ([key containsString:@"_"]) {
                             key = [key convertFromSnakeCaseToCamelCase];
                         }
+                        if ([key isEqualToString:@"id"]) {
+                            driver.driverId = parsedData[@"driverData"][key];
+                        };
                         SEL selector = NSSelectorFromString(key);
                         if ([driver respondsToSelector:selector] && value != NSNull.null) {
                             [driver setValue:value forKey:key];

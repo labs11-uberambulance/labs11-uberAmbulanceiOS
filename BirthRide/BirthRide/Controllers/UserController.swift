@@ -17,8 +17,12 @@ class UserController {
     
     
     //MARK: Public Methods
-    public func configurePregnantMom( viewController: UIViewController, dueDate: String?, hospital: String?, caretakerName: String?) -> PregnantMom {
-        let newMom = PregnantMom(dueDate: dueDate, destinationLatitude: 1, destinationLongitude: 1, caretakerName: caretakerName, motherID: nil)
+    public func configurePregnantMom( viewController: UIViewController, startLatLong: String, destinationLatLong: String, startDescription: String?) -> PregnantMom {
+        
+        let testStart = Start(latLong: startLatLong, name: "", startDescription: "")
+        let testDestination = Destination(latLong: "", name: "", destinationDescription: "")
+        
+        let newMom = PregnantMom(start: testStart, destination: testDestination, caretakerName: nil, motherId: nil)
         
         guard let token = AuthenticationController.shared.userToken,
         let user = AuthenticationController.shared.genericUser,
@@ -53,7 +57,7 @@ class UserController {
     }
     
     public func configureDriver(price: Int, bio: String) -> Driver {
-        return Driver(price: price, bio: bio, photo: nil, driverID: nil)
+        return Driver(price: price, bio: bio, photo: nil, driverId: nil, firebaseId: nil)
     }
     public func updateDriver(viewController: UIViewController, name: String?, address: String?, email: String?, phoneNumber: String?, priceString: String?, bio: String?, photo: String?) {
         guard name != "", address != "", email != "", phoneNumber != "", priceString != "" else {

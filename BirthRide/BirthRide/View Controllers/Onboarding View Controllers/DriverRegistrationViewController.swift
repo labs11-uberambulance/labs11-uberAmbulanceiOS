@@ -24,6 +24,7 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupKeyboardDismissRecognizer()
 
         // Do any additional setup after loading the view.
     }
@@ -37,15 +38,19 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         self.present(driverPhotoRegistrationViewController, animated: true) {
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    //MARK: Private Methods
+    private func setupKeyboardDismissRecognizer(){
+        let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.dismissKeyboard))
+        
+        self.view.addGestureRecognizer(tapRecognizer)
     }
-    */
-
+    
+    @objc
+    private func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
 }
