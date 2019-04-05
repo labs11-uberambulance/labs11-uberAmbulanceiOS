@@ -294,6 +294,9 @@
                         }
                         if ([key isEqualToString:@"start"]) {
                             [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  value, BOOL* stop) {
+                                if ([key containsString:@"latlng"]) {
+                                    pregnantMom.start.latLong = parsedData[userTypeKey][key];
+                                }
                                 SEL selector = NSSelectorFromString(key);
                                 if ([pregnantMom.start respondsToSelector:selector] && value != NSNull.null) {
                                     [pregnantMom.start setValue:value forKey:key];
