@@ -17,12 +17,15 @@ class UserController {
     
     
     //MARK: Public Methods
-    public func configurePregnantMom( viewController: UIViewController, startLatLong: String, destinationLatLong: String, startDescription: String?) -> PregnantMom {
+    public func configurePregnantMom( viewController: UIViewController, startLatLong: NSString, destinationLatLong: NSString, startDescription: NSString?) -> PregnantMom {
         
         let testStart = Start(latLong: startLatLong, name: "", startDescription: "")
         let testDestination = Destination(latLong: "", name: "", destinationDescription: "")
         
         let newMom = PregnantMom(start: testStart, destination: testDestination, caretakerName: nil, motherId: nil)
+        newMom.start?.latLong = startLatLong
+        newMom.destination?.latLong = destinationLatLong
+        AuthenticationController.shared.pregnantMom = newMom
         
         guard let token = AuthenticationController.shared.userToken,
         let user = AuthenticationController.shared.genericUser,
@@ -56,10 +59,10 @@ class UserController {
         
     }
     
-    public func configureDriver(price: Int, bio: String) -> Driver {
+    public func configureDriver(price: Int, bio: NSString) -> Driver {
         return Driver(price: price, bio: bio, photo: nil, driverId: nil, firebaseId: nil)
     }
-    public func updateDriver(viewController: UIViewController, name: String?, address: String?, email: String?, phoneNumber: String?, priceString: String?, bio: String?, photo: String?) {
+    public func updateDriver(viewController: UIViewController, name: NSString?, address: NSString?, email: NSString?, phoneNumber: NSString?, priceString: NSString?, bio: NSString?, photo: NSString?) {
         guard name != "", address != "", email != "", phoneNumber != "", priceString != "" else {
             return
         }
@@ -67,19 +70,24 @@ class UserController {
         let user = AuthenticationController.shared.genericUser else {
             return
         }
-        driver.price = stringToInt(intString: priceString!, viewController: viewController)
+        driver.price = stringToInt(intString: priceString! as String, viewController: viewController)
         driver.bio = bio
-        driver.photo = photo
+        driver.photoUrl = photo
         user.name = name
         user.address = address
         user.email = email
         user.phone = phoneNumber
     }
     
-    public func configureGenericUser() {
-        
-    }
     public func updateGenericUser(user: User, name: String?, village: String?, phone: String?, address: String?, email: String?) {
+        guard let name = name,
+        let village = village,
+            let phone = phone else {
+                return
+        }
+        user.name = name as NSString
+        user.village = village as NSString
+        user.phone = phone as NSString
         
     }
     //MARK: Private Methods

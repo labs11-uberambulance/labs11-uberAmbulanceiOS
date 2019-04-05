@@ -14,18 +14,19 @@
 
 
 @implementation ABCNetworkingController
-- (void)fetchNearbyDriversWithLatitude:(NSNumber *)latitude withLongitude:(NSNumber *)longitude withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler {
+- (void)fetchNearbyDriversWithToken:(NSString *)token withMother:(PregnantMom *)mother withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler {
     
-    NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/drivers"];
+    NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/rides/drivers"];
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
     [requestURL setHTTPMethod:@"POST"];
-    NSData *coordinateData = [[NSData alloc] init];
-    NSDictionary *coordinateDictionary = @{
-                                           @"latitude": latitude,
-                                           @"longitude": longitude
-                                           };
+    [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
     
-    coordinateData = [NSJSONSerialization dataWithJSONObject:coordinateDictionary options:NSJSONWritingPrettyPrinted error: NULL];
+    //I was getting an error with my networking because I was not sending valid JSON. When I would po my coordinateString in the console, the colon would be replaced by an equal sign. I had to add the below header, at the suggestion of Matt, to let the back-end know that I am indeed sending JSON.
+    [requestURL setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+    NSDictionary *coordinateString = @{@"location":@"0.5223289999999999,33.276038"};
+    
+    NSData *coordinateData = [NSJSONSerialization dataWithJSONObject:coordinateString options:NSJSONWritingPrettyPrinted error: NULL];
     [requestURL setHTTPBody:coordinateData];
     
     [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -39,8 +40,44 @@
             completionHandler(nil, nil);
             return;
         }
-        NSArray<Driver *> *driversArray = [[NSArray alloc] init];
-        driversArray = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
+        
+        NSArray *driversDictionaryArray = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
+        
+        NSMutableArray<Driver *> *driversArray = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < driversDictionaryArray.count; i++) {
+            Driver *newDriver = [[Driver alloc] initWithPrice:23 active:true bio:@"hello" photo:NULL driverId:NULL firebaseId:NULL];
+            NSDictionary *driverDictionary = driversDictionaryArray[i];
+            [driverDictionary[@"driver"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
+                if ([key containsString:@"location"]) {
+                    newDriver.location.latLong = driverDictionary[key][@"latlng"];
+                }
+                SEL selector = NSSelectorFromString(key);
+                if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
+                    [newDriver setValue:value forKey:key];
+                }
+            }];
+            [driverDictionary[@"distance"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
+                if ([key containsString:@"text"]) {
+                    newDriver.distance = driverDictionary[@"distance"][key];
+                }
+                SEL selector = NSSelectorFromString(key);
+                if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
+                    [newDriver setValue:value forKey:key];
+                }
+            }];
+            [driverDictionary[@"duration"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
+                if ([key containsString:@"text"]) {
+                    newDriver.duration = driverDictionary[@"duration"][key];
+                }
+                SEL selector = NSSelectorFromString(key);
+                if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
+                    [newDriver setValue:value forKey:key];
+                }
+            }];
+            [driversArray addObject: newDriver];
+            
+        }
         completionHandler(nil, driversArray);
         
     }] resume];
@@ -55,6 +92,7 @@
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:appendedURL];
     [requestURL setHTTPMethod:@"POST"];
     [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
+    [requestURL setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 
     if (mother == nil && driver == nil) {
         return;
@@ -71,14 +109,32 @@
         [requestURL setHTTPBody:dictionaryData];
     }
     else {
-        NSData *motherData = [[NSData alloc] init];
-        motherData = [NSJSONSerialization dataWithJSONObject:mother options:NSJSONWritingPrettyPrinted error: NULL];
-        NSDictionary *userDictionary = @{
-                                         @"user_type": @"mother",
-                                         @"motherData": motherData
+        
+        NSNull *noData = [[NSNull alloc] init];
+        
+        NSDictionary *dataDictionary = @{
+                                         @"user_type": @"mothers",
+                                         @"motherData": @{
+                                                 @"mother_id":noData,
+                                                 @"caretaker_name": @"test",
+                                                 @"start": @{
+                                                         @"latlng": mother.start.latLong,
+                                                         @"name": @"test",
+                                                         @"descr": noData
+                                                         },
+                                                 @"destination": @{
+                                                         @"latlng": mother.destination.latLong,
+                                                         @"name": @"test",
+                                                         @"descr": noData
+                                                         }
+                                                 }
                                          };
+        
+        
+        
+        
         NSData *dictionaryData = [[NSData alloc] init];
-        dictionaryData = [NSJSONSerialization dataWithJSONObject:userDictionary options:NSJSONWritingPrettyPrinted error: NULL];
+        dictionaryData = [NSJSONSerialization dataWithJSONObject:dataDictionary options:NSJSONWritingPrettyPrinted error: NULL];
         [requestURL setHTTPBody:dictionaryData];
     }
     
@@ -98,20 +154,30 @@
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:appendedURL];
     [requestURL setHTTPMethod:@"PUT"];
     [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
+    [requestURL setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     if (mother == nil && driver == nil) {
         return;
     }
     
-    NSData *userData = [[NSData alloc] init];
-    userData = [NSJSONSerialization dataWithJSONObject:userData options:NSJSONWritingPrettyPrinted error:NULL];
-    NSDictionary *jsonDictionary = @{};
+    NSNull *noData = [[NSNull alloc] init];
+    
+    NSDictionary *userDictionary = @{
+                                     @"name": user.name,
+                                     @"phone": user.phone,
+                                     @"location": @{
+                                             @"latlng": mother.start.latLong,
+                                             @"name": noData,
+                                             @"descr": noData
+                                             },
+                                     };
+    NSDictionary *jsonDictionary;
     
     if (driver != nil) {
-        NSData *driverData = [[NSData alloc] init];
-        driverData = [NSJSONSerialization dataWithJSONObject: driver options:NSJSONWritingPrettyPrinted error: NULL];
+        
+        NSData *driverData = [NSJSONSerialization dataWithJSONObject: driver options:NSJSONWritingPrettyPrinted error: NULL];
         jsonDictionary = @{
-                                         @"user": userData,
+                                         @"user": userDictionary,
                                          @"driver": driverData
                                          };
         NSData *dictionaryData = [[NSData alloc] init];
@@ -119,11 +185,16 @@
         [requestURL setHTTPBody:dictionaryData];
     }
     else {
-        NSData *motherData = [[NSData alloc] init];
-        motherData = [NSJSONSerialization dataWithJSONObject:mother options:NSJSONWritingPrettyPrinted error: NULL];
+        NSDictionary *motherDictionary = @{
+                                           @"start": @{
+                                                   @"latlng": mother.start.latLong,
+                                                   @"name": user.village,
+                                                   @"descr": noData,
+                                                   }
+                                           };
         jsonDictionary = @{
-                                         @"user": userData,
-                                         @"mother": motherData
+                                         @"user": userDictionary,
+                                         @"mother": motherDictionary
                                          };
         NSData *dictionaryData = [[NSData alloc] init];
         dictionaryData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error: NULL];
@@ -145,6 +216,9 @@
     NSURL *baseURL = [[NSURL alloc] initWithString:@"https://birthrider-backend.herokuapp.com/request/driver"];
     NSURL *completeBaseURL = [baseURL URLByAppendingPathComponent: driver.firebaseId];
     NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:completeBaseURL];
+    [requestURL setHTTPMethod:@"POST"];
+    [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
+    [requestURL setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     NSDictionary *newRideDictionary = @{
                                         @"end": mother.destination.latLong,
@@ -185,6 +259,7 @@
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
     [requestURL setHTTPMethod:@"GET"];
     [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
+    [requestURL setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error != nil) {
@@ -230,8 +305,30 @@
             if (user.userType != nil) {
                 if ([user.userType isEqualToString:@"mothers"]) {
                     [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
+                        
                         if ([key containsString:@"_"]) {
                             key = [key convertFromSnakeCaseToCamelCase];
+                        }
+                        if ([key isEqualToString:@"start"]) {
+                            [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  value, BOOL* stop) {
+                                if ([key containsString:@"latlng"]) {
+                                    pregnantMom.start.latLong = parsedData[userTypeKey][key];
+                                }
+                                SEL selector = NSSelectorFromString(key);
+                                if ([pregnantMom.start respondsToSelector:selector] && value != NSNull.null) {
+                                    [pregnantMom.start setValue:value forKey:key];
+                                }
+                            }];
+                            
+                        }
+                        if ([key isEqualToString:@"destination"]) {
+                            [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  value, BOOL* stop) {
+                                SEL selector = NSSelectorFromString(key);
+                                if ([pregnantMom.destination respondsToSelector:selector] && value != NSNull.null) {
+                                    [pregnantMom.destination setValue:value forKey:key];
+                                }
+                            }];
+                            
                         }
                         if ([key isEqualToString:@"id"]) {
                             pregnantMom.motherId = parsedData[@"motherData"][key];

@@ -14,8 +14,10 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     //MARK: Private Properties
     private var driversArray: [Driver] = [] {
         didSet {
-            configureMapView()
-            configureLabels()
+            DispatchQueue.main.async {
+            self.configureMapView()
+            self.configureLabels()
+            }
         }
     }
     private var count = 0
@@ -35,6 +37,16 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
+        
+        if AuthenticationController.shared.pregnantMom?.start?.latLong != nil {
+            let latLongArray = AuthenticationController.shared.pregnantMom?.start?.latLong?.components(separatedBy: ",") as? [NSString]
+            
+            
+            
+            fetchDrivers(latitude: (latLongArray?[0].doubleValue)!, longitude: (latLongArray?[1].doubleValue)!)
+        }
+        
+        
         
         
         // Do any additional setup after loading the view.
@@ -91,13 +103,17 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     private func configureLabels() {
-        guard let price = driversArray[count].price else {return}
-        estimatedPickupTimeLabel.text = "Estimated Pickup Time: 5 minutes"
+        guard let price = driversArray[count].price,
+            let duration = driversArray[count].duration else {return}
+        estimatedPickupTimeLabel.text = "Estimated Pickup Time: \(duration)"
         estimatedFareLabel.text = "Estimated Fare: \(price)"
         nameLabel.text = "Frederick"
     }
     private func fetchDrivers(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        ABCNetworkingController().fetchNearbyDrivers(withLatitude: latitude as NSNumber, withLongitude: longitude as NSNumber) { (error, fetchedDriversArray)  in
+        guard let token = AuthenticationController.shared.userToken,
+        let mother = AuthenticationController.shared.pregnantMom else {return}
+        
+        ABCNetworkingController().fetchNearbyDrivers(withToken: token, withMother: mother, withCompletion: { (error, fetchedDriversArray)  in
             if let error = error {
                 NSLog(error.localizedDescription)
                 return
@@ -106,11 +122,11 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
                 return
             }
             self.driversArray = driversArray
-        }
+        })
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+
         guard let location = locations.last else {return}
         let camera = GMSCameraPosition.camera(withLatitude: (location.coordinate.latitude), longitude: (location.coordinate.longitude), zoom: 17.0)
         
@@ -118,8 +134,6 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         
         //Finally stop updating location otherwise it will come again and again in this delegate
         self.locationManager.stopUpdatingLocation()
-        
-        fetchDrivers(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

@@ -59,18 +59,22 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     @IBAction func continueButtonTapped(_ sender: Any) {
         guard nameTextField.text != "", villageTextField.text != "", phoneTextField.text != "",
             userMarkerArray.count > 0,
+            destinationMarkerArray.count > 0,
         let user = AuthenticationController.shared.genericUser else {return}
     
         let motherLatitude = userMarkerArray[0].position.latitude
         let motherLongitude = userMarkerArray[0].position.longitude
-        let latLongString = "\(motherLatitude), \(motherLongitude)"
-        AuthenticationController.shared.pregnantMom?.start?.latLong = latLongString
-        AuthenticationController.shared.genericUser?.name = nameTextField.text
-        AuthenticationController.shared.genericUser?.phone = phoneTextField.text
+        let latLongString = "\(motherLatitude),\(motherLongitude)"
+        let destinationLatitude = destinationMarkerArray[0].position.latitude
+        let destinationLongitude = destinationMarkerArray[0].position.longitude
+        let destLatLongString = "\(destinationLatitude), \(destinationLongitude)"
+
+        AuthenticationController.shared.genericUser?.name = nameTextField.text! as NSString
+        AuthenticationController.shared.genericUser?.phone = phoneTextField.text! as NSString
 
         UserController().updateGenericUser(user: user, name: nameTextField.text, village: villageTextField.text, phone: phoneTextField.text, address: nil, email: nil)
 
-        AuthenticationController.shared.pregnantMom = UserController().configurePregnantMom(viewController: self, startLatLong: "", destinationLatLong: "", startDescription: "")
+        UserController().configurePregnantMom(viewController: self, startLatLong: latLongString as NSString, destinationLatLong: destLatLongString as NSString, startDescription: "")
 
         transition(userType: nil)
     }
@@ -87,8 +91,10 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
         let lat = "\(place.coordinate.latitude)"
         let long = "\(place.coordinate.longitude)"
-        AuthenticationController.shared.pregnantMom?.destination?.latLong = "\(lat), \(long)"
-        AuthenticationController.shared.pregnantMom?.destination?.name = place.name
+        AuthenticationController.shared.pregnantMom?.destination?.latLong = "\(lat), \(long)" as NSString
+        if let name = place.name {
+            AuthenticationController.shared.pregnantMom?.destination?.name = name as NSString
+        }
         createDestinationMapMarker(coordinate: place.coordinate)
         resultsController.dismiss(animated: true, completion: nil)
     }

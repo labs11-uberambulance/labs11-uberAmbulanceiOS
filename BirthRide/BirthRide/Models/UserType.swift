@@ -18,24 +18,24 @@ enum UserType: String {
 class User: NSObject {
     ///This property will be set by the backend. I will get it back when I first create the user.
     var userID: NSNumber?
-    var name: String?
+    var name: NSString?
     ///This property will contain the email or phone number of the user, depending on login type. This property is unneeded on the FE.
 //    var login: String?
-    var firebaseId: String?
-    var phone: String?
-    var userType: String?
+    var firebaseId: NSString?
+    var phone: NSString?
+    var userType: NSString?
     ///This property stores either the street address or the description of the user's location. 500 char limit.
-    var address: String?
+    var address: NSString?
     ///The value of the property must match location findable by google maps API
-    var village: String?
+    var village: NSString?
     ///This property should be populated immediately upon receiving the id from the backend.
     var latitude: NSNumber?
     ///This property should be populated immediately upon receiving the id from the backend.
     var longitude: NSNumber?
     
-    var email: String?
+    var email: NSString?
 
-    init(userID: NSNumber?, name: String?, login: String?, firebaseId: String?, phone: String?, userType: String?, address: String?, village: String?, latitude: NSNumber?, longitude: NSNumber?, email: String?) {
+    init(userID: NSNumber?, name: NSString?, login: NSString?, firebaseId: NSString?, phone: NSString?, userType: NSString?, address: NSString?, village: NSString?, latitude: NSNumber?, longitude: NSNumber?, email: NSString?) {
         super.init()
         self.userID = userID
         self.name = name
@@ -53,14 +53,14 @@ class User: NSObject {
 @objcMembers
 class PregnantMom: NSObject {
     var motherId: NSNumber?
-    var caretakerName: String?
+    var caretakerName: NSString?
 //    ///This property must have the format: YYYY-MM-DD
 //    var dueDate: String?
     var start: Start?
     var destination: Destination?
     
 
-    required init(start: Start?, destination: Destination?, caretakerName: String?, motherId: NSNumber?) {
+    required init(start: Start?, destination: Destination?, caretakerName: NSString?, motherId: NSNumber?) {
         self.start = start
         self.destination = destination
         self.caretakerName = caretakerName
@@ -69,11 +69,11 @@ class PregnantMom: NSObject {
 }
 @objcMembers
 class Start: NSObject {
-    var latLong: String?
-    var name: String?
-    var startDescription: String?
+    var latLong: NSString?
+    var name: NSString?
+    var startDescription: NSString?
     
-    init(latLong: String, name: String, startDescription: String?) {
+    init(latLong: NSString, name: NSString, startDescription: NSString?) {
         super.init()
         self.latLong = latLong
         self.name = name
@@ -83,11 +83,11 @@ class Start: NSObject {
 
 @objcMembers
 class Destination: NSObject {
-    var latLong: String?
-    var name: String?
-    var destinationDescription: String?
+    var latLong: NSString?
+    var name: NSString?
+    var destinationDescription: NSString?
     
-    init(latLong: String, name: String, destinationDescription: String?) {
+    init(latLong: NSString, name: NSString, destinationDescription: NSString?) {
         super.init()
         self.latLong = latLong
         self.name = name
@@ -99,19 +99,23 @@ class Destination: NSObject {
 class Driver: NSObject {
     var driverId: NSNumber?
     ///The value of this property is the maximum price for the ride
-    var firebaseId: String?
-    var price: Int?
+    var firebaseId: NSString?
+    var price: NSNumber?
     var active: Bool?
     ///The value of this property has a 500 char limit
-    var bio: String?
-    var photo: String?
+    var bio: NSString?
+    var photoUrl: NSString?
+    var location: Start?
+    var distance: NSString?
+    var duration: NSString?
+    
     
     @objc
-    required init(price: Int, active: Bool = false, bio: String, photo: String?, driverId: NSNumber?, firebaseId: String?) {
+    required init(price: NSNumber, active: Bool = false, bio: NSString, photo: NSString?, driverId: NSNumber?, firebaseId: NSString?) {
         self.price = price
         self.active = active
         self.bio = bio
-        self.photo = photo
+        self.photoUrl = photo
         self.driverId = driverId
         self.firebaseId = firebaseId
     }

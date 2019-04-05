@@ -29,7 +29,7 @@ class GoogleIDAuthorizationViewController: UIViewController, GIDSignInUIDelegate
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        //        transition(userType: nil)
+        transition(userType: nil)
     }
     //MARK: TransitionBetweenViewControllers methods
     func transition(userType: UserType?) {

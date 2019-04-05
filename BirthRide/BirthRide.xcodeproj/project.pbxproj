@@ -247,7 +247,7 @@
 				A2C19DA7224A86B700FC20F0 /* Controllers */,
 				A2C19DA8224A86C000FC20F0 /* Models */,
 				A200D9C0225546FE00E1B551 /* Loading UI */,
-				A2928316224D327600FF9C28 /* Categories */,
+				A2928316224D327600FF9C28 /* Categories/Extensions */,
 				A2928319224D327A00FF9C28 /* Categories */,
 				A21550262242CE5C00DDF613 /* Assets.xcassets */,
 				A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */,
@@ -342,13 +342,13 @@
 			name = "Mother-flow View Controllers";
 			sourceTree = "<group>";
 		};
-		A2928316224D327600FF9C28 /* Categories */ = {
+		A2928316224D327600FF9C28 /* Categories/Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				A292831A224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.h */,
 				A292831B224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.m */,
 			);
-			name = Categories;
+			name = Categories/Extensions;
 			path = ..;
 			sourceTree = "<group>";
 		};
