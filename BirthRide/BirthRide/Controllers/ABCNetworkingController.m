@@ -95,13 +95,14 @@
     [requestURL setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 
     if (mother == nil && driver == nil) {
+        completionHandler(nil);
         return;
     }
     if (driver != nil) {
         NSData *driverData = [[NSData alloc] init];
         driverData = [NSJSONSerialization dataWithJSONObject: driver options:NSJSONWritingPrettyPrinted error: NULL];
         NSDictionary *userDictionary = @{
-                           @"user_type": @"driver",
+                           @"user_type": @"drivers",
                            @"driverData": driverData
                            };
         NSData *dictionaryData = [[NSData alloc] init];
@@ -113,19 +114,19 @@
         NSNull *noData = [[NSNull alloc] init];
         
         NSDictionary *dataDictionary = @{
-                                         @"user_type": @"mothers",
+                                         @"user_type": @"mother",
                                          @"motherData": @{
-                                                 @"mother_id":noData,
+//                                                 @"mother_id":noData,
                                                  @"caretaker_name": @"test",
                                                  @"start": @{
                                                          @"latlng": mother.start.latLong,
                                                          @"name": @"test",
-                                                         @"descr": noData
+//                                                         @"descr": noData
                                                          },
                                                  @"destination": @{
                                                          @"latlng": mother.destination.latLong,
                                                          @"name": @"test",
-                                                         @"descr": noData
+//                                                         @"descr": noData
                                                          }
                                                  }
                                          };
@@ -141,8 +142,16 @@
     [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error != nil) {
             NSLog(@"%@", error.localizedDescription);
+            completionHandler(error);
             return;
         }
+        if (data == nil) {
+            completionHandler(nil);
+            return;
+        }
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
+        [jsonResponse allKeys];
+        completionHandler(nil);
     }] resume];
     
 }
@@ -206,6 +215,11 @@
             NSLog(@"%@", error.localizedDescription);
             return;
         }
+        if (data == nil) {
+            return;
+        }
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
+        [jsonResponse allKeys];
     }] resume];
 }
 

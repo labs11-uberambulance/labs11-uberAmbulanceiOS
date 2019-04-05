@@ -82,7 +82,7 @@ class UserController {
     public func updateGenericUser(user: User, name: String?, village: String?, phone: String?, address: String?, email: String?) {
         guard let name = name,
         let village = village,
-            let phone = phone else {
+            let phone = phone else{
                 return
         }
         user.name = name as NSString
