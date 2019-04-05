@@ -69,7 +69,6 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
         let credential = PhoneAuthProvider.provider().credential(
             withVerificationID: verificationID!,
             verificationCode: verificationCode!)
-        
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
             if let error = error {
                 NSLog("Error in PhoneAuthorizationViewController.verifyAuthenticationCodeAndID")
@@ -89,6 +88,7 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
                     return
                 }
                 AuthenticationController.shared.userToken = idToken
+                
                 AuthenticationController.shared.authenticateUser()
             })
         }

@@ -14,8 +14,10 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     //MARK: Private Properties
     private var driversArray: [Driver] = [] {
         didSet {
-            configureMapView()
-            configureLabels()
+            DispatchQueue.main.async {
+            self.configureMapView()
+            self.configureLabels()
+            }
         }
     }
     private var count = 0
@@ -37,7 +39,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestLocation()
         
         if AuthenticationController.shared.pregnantMom?.start?.latLong != nil {
-            let latLongArray = AuthenticationController.shared.pregnantMom?.start?.latLong?.components(separatedBy: ", ") as? [NSString]
+            let latLongArray = AuthenticationController.shared.pregnantMom?.start?.latLong?.components(separatedBy: ",") as? [NSString]
             
             
             

@@ -20,12 +20,11 @@
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
     [requestURL setHTTPMethod:@"POST"];
     [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
+    [requestURL setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+    NSDictionary *coordinateString = @{@"location":@"0.5223289999999999,33.276038"};
     
-    NSData *coordinateData = [[NSData alloc] init];
-    
-    NSString *coordinateString = mother.start.latLong;
-    
-    coordinateData = [NSJSONSerialization dataWithJSONObject:coordinateString options:NSJSONWritingPrettyPrinted error: NULL];
+    NSData *coordinateData = [NSJSONSerialization dataWithJSONObject:coordinateString options:NSJSONWritingPrettyPrinted error: NULL];
     [requestURL setHTTPBody:coordinateData];
     
     [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -39,7 +38,7 @@
             completionHandler(nil, nil);
             return;
         }
-        NSDictionary *driversDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
+        NSArray *driversDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
         NSArray<Driver *> *driversArray = [[NSArray alloc] init];
         completionHandler(nil, driversArray);
         
@@ -264,8 +263,27 @@
             if (user.userType != nil) {
                 if ([user.userType isEqualToString:@"mothers"]) {
                     [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
+                        
                         if ([key containsString:@"_"]) {
                             key = [key convertFromSnakeCaseToCamelCase];
+                        }
+                        if ([key isEqualToString:@"start"]) {
+                            [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  value, BOOL* stop) {
+                                SEL selector = NSSelectorFromString(key);
+                                if ([pregnantMom.start respondsToSelector:selector] && value != NSNull.null) {
+                                    [pregnantMom.start setValue:value forKey:key];
+                                }
+                            }];
+                            
+                        }
+                        if ([key isEqualToString:@"destination"]) {
+                            [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  value, BOOL* stop) {
+                                SEL selector = NSSelectorFromString(key);
+                                if ([pregnantMom.destination respondsToSelector:selector] && value != NSNull.null) {
+                                    [pregnantMom.destination setValue:value forKey:key];
+                                }
+                            }];
+                            
                         }
                         if ([key isEqualToString:@"id"]) {
                             pregnantMom.motherId = parsedData[@"motherData"][key];

@@ -104,14 +104,18 @@ class Driver: NSObject {
     var active: Bool?
     ///The value of this property has a 500 char limit
     var bio: NSString?
-    var photo: NSString?
+    var photoUrl: NSString?
+    var location: Start?
+    var distance: NSString?
+    var duration: NSString?
+    
     
     @objc
     required init(price: Int, active: Bool = false, bio: NSString, photo: NSString?, driverId: NSNumber?, firebaseId: NSString?) {
         self.price = price
         self.active = active
         self.bio = bio
-        self.photo = photo
+        self.photoUrl = photo
         self.driverId = driverId
         self.firebaseId = firebaseId
     }

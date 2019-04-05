@@ -64,7 +64,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
         let motherLatitude = userMarkerArray[0].position.latitude
         let motherLongitude = userMarkerArray[0].position.longitude
-        let latLongString = "\(motherLatitude), \(motherLongitude)"
+        let latLongString = "\(motherLatitude),\(motherLongitude)"
         let destinationLatitude = destinationMarkerArray[0].position.latitude
         let destinationLongitude = destinationMarkerArray[0].position.longitude
         let destLatLongString = "\(destinationLatitude), \(destinationLongitude)"
