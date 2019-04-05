@@ -46,7 +46,7 @@
         NSMutableArray<Driver *> *driversArray = [[NSMutableArray alloc] init];
         
         for (int i = 0; i < driversDictionaryArray.count; i++) {
-            Driver *newDriver = [[Driver alloc] initWithPrice:23 active:true bio:@"hello" photo:NULL driverId:NULL firebaseId:NULL];
+            Driver *newDriver = [[Driver alloc] initWithPrice:@(23) active:true bio:@"hello" photo:NULL driverId:NULL firebaseId:NULL];
             NSDictionary *driverDictionary = driversDictionaryArray[i];
             [driverDictionary[@"driver"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
                 if ([key containsString:@"location"]) {
