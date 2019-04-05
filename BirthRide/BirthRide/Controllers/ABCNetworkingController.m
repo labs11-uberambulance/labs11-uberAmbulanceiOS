@@ -41,7 +41,7 @@
         
         NSArray *driversDictionaryArray = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
         
-        NSArray<Driver *> *driversArray = [[NSArray alloc] init];
+        NSMutableArray<Driver *> *driversArray = [[NSArray alloc] init];
         
         for (int i = 0; i > driversDictionaryArray.count; i++) {
             Driver *newDriver = [Driver alloc];
@@ -63,6 +63,7 @@
                 if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
                     [newDriver setValue:value forKey:key];
                 }
+                [driversArray addObject:newDriver];
             }];
         }
         completionHandler(nil, driversArray);
