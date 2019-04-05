@@ -45,7 +45,7 @@
         
         NSMutableArray<Driver *> *driversArray = [[NSMutableArray alloc] init];
         
-        for (int i = 0; i > driversDictionaryArray.count; i++) {
+        for (int i = 0; i < driversDictionaryArray.count; i++) {
             Driver *newDriver = [[Driver alloc] initWithPrice:23 active:true bio:@"hello" photo:NULL driverId:NULL firebaseId:NULL];
             NSDictionary *driverDictionary = driversDictionaryArray[i];
             [driverDictionary[@"driver"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
@@ -60,7 +60,7 @@
             }];
             [driverDictionary[@"distance"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
                 if ([key containsString:@"text"]) {
-                    newDriver.location.latLong = driverDictionary[@"distance"][key];
+                    newDriver.distance = driverDictionary[@"distance"][key];
                 }
                 SEL selector = NSSelectorFromString(key);
                 if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
@@ -70,7 +70,7 @@
             }];
             [driverDictionary[@"duration"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
                 if ([key containsString:@"text"]) {
-                    newDriver.location.latLong = driverDictionary[@"duration"][key];
+                    newDriver.duration = driverDictionary[@"duration"][key];
                 }
                 SEL selector = NSSelectorFromString(key);
                 if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
