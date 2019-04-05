@@ -46,30 +46,40 @@
         NSMutableArray<Driver *> *driversArray = [[NSMutableArray alloc] init];
         
         for (int i = 0; i > driversDictionaryArray.count; i++) {
-            Driver *newDriver = [Driver alloc];
+            Driver *newDriver = [[Driver alloc] initWithPrice:23 active:true bio:@"hello" photo:NULL driverId:NULL firebaseId:NULL];
             NSDictionary *driverDictionary = driversDictionaryArray[i];
-            [driverDictionary[@"user"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
-                if ([key containsString:@"_"]) {
-                    key = [key convertFromSnakeCaseToCamelCase];
-                }
-                if ([key containsString:@"distance"]) {
-                    newDriver.distance = driverDictionary[key][@"text"];
-                }
-                if ([key containsString:@"duration"]) {
-                    newDriver.duration = driverDictionary[key][@"text"];
-                }
-                if ([key containsString:@"location"]) {
-                    newDriver.location.latLong = driverDictionary[key][@"latlng"];
-                }
-                SEL selector = NSSelectorFromString(key);
-                if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
-                    [newDriver setValue:value forKey:key];
-                }
-                [driversArray addObject:newDriver];
+            NSBlockOperation *dictionaryOp  = [[NSBlockOperation alloc] init];
+            NSBlockOperation *completionOp  = [[NSBlockOperation alloc] init];
+            dictionaryOp = [[NSBlockOperation alloc] init];
+            [dictionaryOp addExecutionBlock:^{
+                [driverDictionary[@"user"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
+                    if ([key containsString:@"_"]) {
+                        key = [key convertFromSnakeCaseToCamelCase];
+                    }
+                    if ([key containsString:@"distance"]) {
+                        newDriver.distance = driverDictionary[key][@"text"];
+                    }
+                    if ([key containsString:@"duration"]) {
+                        newDriver.duration = driverDictionary[key][@"text"];
+                    }
+                    if ([key containsString:@"location"]) {
+                        newDriver.location.latLong = driverDictionary[key][@"latlng"];
+                    }
+                    SEL selector = NSSelectorFromString(key);
+                    if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
+                        [newDriver setValue:value forKey:key];
+                    }
+                    [driversArray addObject:newDriver];
+                }];
             }];
+            [completionOp addExecutionBlock:^{
+                completionHandler(nil, driversArray);
+            }];
+            [completionOp addDependency:dictionaryOp];
+            NSOperationQueue *opQ = [[NSOperationQueue alloc]init];
+            [opQ addOperation:dictionaryOp];
+            [opQ addOperation:completionOp];
         }
-        completionHandler(nil, driversArray);
-        
     }] resume];
 }
 
