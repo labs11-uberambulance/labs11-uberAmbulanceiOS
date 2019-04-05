@@ -121,15 +121,24 @@
         return;
     }
     
-    NSData *userData = [[NSData alloc] init];
-    userData = [NSJSONSerialization dataWithJSONObject:userData options:NSJSONWritingPrettyPrinted error:NULL];
-    NSDictionary *jsonDictionary = @{};
+    NSNull *noData = [[NSNull alloc] init];
+    
+    NSDictionary *userDictionary = @{
+                                     @"name": user.name,
+                                     @"phone": user.phone,
+                                     @"location": @{
+                                             @"latlng": mother.start.latLong,
+                                             @"name": noData,
+                                             @"descr": noData
+                                             },
+                                     };
+    NSDictionary *jsonDictionary;
     
     if (driver != nil) {
-        NSData *driverData = [[NSData alloc] init];
-        driverData = [NSJSONSerialization dataWithJSONObject: driver options:NSJSONWritingPrettyPrinted error: NULL];
+        
+        NSData *driverData = [NSJSONSerialization dataWithJSONObject: driver options:NSJSONWritingPrettyPrinted error: NULL];
         jsonDictionary = @{
-                                         @"user": userData,
+                                         @"user": userDictionary,
                                          @"driver": driverData
                                          };
         NSData *dictionaryData = [[NSData alloc] init];
@@ -137,11 +146,16 @@
         [requestURL setHTTPBody:dictionaryData];
     }
     else {
-        NSData *motherData = [[NSData alloc] init];
-        motherData = [NSJSONSerialization dataWithJSONObject:mother options:NSJSONWritingPrettyPrinted error: NULL];
+        NSDictionary *motherDictionary = @{
+                                           @"start": @{
+                                                   @"latlng": mother.start.latLong,
+                                                   @"name": user.village,
+                                                   @"descr": noData,
+                                                   }
+                                           };
         jsonDictionary = @{
-                                         @"user": userData,
-                                         @"mother": motherData
+                                         @"user": userDictionary,
+                                         @"mother": motherDictionary
                                          };
         NSData *dictionaryData = [[NSData alloc] init];
         dictionaryData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error: NULL];

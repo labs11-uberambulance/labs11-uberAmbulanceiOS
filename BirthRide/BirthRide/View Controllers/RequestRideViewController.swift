@@ -36,6 +36,16 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
+        if AuthenticationController.shared.pregnantMom?.start?.latLong != nil {
+            let latLongArray = AuthenticationController.shared.pregnantMom?.start?.latLong?.components(separatedBy: ", ") as? [NSString]
+            
+            
+            
+            fetchDrivers(latitude: latLongArray[0].doubleValue, longitude: latLongArray[1].doubleValue)
+        }
+        
+        
+        
         
         // Do any additional setup after loading the view.
     }
@@ -44,13 +54,13 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         guard let userToken = AuthenticationController.shared.userToken,
             let mother = AuthenticationController.shared.pregnantMom,
             let user = AuthenticationController.shared.genericUser else {return}
-        ABCNetworkingController().requestDriver(withToken: userToken, with: driversArray[count], withMother: mother, with: user) { (error) in
-            if let error = error {
-                NSLog("error in RequestRideViewController.requestRideButtonTapped")
-                NSLog(error.localizedDescription)
-                return
-            }
-        }
+//        ABCNetworkingController().requestDriver(withToken: userToken, with: driversArray[count], withMother: mother, with: user) { (error) in
+//            if let error = error {
+//                NSLog("error in RequestRideViewController.requestRideButtonTapped")
+//                NSLog(error.localizedDescription)
+//                return
+//            }
+//        }
     }
     @IBAction func nextDriverButtonTapped(_ sender: Any) {
         guard driversArray.count > 0 else {return}
@@ -113,21 +123,14 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        guard let location = locations.last else {
-            guard let latLongString: NSString = AuthenticationController.shared.pregnantMom?.start?.latLong else {return}
-            let latLongArray: [NSString] = latLongString.components(separatedBy: ", ") as [NSString]
-            fetchDrivers(latitude: latLongArray[0].doubleValue, longitude: latLongArray[1].doubleValue)
-            return
-        }
+
+        guard let location = locations.last else {return}
         let camera = GMSCameraPosition.camera(withLatitude: (location.coordinate.latitude), longitude: (location.coordinate.longitude), zoom: 17.0)
         
         self.mapView?.animate(to: camera)
         
         //Finally stop updating location otherwise it will come again and again in this delegate
         self.locationManager.stopUpdatingLocation()
-        
-        fetchDrivers(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
