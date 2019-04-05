@@ -25,6 +25,7 @@ class UserController {
         let newMom = PregnantMom(start: testStart, destination: testDestination, caretakerName: nil, motherId: nil)
         newMom.start?.latLong = startLatLong
         newMom.destination?.latLong = destinationLatLong
+        AuthenticationController.shared.pregnantMom = newMom
         
         guard let token = AuthenticationController.shared.userToken,
         let user = AuthenticationController.shared.genericUser,

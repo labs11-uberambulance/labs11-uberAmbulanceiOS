@@ -41,7 +41,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
             
             
             
-            fetchDrivers(latitude: latLongArray[0].doubleValue, longitude: latLongArray[1].doubleValue)
+            fetchDrivers(latitude: (latLongArray?[0].doubleValue)!, longitude: (latLongArray?[1].doubleValue)!)
         }
         
         
