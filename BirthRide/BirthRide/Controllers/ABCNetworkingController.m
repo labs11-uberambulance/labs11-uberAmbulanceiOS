@@ -80,6 +80,7 @@
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:appendedURL];
     [requestURL setHTTPMethod:@"POST"];
     [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
+    [requestURL setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 
     if (mother == nil && driver == nil) {
         return;
@@ -141,6 +142,7 @@
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:appendedURL];
     [requestURL setHTTPMethod:@"PUT"];
     [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
+    [requestURL setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     if (mother == nil && driver == nil) {
         return;
@@ -204,6 +206,7 @@
     NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:completeBaseURL];
     [requestURL setHTTPMethod:@"POST"];
     [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
+    [requestURL setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     NSDictionary *newRideDictionary = @{
                                         @"end": mother.destination.latLong,
@@ -244,6 +247,7 @@
     NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
     [requestURL setHTTPMethod:@"GET"];
     [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
+    [requestURL setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error != nil) {
