@@ -38,8 +38,33 @@
             completionHandler(nil, nil);
             return;
         }
-        NSArray *driversDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
+        
+        NSArray *driversDictionaryArray = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
+        
         NSArray<Driver *> *driversArray = [[NSArray alloc] init];
+        
+        for (int i = 0; i > driversDictionaryArray.count; i++) {
+            Driver *newDriver = [Driver alloc];
+            NSDictionary *driverDictionary = driversDictionaryArray[i];
+            [driverDictionary[@"user"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
+                if ([key containsString:@"_"]) {
+                    key = [key convertFromSnakeCaseToCamelCase];
+                }
+                if ([key containsString:@"distance"]) {
+                    newDriver.distance = driverDictionary[key][@"text"];
+                }
+                if ([key containsString:@"duration"]) {
+                    newDriver.duration = driverDictionary[key][@"text"];
+                }
+                if ([key containsString:@"location"]) {
+                    newDriver.location.latLong = driverDictionary[key][@"latlng"];
+                }
+                SEL selector = NSSelectorFromString(key);
+                if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
+                    [newDriver setValue:value forKey:key];
+                }
+            }];
+        }
         completionHandler(nil, driversArray);
         
     }] resume];

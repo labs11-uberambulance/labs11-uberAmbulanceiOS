@@ -72,7 +72,7 @@ class UserController {
         }
         driver.price = stringToInt(intString: priceString! as String, viewController: viewController)
         driver.bio = bio
-        driver.photo = photo
+        driver.photoUrl = photo
         user.name = name
         user.address = address
         user.email = email
