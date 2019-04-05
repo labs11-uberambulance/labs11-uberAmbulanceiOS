@@ -56,13 +56,13 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         guard let userToken = AuthenticationController.shared.userToken,
             let mother = AuthenticationController.shared.pregnantMom,
             let user = AuthenticationController.shared.genericUser else {return}
-//        ABCNetworkingController().requestDriver(withToken: userToken, with: driversArray[count], withMother: mother, with: user) { (error) in
-//            if let error = error {
-//                NSLog("error in RequestRideViewController.requestRideButtonTapped")
-//                NSLog(error.localizedDescription)
-//                return
-//            }
-//        }
+        ABCNetworkingController().requestDriver(withToken: userToken, with: driversArray[count], withMother: mother, with: user) { (error) in
+            if let error = error {
+                NSLog("error in RequestRideViewController.requestRideButtonTapped")
+                NSLog(error.localizedDescription)
+                return
+            }
+        }
     }
     @IBAction func nextDriverButtonTapped(_ sender: Any) {
         guard driversArray.count > 0 else {return}
@@ -103,8 +103,9 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     private func configureLabels() {
-        guard let price = driversArray[count].price else {return}
-        estimatedPickupTimeLabel.text = "Estimated Pickup Time: 5 minutes"
+        guard let price = driversArray[count].price,
+            let duration = driversArray[count].duration else {return}
+        estimatedPickupTimeLabel.text = "Estimated Pickup Time: \(duration)"
         estimatedFareLabel.text = "Estimated Fare: \(price)"
         nameLabel.text = "Frederick"
     }
