@@ -56,7 +56,6 @@
                 if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
                     [newDriver setValue:value forKey:key];
                 }
-                [driversArray addObject:newDriver];
             }];
             [driverDictionary[@"distance"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
                 if ([key containsString:@"text"]) {
@@ -66,7 +65,6 @@
                 if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
                     [newDriver setValue:value forKey:key];
                 }
-                [driversArray addObject:newDriver];
             }];
             [driverDictionary[@"duration"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
                 if ([key containsString:@"text"]) {
@@ -76,8 +74,8 @@
                 if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
                     [newDriver setValue:value forKey:key];
                 }
-                [driversArray addObject:newDriver];
             }];
+            [driversArray addObject: newDriver];
             
         }
         completionHandler(nil, driversArray);
