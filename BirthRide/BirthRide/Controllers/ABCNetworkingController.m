@@ -257,6 +257,10 @@
          completionHandler(error);
          return;
       }
+      if (data != nil) {
+         NSLog(@"%@", data);
+         return;
+      }
    }] resume];
 }
 
