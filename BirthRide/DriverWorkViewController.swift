@@ -54,11 +54,14 @@ class DriverWorkViewController: UIViewController {
             if ride == nil {
                 animateLoadingView()
                 searchingForRidesLabel.isHidden = false
+                AuthenticationController.shared.driver?.isActive = true
+                UserController().updateDriver(viewController: self, name: nil, address: nil, email: nil, phoneNumber: nil, priceString: nil, bio: nil, photo: nil)
             }
         case false:
             if mapView.isHidden == true {
                 stopAnimatingLoadingView()
                 searchingForRidesLabel.isHidden = true
+                AuthenticationController.shared.driver?.isActive = false
             }
         }
     }
