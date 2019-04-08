@@ -98,6 +98,7 @@ class Destination: NSObject {
 @objcMembers
 class Driver: NSObject {
     var driverId: NSNumber?
+    var requestedDriverName: NSString?
     ///The value of this property is the maximum price for the ride
     var firebaseId: NSString?
     var price: NSNumber?
@@ -111,7 +112,8 @@ class Driver: NSObject {
     
     
     @objc
-    required init(price: NSNumber, active: Bool = false, bio: NSString, photo: NSString?, driverId: NSNumber?, firebaseId: NSString?) {
+    required init(price: NSNumber, requestedDriverName: NSString?, active: Bool = false, bio: NSString, photo: NSString?, driverId: NSNumber?, firebaseId: NSString?) {
+        self.requestedDriverName = requestedDriverName
         self.price = price
         self.active = active
         self.bio = bio

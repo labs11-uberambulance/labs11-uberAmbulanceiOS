@@ -21,6 +21,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     private var count = 0
+    private let authenticationController = AuthenticationController.shared
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
     let locationManager = CLLocationManager()
@@ -38,18 +39,15 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
-        if AuthenticationController.shared.pregnantMom?.start?.latLong != nil {
-            let latLongArray = AuthenticationController.shared.pregnantMom?.start?.latLong?.components(separatedBy: ",") as? [NSString]
+        let pregnantMomStart = authenticationController.pregnantMom?.start
+        
+        
+        guard let latLongArray = pregnantMomStart?.latLong?.components(separatedBy: ",") as [NSString]? else {return}
             
             
             
-            fetchDrivers(latitude: (latLongArray?[0].doubleValue)!, longitude: (latLongArray?[1].doubleValue)!)
-        }
+        fetchDrivers(latitude: (latLongArray[0].doubleValue), longitude: (latLongArray[1].doubleValue))
         
-        
-        
-        
-        // Do any additional setup after loading the view.
     }
     //MARK: IBActions
     @IBAction func requestRideButtonTapped(_ sender: Any) {
