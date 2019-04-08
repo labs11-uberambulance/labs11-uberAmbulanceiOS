@@ -22,6 +22,7 @@ class AuthenticationController {
     public var pregnantMom: PregnantMom?
     public var driver: Driver?
     public var genericUser: User?
+    public var motherStartLatLong: NSString?
     
     public var userToken: String?
 

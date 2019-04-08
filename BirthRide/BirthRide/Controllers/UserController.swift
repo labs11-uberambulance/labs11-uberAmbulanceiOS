@@ -59,8 +59,8 @@ class UserController {
         
     }
     
-    public func configureDriver(price: Int, bio: NSString) -> Driver {
-        return Driver(price: price, bio: bio, photo: nil, driverId: nil, firebaseId: nil)
+    public func configureDriver(price: NSNumber, bio: NSString) -> Driver {
+        return Driver(price: price, requestedDriverName: nil, bio: bio, photo: nil, driverId: nil, firebaseId: nil)
     }
     public func updateDriver(viewController: UIViewController, name: NSString?, address: NSString?, email: NSString?, phoneNumber: NSString?, priceString: NSString?, bio: NSString?, photo: NSString?) {
         guard name != "", address != "", email != "", phoneNumber != "", priceString != "" else {
@@ -70,7 +70,7 @@ class UserController {
         let user = AuthenticationController.shared.genericUser else {
             return
         }
-        driver.price = stringToInt(intString: priceString! as String, viewController: viewController)
+        driver.price = stringToInt(intString: priceString! as String, viewController: viewController) as NSNumber
         driver.bio = bio
         driver.photoUrl = photo
         user.name = name
@@ -82,7 +82,7 @@ class UserController {
     public func updateGenericUser(user: User, name: String?, village: String?, phone: String?, address: String?, email: String?) {
         guard let name = name,
         let village = village,
-            let phone = phone else {
+            let phone = phone else{
                 return
         }
         user.name = name as NSString
