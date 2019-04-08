@@ -174,26 +174,25 @@
    
    NSNull *noData = [[NSNull alloc] init];
    
-   NSDictionary *userDictionary = @{
-                                    @"name": user.name,
-                                    @"phone": user.phone,
-                                    @"location": @{
-                                          @"latlng": mother.start.latLong,
-                                          @"name": noData,
-                                          @"descr": noData
-                                          },
-                                    };
+   NSDictionary *userDictionary = [[NSDictionary alloc] init];
+   
+   
    NSDictionary *jsonDictionary;
    
    if (driver != nil) {
       
+      userDictionary = @{
+                         @"name": user.name,
+                         @"phone": user.phone,
+                         };
+      //I was struggling for a minute with an error here. I was trying to pass the BOOL into the dictionary, but dictionaries only take objects and BOOLs are primitives.
       NSDictionary *driverDataDictionary = @{
                                              @"id": driver.driverId,
                                              @"firebase_id": driver.firebaseId,
                                              @"price": driver.price,
+                                             
                                              @"active":
-                                                //I was struggling for a minute with an error here. I was trying to pass the BOOL into the dictionary, but dictionaries only take objects and BOOLs are primitives.
-                                          [NSNumber numberWithBool:driver.isActive],
+                                             [NSNumber numberWithBool:driver.isActive],
                                              @"bio": driver.bio,
                                              @"photo_url":
                                                 driver.photoUrl
@@ -205,10 +204,19 @@
                          @"driver": driverDataDictionary
                          };
       
-      NSDictionary *dictionaryData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error: NULL];
+      NSData *dictionaryData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error: NULL];
       [requestURL setHTTPBody:dictionaryData];
    }
    else {
+      userDictionary = @{
+                         @"name": user.name,
+                         @"phone": user.phone,
+                         @"location": @{
+                               @"latlng": mother.start.latLong,
+                               @"name": noData,
+                               @"descr": noData
+                               },
+                         };
       NSDictionary *motherDictionary = @{
                                          @"start": @{
                                                @"latlng": mother.start.latLong,
@@ -230,11 +238,7 @@
          NSLog(@"%@", error.localizedDescription);
          return;
       }
-      if (data == nil) {
-         return;
-      }
-      NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
-      [jsonResponse allKeys];
+      
    }] resume];
 }
 

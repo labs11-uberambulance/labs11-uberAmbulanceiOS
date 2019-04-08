@@ -63,7 +63,18 @@ class UserController {
         return Driver(price: price, requestedDriverName: nil, isActive: false, bio: bio, photo: nil, driverId: nil, firebaseId: nil)
     }
     public func updateDriver(viewController: UIViewController, name: NSString?, address: NSString?, email: NSString?, phoneNumber: NSString?, priceString: NSString?, bio: NSString?, photo: NSString?) {
-        guard name != "", address != "", email != "", phoneNumber != "", priceString != "" else {
+        guard name != "", address != "", email != "", phoneNumber != "", priceString != "",
+        name != nil, address != nil, email != nil, phoneNumber != nil, priceString != nil else {
+            guard let userToken = AuthenticationController.shared.userToken,
+            let user = AuthenticationController.shared.genericUser,
+            let driver = AuthenticationController.shared.driver else {return}
+            ABCNetworkingController().updateUser(withToken: userToken, withUserID: user.userID!, with: user, with: driver, withMother: nil) { (error) in
+                if let error = error {
+                    NSLog("Error in userController.updateDriver")
+                    NSLog(error.localizedDescription)
+                    return
+                }
+            }
             return
         }
         guard let driver = AuthenticationController.shared.driver,

@@ -31,7 +31,7 @@ class DriverWorkViewController: UIViewController {
     var loadingView: IndeterminateLoadingView?
     
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         isWorkingSwitch.isOn = false
@@ -43,7 +43,7 @@ class DriverWorkViewController: UIViewController {
         mapView.isHidden = true
         // Do any additional setup after loading the view.
     }
-
+    
     //MARK: IBActions
     @IBAction func acceptRideButtonTapped(_ sender: Any) {
     }
@@ -62,6 +62,8 @@ class DriverWorkViewController: UIViewController {
                 stopAnimatingLoadingView()
                 searchingForRidesLabel.isHidden = true
                 AuthenticationController.shared.driver?.isActive = false
+                
+                UserController().updateDriver(viewController: self, name: nil, address: nil, email: nil, phoneNumber: nil, priceString: nil, bio: nil, photo: nil)
             }
         }
     }
@@ -84,12 +86,12 @@ class DriverWorkViewController: UIViewController {
     }
     private func configureLabels() {
         if mapView.isHidden == true {
-        requestTimeLabel.isHidden = false
-        startVillageLabel.isHidden = false
-        destinationLabel.isHidden = false
-        acceptRideButton.isHidden = false
-        searchingForRidesLabel.isHidden = false
-        
+            requestTimeLabel.isHidden = false
+            startVillageLabel.isHidden = false
+            destinationLabel.isHidden = false
+            acceptRideButton.isHidden = false
+            searchingForRidesLabel.isHidden = false
+            
         }
     }
     
