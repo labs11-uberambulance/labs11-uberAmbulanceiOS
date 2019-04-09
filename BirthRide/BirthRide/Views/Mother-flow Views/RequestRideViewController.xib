@@ -116,7 +116,11 @@
                                     <action selector="logoutButtonTapped:" destination="-1" id="nQa-g3-c4Z"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem key="rightBarButtonItem" title="Edit Profile" id="jw0-2B-IvW"/>
+                            <barButtonItem key="rightBarButtonItem" title="Edit Profile" id="jw0-2B-IvW">
+                                <connections>
+                                    <action selector="editProfileButtonTapped:" destination="-1" id="OfK-sy-UKa"/>
+                                </connections>
+                            </barButtonItem>
                         </navigationItem>
                     </items>
                 </navigationBar>

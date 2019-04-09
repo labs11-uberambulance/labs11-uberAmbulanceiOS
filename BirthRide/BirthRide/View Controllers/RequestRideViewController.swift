@@ -61,6 +61,10 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         AuthenticationController.shared.deauthenticateUser()
         logoutTransition()
     }
+    @IBAction func editProfileButtonTapped(_ sender: Any) {
+        editProfileTransition()
+    }
+    
     
     @IBAction func requestRideButtonTapped(_ sender: Any) {
         guard let userToken = AuthenticationController.shared.userToken,
@@ -157,6 +161,17 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    private func editProfileTransition() {
+        let destinationVC = MotherOrCaretakerRegistrationViewController()
+        guard let mother = AuthenticationController.shared.pregnantMom else {return}
+        destinationVC.mother = mother
+        
+        
+        present(destinationVC, animated: true, completion: nil)
+        
+        
+        
+    }
     
     
     

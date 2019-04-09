@@ -26,6 +26,7 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapView.delegate = self
         setupKeyboardDismissRecognizer()
         populateLabelsAndTextFields()
         configureMapView()
@@ -96,7 +97,6 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     
     ///This method will configure the mapView. If the app is able to get the user coordinates, then it will also create a marker to put on the map. If not it will return. The map marker will **not** be created if one already exists.
     private func configureMapView() {
-        mapView.delegate = self
         let userMarker = GMSMarker()
         guard let userLocation = driver?.location?.latLong else {return}
         let latLongArray = userLocation.components(separatedBy: ",")

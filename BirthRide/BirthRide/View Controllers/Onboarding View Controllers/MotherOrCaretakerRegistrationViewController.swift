@@ -19,7 +19,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     private let autocompleteResultsVC = GMSAutocompleteResultsViewController()
     private var searchController: UISearchController?
     //MARK: Other Properties
-    
+    var mother: PregnantMom?
     //MARK: IBOutlets
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -50,6 +50,8 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         searchController?.searchBar.sizeToFit()
         mapContainerView.addSubview((searchController?.searchBar)!)
         autocompleteResultsVC.delegate = self
+        populateTextFieldsAndConfigureViewForEditing()
+        createDestinationMapMarker(coordinate: CLLocationCoordinate2D(latitude: 22, longitude: 22))
         // Do any additional setup after loading the view.
     }
     @IBAction func caretakerButtonTapped(_ sender: Any) {
@@ -116,10 +118,26 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
     //MARK: Private Methods
     private func createDestinationMapMarker(coordinate: CLLocationCoordinate2D){
+        
         if destinationMarkerArray.count > 0 {
             destinationMarkerArray.removeAll()
         }
         let destinationMarker = GMSMarker()
+        
+        if let latLong = mother?.destination?.latLong {
+            
+            let latLongArray = latLong.components(separatedBy: ",")
+            let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)
+            let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)
+            destinationMarker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+            destinationMarker.appearAnimation = .pop
+            destinationMarker.isDraggable = true
+            destinationMarker.map = mapView
+            destinationMarker.icon = GMSMarker.markerImage(with: .red)
+            destinationMarkerArray.append(destinationMarker)
+            return
+            
+        }
         destinationMarker.position = coordinate
         destinationMarker.appearAnimation = .pop
         destinationMarker.isDraggable = false
@@ -146,15 +164,45 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
     ///This method will configure the mapView. If the app is able to get the user coordinates, then it will also create a marker to put on the map. If not it will return. The map marker will **not** be created if one already exists.
     private func configureMapView() {
+        let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
+        mapView.animate(to: camera)
+        configureUserMarker()
+        
+    }
+    
+    private func populateTextFieldsAndConfigureViewForEditing() {
+        if let mother = mother,
+            let user = AuthenticationController.shared.genericUser {
+            nameTextField.text = user.name as String?
+            phoneTextField.text = user.phone as String?
+            villageTextField.text = mother.start?.name as String?
+            caretakerTextField.text = mother.caretakerName as String?
+            caretakerTextField.isHidden = false
+        }
+    }
+    
+    private func configureUserMarker() {
         let userMarker = GMSMarker()
+        if let mother = mother,
+            let userLocation = mother.start?.latLong {
+            let latLongArray = userLocation.components(separatedBy: ",")
+            let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)
+            let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)
+            userMarker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+            userMarker.appearAnimation = .pop
+            userMarker.isDraggable = true
+            userMarker.map = mapView
+            userMarker.icon = GMSMarker.markerImage(with: .blue)
+            userMarkerArray.append(userMarker)
+            return
+        }
         guard let userLocation = locationManager.location?.coordinate else {return}
         userMarker.position = userLocation
         userMarker.appearAnimation = .pop
         userMarker.isDraggable = true
         userMarker.map = mapView
+        userMarker.icon = GMSMarker.markerImage(with: .blue)
         userMarkerArray.append(userMarker)
-        
     }
-    
     
 }
