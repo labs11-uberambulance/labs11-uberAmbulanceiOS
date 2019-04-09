@@ -20,7 +20,7 @@ class DriverWorkViewController: UIViewController {
     @IBOutlet weak var searchingForRidesLabel: UILabel!
     
     //MARK: Private Properties
-    private var ride: Ride? {
+    private var ride: RequestedRide? {
         didSet {
             updateViews()
         }
@@ -31,7 +31,7 @@ class DriverWorkViewController: UIViewController {
     var loadingView: IndeterminateLoadingView?
     
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         isWorkingSwitch.isOn = false
@@ -43,9 +43,30 @@ class DriverWorkViewController: UIViewController {
         mapView.isHidden = true
         // Do any additional setup after loading the view.
     }
-
+    
     //MARK: IBActions
     @IBAction func acceptRideButtonTapped(_ sender: Any) {
+        guard let userToken = AuthenticationController.shared.userToken,
+            let rideId = self.ride?.rideId else {return}
+        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: true) { (error) in
+            if let error = error {
+                NSLog("Error in DriverWorkVC.acceptRideButtonTapped")
+                NSLog(error.localizedDescription)
+                return
+            }
+        }
+        updateViews()
+    }
+    @IBAction func rejectRideButtonTapped(_ sender: Any) {
+        guard let userToken = AuthenticationController.shared.userToken,
+            let rideId = self.ride?.rideId else {return}
+        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: false) { (error) in
+            if let error = error {
+                NSLog("Error in DriverWorkVC.acceptRideButtonTapped")
+                NSLog(error.localizedDescription)
+                return
+            }
+        }
     }
     
     @IBAction func isWorkingSwitchToggled(_ sender: Any) {
@@ -54,11 +75,16 @@ class DriverWorkViewController: UIViewController {
             if ride == nil {
                 animateLoadingView()
                 searchingForRidesLabel.isHidden = false
+                AuthenticationController.shared.driver?.isActive = true
+                UserController().updateDriver(viewController: self, name: nil, address: nil, email: nil, phoneNumber: nil, priceString: nil, bio: nil, photo: nil)
             }
         case false:
             if mapView.isHidden == true {
                 stopAnimatingLoadingView()
                 searchingForRidesLabel.isHidden = true
+                AuthenticationController.shared.driver?.isActive = false
+                
+                UserController().updateDriver(viewController: self, name: nil, address: nil, email: nil, phoneNumber: nil, priceString: nil, bio: nil, photo: nil)
             }
         }
     }
@@ -69,7 +95,13 @@ class DriverWorkViewController: UIViewController {
         configureMapView()
     }
     private func configureMapView() {
+        guard let ride = ride else {return}
+        if mapView.isHidden == true {
         mapView.isHidden = false
+        }
+        else {
+            mapView.isHidden = true
+        }
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
         mapView.animate(to: camera)
         
@@ -80,13 +112,16 @@ class DriverWorkViewController: UIViewController {
         
     }
     private func configureLabels() {
-        if mapView.isHidden == true {
-        requestTimeLabel.isHidden = false
-        startVillageLabel.isHidden = false
-        destinationLabel.isHidden = false
-        acceptRideButton.isHidden = false
-        searchingForRidesLabel.isHidden = false
-        
+        guard let ride = ride else {return}
+        if requestTimeLabel.isHidden == true {
+            requestTimeLabel.isHidden = false
+            requestTimeLabel.text = ride.price.stringValue
+            startVillageLabel.isHidden = false
+            startVillageLabel.text = ride.hospital as String
+            destinationLabel.isHidden = false
+            destinationLabel.text = ride.distance as String
+            acceptRideButton.isHidden = false
+            searchingForRidesLabel.isHidden = false
         }
     }
     

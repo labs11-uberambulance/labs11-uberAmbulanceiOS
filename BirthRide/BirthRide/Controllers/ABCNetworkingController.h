@@ -12,6 +12,7 @@
 @class Driver;
 @class User;
 @class Ride;
+@class RequestedRide;
 NS_ASSUME_NONNULL_BEGIN
 
 
@@ -88,6 +89,16 @@ NS_ASSUME_NONNULL_BEGIN
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
 - (void)authenticateUserWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, NSArray *_Nullable userArray, NSString * _Nullable userType))completionHandler;
+
+
+/**
+This method will notify the backend that the driver has either accepted or rejected the ride request that he/she has received.
+ 
+ @param token The authentication token associated with the user. This parameter is used to find the existing user associated with it or, if not associated user is found, to create in the database a new user associated with it.
+ @param didAccept A BOOL declaring whether or not the driver accepted the ride.
+ @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
+ */
+- (void)driverAcceptsOrRejectsRideWithToken:(NSString *)token withRideId:(NSNumber *)rideId withDidAccept:(BOOL)didAccept withCompletion:(void(^)(NSError * _Nullable error))completionHandler;
 
 @end
 

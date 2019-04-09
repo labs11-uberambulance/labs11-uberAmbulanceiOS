@@ -46,7 +46,7 @@
       NSMutableArray<Driver *> *driversArray = [[NSMutableArray alloc] init];
       
       for (int i = 0; i < driversDictionaryArray.count; i++) {
-         Driver *newDriver = [[Driver alloc] initWithPrice:@(99) requestedDriverName:nil active:false bio:@"" photo:nil driverId:nil firebaseId:nil];
+         Driver *newDriver = [[Driver alloc] initWithPrice:@(99) requestedDriverName:nil isActive:false bio:@"" photo:nil driverId:nil firebaseId:nil];
          NSDictionary *driverDictionary = driversDictionaryArray[i];
          [driverDictionary[@"driver"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
             if ([key containsString:@"_"]) {
@@ -174,29 +174,49 @@
    
    NSNull *noData = [[NSNull alloc] init];
    
-   NSDictionary *userDictionary = @{
-                                    @"name": user.name,
-                                    @"phone": user.phone,
-                                    @"location": @{
-                                          @"latlng": mother.start.latLong,
-                                          @"name": noData,
-                                          @"descr": noData
-                                          },
-                                    };
+   NSDictionary *userDictionary = [[NSDictionary alloc] init];
+   
+   
    NSDictionary *jsonDictionary;
    
    if (driver != nil) {
       
-      NSData *driverData = [NSJSONSerialization dataWithJSONObject: driver options:NSJSONWritingPrettyPrinted error: NULL];
+      userDictionary = @{
+                         @"name": user.name,
+                         @"phone": user.phone,
+                         };
+      //I was struggling for a minute with an error here. I was trying to pass the BOOL into the dictionary, but dictionaries only take objects and BOOLs are primitives.
+      NSDictionary *driverDataDictionary = @{
+                                             @"id": driver.driverId,
+                                             @"firebase_id": driver.firebaseId,
+                                             @"price": driver.price,
+                                             
+                                             @"active":
+                                             [NSNumber numberWithBool:driver.isActive],
+                                             @"bio": driver.bio,
+                                             @"photo_url":
+                                                driver.photoUrl
+                                             
+                                             };
+      
       jsonDictionary = @{
                          @"user": userDictionary,
-                         @"driver": driverData
+                         @"driver": driverDataDictionary
                          };
-      NSData *dictionaryData = [[NSData alloc] init];
-      dictionaryData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error: NULL];
+      
+      NSData *dictionaryData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error: NULL];
       [requestURL setHTTPBody:dictionaryData];
    }
    else {
+      userDictionary = @{
+                         @"name": user.name,
+                         @"phone": user.phone,
+                         @"location": @{
+                               @"latlng": mother.start.latLong,
+                               @"name": noData,
+                               @"descr": noData
+                               },
+                         };
       NSDictionary *motherDictionary = @{
                                          @"start": @{
                                                @"latlng": mother.start.latLong,
@@ -218,11 +238,7 @@
          NSLog(@"%@", error.localizedDescription);
          return;
       }
-      if (data == nil) {
-         return;
-      }
-      NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
-      [jsonResponse allKeys];
+      
    }] resume];
 }
 
@@ -271,6 +287,41 @@
 - (void)updateRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable))completionHandler {
    
 }
+
+- (void)driverAcceptsOrRejectsRideWithToken:(NSString *)token withRideId:(NSNumber *)rideId withDidAccept:(BOOL)didAccept withRideData:(RequestedRide * _Nullable)requestedRide withCompletion:(void (^)(NSError * _Nullable))completionHandler {
+   NSURL *baseURL = [[NSURL alloc] initWithString: @"https://birthrider-backend.herokuapp.com/api/rides/driver"];
+   NSURL *baseURLWithMethod;
+   if (didAccept) {
+      baseURLWithMethod = [baseURL URLByAppendingPathComponent: @"accepts"];
+   }
+   else  {
+      baseURLWithMethod = [baseURL URLByAppendingPathComponent: @"rejects"];
+   }
+   NSURL *completeURL = [baseURLWithMethod URLByAppendingPathComponent: [rideId stringValue]];
+   NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:completeURL];
+   if (didAccept) {
+      [requestURL setHTTPMethod:@"POST"];
+      NSDictionary *requestedRideDictionary = @{
+                                                @"data": requestedRide
+                                                };
+      NSData *requestedRideData = [NSJSONSerialization dataWithJSONObject:requestedRideDictionary options:NSJSONWritingPrettyPrinted error:NULL];
+      [requestURL setHTTPBody:requestedRideData];
+   }
+   else {
+      [requestURL setHTTPMethod:@"GET"];
+   }
+   
+   [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+      if (error != nil) {
+         NSLog(@"Error in ABCNetworkingController.driverAcceptsOrRejectsRide:...");
+         NSLog(@"%@", error.localizedDescription);
+         return;
+      }
+   }] resume];
+}
+
+
+
 
 //I was getting errors when I was trying to pass the error into my completionHandler. It was an ARC error. The problem was that I was adding in an extra "asterisk", or saying that there was an extra pointer. The completionHandler couldn't take the error in that way. This is what it looked like when I was getting the error: NSError * _Nullable *error. That second asterisk was tripping me up.
 
