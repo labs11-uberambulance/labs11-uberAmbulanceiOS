@@ -288,6 +288,31 @@
    
 }
 
+- (void)driverAcceptsOrRejectsRideWithToken:(NSString *)token withRideId:(NSNumber *)rideId withDidAccept:(BOOL)didAccept withCompletion:(void (^)(NSError * _Nullable))completionHandler {
+   NSURL *baseURL = [[NSURL alloc] initWithString: @"https://birthrider-backend.herokuapp.com/api/rides/driver"];
+   NSURL *baseURLWithMethod;
+   if (didAccept) {
+      baseURLWithMethod = [baseURL URLByAppendingPathComponent: @"accepts"];
+   }
+   else  {
+      baseURLWithMethod = [baseURL URLByAppendingPathComponent: @"rejects"];
+   }
+   NSURL *completeURL = [baseURLWithMethod URLByAppendingPathComponent: [rideId stringValue]];
+   NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:completeURL];
+   [requestURL setHTTPMethod:@"POST"];
+   
+   [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+      if (error != nil) {
+         NSLog(@"Error in ABCNetworkingController.driverAcceptsOrRejectsRide:...");
+         NSLog(@"%@", error.localizedDescription);
+         return;
+      }
+   }] resume];
+}
+
+
+
+
 //I was getting errors when I was trying to pass the error into my completionHandler. It was an ARC error. The problem was that I was adding in an extra "asterisk", or saying that there was an extra pointer. The completionHandler couldn't take the error in that way. This is what it looked like when I was getting the error: NSError * _Nullable *error. That second asterisk was tripping me up.
 
 - (void)authenticateUserWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable, NSArray *_Nullable, NSString * _Nullable))completionHandler {

@@ -46,10 +46,27 @@ class DriverWorkViewController: UIViewController {
     
     //MARK: IBActions
     @IBAction func acceptRideButtonTapped(_ sender: Any) {
-        //accept ride networking request here
+        guard let userToken = AuthenticationController.shared.userToken,
+            let rideId = self.ride?.rideId else {return}
+        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: true) { (error) in
+            if let error = error {
+                NSLog("Error in DriverWorkVC.acceptRideButtonTapped")
+                NSLog(error.localizedDescription)
+                return
+            }
+        }
+        requestTimeLabel.text = self.ride
     }
     @IBAction func rejectRideButtonTapped(_ sender: Any) {
-        //reject ride networking request here
+        guard let userToken = AuthenticationController.shared.userToken,
+            let rideId = self.ride?.rideId else {return}
+        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: false) { (error) in
+            if let error = error {
+                NSLog("Error in DriverWorkVC.acceptRideButtonTapped")
+                NSLog(error.localizedDescription)
+                return
+            }
+        }
     }
     
     @IBAction func isWorkingSwitchToggled(_ sender: Any) {

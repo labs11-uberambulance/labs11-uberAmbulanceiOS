@@ -17,9 +17,10 @@ enum RideStatus: String {
     case complete
 }
 
-@objc
+@objcMembers
 class Ride: NSObject {
     var rideId: NSNumber?
+    var motherId: NSNumber?
     var waitMin: NSNumber?
     var startVillage: String?
     var startAddress: String?
@@ -27,6 +28,7 @@ class Ride: NSObject {
     var destinationAddress: String?
     
     init(rideID: NSNumber, waitMin: NSNumber, startVillage: String, startAddress: String, destination: String, destinationAddress: String) {
+        super.init()
         self.rideId = rideID
         self.waitMin = waitMin
         self.startVillage = startVillage
@@ -34,4 +36,23 @@ class Ride: NSObject {
         self.destination = destination
         self.destinationAddress = destinationAddress
     }
+}
+
+@objcMembers
+class requestedRide: NSObject {
+    let price: NSNumber
+    let hospitalName: NSString
+    let motherName: NSString
+    let distance: NSString
+    let phoneNumber: NSString
+    
+    required init(price: NSNumber, hospitalName: NSString, motherName: NSString, distance: NSString, phoneNumber: NSString) {
+        self.price = price
+        self.hospitalName = hospitalName
+        self.motherName = motherName
+        self.distance = distance
+        self.phoneNumber = phoneNumber
+    }
+    
+    
 }
