@@ -17,7 +17,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var rideInformationView: UIView!
     @IBOutlet weak var searchingForRidesLabel: UILabel!
     @IBOutlet weak var pastRidesTableView: UITableView!
-    
+    @IBOutlet weak var rejectRideButton: UIButton!
     //MARK: Private Properties
     private var ride: RequestedRide? {
         didSet {
@@ -38,6 +38,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         startVillageLabel.isHidden = true
         destinationLabel.isHidden = true
         acceptRideButton.isHidden = true
+        rejectRideButton.isHidden = true
         searchingForRidesLabel.isHidden = true
         pastRidesTableView.delegate = self
         // Do any additional setup after loading the view.
@@ -88,9 +89,6 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
     
     //MARK: Private Methods
     private func updateViews() {
-        configureLabels()
-    }
-    private func configureLabels() {
         guard let ride = ride else {return}
         if requestTimeLabel.isHidden == true {
             requestTimeLabel.isHidden = false
@@ -100,7 +98,17 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
             destinationLabel.isHidden = false
             destinationLabel.text = ride.distance as String
             acceptRideButton.isHidden = false
+            rejectRideButton.isHidden = false
             searchingForRidesLabel.isHidden = false
+        }
+        if requestTimeLabel.isHidden == false {
+            requestTimeLabel.isHidden = true
+            startVillageLabel.isHidden = true
+            destinationLabel.isHidden = true
+            acceptRideButton.isHidden = true
+            rejectRideButton.isHidden = true
+            searchingForRidesLabel.isHidden = true
+            animateLoadingView()
         }
     }
 }

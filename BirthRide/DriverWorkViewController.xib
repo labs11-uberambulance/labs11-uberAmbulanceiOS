@@ -15,6 +15,7 @@
                 <outlet property="destinationLabel" destination="ewj-ng-AQT" id="Ohb-dR-pur"/>
                 <outlet property="isWorkingSwitch" destination="ZDg-5C-d3Y" id="reT-dj-9FS"/>
                 <outlet property="pastRidesTableView" destination="h5V-c8-bcL" id="mYB-oZ-qzH"/>
+                <outlet property="rejectRideButton" destination="LKo-y4-Nz8" id="hWZ-NF-6Af"/>
                 <outlet property="requestTimeLabel" destination="Is1-Hq-Niy" id="C0Z-8A-eJg"/>
                 <outlet property="rideInformationView" destination="9Jg-Cz-vPL" id="l4V-ZV-3uk"/>
                 <outlet property="searchingForRidesLabel" destination="5Kb-Pe-aHQ" id="vc6-cB-8rx"/>
