@@ -26,6 +26,7 @@ class AuthenticationController {
     
     public var userToken: String?
 
+    public var requestedRide: RequestedRide?
     
     
     /// This method will do all of the networking with Firebase and the BirthRide server to authenticate the user, either whether the user is signing in or signing up. It uses a boolean, isSigningUp, to decide how to authenticate the user.

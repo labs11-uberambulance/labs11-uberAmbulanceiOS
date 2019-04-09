@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class DriverWorkViewController: UIViewController, UITableViewDelegate {
     //MARK: IBOutlets
@@ -19,15 +20,16 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var pastRidesTableView: UITableView!
     @IBOutlet weak var rejectRideButton: UIButton!
     //MARK: Private Properties
-    private var ride: RequestedRide? {
-        didSet {
-            updateViews()
-        }
-    }
+    
     
     //MARK: Other Properties
     var isSubviewOfSuperview = false
     var loadingView: IndeterminateLoadingView?
+    var ride: RequestedRide? {
+        didSet {
+            updateViews()
+        }
+    }
     
     
     
@@ -68,6 +70,14 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
             }
         }
     }
+    
+    @IBAction func logoutButtonTapped(_ sender: Any) {
+        
+    }
+    @IBAction func editProfileButtonTapped(_ sender: Any) {
+        
+    }
+    
     
     @IBAction func isWorkingSwitchToggled(_ sender: Any) {
         switch isWorkingSwitch.isOn {

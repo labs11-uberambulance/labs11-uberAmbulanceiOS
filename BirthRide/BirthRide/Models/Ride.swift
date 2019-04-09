@@ -56,5 +56,18 @@ class RequestedRide: NSObject {
         self.rideId = rideId
     }
     
+    class func createRideWithDictionary(dictionary: [String: AnyObject]) -> RequestedRide {
+        guard dictionary.keys.contains("price"),
+            dictionary.keys.contains("hospital"),
+        dictionary.keys.contains("name"),
+        dictionary.keys.contains("distance"),
+        dictionary.keys.contains("phone"),
+            dictionary.keys.contains("ride_id") else {
+                NSLog("dictionary received from push notification does not have the necessary keys, this method will return a dummy object.")
+                return RequestedRide.init(price: 1, hospitalName: "", motherName: "", distance: "", phoneNumber: "", rideId: 1)
+        }
+        return RequestedRide.init(price: dictionary["price"] as! NSNumber, hospitalName: dictionary["hospital"] as! NSString, motherName: dictionary["name"] as! NSString, distance: dictionary["distance"] as! NSString, phoneNumber: dictionary["phone"] as! NSString, rideId: dictionary["ride_id"] as! NSNumber)
+        
+    }
     
 }
