@@ -46,6 +46,10 @@ class DriverWorkViewController: UIViewController {
     
     //MARK: IBActions
     @IBAction func acceptRideButtonTapped(_ sender: Any) {
+        //accept ride networking request here
+    }
+    @IBAction func rejectRideButtonTapped(_ sender: Any) {
+        //reject ride networking request here
     }
     
     @IBAction func isWorkingSwitchToggled(_ sender: Any) {
