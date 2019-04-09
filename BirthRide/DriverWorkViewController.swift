@@ -6,18 +6,17 @@
 //
 
 import UIKit
-import GoogleMaps
 
-class DriverWorkViewController: UIViewController {
+class DriverWorkViewController: UIViewController, UITableViewDelegate {
     //MARK: IBOutlets
     @IBOutlet weak var isWorkingSwitch: UISwitch!
     @IBOutlet weak var requestTimeLabel: UILabel!
     @IBOutlet weak var startVillageLabel: UILabel!
     @IBOutlet weak var destinationLabel: UILabel!
     @IBOutlet weak var acceptRideButton: UIButton!
-    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var rideInformationView: UIView!
     @IBOutlet weak var searchingForRidesLabel: UILabel!
+    @IBOutlet weak var pastRidesTableView: UITableView!
     
     //MARK: Private Properties
     private var ride: RequestedRide? {
@@ -40,7 +39,7 @@ class DriverWorkViewController: UIViewController {
         destinationLabel.isHidden = true
         acceptRideButton.isHidden = true
         searchingForRidesLabel.isHidden = true
-        mapView.isHidden = true
+        pastRidesTableView.delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -79,7 +78,6 @@ class DriverWorkViewController: UIViewController {
                 UserController().updateDriver(viewController: self, name: nil, address: nil, email: nil, phoneNumber: nil, priceString: nil, bio: nil, photo: nil)
             }
         case false:
-            if mapView.isHidden == true {
                 stopAnimatingLoadingView()
                 searchingForRidesLabel.isHidden = true
                 AuthenticationController.shared.driver?.isActive = false
@@ -87,29 +85,10 @@ class DriverWorkViewController: UIViewController {
                 UserController().updateDriver(viewController: self, name: nil, address: nil, email: nil, phoneNumber: nil, priceString: nil, bio: nil, photo: nil)
             }
         }
-    }
     
     //MARK: Private Methods
     private func updateViews() {
         configureLabels()
-        configureMapView()
-    }
-    private func configureMapView() {
-        guard let ride = ride else {return}
-        if mapView.isHidden == true {
-        mapView.isHidden = false
-        }
-        else {
-            mapView.isHidden = true
-        }
-        let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
-        mapView.animate(to: camera)
-        
-        let userMarker = GMSMarker()
-        userMarker.icon = GMSMarker.markerImage(with: .blue)
-        userMarker.position = CLLocationManager().location?.coordinate ?? CLLocationCoordinate2D(latitude: 1.5, longitude: 36.9)
-        userMarker.map = mapView
-        
     }
     private func configureLabels() {
         guard let ride = ride else {return}
@@ -124,6 +103,7 @@ class DriverWorkViewController: UIViewController {
             searchingForRidesLabel.isHidden = false
         }
     }
-    
-    
 }
+    
+    
+
