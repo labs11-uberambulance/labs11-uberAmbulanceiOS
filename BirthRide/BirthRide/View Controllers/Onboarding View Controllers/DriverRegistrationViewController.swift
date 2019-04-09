@@ -10,8 +10,8 @@ import UIKit
 
 class DriverRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
     
-    //MARK: Private Properties
-    private var driver: Driver?
+    //MARK: Other Properties
+    var driver: Driver?
     
     
     //MARK: IBOutlets
@@ -25,6 +25,7 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     override func viewDidLoad() {
         super.viewDidLoad()
         setupKeyboardDismissRecognizer()
+        populateLabelsAndTextFields()
 
         // Do any additional setup after loading the view.
     }
@@ -69,5 +70,15 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     private func dismissKeyboard()
     {
         view.endEditing(true)
+    }
+    
+    private func populateLabelsAndTextFields() {
+        if let driver = driver,
+            let user = AuthenticationController.shared.genericUser {
+            priceTextField.text = driver.price?.stringValue
+            bioTextView.text = driver.bio as String?
+            phoneNumberTextField.text = user.phone as String?
+            nameTextField.text = user.name as String?
+        }
     }
 }

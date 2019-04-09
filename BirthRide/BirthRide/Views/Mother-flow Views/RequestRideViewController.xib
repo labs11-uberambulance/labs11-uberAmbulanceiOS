@@ -111,7 +111,11 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     <items>
                         <navigationItem title="Request a Ride" id="tm7-PX-rtT">
-                            <barButtonItem key="leftBarButtonItem" title="Logout" id="8Uv-1z-lEn"/>
+                            <barButtonItem key="leftBarButtonItem" title="Logout" id="8Uv-1z-lEn">
+                                <connections>
+                                    <action selector="logoutButtonTapped:" destination="-1" id="nQa-g3-c4Z"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem key="rightBarButtonItem" title="Edit Profile" id="jw0-2B-IvW"/>
                         </navigationItem>
                     </items>

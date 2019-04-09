@@ -39,6 +39,15 @@ class AuthenticationController {
         authenticationNetworkingRequest()
     }
     
+    public func deauthenticateUser() {
+        userToken = nil
+        driver = nil
+        motherStartLatLong = nil
+        pregnantMom = nil
+        genericUser = nil
+        requestedRide = nil
+    }
+    
     /// This method will perform a networking request to authenticate with the back-end. The networking request returns a userArray. From this userArray the user and driver/pregnantMom properties of the AuthenticationController are populated.
     ///
     /// - Parameter viewController: This UIViewControllerProperty is used to determine the viewController in which the error messages should be displayed.

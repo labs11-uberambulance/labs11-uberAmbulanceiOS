@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import GoogleMaps
 import GooglePlaces
 
@@ -50,6 +51,17 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     //MARK: IBActions
+    @IBAction func logoutButtonTapped(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            NSLog("Could not sign out user in DriverWorkViewController.logoutButtonTapped")
+            NSLog(error.localizedDescription)
+        }
+        AuthenticationController.shared.deauthenticateUser()
+        logoutTransition()
+    }
+    
     @IBAction func requestRideButtonTapped(_ sender: Any) {
         guard let userToken = AuthenticationController.shared.userToken,
             let mother = AuthenticationController.shared.pregnantMom,
@@ -89,7 +101,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     
     
     
-    
+    //MARK: Private Methods
     private func configureMapView() {
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
         mapView.animate(to: camera)
@@ -122,6 +134,34 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
             self.driversArray = driversArray
         })
     }
+    private func logoutTransition() {
+        let tabBarController = UITabBarController()
+        
+        let signUpViewController = SignUpViewController()
+        
+        let signInViewController = SignInViewController()
+        
+        tabBarController.addChild(signInViewController)
+        tabBarController.addChild(signUpViewController)
+        
+        let signUpItem = UITabBarItem()
+        signUpItem.title = "Sign Up"
+        let signInItem = UITabBarItem()
+        signInItem.title = "Sign In"
+        
+        signUpViewController.tabBarItem = signUpItem
+        signInViewController.tabBarItem = signInItem
+        
+        present(tabBarController, animated: true, completion: nil)
+        
+        
+    }
+    
+    
+    
+    
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
