@@ -288,7 +288,7 @@
    
 }
 
-- (void)driverAcceptsOrRejectsRideWithToken:(NSString *)token withRideId:(NSNumber *)rideId withDidAccept:(BOOL)didAccept withCompletion:(void (^)(NSError * _Nullable))completionHandler {
+- (void)driverAcceptsOrRejectsRideWithToken:(NSString *)token withRideId:(NSNumber *)rideId withDidAccept:(BOOL)didAccept withRideData:(RequestedRide * _Nullable)requestedRide withCompletion:(void (^)(NSError * _Nullable))completionHandler {
    NSURL *baseURL = [[NSURL alloc] initWithString: @"https://birthrider-backend.herokuapp.com/api/rides/driver"];
    NSURL *baseURLWithMethod;
    if (didAccept) {
@@ -299,7 +299,17 @@
    }
    NSURL *completeURL = [baseURLWithMethod URLByAppendingPathComponent: [rideId stringValue]];
    NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:completeURL];
-   [requestURL setHTTPMethod:@"POST"];
+   if (didAccept) {
+      [requestURL setHTTPMethod:@"POST"];
+      NSDictionary *requestedRideDictionary = @{
+                                                @"data": requestedRide
+                                                };
+      NSData *requestedRideData = [NSJSONSerialization dataWithJSONObject:requestedRideDictionary options:NSJSONWritingPrettyPrinted error:NULL];
+      [requestURL setHTTPBody:requestedRideData];
+   }
+   else {
+      [requestURL setHTTPMethod:@"GET"];
+   }
    
    [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
       if (error != nil) {

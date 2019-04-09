@@ -39,19 +39,21 @@ class Ride: NSObject {
 }
 
 @objcMembers
-class requestedRide: NSObject {
+class RequestedRide: NSObject {
     let price: NSNumber
-    let hospitalName: NSString
-    let motherName: NSString
+    let hospital: NSString
+    let name: NSString
     let distance: NSString
-    let phoneNumber: NSString
+    let phone: NSString
+    let rideId: NSNumber
     
-    required init(price: NSNumber, hospitalName: NSString, motherName: NSString, distance: NSString, phoneNumber: NSString) {
+    required init(price: NSNumber, hospitalName: NSString, motherName: NSString, distance: NSString, phoneNumber: NSString, rideId: NSNumber) {
         self.price = price
-        self.hospitalName = hospitalName
-        self.motherName = motherName
+        self.hospital = hospitalName
+        self.name = motherName
         self.distance = distance
-        self.phoneNumber = phoneNumber
+        self.phone = phoneNumber
+        self.rideId = rideId
     }
     
     

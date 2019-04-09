@@ -20,7 +20,7 @@ class DriverWorkViewController: UIViewController {
     @IBOutlet weak var searchingForRidesLabel: UILabel!
     
     //MARK: Private Properties
-    private var ride: Ride? {
+    private var ride: RequestedRide? {
         didSet {
             updateViews()
         }
@@ -55,7 +55,7 @@ class DriverWorkViewController: UIViewController {
                 return
             }
         }
-        requestTimeLabel.text = self.ride
+        updateViews()
     }
     @IBAction func rejectRideButtonTapped(_ sender: Any) {
         guard let userToken = AuthenticationController.shared.userToken,
@@ -95,7 +95,13 @@ class DriverWorkViewController: UIViewController {
         configureMapView()
     }
     private func configureMapView() {
+        guard let ride = ride else {return}
+        if mapView.isHidden == true {
         mapView.isHidden = false
+        }
+        else {
+            mapView.isHidden = true
+        }
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
         mapView.animate(to: camera)
         
@@ -106,13 +112,16 @@ class DriverWorkViewController: UIViewController {
         
     }
     private func configureLabels() {
-        if mapView.isHidden == true {
+        guard let ride = ride else {return}
+        if requestTimeLabel.isHidden == true {
             requestTimeLabel.isHidden = false
+            requestTimeLabel.text = ride.price.stringValue
             startVillageLabel.isHidden = false
+            startVillageLabel.text = ride.hospital as String
             destinationLabel.isHidden = false
+            destinationLabel.text = ride.distance as String
             acceptRideButton.isHidden = false
             searchingForRidesLabel.isHidden = false
-            
         }
     }
     

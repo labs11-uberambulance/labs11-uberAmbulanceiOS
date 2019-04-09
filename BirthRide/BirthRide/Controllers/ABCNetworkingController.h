@@ -12,6 +12,7 @@
 @class Driver;
 @class User;
 @class Ride;
+@class RequestedRide;
 NS_ASSUME_NONNULL_BEGIN
 
 
