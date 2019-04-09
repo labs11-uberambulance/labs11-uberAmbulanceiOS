@@ -7,33 +7,34 @@
 //
 
 import UIKit
+import GoogleMaps
 
-class DriverRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
+class DriverRegistrationViewController: UIViewController, TransitionBetweenViewControllers, GMSMapViewDelegate {
+    
+    //MARK: Private Properties
+    private var userMarkerArray: [GMSMarker] = []
     
     //MARK: Other Properties
     var driver: Driver?
     
-    
     //MARK: IBOutlets
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var addressTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var bioTextView: UITextView!
+    @IBOutlet weak var mapView: GMSMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupKeyboardDismissRecognizer()
         populateLabelsAndTextFields()
+        configureMapView()
 
         // Do any additional setup after loading the view.
     }
     @IBAction func continueButtonTapped(_ sender: Any) {
         
         guard let name = nameTextField?.text,
-            let address = addressTextField.text,
-            let email = emailTextField.text,
             let phoneNumber = phoneNumberTextField.text,
             let price = priceTextField.text,
             let bio = bioTextView.text else {
@@ -41,13 +42,11 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         }
         
         let otherName = name as NSString
-        let otherAddress = address as NSString
-        let otherEmail = email as NSString
         let otherPhone = phoneNumber as NSString
         let otherPrice = price as NSString
         let otherBio = bio as NSString
         
-        UserController().updateDriver(viewController: self, name: otherName, address: otherAddress, email: otherEmail, phoneNumber: otherPhone, priceString: otherPrice, bio: otherBio, photo: nil)
+        UserController().updateDriver(viewController: self, name: otherName, address: nil, email: nil, phoneNumber: otherPhone, priceString: otherPrice, bio: otherBio, photo: nil)
         transition(userType: nil)
     }
     
@@ -56,6 +55,19 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         self.present(driverPhotoRegistrationViewController, animated: true) {
         }
     }
+    
+    
+    ///This method will create a map marker when the user touches and holds on a position on the mapView. The map marker will **not** be created if one already exists.
+    func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
+        guard userMarkerArray.count == 0 else {return}
+        let userMarker = GMSMarker()
+        userMarker.position = coordinate
+        userMarker.appearAnimation = .pop
+        userMarker.isDraggable = true
+        userMarker.map = mapView
+        userMarkerArray.append(userMarker)
+    }
+    
     
     //MARK: Private Methods
     private func setupKeyboardDismissRecognizer(){
@@ -80,5 +92,23 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
             phoneNumberTextField.text = user.phone as String?
             nameTextField.text = user.name as String?
         }
+    }
+    
+    ///This method will configure the mapView. If the app is able to get the user coordinates, then it will also create a marker to put on the map. If not it will return. The map marker will **not** be created if one already exists.
+    private func configureMapView() {
+        mapView.delegate = self
+        let userMarker = GMSMarker()
+        guard let userLocation = driver?.location?.latLong else {return}
+        let latLongArray = userLocation.components(separatedBy: ",")
+        let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)
+        let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)
+        userMarker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+        userMarker.appearAnimation = .pop
+        userMarker.isDraggable = true
+        userMarker.map = mapView
+        
+        mapView.camera = GMSCameraPosition(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude), zoom: 6.0)
+        userMarkerArray.append(userMarker)
+        
     }
 }

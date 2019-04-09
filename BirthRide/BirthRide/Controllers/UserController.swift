@@ -101,8 +101,8 @@ class UserController {
         user.phone = phone as NSString
         
     }
-    //MARK: Private Methods
-    private func stringToInt(intString: String, viewController: UIViewController) -> Int {
+    
+    public func stringToInt(intString: String, viewController: UIViewController) -> Int {
         let stringArray = intString.components(separatedBy: "")
         var intResult: Int = 0
         var intArray: [Int] = []
