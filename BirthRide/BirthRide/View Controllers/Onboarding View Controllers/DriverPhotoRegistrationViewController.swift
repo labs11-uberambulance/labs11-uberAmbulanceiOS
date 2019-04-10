@@ -61,6 +61,7 @@ class DriverPhotoRegistrationViewController: UIViewController, TransitionBetween
     
     //MARK: TransitionBetweenViewControllers methods
     func transition(userType: UserType?) {
+        present(DriverWorkViewController(), animated: true, completion: nil)
     }
 
     /*

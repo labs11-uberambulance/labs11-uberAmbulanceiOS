@@ -20,6 +20,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     private var searchController: UISearchController?
     //MARK: Other Properties
     var mother: PregnantMom?
+    var isUpdating: Bool = false
     //MARK: IBOutlets
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -73,10 +74,10 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
 
         AuthenticationController.shared.genericUser?.name = nameTextField.text! as NSString
         AuthenticationController.shared.genericUser?.phone = phoneTextField.text! as NSString
-
+        
         UserController().updateGenericUser(user: user, name: nameTextField.text, village: villageTextField.text, phone: phoneTextField.text, address: nil, email: nil)
 
-        UserController().configurePregnantMom(viewController: self, startLatLong: latLongString as NSString, destinationLatLong: destLatLongString as NSString, startDescription: "")
+        UserController().configurePregnantMom(viewController: self, isUpdating: isUpdating, startLatLong: latLongString as NSString, destinationLatLong: destLatLongString as NSString, startDescription: "")
 
         transition(userType: nil)
     }

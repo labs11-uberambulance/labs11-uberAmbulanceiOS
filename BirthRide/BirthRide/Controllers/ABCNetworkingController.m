@@ -238,6 +238,10 @@
          NSLog(@"%@", error.localizedDescription);
          return;
       }
+      if (data != nil) {
+         NSDictionary *this = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+         NSLog(@"hope this works");
+      }
       
    }] resume];
 }

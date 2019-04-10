@@ -17,7 +17,7 @@ class UserController {
     
     
     //MARK: Public Methods
-    public func configurePregnantMom( viewController: UIViewController, startLatLong: NSString, destinationLatLong: NSString, startDescription: NSString?) -> PregnantMom {
+    public func configurePregnantMom( viewController: UIViewController, isUpdating: Bool, startLatLong: NSString, destinationLatLong: NSString, startDescription: NSString?) -> PregnantMom {
         
         let testStart = Start(latLong: startLatLong, name: "", startDescription: "")
         let testDestination = Destination(latLong: "", name: "", destinationDescription: "")
@@ -48,9 +48,13 @@ class UserController {
                 }
             }
         }
+        if !isUpdating {
         updateOperation.addDependency(onboardOperation)
         onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation], waitUntilFinished: true)
-        
+        }
+        else {
+            onboardAndUpdateUserOperationQueue.addOperation(updateOperation)
+        }
         
         
         return newMom
@@ -59,9 +63,46 @@ class UserController {
         
     }
     
-    public func configureDriver(price: NSNumber, bio: NSString) -> Driver {
-        return Driver(price: price, requestedDriverName: nil, isActive: false, bio: bio, photo: nil, driverId: nil, firebaseId: nil)
+    public func configureDriver(isUpdating: Bool, price: NSNumber, bio: NSString){
+        guard let user = AuthenticationController.shared.genericUser,
+            let token = AuthenticationController.shared.userToken,
+        let userID = AuthenticationController.shared.genericUser?.userID else {return}
+        
+        let newDriver = Driver(price: price, requestedDriverName: nil, isActive: false, bio: bio, photo: nil, driverId: nil, firebaseId: nil)
+        
+        let onboardAndUpdateUserOperationQueue = OperationQueue()
+        let onboardOperation: BlockOperation = BlockOperation {
+            self.networkingController.onboardUser(withToken: token, withUserID: userID, with: user, with: newDriver, withMother: nil) { (error) in
+                if let error = error {
+                    NSLog(error.localizedDescription)
+                    return
+                }
+            }
+        }
+        let updateOperation: BlockOperation = BlockOperation {
+            self.networkingController.updateUser(withToken: token, withUserID: userID, with: user, with: newDriver, withMother: nil) { (error) in
+                if let error = error {
+                    NSLog(error.localizedDescription)
+                    return
+                }
+            }
+        }
+        if !isUpdating {
+            updateOperation.addDependency(onboardOperation)
+            onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation], waitUntilFinished: true)
+        }
+        else {
+            onboardAndUpdateUserOperationQueue.addOperation(updateOperation)
+        }
     }
+    
+    
+    
+    
+    
+    
+    
+    
     public func updateDriver(viewController: UIViewController, name: NSString?, address: NSString?, email: NSString?, phoneNumber: NSString?, priceString: NSString?, bio: NSString?, photo: NSString?) {
         guard name != "", address != "", email != "", phoneNumber != "", priceString != "",
         name != nil, address != nil, email != nil, phoneNumber != nil, priceString != nil else {
