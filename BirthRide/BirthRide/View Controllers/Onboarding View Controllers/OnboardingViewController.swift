@@ -15,6 +15,9 @@ class OnboardingViewController: UIViewController {
     ///This is not a true containerView. Here we are going to add the view of the intended viewController as a subView
     @IBOutlet weak var containerView: UIView!
     
+    //MARK: Private Properties
+    var containerViewController: UIViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViewControllerAndView()
@@ -23,14 +26,14 @@ class OnboardingViewController: UIViewController {
     
     func setUpViewControllerAndView() {
         if AuthenticationController.shared.genericUser?.userType == "drivers" {
-            let containerViewController = DriverRegistrationViewController()
-            containerViewController.isUpdating = false
-            containerView.addSubview((containerViewController.view)!)
+            containerViewController = DriverRegistrationViewController()
+        guard containerViewController != nil else {return}
+        containerView.addSubview((containerViewController?.view)!)
         }
         else {
-            let containerViewController = MotherOrCaretakerRegistrationViewController()
-            containerViewController.isUpdating = false
-            containerView.addSubview((containerViewController.view)!)
+            containerViewController = MotherOrCaretakerRegistrationViewController()
+            guard containerViewController != nil else {return}
+            containerView.addSubview((containerViewController?.view)!)
     }
 }
 

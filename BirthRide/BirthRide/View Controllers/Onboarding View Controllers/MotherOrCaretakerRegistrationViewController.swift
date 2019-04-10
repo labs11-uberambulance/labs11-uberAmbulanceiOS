@@ -52,11 +52,14 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         mapContainerView.addSubview((searchController?.searchBar)!)
         autocompleteResultsVC.delegate = self
         populateTextFieldsAndConfigureViewForEditing()
+        
+        if isUpdating {
+            guard let mom = AuthenticationController.shared.pregnantMom else {return}
         createDestinationMapMarker(coordinate: CLLocationCoordinate2D(latitude: 22, longitude: 22))
+        }
         // Do any additional setup after loading the view.
     }
     @IBAction func caretakerButtonTapped(_ sender: Any) {
-        //FIXME: Currently, all of the text fields are hidden until this button is hit.
         caretakerTextField.isHidden = false
     }
     @IBAction func continueButtonTapped(_ sender: Any) {
@@ -173,7 +176,9 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     private func configureMapView() {
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
         mapView.animate(to: camera)
+        if isUpdating {
         configureUserMarker()
+        }
         
     }
     
