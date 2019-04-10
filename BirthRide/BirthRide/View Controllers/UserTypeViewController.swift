@@ -21,7 +21,7 @@ class UserTypeViewController: UIViewController, TransitionBetweenViewControllers
     
     //MARK: IBActions
     @IBAction func driverButtonTapped(_ sender: Any) {
-        transition(userType: UserType.driver)
+        transition(userType: UserType.drivers)
     }
     @IBAction func pregnantMomButtonTapped(_ sender: Any) {
         transition(userType: UserType.pregnantMom)

@@ -32,7 +32,7 @@ class DriverPhotoRegistrationViewController: UIViewController, TransitionBetween
         choosePhoto()
     }
     @IBAction func doneButton(_ sender: Any) {
-            transition(userType: UserType.driver)
+            transition(userType: UserType.drivers)
     }
     
     //MARK: Private Methods
