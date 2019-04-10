@@ -25,8 +25,6 @@ class UserController {
         
         if !isUpdating {
         mom = PregnantMom(start: Start(latLong: startLatLong, name: village, startDescription: ""), destination: Destination(latLong: destinationLatLong, name: "", destinationDescription: ""), caretakerName: caretakerName, motherId: nil)
-        mom.start?.latLong = startLatLong
-        mom.destination?.latLong = destinationLatLong
         AuthenticationController.shared.pregnantMom = mom
         }
         else {

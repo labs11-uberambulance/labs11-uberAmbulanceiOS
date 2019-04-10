@@ -19,6 +19,9 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     private let autocompleteResultsVC = GMSAutocompleteResultsViewController()
     private var searchController: UISearchController?
     private var path = GMSMutablePath()
+    private var startName: String?
+    private var startLatLong: String?
+    private var destLatLong: String?
     //MARK: Other Properties
     var mother: PregnantMom?
     var isUpdating: Bool = false
@@ -69,16 +72,11 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
             destinationMarkerArray.count > 0,
         let name = nameTextField.text,
         let phone = phoneTextField.text,
-        let village = villageTextField.text else {return}
+        let village = villageTextField.text,
+        let startLatLong = startLatLong,
+        let destLatLong = destLatLong else {return}
        
         var caretakerName = caretakerTextField.text
-    
-        let motherLatitude = userMarkerArray[0].position.latitude
-        let motherLongitude = userMarkerArray[0].position.longitude
-        let latLongString = "\(motherLatitude),\(motherLongitude)"
-        let destinationLatitude = destinationMarkerArray[0].position.latitude
-        let destinationLongitude = destinationMarkerArray[0].position.longitude
-        let destLatLongString = "\(destinationLatitude), \(destinationLongitude)"
 
         AuthenticationController.shared.genericUser?.name = nameTextField.text! as NSString
         AuthenticationController.shared.genericUser?.phone = phoneTextField.text! as NSString
@@ -87,7 +85,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         if caretakerName == nil {
             caretakerName = ""
         }
-        UserController().configurePregnantMom(isUpdating: isUpdating, name: name as NSString, village: village as NSString, phone: phone as NSString, caretakerName: caretakerName as NSString?, startLatLong: latLongString as NSString, destinationLatLong: destLatLongString as NSString, startDescription: "")
+        UserController().configurePregnantMom(isUpdating: isUpdating, name: name as NSString, village: village as NSString, phone: phone as NSString, caretakerName: caretakerName as NSString?, startLatLong: startLatLong as NSString, destinationLatLong: destLatLong as NSString, startDescription: "")
 
         transition(userType: nil)
     }
@@ -102,11 +100,11 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
     //MARK: GMSAutocompleteResultsViewControllerDelegate methods
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
-        let lat = "\(place.coordinate.latitude)"
-        let long = "\(place.coordinate.longitude)"
-        AuthenticationController.shared.pregnantMom?.destination?.latLong = "\(lat),\(long)" as NSString
+        let latLong = "\(place.coordinate.latitude),\(place.coordinate.longitude)"
+        destLatLong = latLong
+        
         if let name = place.name {
-            AuthenticationController.shared.pregnantMom?.destination?.name = name as NSString
+            startName = name
         }
         createDestinationMapMarker(coordinate: place.coordinate)
         createRoute()
@@ -127,9 +125,15 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         userMarker.map = mapView
         userMarkerArray.append(userMarker)
         createRoute()
+        let latLong = "\(coordinate.latitude),\(coordinate.longitude)"
+        startLatLong = latLong
     }
     
     func mapView(_ mapView: GMSMapView, didDrag marker: GMSMarker) {
+        
+        let latLong = "\(marker.position.latitude),\(marker.position.longitude)"
+        startLatLong = latLong
+        
         createRoute()
     }
     
