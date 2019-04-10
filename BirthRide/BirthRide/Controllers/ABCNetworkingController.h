@@ -94,6 +94,7 @@ This method will notify the backend that the driver has either accepted or rejec
  
  @param token The authentication token associated with the user. This parameter is used to find the existing user associated with it or, if not associated user is found, to create in the database a new user associated with it.
  @param didAccept A BOOL declaring whether or not the driver accepted the ride.
+ @param requestedRide A nullable RequestedRide object that is passed into the method ONLY if the driver is rejecting the ride. Otherwise, it is nil.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
 - (void)driverAcceptsOrRejectsRideWithToken:(NSString *)token withRideId:(NSNumber *)rideId withDidAccept:(BOOL)didAccept withRideData:(RequestedRide * _Nullable)requestedRide withCompletion:(void (^)(NSError * _Nullable))completionHandler;
