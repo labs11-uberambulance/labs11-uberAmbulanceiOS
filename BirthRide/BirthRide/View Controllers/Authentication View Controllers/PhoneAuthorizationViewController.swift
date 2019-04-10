@@ -14,8 +14,6 @@ import Firebase
 class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewControllers {
     //MARK: Private Properties
     private let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
-    private var genericUser: User?
-    private var pregnantMom: PregnantMom?
     
     //MARK: IBOutlets
     @IBOutlet weak var phoneNumberTextField: UITextField!
