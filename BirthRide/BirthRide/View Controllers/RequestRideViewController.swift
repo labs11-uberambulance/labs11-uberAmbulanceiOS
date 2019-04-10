@@ -52,12 +52,14 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     }
     //MARK: IBActions
     @IBAction func logoutButtonTapped(_ sender: Any) {
+        let firebaseAuth = Auth.auth()
         do {
-            try Auth.auth().signOut()
-        } catch {
-            NSLog("Could not sign out user in DriverWorkViewController.logoutButtonTapped")
-            NSLog(error.localizedDescription)
+            try firebaseAuth.signOut()
+            NSLog("Sign out successful")
+        } catch let signOutError as NSError {
+            NSLog("Error signing out: %@", signOutError)
         }
+        
         AuthenticationController.shared.deauthenticateUser()
         logoutTransition()
     }
