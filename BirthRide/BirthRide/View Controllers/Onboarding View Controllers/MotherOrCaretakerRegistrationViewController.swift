@@ -18,6 +18,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     private var destinationMarkerArray: [GMSMarker] = []
     private let autocompleteResultsVC = GMSAutocompleteResultsViewController()
     private var searchController: UISearchController?
+    private var path = GMSMutablePath()
     //MARK: Other Properties
     var mother: PregnantMom?
     var isUpdating: Bool = false
@@ -103,11 +104,12 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
         let lat = "\(place.coordinate.latitude)"
         let long = "\(place.coordinate.longitude)"
-        AuthenticationController.shared.pregnantMom?.destination?.latLong = "\(lat), \(long)" as NSString
+        AuthenticationController.shared.pregnantMom?.destination?.latLong = "\(lat),\(long)" as NSString
         if let name = place.name {
             AuthenticationController.shared.pregnantMom?.destination?.name = name as NSString
         }
         createDestinationMapMarker(coordinate: place.coordinate)
+        createRoute()
         resultsController.dismiss(animated: true, completion: nil)
     }
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
@@ -124,6 +126,11 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         userMarker.isDraggable = true
         userMarker.map = mapView
         userMarkerArray.append(userMarker)
+        createRoute()
+    }
+    
+    func mapView(_ mapView: GMSMapView, didDrag marker: GMSMarker) {
+        createRoute()
     }
     
     //MARK: Private Methods
@@ -151,6 +158,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         destinationMarker.position = coordinate
         destinationMarker.appearAnimation = .pop
         destinationMarker.isDraggable = false
+        destinationMarker.icon = GMSMarker.markerImage(with: .orange)
         destinationMarker.map = mapView
         mapView.settings.myLocationButton = true
         destinationMarkerArray.append(destinationMarker)
@@ -214,7 +222,24 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         userMarker.isDraggable = true
         userMarker.map = mapView
         userMarker.icon = GMSMarker.markerImage(with: .blue)
+        userMarker.icon = GMSMarker.markerImage(with: .blue)
         userMarkerArray.append(userMarker)
+    }
+    
+    
+    //FIXME: The existing paths are not removed when the new path is created.
+    private func createRoute() {
+        
+        guard userMarkerArray.count > 0,
+            destinationMarkerArray.count > 0 else {return}
+        
+        path.removeAllCoordinates()
+        path.add(CLLocationCoordinate2D(latitude: CLLocationDegrees(destinationMarkerArray[0].position.latitude), longitude: CLLocationDegrees(destinationMarkerArray[0].position.longitude)))
+        path.add(CLLocationCoordinate2D(latitude: userMarkerArray[0].position.latitude, longitude: userMarkerArray[0].position.longitude))
+        
+        let line = GMSPolyline.init(path: path)
+        line.strokeColor = .green
+        line.map = mapView
     }
     
 }
