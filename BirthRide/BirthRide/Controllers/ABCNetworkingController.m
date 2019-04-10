@@ -24,7 +24,7 @@
    //I was getting an error with my networking because I was not sending valid JSON. When I would po my coordinateString in the console, the colon would be replaced by an equal sign. I had to add the below header, at the suggestion of Matt, to let the back-end know that I am indeed sending JSON.
    [requestURL setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
    
-   NSDictionary *coordinateString = @{@"location":@"0.5223289999999999,33.276038"};
+   NSDictionary *coordinateString = @{@"location": mother.start.latLong};
    
    NSData *coordinateData = [NSJSONSerialization dataWithJSONObject:coordinateString options:NSJSONWritingPrettyPrinted error: NULL];
    [requestURL setHTTPBody:coordinateData];

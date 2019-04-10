@@ -108,6 +108,20 @@
 			remoteGlobalIDString = FA897E0F8D7DF8DB5E46395F4F43AEED;
 			remoteInfo = "Pods-BirthRide";
 		};
+		A2E7C1D3225E493400429C13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F82CE3790FF16478BA8FE8127CFE6D4B;
+			remoteInfo = FirebaseMessaging;
+		};
+		A2E7C1D5225E493400429C13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DFE9841989B5285BD5437F7525EB36C6;
+			remoteInfo = Protobuf;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -317,11 +331,13 @@
 			children = (
 				A29282E7224C030400FF9C28 /* FirebaseAuth.framework */,
 				A29282E9224C030400FF9C28 /* FirebaseCore.framework */,
+				A2E7C1D4225E493400429C13 /* FirebaseMessaging.framework */,
 				A29282EB224C030400FF9C28 /* GoogleToolboxForMac.framework */,
 				A29282ED224C030400FF9C28 /* GoogleUtilities.framework */,
 				A29282EF224C030400FF9C28 /* GTMSessionFetcher.framework */,
 				A29282F1224C030400FF9C28 /* nanopb.framework */,
 				A29282F3224C030400FF9C28 /* Pods_BirthRide.framework */,
+				A2E7C1D6225E493400429C13 /* Protobuf.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -476,7 +492,7 @@
 				TargetAttributes = {
 					A215501B2242CE5C00DDF613 = {
 						CreatedOnToolsVersion = 10.0;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -560,6 +576,20 @@
 			fileType = wrapper.framework;
 			path = Pods_BirthRide.framework;
 			remoteRef = A29282F2224C030400FF9C28 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A2E7C1D4225E493400429C13 /* FirebaseMessaging.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseMessaging.framework;
+			remoteRef = A2E7C1D3225E493400429C13 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A2E7C1D6225E493400429C13 /* Protobuf.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Protobuf.framework;
+			remoteRef = A2E7C1D5225E493400429C13 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -847,7 +877,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BirthRide-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -870,7 +900,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AustinCole.BirthRide-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BirthRide-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
