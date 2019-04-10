@@ -6,29 +6,30 @@
 //
 
 import UIKit
-import GoogleMaps
+import FirebaseAuth
 
-class DriverWorkViewController: UIViewController {
+class DriverWorkViewController: UIViewController, UITableViewDelegate {
     //MARK: IBOutlets
     @IBOutlet weak var isWorkingSwitch: UISwitch!
     @IBOutlet weak var requestTimeLabel: UILabel!
     @IBOutlet weak var startVillageLabel: UILabel!
     @IBOutlet weak var destinationLabel: UILabel!
     @IBOutlet weak var acceptRideButton: UIButton!
-    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var rideInformationView: UIView!
     @IBOutlet weak var searchingForRidesLabel: UILabel!
-    
+    @IBOutlet weak var pastRidesTableView: UITableView!
+    @IBOutlet weak var rejectRideButton: UIButton!
     //MARK: Private Properties
-    private var ride: RequestedRide? {
-        didSet {
-            updateViews()
-        }
-    }
+    
     
     //MARK: Other Properties
     var isSubviewOfSuperview = false
     var loadingView: IndeterminateLoadingView?
+    var ride: RequestedRide? {
+        didSet {
+            updateViews()
+        }
+    }
     
     
     
@@ -39,8 +40,9 @@ class DriverWorkViewController: UIViewController {
         startVillageLabel.isHidden = true
         destinationLabel.isHidden = true
         acceptRideButton.isHidden = true
+        rejectRideButton.isHidden = true
         searchingForRidesLabel.isHidden = true
-        mapView.isHidden = true
+        pastRidesTableView.delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -69,6 +71,21 @@ class DriverWorkViewController: UIViewController {
         }
     }
     
+    @IBAction func logoutButtonTapped(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            NSLog("Could not sign out user in DriverWorkViewController.logoutButtonTapped")
+            NSLog(error.localizedDescription)
+        }
+        AuthenticationController.shared.deauthenticateUser()
+        logoutTransition()
+    }
+    @IBAction func editProfileButtonTapped(_ sender: Any) {
+        editProfileTransition()
+    }
+    
+    
     @IBAction func isWorkingSwitchToggled(_ sender: Any) {
         switch isWorkingSwitch.isOn {
         case true:
@@ -79,7 +96,6 @@ class DriverWorkViewController: UIViewController {
                 UserController().updateDriver(viewController: self, name: nil, address: nil, email: nil, phoneNumber: nil, priceString: nil, bio: nil, photo: nil)
             }
         case false:
-            if mapView.isHidden == true {
                 stopAnimatingLoadingView()
                 searchingForRidesLabel.isHidden = true
                 AuthenticationController.shared.driver?.isActive = false
@@ -87,31 +103,9 @@ class DriverWorkViewController: UIViewController {
                 UserController().updateDriver(viewController: self, name: nil, address: nil, email: nil, phoneNumber: nil, priceString: nil, bio: nil, photo: nil)
             }
         }
-    }
     
     //MARK: Private Methods
     private func updateViews() {
-        configureLabels()
-        configureMapView()
-    }
-    private func configureMapView() {
-        guard let ride = ride else {return}
-        if mapView.isHidden == true {
-        mapView.isHidden = false
-        }
-        else {
-            mapView.isHidden = true
-        }
-        let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
-        mapView.animate(to: camera)
-        
-        let userMarker = GMSMarker()
-        userMarker.icon = GMSMarker.markerImage(with: .blue)
-        userMarker.position = CLLocationManager().location?.coordinate ?? CLLocationCoordinate2D(latitude: 1.5, longitude: 36.9)
-        userMarker.map = mapView
-        
-    }
-    private func configureLabels() {
         guard let ride = ride else {return}
         if requestTimeLabel.isHidden == true {
             requestTimeLabel.isHidden = false
@@ -121,9 +115,56 @@ class DriverWorkViewController: UIViewController {
             destinationLabel.isHidden = false
             destinationLabel.text = ride.distance as String
             acceptRideButton.isHidden = false
+            rejectRideButton.isHidden = false
             searchingForRidesLabel.isHidden = false
+        }
+        if requestTimeLabel.isHidden == false {
+            requestTimeLabel.isHidden = true
+            startVillageLabel.isHidden = true
+            destinationLabel.isHidden = true
+            acceptRideButton.isHidden = true
+            rejectRideButton.isHidden = true
+            searchingForRidesLabel.isHidden = true
+            animateLoadingView()
         }
     }
     
+    private func logoutTransition() {
+        let tabBarController = UITabBarController()
+        
+        let signUpViewController = SignUpViewController()
+        
+        let signInViewController = SignInViewController()
+        
+        tabBarController.addChild(signInViewController)
+        tabBarController.addChild(signUpViewController)
+        
+        let signUpItem = UITabBarItem()
+        signUpItem.title = "Sign Up"
+        let signInItem = UITabBarItem()
+        signInItem.title = "Sign In"
+        
+        signUpViewController.tabBarItem = signUpItem
+        signInViewController.tabBarItem = signInItem
+        
+        present(tabBarController, animated: true, completion: nil)
+        
+        
+    }
     
+    //I ran into an error here when I was trying to set the text values for all of the textfields in the destinationVC. I was getting a fatal error telling me that nil was unexpectedly found when a property was unwrapped. This is because the UIElements don't exist right now.
+    private func editProfileTransition() {
+        let destinationVC = DriverRegistrationViewController()
+        guard let driver = AuthenticationController.shared.driver else {return}
+        destinationVC.driver = driver
+        
+        
+        present(destinationVC, animated: true, completion: nil)
+        
+        
+        
+    }
 }
+    
+    
+

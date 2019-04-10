@@ -26,6 +26,7 @@ class AuthenticationController {
     
     public var userToken: String?
 
+    public var requestedRide: RequestedRide?
     
     
     /// This method will do all of the networking with Firebase and the BirthRide server to authenticate the user, either whether the user is signing in or signing up. It uses a boolean, isSigningUp, to decide how to authenticate the user.
@@ -36,6 +37,15 @@ class AuthenticationController {
     ///   - viewController: The viewController calling the method.
     public func authenticateUser() {
         authenticationNetworkingRequest()
+    }
+    
+    public func deauthenticateUser() {
+        userToken = nil
+        driver = nil
+        motherStartLatLong = nil
+        pregnantMom = nil
+        genericUser = nil
+        requestedRide = nil
     }
     
     /// This method will perform a networking request to authenticate with the back-end. The networking request returns a userArray. From this userArray the user and driver/pregnantMom properties of the AuthenticationController are populated.
