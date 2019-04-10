@@ -102,11 +102,14 @@
       return;
    }
    if (driver != nil) {
-      NSData *driverData = [[NSData alloc] init];
-      driverData = [NSJSONSerialization dataWithJSONObject: driver options:NSJSONWritingPrettyPrinted error: NULL];
       NSDictionary *userDictionary = @{
                                        @"user_type": @"drivers",
-                                       @"driverData": driverData
+                                       @"driverData": @{
+                                             @"price": driver.price,
+                                             @"active": @(driver.isActive),
+                                             @"bio": driver.bio,
+                                             @"photo_url": driver.photoUrl,
+                                             }
                                        };
       NSData *dictionaryData = [[NSData alloc] init];
       dictionaryData = [NSJSONSerialization dataWithJSONObject:userDictionary options:NSJSONWritingPrettyPrinted error: NULL];
@@ -123,7 +126,7 @@
                                              @"caretaker_name": @"test",
                                              @"start": @{
                                                    @"latlng": mother.start.latLong,
-                                                   @"name": @"test",
+                                                   @"name": mother.start.name,
                                                    //                                                         @"descr": noData
                                                    },
                                              @"destination": @{
@@ -187,16 +190,11 @@
                          };
       //I was struggling for a minute with an error here. I was trying to pass the BOOL into the dictionary, but dictionaries only take objects and BOOLs are primitives.
       NSDictionary *driverDataDictionary = @{
-                                             @"id": driver.driverId,
-                                             @"firebase_id": driver.firebaseId,
                                              @"price": driver.price,
                                              
                                              @"active":
                                              [NSNumber numberWithBool:driver.isActive],
                                              @"bio": driver.bio,
-                                             @"photo_url":
-                                                driver.photoUrl
-                                             
                                              };
       
       jsonDictionary = @{
@@ -213,16 +211,15 @@
                          @"phone": user.phone,
                          @"location": @{
                                @"latlng": mother.start.latLong,
-                               @"name": noData,
-                               @"descr": noData
+                               @"name": mother.start.name,
                                },
                          };
       NSDictionary *motherDictionary = @{
                                          @"start": @{
                                                @"latlng": mother.start.latLong,
-                                               @"name": user.village,
-                                               @"descr": noData,
-                                               }
+                                               @"name": mother.start.name
+                                               },
+                                         @"caretaker_name": mother.caretakerName
                                          };
       jsonDictionary = @{
                          @"user": userDictionary,
@@ -238,11 +235,6 @@
          NSLog(@"%@", error.localizedDescription);
          return;
       }
-      if (data != nil) {
-         NSDictionary *this = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-         NSLog(@"hope this works");
-      }
-      
    }] resume];
 }
 

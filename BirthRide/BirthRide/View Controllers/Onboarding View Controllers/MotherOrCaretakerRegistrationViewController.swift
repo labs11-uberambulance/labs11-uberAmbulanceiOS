@@ -63,7 +63,11 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         guard nameTextField.text != "", villageTextField.text != "", phoneTextField.text != "",
             userMarkerArray.count > 0,
             destinationMarkerArray.count > 0,
-        let user = AuthenticationController.shared.genericUser else {return}
+        let name = nameTextField.text,
+        let phone = phoneTextField.text,
+        let village = villageTextField.text else {return}
+       
+        var caretakerName = caretakerTextField.text
     
         let motherLatitude = userMarkerArray[0].position.latitude
         let motherLongitude = userMarkerArray[0].position.longitude
@@ -75,9 +79,11 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         AuthenticationController.shared.genericUser?.name = nameTextField.text! as NSString
         AuthenticationController.shared.genericUser?.phone = phoneTextField.text! as NSString
         
-        UserController().updateGenericUser(user: user, name: nameTextField.text, village: villageTextField.text, phone: phoneTextField.text, address: nil, email: nil)
 
-        UserController().configurePregnantMom(viewController: self, isUpdating: isUpdating, startLatLong: latLongString as NSString, destinationLatLong: destLatLongString as NSString, startDescription: "")
+        if caretakerName == nil {
+            caretakerName = ""
+        }
+        UserController().configurePregnantMom(isUpdating: isUpdating, name: name as NSString, village: village as NSString, phone: phone as NSString, caretakerName: caretakerName as NSString?, startLatLong: latLongString as NSString, destinationLatLong: destLatLongString as NSString, startDescription: "")
 
         transition(userType: nil)
     }

@@ -16,6 +16,7 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     
     //MARK: Other Properties
     var driver: Driver?
+    var isUpdating: Bool = false
     
     //MARK: IBOutlets
     @IBOutlet weak var nameTextField: UITextField!
@@ -38,7 +39,8 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         guard let name = nameTextField?.text,
             let phoneNumber = phoneNumberTextField.text,
             let price = priceTextField.text,
-            let bio = bioTextView.text else {
+            let bio = bioTextView.text,
+            let user = AuthenticationController.shared.genericUser else {
                 return
         }
         
@@ -47,7 +49,7 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         let otherPrice = price as NSString
         let otherBio = bio as NSString
         
-        UserController().updateDriver(viewController: self, name: otherName, address: nil, email: nil, phoneNumber: otherPhone, priceString: otherPrice, bio: otherBio, photo: nil)
+        UserController().configureDriver(isUpdating: isUpdating, name: otherName, address: nil, email: nil, phoneNumber: otherPhone, price: otherPrice, bio: otherBio, photo: nil)
         transition(userType: nil)
     }
     
