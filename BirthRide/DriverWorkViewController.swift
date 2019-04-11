@@ -117,7 +117,9 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
             let phone = AuthenticationController.shared.genericUser?.phone,
             let price = AuthenticationController.shared.driver?.price,
             let bio = AuthenticationController.shared.driver?.bio,
-            let photo = AuthenticationController.shared.driver?.photoUrl else {return}
+            let photo = AuthenticationController.shared.driver?.photoUrl,
+            let userLocation = AuthenticationController.shared.driver?.location?.latLong else {return}
+        
         switch isWorkingSwitch.isOn {
         case true:
             if ride == nil {
@@ -125,14 +127,14 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
                 searchingForRidesLabel.isHidden = false
                 AuthenticationController.shared.driver?.isActive = true
                 
-                UserController().configureDriver(isUpdating: true, name: name, address: nil, email: nil, phoneNumber: phone, price: price.stringValue as NSString, bio: bio, photo: photo)
+                UserController().configureDriver(isUpdating: true, name: name, address: nil, email: nil, phoneNumber: phone, price: price.stringValue as NSString, bio: bio, photo: photo, userLocation: userLocation)
             }
         case false:
                 stopAnimatingLoadingView()
                 searchingForRidesLabel.isHidden = true
                 AuthenticationController.shared.driver?.isActive = false
                 
-                UserController().configureDriver(isUpdating: true, name: name, address: nil, email: nil, phoneNumber: phone, price: price.stringValue as NSString, bio: bio, photo: photo)
+                UserController().configureDriver(isUpdating: true, name: name, address: nil, email: nil, phoneNumber: phone, price: price.stringValue as NSString, bio: bio, photo: photo, userLocation: userLocation)
             }
         }
     

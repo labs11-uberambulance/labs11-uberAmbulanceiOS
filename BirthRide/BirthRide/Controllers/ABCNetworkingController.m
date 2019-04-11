@@ -119,6 +119,9 @@
                                              @"active": @(driver.isActive),
                                              @"bio": driver.bio,
                                              @"photo_url": driver.photoUrl,
+                                             @"location": @{
+                                                   @"latlng": driver.location.latLong
+                                                   }
                                              }
                                        };
       NSData *dictionaryData = [[NSData alloc] init];
@@ -201,7 +204,9 @@
       //I was struggling for a minute with an error here. I was trying to pass the BOOL into the dictionary, but dictionaries only take objects and BOOLs are primitives.
       NSDictionary *driverDataDictionary = @{
                                              @"price": driver.price,
-                                             
+                                             @"location": @{
+                                                   @"latlng": driver.location.latLong
+                                                   },
                                              @"active":
                                                 [NSNumber numberWithBool:driver.isActive],
                                              @"bio": driver.bio,
@@ -435,6 +440,8 @@
                }];
                [userArray addObject:pregnantMom];
             };
+            
+            driver.location = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:NULL];
             if ([user.userType isEqualToString:@"drivers"]) {
                [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
                   if ([key containsString:@"_"]) {
@@ -443,6 +450,22 @@
                   if ([key isEqualToString:@"id"]) {
                      driver.driverId = parsedData[@"driverData"][key];
                   };
+                  
+                  
+                  
+                  if ([key isEqualToString:@"location"]) {
+                     [parsedData[userTypeKey][@"location"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  value, BOOL* stop) {
+                        if ([key isEqualToString:@"latlng"]) {
+                           [driver.location setValue:value forKey:@"latLong"];
+                        }
+                        SEL selector = NSSelectorFromString(key);
+                        if ([driver.location respondsToSelector:selector] && value != NSNull.null) {
+                           [driver.location setValue:value forKey:key];
+                        }
+                     }];
+                  }
+                  
+                  
                   SEL selector = NSSelectorFromString(key);
                   if ([driver respondsToSelector:selector] && value != NSNull.null) {
                      [driver setValue:value forKey:key];

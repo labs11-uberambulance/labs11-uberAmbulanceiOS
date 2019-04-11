@@ -13,6 +13,7 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     
     //MARK: Private Properties
     private var userMarkerArray: [GMSMarker] = []
+    private var userLocation: NSString?
     
     //MARK: Other Properties
     var driver: Driver?
@@ -42,16 +43,16 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
             let phoneNumber = phoneNumberTextField.text,
             let price = priceTextField.text,
             let bio = bioTextView.text,
-            let user = AuthenticationController.shared.genericUser else {
-                return
-        }
+            let user = AuthenticationController.shared.genericUser,
+            let userLocation = userLocation else {return}
         
         let otherName = name as NSString
         let otherPhone = phoneNumber as NSString
         let otherPrice = price as NSString
         let otherBio = bio as NSString
+
         
-        UserController().configureDriver(isUpdating: isUpdating, name: otherName, address: nil, email: nil, phoneNumber: otherPhone, price: otherPrice, bio: otherBio, photo: nil)
+        UserController().configureDriver(isUpdating: isUpdating, name: otherName, address: nil, email: nil, phoneNumber: otherPhone, price: otherPrice, bio: otherBio, photo: nil, userLocation: userLocation)
         transition(userType: nil)
     }
     
@@ -71,6 +72,7 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         userMarker.isDraggable = true
         userMarker.map = mapView
         userMarkerArray.append(userMarker)
+        userLocation = "\(coordinate.latitude),\(coordinate.longitude)" as NSString
     }
     
     
@@ -102,7 +104,9 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     ///This method will configure the mapView. If the app is able to get the user coordinates, then it will also create a marker to put on the map. If not it will return. The map marker will **not** be created if one already exists.
     private func configureMapView() {
         let userMarker = GMSMarker()
-        guard let userLocation = driver?.location?.latLong else {return}
+        guard let userLocation = driver?.location?.latLong,
+            driver?.location?.latLong != "" else {return}
+        self.userLocation = userLocation
         let latLongArray = userLocation.components(separatedBy: ",")
         let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)
         let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)

@@ -69,11 +69,12 @@ class UserController {
         }
     }
     
-    public func configureDriver(isUpdating: Bool, name: NSString, address: NSString?, email: NSString?, phoneNumber: NSString, price: NSString, bio: NSString, photo: NSString?) {
+    public func configureDriver(isUpdating: Bool, name: NSString, address: NSString?, email: NSString?, phoneNumber: NSString, price: NSString, bio: NSString, photo: NSString?, userLocation: NSString) {
         guard let user = AuthenticationController.shared.genericUser,
             let token = AuthenticationController.shared.userToken,
-            let userID = AuthenticationController.shared.genericUser?.userID,
-            let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") else {return}
+            let userID = AuthenticationController.shared.genericUser?.userID else {return}
+        //TODO: I need to be guarding that there is a deviceToken here when using this on an actual device. I will also need to uncomment all of the code here that I commented out.
+//            let deviceToken = UserDefaults.standard.string(forKey: "deviceToken")
         
         let driver: Driver
         
@@ -85,12 +86,16 @@ class UserController {
         guard let newPrice = f.number(from: price as String) else {return}
         
         if !isUpdating {
+            let location = Start(latLong: userLocation, name: user.village ?? "", startDescription: nil)
             driver = Driver(price: newPrice, requestedDriverName: "", isActive: false, bio: bio, photo: "", driverId: nil, firebaseId: nil)
+            driver.location = location
         } else {
             driver = AuthenticationController.shared.driver!
             driver.price = newPrice
             driver.bio = bio
             driver.photoUrl = photo
+            driver.location?.latLong = userLocation
+            
         }
         
         let onboardAndUpdateUserOperationQueue = OperationQueue()
@@ -111,20 +116,21 @@ class UserController {
             }
         }
         
-        let sendTokenToServerOperation: BlockOperation = BlockOperation {
-            self.networkingController.refreshToken(withFIRToken: token, withDeviceToken: deviceToken, withCompletion: { (error) in
-                if let error = error {
-                    NSLog("Error in UserController.configureDriver")
-                    NSLog(error.localizedDescription)
-                    return
-                }
-            })
-        }
+//        let sendTokenToServerOperation: BlockOperation = BlockOperation {
+//            self.networkingController.refreshToken(withFIRToken: token, withDeviceToken: deviceToken, withCompletion: { (error) in
+//                if let error = error {
+//                    NSLog("Error in UserController.configureDriver")
+//                    NSLog(error.localizedDescription)
+//                    return
+//                }
+//            })
+//        }
         
         if !isUpdating {
             updateOperation.addDependency(onboardOperation)
-            sendTokenToServerOperation.addDependency(updateOperation)
-            onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation, sendTokenToServerOperation], waitUntilFinished: true)
+//            sendTokenToServerOperation.addDependency(updateOperation)
+            onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation], waitUntilFinished: true)
+//            onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation, sendTokenToServerOperation], waitUntilFinished: true)
         }
         else {
             onboardAndUpdateUserOperationQueue.addOperation(updateOperation)
