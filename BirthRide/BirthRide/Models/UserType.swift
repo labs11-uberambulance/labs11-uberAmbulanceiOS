@@ -11,7 +11,7 @@ import UIKit
 ///The type of user
 enum UserType: String {
     case pregnantMom
-    case driver
+    case drivers
 }
 
 @objcMembers

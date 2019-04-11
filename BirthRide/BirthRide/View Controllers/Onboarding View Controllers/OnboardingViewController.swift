@@ -26,14 +26,14 @@ class OnboardingViewController: UIViewController {
     
     func setUpViewControllerAndView() {
         if AuthenticationController.shared.genericUser?.userType == "drivers" {
-        containerViewController = DriverRegistrationViewController()
+            containerViewController = DriverRegistrationViewController()
         guard containerViewController != nil else {return}
         containerView.addSubview((containerViewController?.view)!)
         }
         else {
-        containerViewController = MotherOrCaretakerRegistrationViewController()
-        guard containerViewController != nil else {return}
-        containerView.addSubview((containerViewController?.view)!)
+            containerViewController = MotherOrCaretakerRegistrationViewController()
+            guard containerViewController != nil else {return}
+            containerView.addSubview((containerViewController?.view)!)
     }
 }
 

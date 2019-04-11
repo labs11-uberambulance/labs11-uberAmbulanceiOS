@@ -17,23 +17,35 @@ class UserController {
     
     
     //MARK: Public Methods
-    public func configurePregnantMom( viewController: UIViewController, startLatLong: NSString, destinationLatLong: NSString, startDescription: NSString?) -> PregnantMom {
+    public func configurePregnantMom( isUpdating: Bool, name: NSString, village: NSString, phone: NSString, caretakerName: NSString?, startLatLong: NSString, destinationLatLong: NSString, startDescription: NSString?){
         
-        let testStart = Start(latLong: startLatLong, name: "", startDescription: "")
-        let testDestination = Destination(latLong: "", name: "", destinationDescription: "")
+        let mom: PregnantMom
         
-        let newMom = PregnantMom(start: testStart, destination: testDestination, caretakerName: nil, motherId: nil)
-        newMom.start?.latLong = startLatLong
-        newMom.destination?.latLong = destinationLatLong
-        AuthenticationController.shared.pregnantMom = newMom
+        guard let user = AuthenticationController.shared.genericUser else {return}
+        
+        if !isUpdating {
+        mom = PregnantMom(start: Start(latLong: startLatLong, name: village, startDescription: ""), destination: Destination(latLong: destinationLatLong, name: "", destinationDescription: ""), caretakerName: caretakerName, motherId: nil)
+        AuthenticationController.shared.pregnantMom = mom
+        }
+        else {
+            guard AuthenticationController.shared.pregnantMom != nil else {return}
+            mom = AuthenticationController.shared.pregnantMom!
+            mom.caretakerName = caretakerName
+            mom.start?.latLong = startLatLong
+            mom.destination?.latLong = destinationLatLong
+            mom.start?.name = village
+        }
+        user.name = name
+        user.phone = phone
+        user.village = village
+        
         
         guard let token = AuthenticationController.shared.userToken,
-        let user = AuthenticationController.shared.genericUser,
-        let userID = user.userID else {return newMom}
+        let userID = user.userID else {return}
         
         let onboardAndUpdateUserOperationQueue = OperationQueue()
         let onboardOperation: BlockOperation = BlockOperation {
-            self.networkingController.onboardUser(withToken: token, withUserID: userID, with: user, with: nil, withMother: newMom) { (error) in
+            self.networkingController.onboardUser(withToken: token, withUserID: userID, with: user, with: nil, withMother: mom) { (error) in
                 if let error = error {
                     NSLog(error.localizedDescription)
                     return
@@ -41,65 +53,69 @@ class UserController {
             }
         }
         let updateOperation: BlockOperation = BlockOperation {
-            self.networkingController.updateUser(withToken: token, withUserID: userID, with: user, with: nil, withMother: newMom) { (error) in
+            self.networkingController.updateUser(withToken: token, withUserID: userID, with: user, with: nil, withMother: mom) { (error) in
                 if let error = error {
                     NSLog(error.localizedDescription)
                     return
                 }
             }
         }
+        if !isUpdating {
         updateOperation.addDependency(onboardOperation)
         onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation], waitUntilFinished: true)
-        
-        
-        
-        return newMom
-    }
-    public func updatePregnantMom(pregnantMom: PregnantMom) {
-        
+        }
+        else {
+            onboardAndUpdateUserOperationQueue.addOperation(updateOperation)
+        }
     }
     
-    public func configureDriver(price: NSNumber, bio: NSString) -> Driver {
-        return Driver(price: price, requestedDriverName: nil, isActive: false, bio: bio, photo: nil, driverId: nil, firebaseId: nil)
-    }
-    public func updateDriver(viewController: UIViewController, name: NSString?, address: NSString?, email: NSString?, phoneNumber: NSString?, priceString: NSString?, bio: NSString?, photo: NSString?) {
-        guard name != "", address != "", email != "", phoneNumber != "", priceString != "",
-        name != nil, address != nil, email != nil, phoneNumber != nil, priceString != nil else {
-            guard let userToken = AuthenticationController.shared.userToken,
-            let user = AuthenticationController.shared.genericUser,
-            let driver = AuthenticationController.shared.driver else {return}
-            ABCNetworkingController().updateUser(withToken: userToken, withUserID: user.userID!, with: user, with: driver, withMother: nil) { (error) in
+    public func configureDriver(isUpdating: Bool, name: NSString, address: NSString?, email: NSString?, phoneNumber: NSString, price: NSString, bio: NSString, photo: NSString?) {
+        guard let user = AuthenticationController.shared.genericUser,
+            let token = AuthenticationController.shared.userToken,
+            let userID = AuthenticationController.shared.genericUser?.userID else {return}
+        
+        let driver: Driver
+        
+        user.name = name
+        user.phone = phoneNumber
+        
+        let f = NumberFormatter()
+        f.numberStyle = .decimal
+        guard let newPrice = f.number(from: price as String) else {return}
+        
+        if !isUpdating {
+        driver = Driver(price: newPrice, requestedDriverName: "", isActive: false, bio: bio, photo: "", driverId: nil, firebaseId: nil)
+        } else {
+            driver = AuthenticationController.shared.driver!
+            driver.price = newPrice
+            driver.bio = bio
+            driver.photoUrl = photo
+        }
+        
+        let onboardAndUpdateUserOperationQueue = OperationQueue()
+        let onboardOperation: BlockOperation = BlockOperation {
+            self.networkingController.onboardUser(withToken: token, withUserID: userID, with: user, with: driver, withMother: nil) { (error) in
                 if let error = error {
-                    NSLog("Error in userController.updateDriver")
                     NSLog(error.localizedDescription)
                     return
                 }
             }
-            return
         }
-        guard let driver = AuthenticationController.shared.driver,
-        let user = AuthenticationController.shared.genericUser else {
-            return
+        let updateOperation: BlockOperation = BlockOperation {
+            self.networkingController.updateUser(withToken: token, withUserID: userID, with: user, with: driver, withMother: nil) { (error) in
+                if let error = error {
+                    NSLog(error.localizedDescription)
+                    return
+                }
+            }
         }
-        driver.price = stringToInt(intString: priceString! as String, viewController: viewController) as NSNumber
-        driver.bio = bio
-        driver.photoUrl = photo
-        user.name = name
-        user.address = address
-        user.email = email
-        user.phone = phoneNumber
-    }
-    
-    public func updateGenericUser(user: User, name: String?, village: String?, phone: String?, address: String?, email: String?) {
-        guard let name = name,
-        let village = village,
-            let phone = phone else{
-                return
+        if !isUpdating {
+            updateOperation.addDependency(onboardOperation)
+            onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation], waitUntilFinished: true)
         }
-        user.name = name as NSString
-        user.village = village as NSString
-        user.phone = phone as NSString
-        
+        else {
+            onboardAndUpdateUserOperationQueue.addOperation(updateOperation)
+        }
     }
     
     public func stringToInt(intString: String, viewController: UIViewController) -> Int {

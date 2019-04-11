@@ -18,8 +18,13 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     private var destinationMarkerArray: [GMSMarker] = []
     private let autocompleteResultsVC = GMSAutocompleteResultsViewController()
     private var searchController: UISearchController?
+    private var path = GMSMutablePath()
+    private var startName: String?
+    private var startLatLong: String?
+    private var destLatLong: String?
     //MARK: Other Properties
     var mother: PregnantMom?
+    var isUpdating: Bool = false
     //MARK: IBOutlets
     @IBOutlet weak var mapView: GMSMapView!
     
@@ -51,32 +56,36 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         mapContainerView.addSubview((searchController?.searchBar)!)
         autocompleteResultsVC.delegate = self
         populateTextFieldsAndConfigureViewForEditing()
+        
+        if isUpdating {
+            guard let mom = AuthenticationController.shared.pregnantMom else {return}
         createDestinationMapMarker(coordinate: CLLocationCoordinate2D(latitude: 22, longitude: 22))
+        }
         // Do any additional setup after loading the view.
     }
     @IBAction func caretakerButtonTapped(_ sender: Any) {
-        //FIXME: Currently, all of the text fields are hidden until this button is hit.
         caretakerTextField.isHidden = false
     }
     @IBAction func continueButtonTapped(_ sender: Any) {
         guard nameTextField.text != "", villageTextField.text != "", phoneTextField.text != "",
             userMarkerArray.count > 0,
             destinationMarkerArray.count > 0,
-        let user = AuthenticationController.shared.genericUser else {return}
-    
-        let motherLatitude = userMarkerArray[0].position.latitude
-        let motherLongitude = userMarkerArray[0].position.longitude
-        let latLongString = "\(motherLatitude),\(motherLongitude)"
-        let destinationLatitude = destinationMarkerArray[0].position.latitude
-        let destinationLongitude = destinationMarkerArray[0].position.longitude
-        let destLatLongString = "\(destinationLatitude), \(destinationLongitude)"
+        let name = nameTextField.text,
+        let phone = phoneTextField.text,
+        let village = villageTextField.text,
+        let startLatLong = startLatLong,
+        let destLatLong = destLatLong else {return}
+       
+        var caretakerName = caretakerTextField.text
 
         AuthenticationController.shared.genericUser?.name = nameTextField.text! as NSString
         AuthenticationController.shared.genericUser?.phone = phoneTextField.text! as NSString
+        
 
-        UserController().updateGenericUser(user: user, name: nameTextField.text, village: villageTextField.text, phone: phoneTextField.text, address: nil, email: nil)
-
-        UserController().configurePregnantMom(viewController: self, startLatLong: latLongString as NSString, destinationLatLong: destLatLongString as NSString, startDescription: "")
+        if caretakerName == nil {
+            caretakerName = ""
+        }
+        UserController().configurePregnantMom(isUpdating: isUpdating, name: name as NSString, village: village as NSString, phone: phone as NSString, caretakerName: caretakerName as NSString?, startLatLong: startLatLong as NSString, destinationLatLong: destLatLong as NSString, startDescription: "")
 
         transition(userType: nil)
     }
@@ -91,13 +100,14 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
     //MARK: GMSAutocompleteResultsViewControllerDelegate methods
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
-        let lat = "\(place.coordinate.latitude)"
-        let long = "\(place.coordinate.longitude)"
-        AuthenticationController.shared.pregnantMom?.destination?.latLong = "\(lat), \(long)" as NSString
+        let latLong = "\(place.coordinate.latitude),\(place.coordinate.longitude)"
+        destLatLong = latLong
+        
         if let name = place.name {
-            AuthenticationController.shared.pregnantMom?.destination?.name = name as NSString
+            startName = name
         }
         createDestinationMapMarker(coordinate: place.coordinate)
+        createRoute()
         resultsController.dismiss(animated: true, completion: nil)
     }
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
@@ -114,6 +124,17 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         userMarker.isDraggable = true
         userMarker.map = mapView
         userMarkerArray.append(userMarker)
+        createRoute()
+        let latLong = "\(coordinate.latitude),\(coordinate.longitude)"
+        startLatLong = latLong
+    }
+    
+    func mapView(_ mapView: GMSMapView, didDrag marker: GMSMarker) {
+        
+        let latLong = "\(marker.position.latitude),\(marker.position.longitude)"
+        startLatLong = latLong
+        
+        createRoute()
     }
     
     //MARK: Private Methods
@@ -141,6 +162,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         destinationMarker.position = coordinate
         destinationMarker.appearAnimation = .pop
         destinationMarker.isDraggable = false
+        destinationMarker.icon = GMSMarker.markerImage(with: .orange)
         destinationMarker.map = mapView
         mapView.settings.myLocationButton = true
         destinationMarkerArray.append(destinationMarker)
@@ -166,7 +188,9 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     private func configureMapView() {
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
         mapView.animate(to: camera)
+        if isUpdating {
         configureUserMarker()
+        }
         
     }
     
@@ -202,7 +226,24 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         userMarker.isDraggable = true
         userMarker.map = mapView
         userMarker.icon = GMSMarker.markerImage(with: .blue)
+        userMarker.icon = GMSMarker.markerImage(with: .blue)
         userMarkerArray.append(userMarker)
+    }
+    
+    
+    //FIXME: The existing paths are not removed when the new path is created.
+    private func createRoute() {
+        
+        guard userMarkerArray.count > 0,
+            destinationMarkerArray.count > 0 else {return}
+        
+        path.removeAllCoordinates()
+        path.add(CLLocationCoordinate2D(latitude: CLLocationDegrees(destinationMarkerArray[0].position.latitude), longitude: CLLocationDegrees(destinationMarkerArray[0].position.longitude)))
+        path.add(CLLocationCoordinate2D(latitude: userMarkerArray[0].position.latitude, longitude: userMarkerArray[0].position.longitude))
+        
+        let line = GMSPolyline.init(path: path)
+        line.strokeColor = .green
+        line.map = mapView
     }
     
 }

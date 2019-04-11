@@ -52,12 +52,14 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     }
     //MARK: IBActions
     @IBAction func logoutButtonTapped(_ sender: Any) {
+        let firebaseAuth = Auth.auth()
         do {
-            try Auth.auth().signOut()
-        } catch {
-            NSLog("Could not sign out user in DriverWorkViewController.logoutButtonTapped")
-            NSLog(error.localizedDescription)
+            try firebaseAuth.signOut()
+            NSLog("Sign out successful")
+        } catch let signOutError as NSError {
+            NSLog("Error signing out: %@", signOutError)
         }
+        
         AuthenticationController.shared.deauthenticateUser()
         logoutTransition()
     }
@@ -107,13 +109,41 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     
     //MARK: Private Methods
     private func configureMapView() {
+        
+        guard let latLongString = authenticationController.pregnantMom?.start?.latLong,
+        let destLatLongString = authenticationController.pregnantMom?.destination?.latLong else {return}
+        
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
         mapView.animate(to: camera)
         
+        let latLongArray = latLongString.components(separatedBy: ",")
+        let destLatLongArray = latLongString.components(separatedBy: ",")
+        
+        let latitude = UserController().stringToInt(intString: latLongArray[0] as String, viewController: self)
+        let destLatitude = UserController().stringToInt(intString: destLatLongArray[0] as String, viewController: self)
+        
+        let longitude = UserController().stringToInt(intString: latLongArray[1] as String, viewController: self)
+        let destLongitude = UserController().stringToInt(intString: destLatLongArray[1] as String, viewController: self)
+        
+        let destinationMarker = GMSMarker()
+        destinationMarker.icon = GMSMarker.markerImage(with: .red)
+        destinationMarker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(destLatitude), longitude: CLLocationDegrees(destLongitude))
+        destinationMarker.map = mapView
+        
+        
         let userMarker = GMSMarker()
         userMarker.icon = GMSMarker.markerImage(with: .blue)
-        userMarker.position = CLLocationManager().location?.coordinate ?? CLLocationCoordinate2D(latitude: 1.5, longitude: 36.9)
+        userMarker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
         userMarker.map = mapView
+        
+        let path = GMSMutablePath()
+        path.add(CLLocationCoordinate2D(latitude: CLLocationDegrees(destLatitude), longitude: CLLocationDegrees(destLongitude)))
+        path.add(CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude)))
+        
+        let line = GMSPolyline.init(path: path)
+        line.map = mapView
+        
+        
     }
     
     private func configureLabels() {
@@ -165,7 +195,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         let destinationVC = MotherOrCaretakerRegistrationViewController()
         guard let mother = AuthenticationController.shared.pregnantMom else {return}
         destinationVC.mother = mother
-        
+        destinationVC.isUpdating = true
         
         present(destinationVC, animated: true, completion: nil)
         

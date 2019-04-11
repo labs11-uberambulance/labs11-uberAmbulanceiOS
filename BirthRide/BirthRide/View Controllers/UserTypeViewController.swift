@@ -21,7 +21,7 @@ class UserTypeViewController: UIViewController, TransitionBetweenViewControllers
     
     //MARK: IBActions
     @IBAction func driverButtonTapped(_ sender: Any) {
-        transition(userType: UserType.driver)
+        transition(userType: UserType.drivers)
     }
     @IBAction func pregnantMomButtonTapped(_ sender: Any) {
         transition(userType: UserType.pregnantMom)
@@ -29,6 +29,8 @@ class UserTypeViewController: UIViewController, TransitionBetweenViewControllers
     
     
     func transition(userType: UserType?) {
+        AuthenticationController.shared.genericUser = User(userID: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil)
+        AuthenticationController.shared.genericUser?.userType = userType?.rawValue as NSString?
         let destinationVC = OnboardingViewController()
         self.present(destinationVC, animated: true) {
         }

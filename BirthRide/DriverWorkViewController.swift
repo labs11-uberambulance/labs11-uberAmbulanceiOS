@@ -45,12 +45,38 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         pastRidesTableView.delegate = self
         // Do any additional setup after loading the view.
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if isWorkingSwitch.isOn && ride == nil {
+            animateLoadingView()
+            searchingForRidesLabel.isHidden = false
+            requestTimeLabel.isHidden = true
+            startVillageLabel.isHidden = true
+            destinationLabel.isHidden = true
+            acceptRideButton.isHidden = true
+            rejectRideButton.isHidden = true
+        } else if ride != nil {
+            searchingForRidesLabel.isHidden = true
+            requestTimeLabel.isHidden = false
+            startVillageLabel.isHidden = false
+            destinationLabel.isHidden = false
+            acceptRideButton.isHidden = false
+            rejectRideButton.isHidden = false
+        } else if !isWorkingSwitch.isOn {
+            searchingForRidesLabel.isHidden = true
+            requestTimeLabel.isHidden = true
+            startVillageLabel.isHidden = true
+            destinationLabel.isHidden = true
+            acceptRideButton.isHidden = true
+            rejectRideButton.isHidden = true
+        }
+    }
     
     //MARK: IBActions
     @IBAction func acceptRideButtonTapped(_ sender: Any) {
         guard let userToken = AuthenticationController.shared.userToken,
             let rideId = self.ride?.rideId else {return}
-        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: true) { (error) in
+        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: true, withRideData: nil) { (error) in
             if let error = error {
                 NSLog("Error in DriverWorkVC.acceptRideButtonTapped")
                 NSLog(error.localizedDescription)
@@ -62,7 +88,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
     @IBAction func rejectRideButtonTapped(_ sender: Any) {
         guard let userToken = AuthenticationController.shared.userToken,
             let rideId = self.ride?.rideId else {return}
-        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: false) { (error) in
+        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: false, withRideData: ride) { (error) in
             if let error = error {
                 NSLog("Error in DriverWorkVC.acceptRideButtonTapped")
                 NSLog(error.localizedDescription)
@@ -87,20 +113,26 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
     
     
     @IBAction func isWorkingSwitchToggled(_ sender: Any) {
+        guard let name = AuthenticationController.shared.genericUser?.name,
+            let phone = AuthenticationController.shared.genericUser?.phone,
+            let price = AuthenticationController.shared.driver?.price,
+            let bio = AuthenticationController.shared.driver?.bio,
+            let photo = AuthenticationController.shared.driver?.photoUrl else {return}
         switch isWorkingSwitch.isOn {
         case true:
             if ride == nil {
                 animateLoadingView()
                 searchingForRidesLabel.isHidden = false
                 AuthenticationController.shared.driver?.isActive = true
-                UserController().updateDriver(viewController: self, name: nil, address: nil, email: nil, phoneNumber: nil, priceString: nil, bio: nil, photo: nil)
+                
+                UserController().configureDriver(isUpdating: true, name: name, address: nil, email: nil, phoneNumber: phone, price: price.stringValue as NSString, bio: bio, photo: photo)
             }
         case false:
                 stopAnimatingLoadingView()
                 searchingForRidesLabel.isHidden = true
                 AuthenticationController.shared.driver?.isActive = false
                 
-                UserController().updateDriver(viewController: self, name: nil, address: nil, email: nil, phoneNumber: nil, priceString: nil, bio: nil, photo: nil)
+                UserController().configureDriver(isUpdating: true, name: name, address: nil, email: nil, phoneNumber: phone, price: price.stringValue as NSString, bio: bio, photo: photo)
             }
         }
     
@@ -157,7 +189,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         let destinationVC = DriverRegistrationViewController()
         guard let driver = AuthenticationController.shared.driver else {return}
         destinationVC.driver = driver
-        
+        destinationVC.isUpdating = true
         
         present(destinationVC, animated: true, completion: nil)
         

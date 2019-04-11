@@ -22,8 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
  This method will fetch a list of drivers nearby the coordinate location of the mother.
 
 @param token The authentication token associated with the user. This parameter is used to find the ride associated with the user.
- @param latitude The latitude of the mother's coordinates.
- @param longitude The longitude of the mother's coordinates.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
 - (void)fetchNearbyDriversWithToken:(NSString *)token withMother:(PregnantMom *)mother withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler;
@@ -96,9 +94,10 @@ This method will notify the backend that the driver has either accepted or rejec
  
  @param token The authentication token associated with the user. This parameter is used to find the existing user associated with it or, if not associated user is found, to create in the database a new user associated with it.
  @param didAccept A BOOL declaring whether or not the driver accepted the ride.
+ @param requestedRide A nullable RequestedRide object that is passed into the method ONLY if the driver is rejecting the ride. Otherwise, it is nil.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)driverAcceptsOrRejectsRideWithToken:(NSString *)token withRideId:(NSNumber *)rideId withDidAccept:(BOOL)didAccept withCompletion:(void(^)(NSError * _Nullable error))completionHandler;
+- (void)driverAcceptsOrRejectsRideWithToken:(NSString *)token withRideId:(NSNumber *)rideId withDidAccept:(BOOL)didAccept withRideData:(RequestedRide * _Nullable)requestedRide withCompletion:(void (^)(NSError * _Nullable))completionHandler;
 
 @end
 

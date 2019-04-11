@@ -46,6 +46,7 @@ class AuthenticationController {
         pregnantMom = nil
         genericUser = nil
         requestedRide = nil
+        UserDefaults.standard.set("", forKey: "authVerificationID")
     }
     
     /// This method will perform a networking request to authenticate with the back-end. The networking request returns a userArray. From this userArray the user and driver/pregnantMom properties of the AuthenticationController are populated.
