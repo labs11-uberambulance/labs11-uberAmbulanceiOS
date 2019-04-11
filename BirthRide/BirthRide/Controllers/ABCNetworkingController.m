@@ -55,6 +55,9 @@
             if ([key isEqualToString:@"location"]) {
                newDriver.location.latLong = driverDictionary[key][@"latlng"];
             }
+            if ([key isEqualToString:@"name"]) {
+               [newDriver setValue:value forKey:@"requestedDriverName"];
+            }
             SEL selector = NSSelectorFromString(key);
             if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
                [newDriver setValue:value forKey:key];

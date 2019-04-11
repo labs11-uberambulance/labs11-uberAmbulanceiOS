@@ -24,6 +24,7 @@ class AuthenticationController {
     public var genericUser: User?
     public var motherStartLatLong: NSString?
     
+    public var userID: NSNumber?
     public var userToken: String?
 
     public var requestedRide: RequestedRide?
@@ -71,6 +72,7 @@ class AuthenticationController {
                     return
                 }
                 self.genericUser = userArray[0] as? User
+                self.userID = self.genericUser?.userID
                 switch userType {
                 case "drivers":
                     self.driver = userArray[1] as? Driver

@@ -12,7 +12,6 @@ import UIKit
 
 class UserController {
     //MARK: Private Properties
-    private let numbersDictionary: Dictionary = ["0": 0, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9]
     private let networkingController = ABCNetworkingController()
     
     
@@ -38,6 +37,7 @@ class UserController {
         user.name = name
         user.phone = phone
         user.village = village
+        user.userID = AuthenticationController.shared.userID
         
         
         guard let token = AuthenticationController.shared.userToken,
@@ -132,13 +132,16 @@ class UserController {
     }
     
     
-    //Thanks to Felix on SO: https://stackoverflow.com/questions/12920345/convert-string-to-double-with-currency#12920544
-    public func stringToInt(intString: String, viewController: UIViewController) -> Int {
+    //Thanks to Felix on SO for helping out with a good solution: https://stackoverflow.com/questions/12920345/convert-string-to-double-with-currency#12920544
+    public func stringToInt(intString: String, viewController: UIViewController) -> Double {
         
-        var f: NumberFormatter = NumberFormatter.init()
+        let f: NumberFormatter = NumberFormatter.init()
         f.numberStyle = .decimal
         let number = f.number(from: intString)
-        guard let finishedNumber = number?.intValue else {return}
+        guard let finishedNumber = number?.doubleValue else {
+            NSLog("Error formatting number in UserController.stringToInt")
+            return 0
+        }
         return finishedNumber
     }
 }

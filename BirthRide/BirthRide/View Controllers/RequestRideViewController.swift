@@ -40,13 +40,18 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         let pregnantMomStart = authenticationController.pregnantMom?.start
         
         
         guard let latLongArray = pregnantMomStart?.latLong?.components(separatedBy: ",") as [NSString]? else {return}
-            
-            
-            
+        
+        
+        
         fetchDrivers(latitude: (latLongArray[0].doubleValue), longitude: (latLongArray[1].doubleValue))
         
     }
@@ -148,11 +153,14 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     
     private func configureLabels() {
         guard let price = driversArray[count].price,
-            let duration = driversArray[count].duration else {return}
+            let duration = driversArray[count].duration,
+            let name = driversArray[count].requestedDriverName else {return}
         estimatedPickupTimeLabel.text = "Estimated Pickup Time: \(duration)"
         estimatedFareLabel.text = "Estimated Fare: \(price)"
-        nameLabel.text = "Frederick"
+        nameLabel.text = name as String
     }
+    
+    
     private func fetchDrivers(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
         guard let token = AuthenticationController.shared.userToken,
         let mother = AuthenticationController.shared.pregnantMom else {return}
