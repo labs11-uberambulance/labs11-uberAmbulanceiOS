@@ -118,11 +118,9 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         guard let latLongString = authenticationController.pregnantMom?.start?.latLong,
         let destLatLongString = authenticationController.pregnantMom?.destination?.latLong else {return}
         
-        let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
-        mapView.animate(to: camera)
         
         let latLongArray = latLongString.components(separatedBy: ",")
-        let destLatLongArray = latLongString.components(separatedBy: ",")
+        let destLatLongArray = destLatLongString.components(separatedBy: ",")
         
         let latitude = UserController().stringToInt(intString: latLongArray[0] as String, viewController: self)
         let destLatitude = UserController().stringToInt(intString: destLatLongArray[0] as String, viewController: self)
@@ -130,22 +128,29 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         let longitude = UserController().stringToInt(intString: latLongArray[1] as String, viewController: self)
         let destLongitude = UserController().stringToInt(intString: destLatLongArray[1] as String, viewController: self)
         
+        
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 6.0)
+        mapView.animate(to: camera)
+        
+        
         let destinationMarker = GMSMarker()
         destinationMarker.icon = GMSMarker.markerImage(with: .red)
-        destinationMarker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(destLatitude), longitude: CLLocationDegrees(destLongitude))
+        destinationMarker.position = CLLocationCoordinate2D(latitude: destLatitude, longitude: destLongitude)
         destinationMarker.map = mapView
         
         
         let userMarker = GMSMarker()
         userMarker.icon = GMSMarker.markerImage(with: .blue)
-        userMarker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+        userMarker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         userMarker.map = mapView
+        
         
         let path = GMSMutablePath()
         path.add(CLLocationCoordinate2D(latitude: CLLocationDegrees(destLatitude), longitude: CLLocationDegrees(destLongitude)))
         path.add(CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude)))
         
         let line = GMSPolyline.init(path: path)
+        line.strokeColor = .green
         line.map = mapView
         
         

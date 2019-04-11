@@ -54,7 +54,13 @@
                key = [key convertFromSnakeCaseToCamelCase];
             }
             if ([key isEqualToString:@"location"]) {
-               newDriver.location.latLong = driverDictionary[key][@"latlng"];
+               [driverDictionary[@"driver"][@"location"] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull value, BOOL * _Nonnull stop) {
+                  if ([key isEqualToString:@"latlng"]) {
+                     [newDriver.location setValue:value forKey:@"latLong"];
+                  }
+               }
+                ];
+               
             }
             if ([key isEqualToString:@"name"]) {
                [newDriver setValue:value forKey:@"requestedDriverName"];
@@ -197,7 +203,7 @@
                                              @"price": driver.price,
                                              
                                              @"active":
-                                             [NSNumber numberWithBool:driver.isActive],
+                                                [NSNumber numberWithBool:driver.isActive],
                                              @"bio": driver.bio,
                                              };
       
