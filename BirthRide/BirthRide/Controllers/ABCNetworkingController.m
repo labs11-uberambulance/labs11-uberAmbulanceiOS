@@ -47,13 +47,23 @@
       
       for (int i = 0; i < driversDictionaryArray.count; i++) {
          Driver *newDriver = [[Driver alloc] initWithPrice:@(99) requestedDriverName:nil isActive:false bio:@"" photo:nil driverId:nil firebaseId:nil];
+         newDriver.location = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:NULL];
          NSDictionary *driverDictionary = driversDictionaryArray[i];
          [driverDictionary[@"driver"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
             if ([key containsString:@"_"]) {
                key = [key convertFromSnakeCaseToCamelCase];
             }
             if ([key isEqualToString:@"location"]) {
-               newDriver.location.latLong = driverDictionary[key][@"latlng"];
+               [driverDictionary[@"driver"][@"location"] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull value, BOOL * _Nonnull stop) {
+                  if ([key isEqualToString:@"latlng"]) {
+                     [newDriver.location setValue:value forKey:@"latLong"];
+                  }
+               }
+                ];
+               
+            }
+            if ([key isEqualToString:@"name"]) {
+               [newDriver setValue:value forKey:@"requestedDriverName"];
             }
             SEL selector = NSSelectorFromString(key);
             if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
@@ -193,7 +203,7 @@
                                              @"price": driver.price,
                                              
                                              @"active":
-                                             [NSNumber numberWithBool:driver.isActive],
+                                                [NSNumber numberWithBool:driver.isActive],
                                              @"bio": driver.bio,
                                              };
       
@@ -448,6 +458,36 @@
       
    }] resume];
    
+}
+
+
+- (void)refreshTokenWithFIRToken:(NSString *)FIRtoken withDeviceToken:(NSString *)deviceToken withCompletion:(void (^)(NSError * _Nullable))completionHandler {
+   NSURL *baseURL = [[NSURL alloc] initWithString: @"api/notifications/refresh-token"];
+   NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:baseURL];
+   
+   [requestURL setHTTPMethod:@"POST"];
+   [requestURL setValue:FIRtoken forHTTPHeaderField:@"Authorization"];
+   
+   NSDictionary *jsonDictionary = @{
+                                    @"token": deviceToken
+                                    };
+   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error:nil];
+   
+   [requestURL setHTTPBody:jsonData];
+   
+   [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+      if (error != nil) {
+         NSLog(@"Error with data task in refreshToken: in ABCNetworkingController.m");
+         NSLog(@"%@", error.localizedDescription);
+         completionHandler(error);
+         return;
+      }
+      if (data != nil) {
+         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
+         NSLog(@"%@", jsonDictionary);
+         completionHandler(nil);
+      }
+   }] resume];
 }
 
 @end

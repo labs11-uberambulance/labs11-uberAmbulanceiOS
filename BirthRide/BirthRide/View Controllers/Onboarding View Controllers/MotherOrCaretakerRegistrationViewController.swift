@@ -63,6 +63,13 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         }
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        startLatLong = mother?.start?.latLong as String?
+        destLatLong = mother?.destination?.latLong as String?
+    }
+    
     @IBAction func caretakerButtonTapped(_ sender: Any) {
         caretakerTextField.isHidden = false
     }

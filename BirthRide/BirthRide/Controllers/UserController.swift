@@ -12,7 +12,6 @@ import UIKit
 
 class UserController {
     //MARK: Private Properties
-    private let numbersDictionary: Dictionary = ["0": 0, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9]
     private let networkingController = ABCNetworkingController()
     
     
@@ -24,8 +23,8 @@ class UserController {
         guard let user = AuthenticationController.shared.genericUser else {return}
         
         if !isUpdating {
-        mom = PregnantMom(start: Start(latLong: startLatLong, name: village, startDescription: ""), destination: Destination(latLong: destinationLatLong, name: "", destinationDescription: ""), caretakerName: caretakerName, motherId: nil)
-        AuthenticationController.shared.pregnantMom = mom
+            mom = PregnantMom(start: Start(latLong: startLatLong, name: village, startDescription: ""), destination: Destination(latLong: destinationLatLong, name: "", destinationDescription: ""), caretakerName: caretakerName, motherId: nil)
+            AuthenticationController.shared.pregnantMom = mom
         }
         else {
             guard AuthenticationController.shared.pregnantMom != nil else {return}
@@ -38,10 +37,11 @@ class UserController {
         user.name = name
         user.phone = phone
         user.village = village
+        user.userID = AuthenticationController.shared.userID
         
         
         guard let token = AuthenticationController.shared.userToken,
-        let userID = user.userID else {return}
+            let userID = user.userID else {return}
         
         let onboardAndUpdateUserOperationQueue = OperationQueue()
         let onboardOperation: BlockOperation = BlockOperation {
@@ -61,8 +61,8 @@ class UserController {
             }
         }
         if !isUpdating {
-        updateOperation.addDependency(onboardOperation)
-        onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation], waitUntilFinished: true)
+            updateOperation.addDependency(onboardOperation)
+            onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation], waitUntilFinished: true)
         }
         else {
             onboardAndUpdateUserOperationQueue.addOperation(updateOperation)
@@ -72,7 +72,8 @@ class UserController {
     public func configureDriver(isUpdating: Bool, name: NSString, address: NSString?, email: NSString?, phoneNumber: NSString, price: NSString, bio: NSString, photo: NSString?) {
         guard let user = AuthenticationController.shared.genericUser,
             let token = AuthenticationController.shared.userToken,
-            let userID = AuthenticationController.shared.genericUser?.userID else {return}
+            let userID = AuthenticationController.shared.genericUser?.userID,
+            let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") else {return}
         
         let driver: Driver
         
@@ -84,7 +85,7 @@ class UserController {
         guard let newPrice = f.number(from: price as String) else {return}
         
         if !isUpdating {
-        driver = Driver(price: newPrice, requestedDriverName: "", isActive: false, bio: bio, photo: "", driverId: nil, firebaseId: nil)
+            driver = Driver(price: newPrice, requestedDriverName: "", isActive: false, bio: bio, photo: "", driverId: nil, firebaseId: nil)
         } else {
             driver = AuthenticationController.shared.driver!
             driver.price = newPrice
@@ -109,30 +110,38 @@ class UserController {
                 }
             }
         }
+        
+        let sendTokenToServerOperation: BlockOperation = BlockOperation {
+            self.networkingController.refreshToken(withFIRToken: token, withDeviceToken: deviceToken, withCompletion: { (error) in
+                if let error = error {
+                    NSLog("Error in UserController.configureDriver")
+                    NSLog(error.localizedDescription)
+                    return
+                }
+            })
+        }
+        
         if !isUpdating {
             updateOperation.addDependency(onboardOperation)
-            onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation], waitUntilFinished: true)
+            sendTokenToServerOperation.addDependency(updateOperation)
+            onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation, sendTokenToServerOperation], waitUntilFinished: true)
         }
         else {
             onboardAndUpdateUserOperationQueue.addOperation(updateOperation)
         }
     }
     
-    public func stringToInt(intString: String, viewController: UIViewController) -> Int {
-        let stringArray = intString.components(separatedBy: "")
-        var intResult: Int = 0
-        var intArray: [Int] = []
-        var multiplier = 1
-        for string in stringArray {
-            guard let int = numbersDictionary[string] else {
-                return 0
-            }
-            intArray.append(int)
+    
+    //Thanks to Felix on SO for helping out with a good solution: https://stackoverflow.com/questions/12920345/convert-string-to-double-with-currency#12920544
+    public func stringToInt(intString: String, viewController: UIViewController) -> Double {
+        
+        let f: NumberFormatter = NumberFormatter.init()
+        f.numberStyle = .decimal
+        let number = f.number(from: intString)
+        guard let finishedNumber = number?.doubleValue else {
+            NSLog("Error formatting number in UserController.stringToInt")
+            return 0
         }
-        while intArray.count > 0 {
-            intResult += (intArray.last ?? 0) * multiplier
-            multiplier *= 10
-        }
-        return intResult
+        return finishedNumber
     }
 }

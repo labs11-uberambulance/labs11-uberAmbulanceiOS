@@ -56,6 +56,7 @@
 		A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D9722456B8800FC20F0 /* UserType.swift */; };
 		A2C19DAF224A881700FC20F0 /* ABCNetworkingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DAE224A881700FC20F0 /* ABCNetworkingController.m */; };
 		A2C19DB1224A935F00FC20F0 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DB0224A935F00FC20F0 /* Ride.swift */; };
+		A2E7C1ED225F9CAB00429C13 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2E7C1D8225F9CAB00429C13 /* UserNotifications.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,13 @@
 			remoteGlobalIDString = DFE9841989B5285BD5437F7525EB36C6;
 			remoteInfo = Protobuf;
 		};
+		A2E7C1EB225F9CAB00429C13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C09B835B1F7A7245224E721B6881CC9E;
+			remoteInfo = FirebaseInstanceID;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -184,6 +192,7 @@
 		A2C19DAD224A881700FC20F0 /* ABCNetworkingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ABCNetworkingController.h; sourceTree = "<group>"; };
 		A2C19DAE224A881700FC20F0 /* ABCNetworkingController.m */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = ABCNetworkingController.m; sourceTree = "<group>"; };
 		A2C19DB0224A935F00FC20F0 /* Ride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
+		A2E7C1D8225F9CAB00429C13 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		A439B999719DA29D34AE9586 /* Pods_BirthRide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BirthRide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -192,6 +201,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2E7C1ED225F9CAB00429C13 /* UserNotifications.framework in Frameworks */,
 				A2928334224D641200FF9C28 /* SystemConfiguration.framework in Frameworks */,
 				A2928332224D640900FF9C28 /* QuartzCore.framework in Frameworks */,
 				A2928330224D640300FF9C28 /* OpenGLES.framework in Frameworks */,
@@ -331,6 +341,7 @@
 			children = (
 				A29282E7224C030400FF9C28 /* FirebaseAuth.framework */,
 				A29282E9224C030400FF9C28 /* FirebaseCore.framework */,
+				A2E7C1EC225F9CAB00429C13 /* FirebaseInstanceID.framework */,
 				A2E7C1D4225E493400429C13 /* FirebaseMessaging.framework */,
 				A29282EB224C030400FF9C28 /* GoogleToolboxForMac.framework */,
 				A29282ED224C030400FF9C28 /* GoogleUtilities.framework */,
@@ -439,6 +450,7 @@
 		B26E3D48CE5DBFB902640CCD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A2E7C1D8225F9CAB00429C13 /* UserNotifications.framework */,
 				A2928333224D641200FF9C28 /* SystemConfiguration.framework */,
 				A2928331224D640900FF9C28 /* QuartzCore.framework */,
 				A292832F224D640300FF9C28 /* OpenGLES.framework */,
@@ -590,6 +602,13 @@
 			fileType = wrapper.framework;
 			path = Protobuf.framework;
 			remoteRef = A2E7C1D5225E493400429C13 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A2E7C1EC225F9CAB00429C13 /* FirebaseInstanceID.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseInstanceID.framework;
+			remoteRef = A2E7C1EB225F9CAB00429C13 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
