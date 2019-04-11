@@ -196,17 +196,18 @@
    NSDictionary *jsonDictionary;
    
    if (driver != nil) {
+      user.location = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:@""];
       
       userDictionary = @{
                          @"name": user.name,
                          @"phone": user.phone,
+                         @"location": @{
+                               @"latlng": driver.location.latLong
+                               }
                          };
       //I was struggling for a minute with an error here. I was trying to pass the BOOL into the dictionary, but dictionaries only take objects and BOOLs are primitives.
       NSDictionary *driverDataDictionary = @{
                                              @"price": driver.price,
-                                             @"location": @{
-                                                   @"latlng": driver.location.latLong
-                                                   },
                                              @"active":
                                                 [NSNumber numberWithBool:driver.isActive],
                                              @"bio": driver.bio,
@@ -386,6 +387,20 @@
             if ([user respondsToSelector: selector] && value != NSNull.null) {
                //On line 85 we are LOOKING FOR a method called `setProperty` to SET the PROPERTY with the VALUE. IF THIS METHOD IS NOT FOUND the selector GENERATES a METHOD called `setProperty` to SET the value of the PARAMETER matching the KEY
                [user setValue:value forKey:key];
+            }
+            
+            if ([key isEqualToString:@"location"]) {
+               user.location = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:NULL];
+               [parsedData[@"user"][@"location"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  value, BOOL* stop) {
+                  if ([key isEqualToString:@"latlng"]) {
+                     [user.location setValue:value forKey:@"latLong"];
+                  }
+                  SEL selector = NSSelectorFromString(key);
+                  if ([user.location respondsToSelector:selector] && value != NSNull.null) {
+                     [user.location setValue:value forKey:key];
+                  }
+               }];
+               
             }
          }];
          [userArray insertObject:user atIndex:0];

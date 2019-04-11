@@ -28,14 +28,12 @@ class User: NSObject {
     var address: NSString?
     ///The value of the property must match location findable by google maps API
     var village: NSString?
-    ///This property should be populated immediately upon receiving the id from the backend.
-    var latitude: NSNumber?
-    ///This property should be populated immediately upon receiving the id from the backend.
-    var longitude: NSNumber?
+    
+    var location: Start?
     
     var email: NSString?
 
-    init(userID: NSNumber?, name: NSString?, login: NSString?, firebaseId: NSString?, phone: NSString?, userType: NSString?, address: NSString?, village: NSString?, latitude: NSNumber?, longitude: NSNumber?, email: NSString?) {
+    init(userID: NSNumber?, name: NSString?, login: NSString?, firebaseId: NSString?, phone: NSString?, userType: NSString?, address: NSString?, village: NSString?, latitude: NSNumber?, longitude: NSNumber?, email: NSString?, location: Start?) {
         super.init()
         self.userID = userID
         self.name = name
@@ -44,9 +42,8 @@ class User: NSObject {
         self.userType = userType
         self.address = address
         self.village = village
-        self.latitude = latitude
-        self.longitude = longitude
         self.email = email
+        self.location = location
     }
 
 }

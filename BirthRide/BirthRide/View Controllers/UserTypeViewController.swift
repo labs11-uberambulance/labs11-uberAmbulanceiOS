@@ -29,7 +29,7 @@ class UserTypeViewController: UIViewController, TransitionBetweenViewControllers
     
     
     func transition(userType: UserType?) {
-        AuthenticationController.shared.genericUser = User(userID: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil)
+        AuthenticationController.shared.genericUser = User(userID: nil, name: nil, login: nil, firebaseId: nil, phone: nil, userType: nil, address: nil, village: nil, latitude: nil, longitude: nil, email: nil, location: nil)
         AuthenticationController.shared.genericUser?.userType = userType?.rawValue as NSString?
         let destinationVC = OnboardingViewController()
         self.present(destinationVC, animated: true) {
