@@ -450,4 +450,34 @@
    
 }
 
+
+- (void)refreshTokenWithFIRToken:(NSString *)FIRtoken withDeviceToken:(NSString *)deviceToken withCompletion:(void (^)(NSError * _Nullable))completionHandler {
+   NSURL *baseURL = [[NSURL alloc] initWithString: @"api/notifications/refresh-token"];
+   NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:baseURL];
+   
+   [requestURL setHTTPMethod:@"POST"];
+   [requestURL setValue:FIRtoken forHTTPHeaderField:@"Authorization"];
+   
+   NSDictionary *jsonDictionary = @{
+                                    @"token": deviceToken
+                                    };
+   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error:nil];
+   
+   [requestURL setHTTPBody:jsonData];
+   
+   [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+      if (error != nil) {
+         NSLog(@"Error with data task in refreshToken: in ABCNetworkingController.m");
+         NSLog(@"%@", error.localizedDescription);
+         completionHandler(error);
+         return;
+      }
+      if (data != nil) {
+         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
+         NSLog(@"%@", jsonDictionary);
+         completionHandler(nil);
+      }
+   }] resume];
+}
+
 @end

@@ -156,7 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
         Messaging.messaging().apnsToken = deviceToken
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
         let token = tokenParts.joined()
-        print("Device Token: \(token)")
+        UserDefaults.standard.setValue(token, forKey: "deviceToken")
     }
     
     

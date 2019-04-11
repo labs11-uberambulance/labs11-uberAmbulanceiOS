@@ -31,9 +31,11 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         setupKeyboardDismissRecognizer()
         populateLabelsAndTextFields()
         configureMapView()
-
         // Do any additional setup after loading the view.
     }
+    
+    
+    
     @IBAction func continueButtonTapped(_ sender: Any) {
         
         guard let name = nameTextField?.text,

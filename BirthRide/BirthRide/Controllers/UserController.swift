@@ -72,7 +72,8 @@ class UserController {
     public func configureDriver(isUpdating: Bool, name: NSString, address: NSString?, email: NSString?, phoneNumber: NSString, price: NSString, bio: NSString, photo: NSString?) {
         guard let user = AuthenticationController.shared.genericUser,
             let token = AuthenticationController.shared.userToken,
-            let userID = AuthenticationController.shared.genericUser?.userID else {return}
+            let userID = AuthenticationController.shared.genericUser?.userID,
+            let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") else {return}
         
         let driver: Driver
         
@@ -109,9 +110,21 @@ class UserController {
                 }
             }
         }
+        
+        let sendTokenToServerOperation: BlockOperation = BlockOperation {
+            self.networkingController.refreshToken(withFIRToken: token, withDeviceToken: deviceToken, withCompletion: { (error) in
+                if let error = error {
+                    NSLog("Error in UserController.configureDriver")
+                    NSLog(error.localizedDescription)
+                    return
+                }
+            })
+        }
+        
         if !isUpdating {
             updateOperation.addDependency(onboardOperation)
-            onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation], waitUntilFinished: true)
+            sendTokenToServerOperation.addDependency(updateOperation)
+            onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation, sendTokenToServerOperation], waitUntilFinished: true)
         }
         else {
             onboardAndUpdateUserOperationQueue.addOperation(updateOperation)
