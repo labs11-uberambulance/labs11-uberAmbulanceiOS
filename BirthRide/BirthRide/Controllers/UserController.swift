@@ -24,8 +24,8 @@ class UserController {
         guard let user = AuthenticationController.shared.genericUser else {return}
         
         if !isUpdating {
-        mom = PregnantMom(start: Start(latLong: startLatLong, name: village, startDescription: ""), destination: Destination(latLong: destinationLatLong, name: "", destinationDescription: ""), caretakerName: caretakerName, motherId: nil)
-        AuthenticationController.shared.pregnantMom = mom
+            mom = PregnantMom(start: Start(latLong: startLatLong, name: village, startDescription: ""), destination: Destination(latLong: destinationLatLong, name: "", destinationDescription: ""), caretakerName: caretakerName, motherId: nil)
+            AuthenticationController.shared.pregnantMom = mom
         }
         else {
             guard AuthenticationController.shared.pregnantMom != nil else {return}
@@ -41,7 +41,7 @@ class UserController {
         
         
         guard let token = AuthenticationController.shared.userToken,
-        let userID = user.userID else {return}
+            let userID = user.userID else {return}
         
         let onboardAndUpdateUserOperationQueue = OperationQueue()
         let onboardOperation: BlockOperation = BlockOperation {
@@ -61,8 +61,8 @@ class UserController {
             }
         }
         if !isUpdating {
-        updateOperation.addDependency(onboardOperation)
-        onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation], waitUntilFinished: true)
+            updateOperation.addDependency(onboardOperation)
+            onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation], waitUntilFinished: true)
         }
         else {
             onboardAndUpdateUserOperationQueue.addOperation(updateOperation)
@@ -85,7 +85,7 @@ class UserController {
         guard let newPrice = f.number(from: price as String) else {return}
         
         if !isUpdating {
-        driver = Driver(price: newPrice, requestedDriverName: "", isActive: false, bio: bio, photo: "", driverId: nil, firebaseId: nil)
+            driver = Driver(price: newPrice, requestedDriverName: "", isActive: false, bio: bio, photo: "", driverId: nil, firebaseId: nil)
         } else {
             driver = AuthenticationController.shared.driver!
             driver.price = newPrice
@@ -131,21 +131,14 @@ class UserController {
         }
     }
     
+    
+    //Thanks to Felix on SO: https://stackoverflow.com/questions/12920345/convert-string-to-double-with-currency#12920544
     public func stringToInt(intString: String, viewController: UIViewController) -> Int {
-        let stringArray = intString.components(separatedBy: "")
-        var intResult: Int = 0
-        var intArray: [Int] = []
-        var multiplier = 1
-        for string in stringArray {
-            guard let int = numbersDictionary[string] else {
-                return 0
-            }
-            intArray.append(int)
-        }
-        while intArray.count > 0 {
-            intResult += (intArray.last ?? 0) * multiplier
-            multiplier *= 10
-        }
-        return intResult
+        
+        var f: NumberFormatter = NumberFormatter.init()
+        f.numberStyle = .decimal
+        let number = f.number(from: intString)
+        guard let finishedNumber = number?.intValue else {return}
+        return finishedNumber
     }
 }
