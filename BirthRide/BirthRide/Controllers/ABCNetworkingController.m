@@ -47,6 +47,7 @@
       
       for (int i = 0; i < driversDictionaryArray.count; i++) {
          Driver *newDriver = [[Driver alloc] initWithPrice:@(99) requestedDriverName:nil isActive:false bio:@"" photo:nil driverId:nil firebaseId:nil];
+         newDriver.location = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:NULL];
          NSDictionary *driverDictionary = driversDictionaryArray[i];
          [driverDictionary[@"driver"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
             if ([key containsString:@"_"]) {
