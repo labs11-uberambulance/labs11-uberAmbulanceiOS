@@ -290,7 +290,9 @@
          return;
       }
       if (data != nil) {
-         NSLog(@"%@", data);
+         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error:NULL];
+         
+         NSLog(@"%@", jsonDictionary);
          return;
       }
    }] resume];
@@ -356,6 +358,7 @@
          completionHandler(error, nil, nil);
          return;
       }
+      BOOL isNewUser = NO;
       NSString *userType = [[NSString alloc] init];
       NSString *userTypeKey = [[NSString alloc] init];
       NSMutableArray *userArray = [[NSMutableArray alloc] init];
@@ -368,6 +371,8 @@
          } else if ([parsedData[@"user"][@"user_type"]  isEqual: @"drivers"]) {
             userType = @"drivers";
             userTypeKey = @"driverData";
+         } else {
+            isNewUser = YES;
          }
          User *user = [User alloc];
          PregnantMom *pregnantMom = [PregnantMom alloc];
@@ -389,17 +394,17 @@
                [user setValue:value forKey:key];
             }
             
-            if ([key isEqualToString:@"location"]) {
+            if ([key isEqualToString:@"location"] && !isNewUser) {
                user.location = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:NULL];
-               [parsedData[@"user"][@"location"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  value, BOOL* stop) {
-                  if ([key isEqualToString:@"latlng"]) {
-                     [user.location setValue:value forKey:@"latLong"];
-                  }
-                  SEL selector = NSSelectorFromString(key);
-                  if ([user.location respondsToSelector:selector] && value != NSNull.null) {
-                     [user.location setValue:value forKey:key];
-                  }
-               }];
+                  [parsedData[@"user"][@"location"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  value, BOOL* stop) {
+                     if ([key isEqualToString:@"latlng"]) {
+                        [user.location setValue:value forKey:@"latLong"];
+                     }
+                     SEL selector = NSSelectorFromString(key);
+                     if ([user.location respondsToSelector:selector] && value != NSNull.null) {
+                        [user.location setValue:value forKey:key];
+                     }
+                  }];
                
             }
          }];
