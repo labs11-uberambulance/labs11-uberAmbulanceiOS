@@ -119,6 +119,9 @@
                                              @"active": @(driver.isActive),
                                              @"bio": driver.bio,
                                              @"photo_url": driver.photoUrl,
+                                             @"location": @{
+                                                   @"latlng": driver.location.latLong
+                                                   }
                                              }
                                        };
       NSData *dictionaryData = [[NSData alloc] init];
@@ -193,15 +196,18 @@
    NSDictionary *jsonDictionary;
    
    if (driver != nil) {
+      user.location = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:@""];
       
       userDictionary = @{
                          @"name": user.name,
                          @"phone": user.phone,
+                         @"location": @{
+                               @"latlng": driver.location.latLong
+                               }
                          };
       //I was struggling for a minute with an error here. I was trying to pass the BOOL into the dictionary, but dictionaries only take objects and BOOLs are primitives.
       NSDictionary *driverDataDictionary = @{
                                              @"price": driver.price,
-                                             
                                              @"active":
                                                 [NSNumber numberWithBool:driver.isActive],
                                              @"bio": driver.bio,
@@ -284,7 +290,9 @@
          return;
       }
       if (data != nil) {
-         NSLog(@"%@", data);
+         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error:NULL];
+         
+         NSLog(@"%@", jsonDictionary);
          return;
       }
    }] resume];
@@ -350,6 +358,7 @@
          completionHandler(error, nil, nil);
          return;
       }
+      BOOL isNewUser = NO;
       NSString *userType = [[NSString alloc] init];
       NSString *userTypeKey = [[NSString alloc] init];
       NSMutableArray *userArray = [[NSMutableArray alloc] init];
@@ -362,6 +371,8 @@
          } else if ([parsedData[@"user"][@"user_type"]  isEqual: @"drivers"]) {
             userType = @"drivers";
             userTypeKey = @"driverData";
+         } else {
+            isNewUser = YES;
          }
          User *user = [User alloc];
          PregnantMom *pregnantMom = [PregnantMom alloc];
@@ -381,6 +392,20 @@
             if ([user respondsToSelector: selector] && value != NSNull.null) {
                //On line 85 we are LOOKING FOR a method called `setProperty` to SET the PROPERTY with the VALUE. IF THIS METHOD IS NOT FOUND the selector GENERATES a METHOD called `setProperty` to SET the value of the PARAMETER matching the KEY
                [user setValue:value forKey:key];
+            }
+            
+            if ([key isEqualToString:@"location"] && !isNewUser) {
+               user.location = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:NULL];
+                  [parsedData[@"user"][@"location"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  value, BOOL* stop) {
+                     if ([key isEqualToString:@"latlng"]) {
+                        [user.location setValue:value forKey:@"latLong"];
+                     }
+                     SEL selector = NSSelectorFromString(key);
+                     if ([user.location respondsToSelector:selector] && value != NSNull.null) {
+                        [user.location setValue:value forKey:key];
+                     }
+                  }];
+               
             }
          }];
          [userArray insertObject:user atIndex:0];
@@ -435,6 +460,8 @@
                }];
                [userArray addObject:pregnantMom];
             };
+            
+            driver.location = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:NULL];
             if ([user.userType isEqualToString:@"drivers"]) {
                [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
                   if ([key containsString:@"_"]) {
@@ -443,6 +470,22 @@
                   if ([key isEqualToString:@"id"]) {
                      driver.driverId = parsedData[@"driverData"][key];
                   };
+                  
+                  
+                  
+                  if ([key isEqualToString:@"location"]) {
+                     [parsedData[userTypeKey][@"location"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  value, BOOL* stop) {
+                        if ([key isEqualToString:@"latlng"]) {
+                           [driver.location setValue:value forKey:@"latLong"];
+                        }
+                        SEL selector = NSSelectorFromString(key);
+                        if ([driver.location respondsToSelector:selector] && value != NSNull.null) {
+                           [driver.location setValue:value forKey:key];
+                        }
+                     }];
+                  }
+                  
+                  
                   SEL selector = NSSelectorFromString(key);
                   if ([driver respondsToSelector:selector] && value != NSNull.null) {
                      [driver setValue:value forKey:key];
@@ -461,16 +504,14 @@
 }
 
 
-- (void)refreshTokenWithFIRToken:(NSString *)FIRtoken withDeviceToken:(NSString *)deviceToken withCompletion:(void (^)(NSError * _Nullable))completionHandler {
+- (void)refreshTokenWithFIRToken:(NSString *)FIRtoken withFCMToken:(NSDictionary *)fcmTokenDictionary withCompletion:(void (^)(NSError * _Nullable))completionHandler {
    NSURL *baseURL = [[NSURL alloc] initWithString: @"api/notifications/refresh-token"];
    NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:baseURL];
    
    [requestURL setHTTPMethod:@"POST"];
    [requestURL setValue:FIRtoken forHTTPHeaderField:@"Authorization"];
    
-   NSDictionary *jsonDictionary = @{
-                                    @"token": deviceToken
-                                    };
+   NSDictionary *jsonDictionary = fcmTokenDictionary;
    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error:nil];
    
    [requestURL setHTTPBody:jsonData];

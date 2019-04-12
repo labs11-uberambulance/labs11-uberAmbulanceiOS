@@ -18,9 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
     
     var window: UIWindow?
     
+    var kGCMMessageIDKey = "gcm.message_id"
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
+        
         UNUserNotificationCenter.current().delegate = self
         
         let tabBarController = UITabBarController()
@@ -153,7 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
         ) {
-        Messaging.messaging().apnsToken = deviceToken
+        Messaging.messaging().setAPNSToken(deviceToken, type: .sandbox)
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
         let token = tokenParts.joined()
         UserDefaults.standard.setValue(token, forKey: "deviceToken")
@@ -178,12 +181,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
             return
         }
         AuthenticationController.shared.requestedRide = RequestedRide.createRideWithDictionary(dictionary: aps["data"] as! [String : AnyObject])
+        completionHandler(.newData)
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        
+        
+    }
+    
+    
+    
+    
+    
+    
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         
         let dataDict:[String: String] = ["token": fcmToken]
-        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        UserDefaults.standard.set(dataDict, forKey: "FCMToken")
+ 
         
     }
 
@@ -223,6 +240,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
             }
         }
     }
+    
+    
+    
+    
 
 }
 

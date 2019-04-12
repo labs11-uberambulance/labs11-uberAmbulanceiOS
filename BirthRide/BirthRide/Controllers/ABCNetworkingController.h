@@ -99,7 +99,7 @@ This method will notify the backend that the driver has either accepted or rejec
  */
 - (void)driverAcceptsOrRejectsRideWithToken:(NSString *)token withRideId:(NSNumber *)rideId withDidAccept:(BOOL)didAccept withRideData:(RequestedRide * _Nullable)requestedRide withCompletion:(void (^)(NSError * _Nullable))completionHandler;
 
-- (void)refreshTokenWithFIRToken:(NSString *)FIRtoken withDeviceToken:(NSString *)deviceToken withCompletion:(void (^)(NSError * _Nullable))completionHandler;
+- (void)refreshTokenWithFIRToken:(NSString *)FIRtoken withFCMToken:(NSDictionary *)fcmTokenDictionary withCompletion:(void (^)(NSError * _Nullable))completionHandler;
 
 @end
 
