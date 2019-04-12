@@ -15,7 +15,7 @@
 		A200D9C52255496E00E1B551 /* DriverWorkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A200D9C32255496E00E1B551 /* DriverWorkViewController.xib */; };
 		A200D9C62255496E00E1B551 /* DriverWorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200D9C42255496E00E1B551 /* DriverWorkViewController.swift */; };
 		A200D9C8225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200D9C7225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift */; };
-		A200D9CE22567EA500E1B551 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A200D9CD22567EA500E1B551 /* GoogleService-Info.plist */; };
+		A2082869225FFE7C009FE1CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2082868225FFE7C009FE1CC /* GoogleService-Info.plist */; };
 		A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215501F2242CE5C00DDF613 /* AppDelegate.swift */; };
 		A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A21550262242CE5C00DDF613 /* Assets.xcassets */; };
 		A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */; };
@@ -142,7 +142,7 @@
 		A200D9C32255496E00E1B551 /* DriverWorkViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DriverWorkViewController.xib; sourceTree = "<group>"; };
 		A200D9C42255496E00E1B551 /* DriverWorkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverWorkViewController.swift; sourceTree = "<group>"; };
 		A200D9C7225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DriverWorkViewController+LoadingUI.swift"; sourceTree = "<group>"; };
-		A200D9CD22567EA500E1B551 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A2082868225FFE7C009FE1CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A215501C2242CE5C00DDF613 /* BirthRide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirthRide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A215501F2242CE5C00DDF613 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A21550262242CE5C00DDF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -245,7 +245,7 @@
 			children = (
 				A215501E2242CE5C00DDF613 /* BirthRide */,
 				A215501F2242CE5C00DDF613 /* AppDelegate.swift */,
-				A200D9CD22567EA500E1B551 /* GoogleService-Info.plist */,
+				A2082868225FFE7C009FE1CC /* GoogleService-Info.plist */,
 				A215501D2242CE5C00DDF613 /* Products */,
 				A2C19DA9224A875000FC20F0 /* BirthRide-Bridging-Header.h */,
 				A1BAC622660EAFD4765D62F9 /* Pods */,
@@ -631,7 +631,7 @@
 				A278042B2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib in Resources */,
 				A278042322443FF7001920A0 /* SignInViewController.xib in Resources */,
 				A278043322444B97001920A0 /* DriverPhotoRegistrationViewController.xib in Resources */,
-				A200D9CE22567EA500E1B551 /* GoogleService-Info.plist in Resources */,
+				A2082869225FFE7C009FE1CC /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
