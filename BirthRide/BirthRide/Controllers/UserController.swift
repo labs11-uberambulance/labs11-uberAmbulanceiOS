@@ -115,21 +115,9 @@ class UserController {
                 }
             }
         }
-        
-        let sendTokenToServerOperation: BlockOperation = BlockOperation {
-            self.networkingController.refreshToken(withFIRToken: token, withDeviceToken: deviceToken, withCompletion: { (error) in
-                if let error = error {
-                    NSLog("Error in UserController.configureDriver")
-                    NSLog(error.localizedDescription)
-                    return
-                }
-            })
-        }
-        
         if !isUpdating {
             updateOperation.addDependency(onboardOperation)
-            sendTokenToServerOperation.addDependency(updateOperation)
-            onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation, sendTokenToServerOperation], waitUntilFinished: true)
+            onboardAndUpdateUserOperationQueue.addOperations([onboardOperation, updateOperation], waitUntilFinished: true)
         }
         else {
             onboardAndUpdateUserOperationQueue.addOperation(updateOperation)

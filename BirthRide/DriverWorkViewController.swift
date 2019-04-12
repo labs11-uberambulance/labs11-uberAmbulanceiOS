@@ -43,6 +43,14 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         rejectRideButton.isHidden = true
         searchingForRidesLabel.isHidden = true
         pastRidesTableView.delegate = self
+        guard let fcmTokenDictionary = UserDefaults.standard.dictionary(forKey: "FCMToken"),
+        let firToken = AuthenticationController.shared.userToken else {return}
+        ABCNetworkingController().refreshToken(withFIRToken: firToken, withFCMToken: fcmTokenDictionary) { (error) in
+            if let error = error {
+                NSLog("Error in DriverWorkViewController.viewDidLoad")
+                NSLog(error.localizedDescription)
+            }
+        }
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {

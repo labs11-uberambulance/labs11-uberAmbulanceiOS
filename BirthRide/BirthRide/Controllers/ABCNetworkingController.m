@@ -499,16 +499,14 @@
 }
 
 
-- (void)refreshTokenWithFIRToken:(NSString *)FIRtoken withDeviceToken:(NSString *)deviceToken withCompletion:(void (^)(NSError * _Nullable))completionHandler {
+- (void)refreshTokenWithFIRToken:(NSString *)FIRtoken withFCMToken:(NSDictionary *)fcmTokenDictionary withCompletion:(void (^)(NSError * _Nullable))completionHandler {
    NSURL *baseURL = [[NSURL alloc] initWithString: @"api/notifications/refresh-token"];
    NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:baseURL];
    
    [requestURL setHTTPMethod:@"POST"];
    [requestURL setValue:FIRtoken forHTTPHeaderField:@"Authorization"];
    
-   NSDictionary *jsonDictionary = @{
-                                    @"token": deviceToken
-                                    };
+   NSDictionary *jsonDictionary = fcmTokenDictionary;
    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error:nil];
    
    [requestURL setHTTPBody:jsonData];
