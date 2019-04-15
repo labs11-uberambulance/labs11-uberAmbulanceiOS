@@ -22,6 +22,7 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupKeyboardDismissRecognizer()
         
         // Do any additional setup after loading the view.
         
@@ -91,6 +92,22 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
             })
         }
     }
+    
+    private func setupKeyboardDismissRecognizer(){
+        let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(self.dismissKeyboard))
+        
+        self.view.addGestureRecognizer(tapRecognizer)
+    }
+    
+    @objc
+    private func dismissKeyboard()
+    {
+        view.endEditing(true)
+    }
+    
+    
     
     //MARK: TransitionBetweenViewControllersDelegate methods
     func transition(userType: UserType?) {

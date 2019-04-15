@@ -383,7 +383,7 @@
                key = [key convertFromSnakeCaseToCamelCase];
             }
             if ([key isEqualToString:@"id"]) {
-               user.userID = parsedData[@"user"][key];
+               [user setValue:value forKey:@"userId"];
             };
             //What is a selector? A selector is a METHOD. A message is a METHOD + ARGUMENTS. Line 59 is, at RUNTIME, CREATING a NEW METHOD using the KEY.
             SEL selector = NSSelectorFromString(key);
@@ -467,10 +467,10 @@
                      key = [key convertFromSnakeCaseToCamelCase];
                   }
                   if ([key isEqualToString:@"id"]) {
-                     driver.driverId = parsedData[@"driverData"][key];
+                     [driver setValue:value forKey:@"driverId"];
                   };
                   if ([key isEqualToString:@"active"]) {
-                     driver.isActive = parsedData[@"driverData"][key];
+                     [driver setValue:value forKey:@"isActive"];
                   };
                   
                   
@@ -525,7 +525,7 @@
          return;
       }
       if (data != nil) {
-         NSArray *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
+         NSString *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
          NSLog(@"%@", jsonDictionary);
          completionHandler(nil);
       }
