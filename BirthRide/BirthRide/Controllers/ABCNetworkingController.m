@@ -113,7 +113,7 @@
    }
    if (driver != nil) {
       NSDictionary *userDictionary = @{
-                                       @"user_type": @"drivers",
+                                       @"user_type": @"driver",
                                        @"driverData": @{
                                              @"price": driver.price,
                                              @"active": @(driver.isActive),
