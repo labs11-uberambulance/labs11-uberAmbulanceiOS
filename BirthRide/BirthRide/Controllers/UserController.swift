@@ -37,11 +37,11 @@ class UserController {
         user.name = name
         user.phone = phone
         user.village = village
-        user.userID = AuthenticationController.shared.userID
+        user.userId = AuthenticationController.shared.userID
         
         
         guard let token = AuthenticationController.shared.userToken,
-            let userID = user.userID else {return}
+            let userID = user.userId else {return}
         
         let onboardAndUpdateUserOperationQueue = OperationQueue()
         let onboardOperation: BlockOperation = BlockOperation {
@@ -72,10 +72,8 @@ class UserController {
     public func configureDriver(isUpdating: Bool, name: NSString, address: NSString?, email: NSString?, phoneNumber: NSString, price: NSString, bio: NSString, photo: NSString?, userLocation: NSString) {
         guard let user = AuthenticationController.shared.genericUser,
             let token = AuthenticationController.shared.userToken,
-            let userID = AuthenticationController.shared.genericUser?.userID,
-        //TODO: I need to be guarding that there is a deviceToken here when using this on an actual device. I will also need to uncomment all of the code here that I commented out.
-            let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") else {return}
-        
+            let userID = AuthenticationController.shared.genericUser?.userId else {return}
+
         let driver: Driver
         
         user.name = name
@@ -97,6 +95,8 @@ class UserController {
             driver.location?.latLong = userLocation
             
         }
+        
+        AuthenticationController.shared.driver = driver
         
         let onboardAndUpdateUserOperationQueue = OperationQueue()
         let onboardOperation: BlockOperation = BlockOperation {

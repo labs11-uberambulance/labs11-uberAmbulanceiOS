@@ -26,8 +26,13 @@ class AuthenticationController {
     
     public var userID: NSNumber?
     public var userToken: String?
-
+    public var FCMToken: String?
+    
+    // I am not sure if this variable belongs here. This is the ride data the app will receive via push notifications from the server. You need to be authenticated to receive this, but you have to be authenticated to do anything beyond signing in, so that's not a very good reason. Anyway, here it is until I find a better place for it.
+    public var rideData: [AnyHashable: Any]?
+    
     public var requestedRide: RequestedRide?
+
     
     
     /// This method will do all of the networking with Firebase and the BirthRide server to authenticate the user, either whether the user is signing in or signing up. It uses a boolean, isSigningUp, to decide how to authenticate the user.
@@ -72,7 +77,7 @@ class AuthenticationController {
                     return
                 }
                 self.genericUser = userArray[0] as? User
-                self.userID = self.genericUser?.userID
+                self.userID = self.genericUser?.userId
                 switch userType {
                 case "drivers":
                     self.driver = userArray[1] as? Driver

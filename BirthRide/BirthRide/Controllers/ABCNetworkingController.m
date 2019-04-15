@@ -358,7 +358,7 @@
          completionHandler(error, nil, nil);
          return;
       }
-      BOOL isNewUser = NO;
+
       NSString *userType = [[NSString alloc] init];
       NSString *userTypeKey = [[NSString alloc] init];
       NSMutableArray *userArray = [[NSMutableArray alloc] init];
@@ -371,9 +371,8 @@
          } else if ([parsedData[@"user"][@"user_type"]  isEqual: @"drivers"]) {
             userType = @"drivers";
             userTypeKey = @"driverData";
-         } else {
-            isNewUser = YES;
          }
+         
          User *user = [User alloc];
          PregnantMom *pregnantMom = [PregnantMom alloc];
          Driver *driver = [Driver alloc];
@@ -384,7 +383,7 @@
                key = [key convertFromSnakeCaseToCamelCase];
             }
             if ([key isEqualToString:@"id"]) {
-               user.userID = parsedData[@"user"][key];
+               [user setValue:value forKey:@"userId"];
             };
             //What is a selector? A selector is a METHOD. A message is a METHOD + ARGUMENTS. Line 59 is, at RUNTIME, CREATING a NEW METHOD using the KEY.
             SEL selector = NSSelectorFromString(key);
@@ -394,7 +393,7 @@
                [user setValue:value forKey:key];
             }
             
-            if ([key isEqualToString:@"location"] && !isNewUser) {
+            if ([key isEqualToString:@"location"] && value != (id)NSNull.null) {
                user.location = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:NULL];
                   [parsedData[@"user"][@"location"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  value, BOOL* stop) {
                      if ([key isEqualToString:@"latlng"]) {
@@ -468,9 +467,11 @@
                      key = [key convertFromSnakeCaseToCamelCase];
                   }
                   if ([key isEqualToString:@"id"]) {
-                     driver.driverId = parsedData[@"driverData"][key];
+                     [driver setValue:value forKey:@"driverId"];
                   };
-                  
+                  if ([key isEqualToString:@"active"]) {
+                     [driver setValue:value forKey:@"isActive"];
+                  };
                   
                   
                   if ([key isEqualToString:@"location"]) {
@@ -505,7 +506,7 @@
 
 
 - (void)refreshTokenWithFIRToken:(NSString *)FIRtoken withFCMToken:(NSDictionary *)fcmTokenDictionary withCompletion:(void (^)(NSError * _Nullable))completionHandler {
-   NSURL *baseURL = [[NSURL alloc] initWithString: @"api/notifications/refresh-token"];
+   NSURL *baseURL = [[NSURL alloc] initWithString: @"https://birthrider-backend.herokuapp.com/api/notifications/refresh-token"];
    NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:baseURL];
    
    [requestURL setHTTPMethod:@"POST"];
@@ -524,7 +525,7 @@
          return;
       }
       if (data != nil) {
-         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
+         NSString *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
          NSLog(@"%@", jsonDictionary);
          completionHandler(nil);
       }

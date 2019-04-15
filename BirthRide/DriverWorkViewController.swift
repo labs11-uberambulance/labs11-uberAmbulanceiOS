@@ -78,6 +78,10 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
             acceptRideButton.isHidden = true
             rejectRideButton.isHidden = true
         }
+        guard let isActive = AuthenticationController.shared.driver?.isActive else {return}
+        if isActive.boolValue {
+            isWorkingSwitch.isOn = true
+        }
     }
     
     //MARK: IBActions

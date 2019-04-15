@@ -17,7 +17,7 @@ enum UserType: String {
 @objcMembers
 class User: NSObject {
     ///This property will be set by the backend. I will get it back when I first create the user.
-    var userID: NSNumber?
+    var userId: NSNumber?
     var name: NSString?
     ///This property will contain the email or phone number of the user, depending on login type. This property is unneeded on the FE.
 //    var login: String?
@@ -35,7 +35,7 @@ class User: NSObject {
 
     init(userID: NSNumber?, name: NSString?, login: NSString?, firebaseId: NSString?, phone: NSString?, userType: NSString?, address: NSString?, village: NSString?, latitude: NSNumber?, longitude: NSNumber?, email: NSString?, location: Start?) {
         super.init()
-        self.userID = userID
+        self.userId = userID
         self.name = name
 //        self.login = login
         self.phone = phone
