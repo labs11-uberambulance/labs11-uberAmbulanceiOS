@@ -29,9 +29,11 @@ class AuthenticationController {
     public var FCMToken: String?
     
     // I am not sure if this variable belongs here. This is the ride data the app will receive via push notifications from the server. You need to be authenticated to receive this, but you have to be authenticated to do anything beyond signing in, so that's not a very good reason. Anyway, here it is until I find a better place for it.
-    public var rideData: [AnyHashable: Any]?
-    
-    public var requestedRide: RequestedRide?
+    public var requestedRide: RequestedRide? {
+        didSet {
+        NotificationCenter.default.post(name: .didReceiveRideRequest, object: nil)
+        }
+    }
 
     
     
