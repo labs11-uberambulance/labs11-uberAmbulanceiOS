@@ -19,6 +19,7 @@
 		A21550202242CE5C00DDF613 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A215501F2242CE5C00DDF613 /* AppDelegate.swift */; };
 		A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A21550262242CE5C00DDF613 /* Assets.xcassets */; };
 		A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A21550282242CE5C00DDF613 /* LaunchScreen.storyboard */; };
+		A276465522652C68009C30DB /* Notification.Name+DidReceiveRideRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A276465422652C68009C30DB /* Notification.Name+DidReceiveRideRequest.swift */; };
 		A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041C22443CC5001920A0 /* UserTypeViewController.swift */; };
 		A278041F22443CC5001920A0 /* UserTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278041D22443CC5001920A0 /* UserTypeViewController.xib */; };
 		A278042222443FF7001920A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042022443FF7001920A0 /* SignInViewController.swift */; };
@@ -148,6 +149,7 @@
 		A21550262242CE5C00DDF613 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A21550292242CE5C00DDF613 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A215502B2242CE5C00DDF613 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A276465422652C68009C30DB /* Notification.Name+DidReceiveRideRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+DidReceiveRideRequest.swift"; sourceTree = "<group>"; };
 		A278041C22443CC5001920A0 /* UserTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeViewController.swift; sourceTree = "<group>"; };
 		A278041D22443CC5001920A0 /* UserTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTypeViewController.xib; sourceTree = "<group>"; };
 		A278042022443FF7001920A0 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 			children = (
 				A292831A224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.h */,
 				A292831B224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.m */,
+				A276465422652C68009C30DB /* Notification.Name+DidReceiveRideRequest.swift */,
 			);
 			name = Categories/Extensions;
 			path = ..;
@@ -731,6 +734,7 @@
 				A2C19D952245589100FC20F0 /* ViewControllerCoordinator.swift in Sources */,
 				A278043222444B97001920A0 /* DriverPhotoRegistrationViewController.swift in Sources */,
 				A278042A2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift in Sources */,
+				A276465522652C68009C30DB /* Notification.Name+DidReceiveRideRequest.swift in Sources */,
 				A2C19DB1224A935F00FC20F0 /* Ride.swift in Sources */,
 				A29282C4224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.swift in Sources */,
 				A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */,

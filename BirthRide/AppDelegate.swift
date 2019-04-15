@@ -186,16 +186,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
-        
-        
+        AuthenticationController.shared.requestedRide = RequestedRide.createRideWithDictionary(dictionary: userInfo as! [String : AnyObject])
     }
-    
-    
-    
-    
-    
-    
-    
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         
         let dataDict:[String: String] = ["token": fcmToken]
@@ -263,10 +255,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         // 2
         let rootViewController = DriverWorkViewController()
-        if let aps = userInfo["aps"] as? [String: [String: AnyObject]] {
-            rootViewController.ride = RequestedRide.createRideWithDictionary(dictionary: aps["data"] as! [String : AnyObject]) as RequestedRide?
-            window?.rootViewController = rootViewController
-        }
+//        if let aps = userInfo["aps"] as? [String: [String: AnyObject]] {
+//            rootViewController.ride = RequestedRide.createRideWithDictionary(dictionary: aps["data"] as! [String : AnyObject]) as RequestedRide?
+//            window?.rootViewController = rootViewController
+//        }
         // 4
         completionHandler()
     }

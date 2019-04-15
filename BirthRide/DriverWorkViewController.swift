@@ -25,11 +25,6 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
     //MARK: Other Properties
     var isSubviewOfSuperview = false
     var loadingView: IndeterminateLoadingView?
-    var ride: RequestedRide? {
-        didSet {
-            updateViews()
-        }
-    }
     
     
     
@@ -51,11 +46,12 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
                 NSLog(error.localizedDescription)
             }
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: .didReceiveRideRequest, object: nil)
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        if isWorkingSwitch.isOn && ride == nil {
+        if isWorkingSwitch.isOn && AuthenticationController.shared.requestedRide == nil {
             animateLoadingView()
             searchingForRidesLabel.isHidden = false
             requestTimeLabel.isHidden = true
@@ -63,7 +59,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
             destinationLabel.isHidden = true
             acceptRideButton.isHidden = true
             rejectRideButton.isHidden = true
-        } else if ride != nil {
+        } else if AuthenticationController.shared.requestedRide != nil {
             searchingForRidesLabel.isHidden = true
             requestTimeLabel.isHidden = false
             startVillageLabel.isHidden = false
@@ -87,7 +83,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
     //MARK: IBActions
     @IBAction func acceptRideButtonTapped(_ sender: Any) {
         guard let userToken = AuthenticationController.shared.userToken,
-            let rideId = self.ride?.rideId else {return}
+            let rideId = AuthenticationController.shared.requestedRide?.rideId else {return}
         ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: true, withRideData: nil) { (error) in
             if let error = error {
                 NSLog("Error in DriverWorkVC.acceptRideButtonTapped")
@@ -99,8 +95,8 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
     }
     @IBAction func rejectRideButtonTapped(_ sender: Any) {
         guard let userToken = AuthenticationController.shared.userToken,
-            let rideId = self.ride?.rideId else {return}
-        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: false, withRideData: ride) { (error) in
+            let ride = AuthenticationController.shared.requestedRide else {return}
+        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: ride.rideId, withDidAccept: false, withRideData: ride) { (error) in
             if let error = error {
                 NSLog("Error in DriverWorkVC.acceptRideButtonTapped")
                 NSLog(error.localizedDescription)
@@ -134,7 +130,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         
         switch isWorkingSwitch.isOn {
         case true:
-            if ride == nil {
+            if AuthenticationController.shared.requestedRide == nil {
                 animateLoadingView()
                 searchingForRidesLabel.isHidden = false
                 AuthenticationController.shared.driver?.isActive = true
@@ -151,8 +147,9 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         }
     
     //MARK: Private Methods
+    @objc
     private func updateViews() {
-        guard let ride = ride else {return}
+        guard let ride = AuthenticationController.shared.requestedRide else {return}
         if requestTimeLabel.isHidden == true {
             requestTimeLabel.isHidden = false
             requestTimeLabel.text = ride.price.stringValue
@@ -162,9 +159,9 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
             destinationLabel.text = ride.distance as String
             acceptRideButton.isHidden = false
             rejectRideButton.isHidden = false
-            searchingForRidesLabel.isHidden = false
+            searchingForRidesLabel.isHidden = true
         }
-        if requestTimeLabel.isHidden == false {
+        else if requestTimeLabel.isHidden == false {
             requestTimeLabel.isHidden = true
             startVillageLabel.isHidden = true
             destinationLabel.isHidden = true
