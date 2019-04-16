@@ -84,7 +84,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
     @IBAction func acceptRideButtonTapped(_ sender: Any) {
         guard let userToken = AuthenticationController.shared.userToken,
             let rideId = AuthenticationController.shared.requestedRide?.rideId else {return}
-        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: false, withRide: nil) { (error) in
+        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: true, withRide: nil) { (error) in
             if let error = error {
                 NSLog("Error in DriverWorkVC.acceptRideButtonTapped")
                 NSLog(error.localizedDescription)
@@ -97,7 +97,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         guard let userToken = AuthenticationController.shared.userToken,
             let rideId = AuthenticationController.shared.requestedRide?.rideId,
             let requestedRideDictionary = UserDefaults.standard.dictionary(forKey: "UserInfoKey") else {return}
-        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: true, withRide: requestedRideDictionary) { (error) in
+        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: false, withRide: requestedRideDictionary) { (error) in
             if let error = error {
                 NSLog("Error in DriverWorkVC.acceptRideButtonTapped")
                 NSLog(error.localizedDescription)
@@ -153,9 +153,9 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         guard let ride = AuthenticationController.shared.requestedRide else {return}
         if requestTimeLabel.isHidden == true {
             requestTimeLabel.isHidden = false
-            requestTimeLabel.text = ride.price.stringValue
+            requestTimeLabel.text = ride.name as String
             startVillageLabel.isHidden = false
-            startVillageLabel.text = ride.hospital as String
+//            startVillageLabel.text = ride.
             destinationLabel.isHidden = false
             destinationLabel.text = ride.distance as String
             acceptRideButton.isHidden = false

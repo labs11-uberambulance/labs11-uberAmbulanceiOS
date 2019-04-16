@@ -47,20 +47,11 @@
       
       for (int i = 0; i < driversDictionaryArray.count; i++) {
          Driver *newDriver = [[Driver alloc] initWithPrice:@(99) requestedDriverName:nil isActive:false bio:@"" photo:nil driverId:nil firebaseId:nil];
-         newDriver.location = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:NULL];
+         
          NSDictionary *driverDictionary = driversDictionaryArray[i];
          [driverDictionary[@"driver"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
             if ([key containsString:@"_"]) {
                key = [key convertFromSnakeCaseToCamelCase];
-            }
-            if ([key isEqualToString:@"location"]) {
-               [driverDictionary[@"driver"][@"location"] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull value, BOOL * _Nonnull stop) {
-                  if ([key isEqualToString:@"latlng"]) {
-                     [newDriver.location setValue:value forKey:@"latLong"];
-                  }
-               }
-                ];
-               
             }
             if ([key isEqualToString:@"name"]) {
                [newDriver setValue:value forKey:@"requestedDriverName"];
@@ -68,6 +59,16 @@
             SEL selector = NSSelectorFromString(key);
             if ([newDriver respondsToSelector: selector] && value != NSNull.null) {
                [newDriver setValue:value forKey:key];
+            }
+            if ([key isEqualToString:@"location"]) {
+               newDriver.location = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:NULL];
+               [driverDictionary[@"driver"][@"location"] enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull value, BOOL * _Nonnull stop) {
+                  if ([key isEqualToString:@"latlng"]) {
+                     [newDriver.location setValue:value forKey:@"latLong"];
+                  }
+               }
+                ];
+               
             }
          }];
          [driverDictionary[@"distance"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
@@ -389,8 +390,7 @@
       NSString *userTypeKey = [[NSString alloc] init];
       NSMutableArray *userArray = [[NSMutableArray alloc] init];
       if (data != nil) {
-         NSDictionary *parsedData = [[NSDictionary alloc] init];
-         parsedData = [NSJSONSerialization JSONObjectWithData:data options:0 error: nil];
+         NSDictionary *parsedData = [NSJSONSerialization JSONObjectWithData:data options:0 error: nil];
          if ([parsedData[@"user"][@"user_type"]  isEqual: @"mothers"]) {
             userType = @"mothers";
             userTypeKey = @"motherData";
