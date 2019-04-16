@@ -11,13 +11,13 @@ import Firebase
 import GoogleMaps
 import GooglePlaces
 
-class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
+class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
     //MARK: Private Properties
     private var driversArray: [Driver] = [] {
         didSet {
             DispatchQueue.main.async {
             self.configureMapView()
-            self.configureLabels()
+            self.configureDriverMarkers()
             }
         }
     }
@@ -28,9 +28,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     //MARK: IBOutlets
     @IBOutlet weak var mapView: GMSMapView!
-    @IBOutlet weak var estimatedPickupTimeLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var estimatedFareLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +37,8 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
+        tableView.delegate = self
+        tableView.dataSource = self
         
     }
     
@@ -85,33 +85,6 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
     }
-    @IBAction func nextDriverButtonTapped(_ sender: Any) {
-        guard driversArray.count > 0 else {return}
-        if count == driversArray.count - 1 {
-            count = 0
-        } else {
-            count += 1
-        }
-        configureLabels()
-        //Call configureMapView again to update the map with a marker where the driver is located
-        configureMapView()
-    }
-    @IBAction func lastDriverButtonTapped(_ sender: Any) {
-        guard driversArray.count > 0 else {return}
-        if count == 0 {
-            count = driversArray.count - 1
-        } else {
-            count -= 1
-        }
-        configureLabels()
-        configureMapView()
-    }
-    
-    
-    
-    
-    
-    
     //MARK: Private Methods
     private func configureMapView() {
         
@@ -156,15 +129,27 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-    private func configureLabels() {
-        guard let price = driversArray[count].price,
-            let duration = driversArray[count].duration,
-            let name = driversArray[count].requestedDriverName else {return}
-        estimatedPickupTimeLabel.text = "Estimated Pickup Time: \(duration)"
-        estimatedFareLabel.text = "Estimated Fare: \(price)"
-        nameLabel.text = name as String
+    private func configureDriverMarkers() {
+        for driver in driversArray {
+            guard let latLongString = driver.location?.latLong,
+            let name = driver.requestedDriverName,
+            let price = driver.price,
+                let profileImage = getImage(index: driversArray.firstIndex(of: driver)!) else{ return}
+            
+            let latLongArray = latLongString.components(separatedBy: ",")
+            
+            let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)
+            let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)
+            
+            let driverMarker = GMSMarker()
+            driverMarker.icon = profileImage
+            driverMarker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            driverMarker.map = mapView
+            driverMarker.title = name as String
+            driverMarker.snippet = price.stringValue
+            
+        }
     }
-    
     
     private func fetchDrivers(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
         guard let token = AuthenticationController.shared.userToken,
@@ -215,12 +200,6 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         
         
     }
-    
-    
-    
-    
-    
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
         guard let location = locations.last else {return}
@@ -242,5 +221,53 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate {
         NSLog("Error udpating location in RequestRideViewController.locationManager:didFailWithError:")
         NSLog(error.localizedDescription)
         return
+    }
+    
+    
+    
+    
+    //MARK: TableView Delegate Methods
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return driversArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReuseIdentifier"),
+        let name = driversArray[indexPath.row].requestedDriverName,
+        let price = driversArray[indexPath.row].price,
+        let duration = driversArray[indexPath.row].duration,
+        let distance = driversArray[indexPath.row].distance else {
+            return UITableViewCell(style: .subtitle, reuseIdentifier: "ReuseIdentifier")
+        }
+        
+        cell.imageView?.image = getImage(index: indexPath.row)
+        
+        cell.textLabel?.text = name as String
+        
+        cell.detailTextLabel?.text = "Driver Name: \(name), Price: \(price) Distance: \(distance), Duration: \(duration)"
+        
+        return cell
+    }
+    
+    //MARK: TableView Delegate Private Helper Methods
+    private func getImage(index: Int) -> UIImage? {
+        guard let urlString = driversArray[index].photoUrl else {return nil}
+        guard let url = URL(string: urlString as String) else {return nil}
+        let data: Data
+        do {
+            data = try Data(contentsOf: url)
+        } catch {
+            NSLog("Error getting driver profile image in RequestRideViewController.getImage")
+            NSLog(error.localizedDescription)
+            return nil
+        }
+        return UIImage(data: data)
+        
     }
 }
