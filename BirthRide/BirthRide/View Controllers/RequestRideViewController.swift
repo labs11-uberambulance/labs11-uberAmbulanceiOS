@@ -108,13 +108,13 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         
         
         let destinationMarker = GMSMarker()
-        destinationMarker.icon = GMSMarker.markerImage(with: .red)
+        destinationMarker.icon = GMSMarker.markerImage(with: .blue)
         destinationMarker.position = CLLocationCoordinate2D(latitude: destLatitude, longitude: destLongitude)
         destinationMarker.map = mapView
         
         
         let userMarker = GMSMarker()
-        userMarker.icon = GMSMarker.markerImage(with: .blue)
+        userMarker.icon = GMSMarker.markerImage(with: .red)
         userMarker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         userMarker.map = mapView
         
@@ -135,7 +135,8 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         for driver in driversArray {
             guard let latLongString = driver.location?.latLong,
             let name = driver.requestedDriverName,
-            let price = driver.price else{ return}
+            let price = driver.price,
+            let duration = driver.duration else{ return}
             
             let latLongArray = latLongString.components(separatedBy: ",")
             
@@ -147,7 +148,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
             driverMarker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             driverMarker.map = mapView
             driverMarker.title = name as String
-            driverMarker.snippet = "Price: \(price.stringValue)"
+            driverMarker.snippet = "Price: \(price.stringValue), Duration: \(duration)"
             
         }
     }
