@@ -113,15 +113,12 @@
    }
    if (driver != nil) {
       NSDictionary *userDictionary = @{
-                                       @"user_type": @"drivers",
+                                       @"user_type": @"driver",
                                        @"driverData": @{
                                              @"price": driver.price,
                                              @"active": @(driver.isActive),
                                              @"bio": driver.bio,
                                              @"photo_url": driver.photoUrl,
-                                             @"location": @{
-                                                   @"latlng": driver.location.latLong
-                                                   }
                                              }
                                        };
       NSData *dictionaryData = [[NSData alloc] init];
@@ -129,8 +126,6 @@
       [requestURL setHTTPBody:dictionaryData];
    }
    else {
-      
-      NSNull *noData = [[NSNull alloc] init];
       
       NSDictionary *dataDictionary = @{
                                        @"user_type": @"mother",
@@ -152,13 +147,14 @@
       
       
       
-      
       NSData *dictionaryData = [[NSData alloc] init];
       dictionaryData = [NSJSONSerialization dataWithJSONObject:dataDictionary options:NSJSONWritingPrettyPrinted error: NULL];
       [requestURL setHTTPBody:dictionaryData];
    }
    
    [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+      
+      NSError *e = nil;
       if (error != nil) {
          NSLog(@"%@", error.localizedDescription);
          completionHandler(error);
@@ -168,8 +164,17 @@
          completionHandler(nil);
          return;
       }
-      NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
-      [jsonResponse allKeys];
+      
+      NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error: &e];
+
+      if (!jsonResponse) {
+         NSLog(@"Error parsing JSON: %@", e);
+      } else {
+         for(NSDictionary *item in jsonResponse) {
+            NSLog(@"Item: %@", item);
+         }
+      }
+      
       completionHandler(nil);
    }] resume];
    
@@ -249,11 +254,13 @@
    [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
       if (error != nil) {
          NSLog(@"%@", error.localizedDescription);
+         completionHandler(error);
          return;
       }
       if (data != nil) {
          NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
          [json allKeys];
+         completionHandler(nil);
       }
    }] resume];
 }

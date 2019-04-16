@@ -72,7 +72,7 @@ class UserController {
     public func configureDriver(isUpdating: Bool, name: NSString, address: NSString?, email: NSString?, phoneNumber: NSString, price: NSString, bio: NSString, photo: NSString?, userLocation: NSString) {
         guard let user = AuthenticationController.shared.genericUser,
             let token = AuthenticationController.shared.userToken,
-            let userID = AuthenticationController.shared.genericUser?.userId else {return}
+            let userID = AuthenticationController.shared.userID else {return}
 
         let driver: Driver
         
