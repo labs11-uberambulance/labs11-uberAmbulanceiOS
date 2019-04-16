@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,7 +28,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="JLI-wi-GFu">
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="JLI-wi-GFu">
                     <rect key="frame" x="84.5" y="79" width="206.5" height="31"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you working?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogc-Kf-aqe">
@@ -55,7 +55,7 @@
                                     <rect key="frame" x="13.5" y="0.0" width="78" height="30"/>
                                     <state key="normal" title="Reject Ride"/>
                                     <connections>
-                                        <action selector="rejectRideButtonTapped:" destination="-1" eventType="touchUpInside" id="TUV-0W-tQj"/>
+                                        <action selector="rejectRideButtonTapped:" destination="-1" eventType="touchUpInside" id="TJU-3M-EPi"/>
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Is1-Hq-Niy">
@@ -80,7 +80,7 @@
                                     <rect key="frame" x="11" y="123.5" width="83" height="30"/>
                                     <state key="normal" title="Accept Ride"/>
                                     <connections>
-                                        <action selector="acceptRideButtonTapped:" destination="-1" eventType="touchUpInside" id="K8I-hJ-lQY"/>
+                                        <action selector="acceptRideButtonTapped:" destination="-1" eventType="touchUpInside" id="zAm-yX-u57"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -134,6 +134,7 @@
             <constraints>
                 <constraint firstItem="9Jg-Cz-vPL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2Uy-uI-0i1"/>
                 <constraint firstItem="9Jg-Cz-vPL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="C1i-aX-Cs0"/>
+                <constraint firstItem="JLI-wi-GFu" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bb6-v0-Cv3"/>
                 <constraint firstItem="9Jg-Cz-vPL" firstAttribute="top" secondItem="JLI-wi-GFu" secondAttribute="bottom" constant="20" id="jae-y0-tYa"/>
                 <constraint firstItem="9Jg-Cz-vPL" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="wM3-OQ-7h8"/>
             </constraints>

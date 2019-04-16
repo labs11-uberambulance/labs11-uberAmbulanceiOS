@@ -18,7 +18,7 @@ class AuthenticationController {
     static let shared = AuthenticationController()
     private init() {}
     
-    //MARK: Private Properties
+    //MARK: Public Properties
     public var pregnantMom: PregnantMom?
     public var driver: Driver?
     public var genericUser: User?
@@ -28,6 +28,7 @@ class AuthenticationController {
     public var userToken: String?
     public var FCMToken: String?
     
+    //MARK: Private Properties
     // I am not sure if this variable belongs here. This is the ride data the app will receive via push notifications from the server. You need to be authenticated to receive this, but you have to be authenticated to do anything beyond signing in, so that's not a very good reason. Anyway, here it is until I find a better place for it.
     public var requestedRide: RequestedRide? {
         didSet {
