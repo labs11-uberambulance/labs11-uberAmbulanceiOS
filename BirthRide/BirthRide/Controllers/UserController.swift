@@ -124,6 +124,11 @@ class UserController {
         }
     }
     
+//    public func getRideMotherInformation() {
+//        ABCNetworkingController().fetchRide(withToken: <#T##String#>, withCompletion: <#T##(Error?, Ride) -> Void#>)
+//        ABCNetworkingController().authenticateUser(withToken: Authent, withCompletion: <#T##(Error?, [Any]?, String?) -> Void#>)
+//    }
+    
     
     //Thanks to Felix on SO for helping out with a good solution: https://stackoverflow.com/questions/12920345/convert-string-to-double-with-currency#12920544
     public func stringToInt(intString: String, viewController: UIViewController) -> Double {
