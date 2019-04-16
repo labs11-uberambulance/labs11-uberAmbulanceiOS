@@ -18,6 +18,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
             DispatchQueue.main.async {
             self.configureMapView()
             self.configureDriverMarkers()
+            self.tableView.reloadData()
             }
         }
     }
@@ -129,12 +130,12 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         
     }
     
+    //The profile pictures of the drivers need to be resized in order to be used as icons for the markers. Some of the images are enormous.
     private func configureDriverMarkers() {
         for driver in driversArray {
             guard let latLongString = driver.location?.latLong,
             let name = driver.requestedDriverName,
-            let price = driver.price,
-                let profileImage = getImage(index: driversArray.firstIndex(of: driver)!) else{ return}
+            let price = driver.price else{ return}
             
             let latLongArray = latLongString.components(separatedBy: ",")
             
@@ -142,11 +143,11 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
             let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)
             
             let driverMarker = GMSMarker()
-            driverMarker.icon = profileImage
+            driverMarker.icon = GMSMarker.markerImage(with: .orange)
             driverMarker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             driverMarker.map = mapView
             driverMarker.title = name as String
-            driverMarker.snippet = price.stringValue
+            driverMarker.snippet = "Price: \(price.stringValue)"
             
         }
     }
@@ -227,7 +228,6 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
     
     
     //MARK: TableView Delegate Methods
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -238,13 +238,13 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReuseIdentifier"),
-        let name = driversArray[indexPath.row].requestedDriverName,
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "ReuseIdentifier")
+        
+        guard let name = driversArray[indexPath.row].requestedDriverName,
         let price = driversArray[indexPath.row].price,
         let duration = driversArray[indexPath.row].duration,
-        let distance = driversArray[indexPath.row].distance else {
-            return UITableViewCell(style: .subtitle, reuseIdentifier: "ReuseIdentifier")
-        }
+            let distance = driversArray[indexPath.row].distance else {return cell}
+            
         
         cell.imageView?.image = getImage(index: indexPath.row)
         
