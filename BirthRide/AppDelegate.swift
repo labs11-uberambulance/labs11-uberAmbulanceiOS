@@ -186,6 +186,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
+        UserDefaults.standard.set(userInfo, forKey: "UserInfoKey")
         AuthenticationController.shared.requestedRide = RequestedRide.createRideWithDictionary(dictionary: userInfo as! [String : AnyObject])
     }
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {

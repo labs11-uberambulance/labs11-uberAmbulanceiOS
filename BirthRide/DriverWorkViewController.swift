@@ -84,7 +84,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
     @IBAction func acceptRideButtonTapped(_ sender: Any) {
         guard let userToken = AuthenticationController.shared.userToken,
             let rideId = AuthenticationController.shared.requestedRide?.rideId else {return}
-        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: true, withRideData: nil) { (error) in
+        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: false, withRide: nil) { (error) in
             if let error = error {
                 NSLog("Error in DriverWorkVC.acceptRideButtonTapped")
                 NSLog(error.localizedDescription)
@@ -95,8 +95,9 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
     }
     @IBAction func rejectRideButtonTapped(_ sender: Any) {
         guard let userToken = AuthenticationController.shared.userToken,
-            let ride = AuthenticationController.shared.requestedRide else {return}
-        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: ride.rideId, withDidAccept: false, withRideData: ride) { (error) in
+            let rideId = AuthenticationController.shared.requestedRide?.rideId,
+            let requestedRideDictionary = UserDefaults.standard.dictionary(forKey: "UserInfoKey") else {return}
+        ABCNetworkingController().driverAcceptsOrRejectsRide(withToken: userToken, withRideId: rideId, withDidAccept: true, withRide: requestedRideDictionary) { (error) in
             if let error = error {
                 NSLog("Error in DriverWorkVC.acceptRideButtonTapped")
                 NSLog(error.localizedDescription)

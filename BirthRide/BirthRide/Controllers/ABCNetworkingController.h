@@ -97,7 +97,7 @@ This method will notify the backend that the driver has either accepted or rejec
  @param requestedRide A nullable RequestedRide object that is passed into the method ONLY if the driver is rejecting the ride. Otherwise, it is nil.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)driverAcceptsOrRejectsRideWithToken:(NSString *)token withRideId:(NSNumber *)rideId withDidAccept:(BOOL)didAccept withRideData:(RequestedRide * _Nullable)requestedRide withCompletion:(void (^)(NSError * _Nullable))completionHandler;
+- (void)driverAcceptsOrRejectsRideWithToken:(NSString *)token withRideId:(NSNumber *)rideId withDidAccept:(BOOL)didAccept withRideDictionary:(NSDictionary * _Nullable)requestedRideDictionary withCompletion:(void (^)(NSError * _Nullable))completionHandler;
 
 - (void)refreshTokenWithFIRToken:(NSString *)FIRtoken withFCMToken:(NSDictionary *)fcmTokenDictionary withCompletion:(void (^)(NSError * _Nullable))completionHandler;
 
