@@ -31,9 +31,12 @@ class ServiceRideViewController: UIViewController {
     
     //MARK: IBActions
     @IBAction func rideStatusButtonTapped(_ sender: Any) {
-        if rideStatusButton.titleLabel?.text == "Pick Up"{
+        if rideStatusButton.titleLabel?.text == "Onsite" {
+            rideStatusButton.setTitle("Pick Up", for: .normal)
             
-        } else if rideStatusButton.titleLabel?.text == "Onsite" {
+        } else if rideStatusButton.titleLabel?.text == "Pick Up"{
+            rideStatusButton.setTitle("Drop Off", for: .normal)
+            configureMapView()
             
         } else if rideStatusButton.titleLabel?.text == "Drop Off" {
             
@@ -88,20 +91,31 @@ class ServiceRideViewController: UIViewController {
             driverMapMarker.position = CLLocationCoordinate2D(latitude: drivertLatitude, longitude: driverLongitude)
             driverMapMarker.map = mapView
             
+            let camera = GMSCameraPosition(latitude: driverMapMarker.position.latitude, longitude: driverMapMarker.position.longitude, zoom: 6.0)
+            mapView.animate(to: camera)
+            
             let startMapMarker = GMSMarker()
             startMapMarker.icon = GMSMarker.markerImage(with: .blue)
             startMapMarker.position = CLLocationCoordinate2D(latitude: startLatitude, longitude: startLongitude)
             startMapMarker.map = mapView
-        } else {
+        } else if rideStatusButton.titleLabel?.text == "Onsite"{
             let driverMapMarker = GMSMarker()
             driverMapMarker.icon = GMSMarker.markerImage(with: .red)
             driverMapMarker.position = CLLocationCoordinate2D(latitude: startLatitude, longitude: startLongitude)
             driverMapMarker.map = mapView
+            
+            let camera = GMSCameraPosition(latitude: driverMapMarker.position.latitude, longitude: driverMapMarker.position.longitude, zoom: 6.0)
+            mapView.animate(to: camera)
             
             let destMapMarker = GMSMarker()
             destMapMarker.icon = GMSMarker.markerImage(with: .blue)
             destMapMarker.position = CLLocationCoordinate2D(latitude: destLatitude, longitude: destLongitude)
             destMapMarker.map = mapView
         }
+    }
+    private func transitionToDriverWorkView() {
+        let destinationVC = DriverWorkViewController()
+        AuthenticationController.shared.requestedRide = nil
+        present(destinationVC, animated: true, completion: nil)
     }
 }
