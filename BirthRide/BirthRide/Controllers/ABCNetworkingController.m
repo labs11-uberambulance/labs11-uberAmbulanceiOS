@@ -306,7 +306,52 @@
    }] resume];
 }
 
-- (void)fetchRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error, Ride *ride))completionHandler {
+- (void)fetchRideWithToken:(NSString *)token withRideID:(NSNumber *)rideId withCompletion:(void(^)(NSError * _Nullable error, NSArray<Ride *> *ridesArray))completionHandler {
+   
+   NSURL *baseURL = [[NSURL alloc] initWithString:@"https://birthrider-backend.herokuapp.com/api/rides"];
+   NSURL *completeURL = [baseURL URLByAppendingPathComponent:rideId.stringValue];
+   
+   NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:completeURL];
+   [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
+   [requestURL setHTTPMethod:@"GET"];
+
+   [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+      if (error != nil) {
+         NSLog(@"Error in ABCNetworkingController.fetchRideWithToken:");
+         NSLog(@"%@", error.localizedDescription);
+         completionHandler(error, nil);
+         return;
+      }
+      if (data == nil) {
+         NSLog(@"Data is nil in ABCNetworkingController.fetchRideWithToken:");
+         completionHandler(nil, nil);
+         return;
+      }
+      NSError *e = nil;
+      NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&e];
+      
+      NSArray *ridesDictionaryArray = [[NSArray alloc] init];
+      
+      for (int i = 0; i < jsonArray.count; i++) {
+         Ride *ride = [[Ride alloc] initWithRideID:@(1) motherId:@(1) driverId:@(1) waitMin:@(1) startLatLong:@"" startName:@"" destination:@"" destinationName:@""];
+         
+         NSDictionary *rideDictionary = ridesDictionaryArray[i];
+         
+         [rideDictionary[@"ride"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop) {
+            
+         }];
+      }
+      
+      if (!jsonArray) {
+         NSLog(@"Could not parse JSON into an array.");
+         NSLog(@"%@", e.localizedDescription);
+         completionHandler(nil, nil);
+         return;
+      }
+      completionHandler(nil, jsonArray);
+      
+   }] resume];
+   
    
 }
 

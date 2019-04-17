@@ -19,22 +19,27 @@ enum RideStatus: String {
 
 @objcMembers
 class Ride: NSObject {
-    var rideId: NSNumber?
-    var motherId: NSNumber?
-    var waitMin: NSNumber?
-    var startVillage: String?
-    var startAddress: String?
-    var destination: String?
-    var destinationAddress: String?
+    var rideId: NSNumber
+    var motherId: NSNumber
+    var driverId: NSNumber
+    ///Number of minutes to wait for confirmation/rejection of ride request (defaults to 20 minutes)
+    var waitMin: NSNumber
+    ///Latitude/Longitude coordinates for the mother's start location
+    var start: NSString
+    var startName: NSString
+    ///Latitude/Longitude coordinates for the mother's destination location
+    var destination: NSString
+    var destinationName: NSString
     
-    init(rideID: NSNumber, waitMin: NSNumber, startVillage: String, startAddress: String, destination: String, destinationAddress: String) {
-        super.init()
+    required init(rideID: NSNumber, motherId: NSNumber, driverId: NSNumber, waitMin: NSNumber, startLatLong: NSString, startName: NSString, destination: NSString, destinationName: NSString) {
         self.rideId = rideID
+        self.motherId = motherId
+        self.driverId = driverId
         self.waitMin = waitMin
-        self.startVillage = startVillage
-        self.startAddress = startAddress
+        self.start = startLatLong
+        self.startName = startName
         self.destination = destination
-        self.destinationAddress = destinationAddress
+        self.destinationName = destinationName
     }
 }
 
