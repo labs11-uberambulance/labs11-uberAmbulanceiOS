@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param token The authentication token associated with the user. This parameter is used to find and update the correct ride on the server that is associated with this authentication token's user.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)updateRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable error))completionHandler;
+- (void)updateRideWithToken:(NSString *)token withRideStatus:(NSString *)rideStatus withRideId:(NSNumber *)rideId withCompletion:(void(^)(NSError * _Nullable))completionHandler;
 
 
 /**

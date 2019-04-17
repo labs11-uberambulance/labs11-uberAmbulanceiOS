@@ -345,6 +345,9 @@
             if ([key isEqualToString:@"id"]) {
                [ride setValue:value forKey:@"rideId"];
             };
+            if ([key isEqualToString:@"destName"]) {
+               [ride setValue:value forKey:@"destinationName"];
+            }
             //What is a selector? A selector is a METHOD. A message is a METHOD + ARGUMENTS. Line 59 is, at RUNTIME, CREATING a NEW METHOD using the KEY.
             SEL selector = NSSelectorFromString(key);
             //On line 83 we are sending a MESSAGE to the OBJECT using the SELECTOR to ASK the OBJECT if it contains a property with the NAME of the SELECTOR
@@ -369,8 +372,23 @@
    
 }
 
-- (void)updateRideWithToken:(NSString *)token withCompletion:(void(^)(NSError * _Nullable))completionHandler {
+- (void)updateRideWithToken:(NSString *)token withRideStatus:(NSString *)rideStatus withRideId:(NSNumber *)rideId withCompletion:(void(^)(NSError * _Nullable))completionHandler {
+   NSURL *baseURL = [[NSURL alloc] initWithString:@"https://birthrider-backend.herokuapp.com/api/rides/driver"];
+   NSURL *urlWithRideStatus = [baseURL URLByAppendingPathComponent:rideStatus];
+   NSURL *completeURL = [urlWithRideStatus URLByAppendingPathComponent:rideId.stringValue];
+   NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:completeURL];
+   [requestURL setValue:token forHTTPHeaderField:@"Authorization"];
+   [requestURL setHTTPMethod:@"GET"];
    
+   [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+      if (error != nil) {
+         NSLog(@"Error in ABCNetworkingController.updateRideWithToken");
+         NSLog(@"%@", error);
+         completionHandler(error);
+         return;
+      }
+      completionHandler(nil);
+   }] resume];
 }
 
 - (void)driverAcceptsOrRejectsRideWithToken:(NSString *)token withRideId:(NSNumber *)rideId withDidAccept:(BOOL)didAccept withRideDictionary:(NSDictionary * _Nullable)requestedRideDictionary withCompletion:(void (^)(NSError * _Nullable))completionHandler {
