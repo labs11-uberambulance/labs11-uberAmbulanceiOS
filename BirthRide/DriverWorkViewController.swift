@@ -90,8 +90,12 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
                 NSLog(error.localizedDescription)
                 return
             }
+            DispatchQueue.main.async {
+                self.serviceRideTransition()
+            }
         }
-        updateViews()
+        
+        
     }
     @IBAction func rejectRideButtonTapped(_ sender: Any) {
         guard let userToken = AuthenticationController.shared.userToken,
@@ -204,9 +208,14 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         destinationVC.isUpdating = true
         
         present(destinationVC, animated: true, completion: nil)
+    }
+    
+    private func serviceRideTransition() {
+        let destinationVC = ServiceRideViewController()
+        guard AuthenticationController.shared.driver != nil,
+            AuthenticationController.shared.requestedRide != nil else {return}
         
-        
-        
+        present(destinationVC, animated: true, completion: nil)
     }
 }
     
