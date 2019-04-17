@@ -20,6 +20,7 @@ class ServiceRideViewController: UIViewController {
     
     //MARK: Private Properties
     private var currentRide: Ride?
+    private let networkingController = ABCNetworkingController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,14 +32,40 @@ class ServiceRideViewController: UIViewController {
     
     //MARK: IBActions
     @IBAction func rideStatusButtonTapped(_ sender: Any) {
+        guard let token = AuthenticationController.shared.userToken,
+        let rideId = currentRide?.rideId else {return}
+        
         if rideStatusButton.titleLabel?.text == "Onsite" {
-            rideStatusButton.setTitle("Pick Up", for: .normal)
-            
-        } else if rideStatusButton.titleLabel?.text == "Pick Up"{
-            rideStatusButton.setTitle("Drop Off", for: .normal)
-            configureMapView()
+            self.rideStatusButton.isUserInteractionEnabled = false
+            networkingController.updateRide(withToken: token, withRideStatus: "arrives", withRideId: rideId) { (error) in
+                if let error = error {
+                    NSLog("Error in ServiceRideViewController.rideStatusButtonTapped")
+                    NSLog(error.localizedDescription)
+                    return;
+                }
+                DispatchQueue.main.async {
+                    self.rideStatusButton.setTitle("Drop Off", for: .normal)
+                    self.rideStatusButton.isUserInteractionEnabled = true
+                    self.configureMapView()
+                }
+                
+            }
             
         } else if rideStatusButton.titleLabel?.text == "Drop Off" {
+            self.rideStatusButton.isUserInteractionEnabled = false
+            networkingController.updateRide(withToken: token, withRideStatus: "arrives", withRideId: rideId) { (error) in
+                if let error = error {
+                    NSLog("Error in ServiceRideViewController.rideStatusButtonTapped")
+                    NSLog(error.localizedDescription)
+                    return;
+                }
+                DispatchQueue.main.async {
+                    self.rideStatusButton.setTitle("Ride Completed!", for: .normal)
+                    self.rideStatusButton.isUserInteractionEnabled = true
+                    self.transitionToDriverWorkView()
+                }
+                
+            }
             
         }
     }
@@ -50,7 +77,7 @@ class ServiceRideViewController: UIViewController {
         guard let rideId = AuthenticationController.shared.requestedRide?.rideId,
             let token = AuthenticationController.shared.userToken else {return}
         
-        ABCNetworkingController().fetchRide(withToken: token, withRideID: rideId) { (error, ridesArray) in
+        networkingController.fetchRide(withToken: token, withRideID: rideId) { (error, ridesArray) in
             if let error = error {
                 NSLog("Error in ServiceRideViewController.fetchCurrentRideInformation")
                 NSLog(error.localizedDescription)
@@ -64,6 +91,7 @@ class ServiceRideViewController: UIViewController {
             self.currentRide = currentRide[0]
             DispatchQueue.main.async {
                 self.configureMapView()
+                self.configureLabels()
             }
         }
     }
@@ -85,7 +113,7 @@ class ServiceRideViewController: UIViewController {
         let destLatitude = UserController().stringToInt(intString: destLatLongArray[0], viewController: self)
         let destLongitude = UserController().stringToInt(intString: destLatLongArray[1], viewController: self)
         
-        if rideStatusButton.titleLabel?.text == "Pick Up" {
+        if rideStatusButton.titleLabel?.text == "Onsite" {
             let driverMapMarker = GMSMarker()
             driverMapMarker.icon = GMSMarker.markerImage(with: .red)
             driverMapMarker.position = CLLocationCoordinate2D(latitude: drivertLatitude, longitude: driverLongitude)
@@ -98,7 +126,7 @@ class ServiceRideViewController: UIViewController {
             startMapMarker.icon = GMSMarker.markerImage(with: .blue)
             startMapMarker.position = CLLocationCoordinate2D(latitude: startLatitude, longitude: startLongitude)
             startMapMarker.map = mapView
-        } else if rideStatusButton.titleLabel?.text == "Onsite"{
+        } else if rideStatusButton.titleLabel?.text == "Drop Off"{
             let driverMapMarker = GMSMarker()
             driverMapMarker.icon = GMSMarker.markerImage(with: .red)
             driverMapMarker.position = CLLocationCoordinate2D(latitude: startLatitude, longitude: startLongitude)
@@ -111,6 +139,17 @@ class ServiceRideViewController: UIViewController {
             destMapMarker.icon = GMSMarker.markerImage(with: .blue)
             destMapMarker.position = CLLocationCoordinate2D(latitude: destLatitude, longitude: destLongitude)
             destMapMarker.map = mapView
+        }
+    }
+    private func configureLabels() {
+        guard let rideRequestInfo = AuthenticationController.shared.requestedRide,
+        let currentRide = currentRide else {return}
+        nameLabel.text = rideRequestInfo.name as String
+        phoneLabel.text = rideRequestInfo.phone as String
+        if rideStatusButton.titleLabel?.text == "Onsite" {
+            startAndDestinationNameLabel.text = currentRide.startName as String
+        } else {
+            startAndDestinationNameLabel.text = currentRide.destinationName as String
         }
     }
     private func transitionToDriverWorkView() {
