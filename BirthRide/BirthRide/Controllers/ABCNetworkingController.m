@@ -270,7 +270,7 @@
 
 - (void)requestDriverWithToken:(NSString *)token withDriver:(Driver *)driver withMother:(PregnantMom *)mother withUser:(User *)user withCompletion:(void (^)(NSError * _Nullable))completionHandler {
    
-   NSURL *baseURL = [[NSURL alloc] initWithString:@"https://birthrider-backend.herokuapp.com/request/driver"];
+   NSURL *baseURL = [[NSURL alloc] initWithString:@"https://birthrider-backend.herokuapp.com/api/rides/request/driver"];
    NSURL *completeBaseURL = [baseURL URLByAppendingPathComponent: driver.firebaseId];
    NSMutableURLRequest *requestURL = [[NSMutableURLRequest alloc] initWithURL:completeBaseURL];
    [requestURL setHTTPMethod:@"POST"];
@@ -330,16 +330,30 @@
       NSError *e = nil;
       NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&e];
       
-      NSArray *ridesDictionaryArray = [[NSArray alloc] init];
+      NSMutableArray<Ride *> *ridesArray = [[NSMutableArray alloc] init];
       
       for (int i = 0; i < jsonArray.count; i++) {
-         Ride *ride = [[Ride alloc] initWithRideID:@(1) motherId:@(1) driverId:@(1) waitMin:@(1) startLatLong:@"" startName:@"" destination:@"" destinationName:@""];
+         Ride *ride = [[Ride alloc] initWithRideID:@(1) motherId:@(1) driverId:@(1) waitMin:@(1) startLatLong:@"" startName:@"" destination:@"" destinationName:@"" rideStatus:@""];
          
-         NSDictionary *rideDictionary = ridesDictionaryArray[i];
+         NSDictionary *rideDictionary = jsonArray[i];
          
-         [rideDictionary[@"ride"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop) {
+         [rideDictionary enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop) {
             
+            if ([key containsString:@"_"]) {
+               key = [key convertFromSnakeCaseToCamelCase];
+            }
+            if ([key isEqualToString:@"id"]) {
+               [ride setValue:value forKey:@"rideId"];
+            };
+            //What is a selector? A selector is a METHOD. A message is a METHOD + ARGUMENTS. Line 59 is, at RUNTIME, CREATING a NEW METHOD using the KEY.
+            SEL selector = NSSelectorFromString(key);
+            //On line 83 we are sending a MESSAGE to the OBJECT using the SELECTOR to ASK the OBJECT if it contains a property with the NAME of the SELECTOR
+            if ([ride respondsToSelector: selector] && value != NSNull.null) {
+               //On line 85 we are LOOKING FOR a method called `setProperty` to SET the PROPERTY with the VALUE. IF THIS METHOD IS NOT FOUND the selector GENERATES a METHOD called `setProperty` to SET the value of the PARAMETER matching the KEY
+               [ride setValue:value forKey:key];
+            }
          }];
+         [ridesArray addObject:ride];
       }
       
       if (!jsonArray) {
@@ -348,7 +362,7 @@
          completionHandler(nil, nil);
          return;
       }
-      completionHandler(nil, jsonArray);
+      completionHandler(nil, ridesArray);
       
    }] resume];
    
@@ -398,13 +412,17 @@
       if (data != nil) {
          NSError *e = nil;
          NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error: &e];
-         if (!jsonResponse) {
-            NSLog(@"Error parsing JSON: %@", e);
-         } else {
-            for(NSDictionary *item in jsonResponse) {
-               NSLog(@"Item: %@", item);
-            }
-         }
+         //This is commented out because, though this request is currently working fine, the BE doesn't have a valid message to send if it is working correctly.
+//         if (!jsonResponse) {
+//            NSLog(@"Error parsing JSON: %@", e);
+//            completionHandler(e);
+//            return;
+//         } else {
+//            for(NSDictionary *item in jsonResponse) {
+//               NSLog(@"Item: %@", item);
+//            }
+//         }
+         completionHandler(nil);
          
       }
    }] resume];

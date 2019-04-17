@@ -73,19 +73,6 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         editProfileTransition()
     }
     
-    
-    @IBAction func requestRideButtonTapped(_ sender: Any) {
-        guard let userToken = AuthenticationController.shared.userToken,
-            let mother = AuthenticationController.shared.pregnantMom,
-            let user = AuthenticationController.shared.genericUser else {return}
-        ABCNetworkingController().requestDriver(withToken: userToken, with: driversArray[count], withMother: mother, with: user) { (error) in
-            if let error = error {
-                NSLog("error in RequestRideViewController.requestRideButtonTapped")
-                NSLog(error.localizedDescription)
-                return
-            }
-        }
-    }
     //MARK: Private Methods
     private func configureMapView() {
         
@@ -254,6 +241,19 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         cell.detailTextLabel?.text = "Driver Name: \(name), Price: \(price) Distance: \(distance), Duration: \(duration)"
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let userToken = AuthenticationController.shared.userToken,
+            let mother = AuthenticationController.shared.pregnantMom,
+            let user = AuthenticationController.shared.genericUser else {return}
+        ABCNetworkingController().requestDriver(withToken: userToken, with: driversArray[count], withMother: mother, with: user) { (error) in
+            if let error = error {
+                NSLog("error in RequestRideViewController.requestRideButtonTapped")
+                NSLog(error.localizedDescription)
+                return
+            }
+        }
     }
     
     //MARK: TableView Delegate Private Helper Methods

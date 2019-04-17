@@ -8,15 +8,6 @@
 
 import UIKit
 
-enum RideStatus: String {
-    case pending
-    case accepted
-    case enrouteToPickup
-    case onsite
-    case enrouteToDestination
-    case complete
-}
-
 @objcMembers
 class Ride: NSObject {
     var rideId: NSNumber
@@ -30,8 +21,9 @@ class Ride: NSObject {
     ///Latitude/Longitude coordinates for the mother's destination location
     var destination: NSString
     var destinationName: NSString
+    var rideStatus: NSString
     
-    required init(rideID: NSNumber, motherId: NSNumber, driverId: NSNumber, waitMin: NSNumber, startLatLong: NSString, startName: NSString, destination: NSString, destinationName: NSString) {
+    required init(rideID: NSNumber, motherId: NSNumber, driverId: NSNumber, waitMin: NSNumber, startLatLong: NSString, startName: NSString, destination: NSString, destinationName: NSString, rideStatus: NSString) {
         self.rideId = rideID
         self.motherId = motherId
         self.driverId = driverId
@@ -40,6 +32,7 @@ class Ride: NSObject {
         self.startName = startName
         self.destination = destination
         self.destinationName = destinationName
+        self.rideStatus = rideStatus
     }
 }
 
