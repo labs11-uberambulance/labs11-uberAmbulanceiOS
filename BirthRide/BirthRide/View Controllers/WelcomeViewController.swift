@@ -17,6 +17,7 @@ class WelcomeViewController: UIViewController {
     }
     //mark: IBActions
     @IBAction func nextButtonTapped(_ sender: Any) {
+        transitionToAuthentication()
     }
     
     //MARK:Private Methods
@@ -41,7 +42,7 @@ class WelcomeViewController: UIViewController {
         
         let destinationVC = tabBarController
         
-        present(destinationVC, animated: true, completion: nil)
+        self.view.window?.rootViewController?.present(destinationVC, animated: true, completion: nil)
     }
 
 }

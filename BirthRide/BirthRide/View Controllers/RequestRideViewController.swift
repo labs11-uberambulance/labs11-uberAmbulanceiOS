@@ -16,7 +16,6 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
     private var driversArray: [Driver] = [] {
         didSet {
             DispatchQueue.main.async {
-            self.configureMapView()
             self.configureDriverMarkers()
             self.tableView.reloadData()
             }
@@ -43,13 +42,17 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        configureMapView()
         
         let pregnantMomStart = authenticationController.pregnantMom?.start
         
         
         guard let latLongArray = pregnantMomStart?.latLong?.components(separatedBy: ",") as [NSString]? else {return}
+        
+        
         
         
         
@@ -144,12 +147,17 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         guard let token = AuthenticationController.shared.userToken,
         let mother = AuthenticationController.shared.pregnantMom else {return}
         
-        ABCNetworkingController().fetchNearbyDrivers(withToken: token, withMother: mother, withCompletion: { (error, fetchedDriversArray)  in
+        ABCNetworkingController().fetchNearbyDrivers(withToken: token, withMother: mother, withCompletion: { (error, fetchedDriversArray, didHaveSuccess)  in
             if let error = error {
                 NSLog(error.localizedDescription)
                 return
             }
             guard let driversArray = fetchedDriversArray else {
+                if didHaveSuccess {
+                    DispatchQueue.main.async {
+                    self.showNoDriversInAreaAlert()
+                    }
+                }
                 return
             }
             self.driversArray = driversArray
@@ -185,10 +193,16 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         destinationVC.isUpdating = true
         
         present(destinationVC, animated: true, completion: nil)
-        
-        
-        
     }
+    
+    private func showNoDriversInAreaAlert() {
+        let alertController = UIAlertController()
+        alertController.title = "No Available Drivers"
+        alertController.message = "It appears that there are no available drivers in your area. Please try again in a few minutes or call 1-222-333-7777 for assistance."
+        alertController.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
         guard let location = locations.last else {return}
