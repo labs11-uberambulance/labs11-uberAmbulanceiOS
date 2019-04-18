@@ -34,6 +34,8 @@
 		A278042F224447A6001920A0 /* DriverRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042D224447A6001920A0 /* DriverRegistrationViewController.xib */; };
 		A278043222444B97001920A0 /* DriverPhotoRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278043022444B97001920A0 /* DriverPhotoRegistrationViewController.swift */; };
 		A278043322444B97001920A0 /* DriverPhotoRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278043122444B97001920A0 /* DriverPhotoRegistrationViewController.xib */; };
+		A285C8BB2268EF4300C86BD6 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285C8B92268EF4300C86BD6 /* WelcomeViewController.swift */; };
+		A285C8BC2268EF4300C86BD6 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A285C8BA2268EF4300C86BD6 /* WelcomeViewController.xib */; };
 		A29282C4224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282C2224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.swift */; };
 		A29282C5224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29282C3224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib */; };
 		A29282CA224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */; };
@@ -166,6 +168,8 @@
 		A278042D224447A6001920A0 /* DriverRegistrationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverRegistrationViewController.xib; sourceTree = "<group>"; };
 		A278043022444B97001920A0 /* DriverPhotoRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverPhotoRegistrationViewController.swift; sourceTree = "<group>"; };
 		A278043122444B97001920A0 /* DriverPhotoRegistrationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverPhotoRegistrationViewController.xib; sourceTree = "<group>"; };
+		A285C8B92268EF4300C86BD6 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		A285C8BA2268EF4300C86BD6 /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		A29282C2224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleIDAuthorizationViewController.swift; sourceTree = "<group>"; };
 		A29282C3224ACF2000FF9C28 /* GoogleIDAuthorizationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoogleIDAuthorizationViewController.xib; sourceTree = "<group>"; };
 		A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthorizationViewController.swift; sourceTree = "<group>"; };
@@ -289,6 +293,7 @@
 		A27804172243FDD9001920A0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A285C8BA2268EF4300C86BD6 /* WelcomeViewController.xib */,
 				A278041D22443CC5001920A0 /* UserTypeViewController.xib */,
 				A29282CC224AD39A00FF9C28 /* Authentication Views */,
 				A29282CD224AD3AF00FF9C28 /* Onboarding Views */,
@@ -447,6 +452,7 @@
 		A2E277902242D59A00F3460D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A285C8B92268EF4300C86BD6 /* WelcomeViewController.swift */,
 				A278041C22443CC5001920A0 /* UserTypeViewController.swift */,
 				A29282C6224ACF6B00FF9C28 /* Authentication View Controllers */,
 				A29282C7224ACF7E00FF9C28 /* Onboarding View Controllers */,
@@ -632,6 +638,7 @@
 				A200D9B4225517B100E1B551 /* RequestRideViewController.xib in Resources */,
 				A29282D3224BE22400FF9C28 /* SignUpViewController.xib in Resources */,
 				A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */,
+				A285C8BC2268EF4300C86BD6 /* WelcomeViewController.xib in Resources */,
 				A200D9C52255496E00E1B551 /* DriverWorkViewController.xib in Resources */,
 				A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */,
 				A278042F224447A6001920A0 /* DriverRegistrationViewController.xib in Resources */,
@@ -739,6 +746,7 @@
 				A29282CA224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift in Sources */,
 				A278042E224447A6001920A0 /* DriverRegistrationViewController.swift in Sources */,
 				A2C19D952245589100FC20F0 /* ViewControllerCoordinator.swift in Sources */,
+				A285C8BB2268EF4300C86BD6 /* WelcomeViewController.swift in Sources */,
 				A278043222444B97001920A0 /* DriverPhotoRegistrationViewController.swift in Sources */,
 				A278042A2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift in Sources */,
 				A276465522652C68009C30DB /* Notification.Name+DidReceiveRideRequest.swift in Sources */,
