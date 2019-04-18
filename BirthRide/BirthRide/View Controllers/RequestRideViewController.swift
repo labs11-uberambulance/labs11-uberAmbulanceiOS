@@ -254,20 +254,33 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         
         cell.detailTextLabel?.text = "Driver Name: \(name), Price: \(price) Distance: \(distance), Duration: \(duration)"
         
+        let requestRideButton = UIButton(type: .roundedRect)
+        requestRideButton.setTitle("Request Ride", for: .normal)
+        requestRideButton.setTitle("Ride Requested", for: .disabled)
+        requestRideButton.setTitleColor(.orange, for: .normal)
+        requestRideButton.setTitleColor(.orange, for: .disabled)
+        
+        requestRideButton.frame = CGRect(x: Double(cell.frame.width) - 80, y: Double(cell.center.y) - 25, width: 150, height: 50)
+        
+        cell.translatesAutoresizingMaskIntoConstraints = false
+        
+        cell.addSubview(requestRideButton)
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let userToken = AuthenticationController.shared.userToken,
-            let mother = AuthenticationController.shared.pregnantMom,
-            let user = AuthenticationController.shared.genericUser else {return}
-        ABCNetworkingController().requestDriver(withToken: userToken, with: driversArray[count], withMother: mother, with: user) { (error) in
-            if let error = error {
-                NSLog("error in RequestRideViewController.requestRideButtonTapped")
-                NSLog(error.localizedDescription)
-                return
-            }
-        }
+        
+//        guard let userToken = AuthenticationController.shared.userToken,
+//            let mother = AuthenticationController.shared.pregnantMom,
+//            let user = AuthenticationController.shared.genericUser else {return}
+//        ABCNetworkingController().requestDriver(withToken: userToken, with: driversArray[count], withMother: mother, with: user) { (error) in
+//            if let error = error {
+//                NSLog("error in RequestRideViewController.requestRideButtonTapped")
+//                NSLog(error.localizedDescription)
+//                return
+//            }
+//        }
     }
     
     //MARK: TableView Delegate Private Helper Methods

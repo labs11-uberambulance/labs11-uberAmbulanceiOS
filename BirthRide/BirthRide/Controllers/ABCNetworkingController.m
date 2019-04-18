@@ -45,7 +45,7 @@
       
       NSDictionary *noDriverDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
       
-      if (noDriverDictionary[@"error"]) {
+      if ([noDriverDictionary isKindOfClass: [NSDictionary class]]) {
          NSLog(@"Unable to coordinate ride.");
          completionHandler(nil, nil, YES);
          return;
