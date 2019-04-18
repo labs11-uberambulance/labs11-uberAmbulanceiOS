@@ -49,8 +49,14 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(updateViews), name: .didReceiveRideRequest, object: nil)
         // Do any additional setup after loading the view.
     }
+    
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
+        
+        guard let isActive = AuthenticationController.shared.driver?.isActive else {return}
+        if isActive.boolValue {
+            isWorkingSwitch.isOn = true
+        }
         if isWorkingSwitch.isOn && AuthenticationController.shared.requestedRide == nil {
             animateLoadingView()
             searchingForRidesLabel.isHidden = false
@@ -73,10 +79,6 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
             destinationLabel.isHidden = true
             acceptRideButton.isHidden = true
             rejectRideButton.isHidden = true
-        }
-        guard let isActive = AuthenticationController.shared.driver?.isActive else {return}
-        if isActive.boolValue {
-            isWorkingSwitch.isOn = true
         }
     }
     
@@ -165,6 +167,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
             acceptRideButton.isHidden = false
             rejectRideButton.isHidden = false
             searchingForRidesLabel.isHidden = true
+            stopAnimatingLoadingView()
         }
         else if requestTimeLabel.isHidden == false {
             requestTimeLabel.isHidden = true

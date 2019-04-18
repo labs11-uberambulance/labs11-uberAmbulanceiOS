@@ -49,7 +49,7 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
         guard phoneNumber != "" else {
             return
         }
-        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber!, uiDelegate: nil) { (verificationID, error) in
+        PhoneAuthProvider.provider().verifyPhoneNumber("+1\(phoneNumber!)", uiDelegate: nil) { (verificationID, error) in
             if let error = error {
                 NSLog("%@", error.localizedDescription)
                 return
@@ -113,14 +113,14 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     func transition(userType: UserType?) {
         if AuthenticationController.shared.driver == nil && AuthenticationController.shared.pregnantMom == nil {
             let destinationVC = UserTypeViewController()
-            self.present(destinationVC, animated: true) {
+            self.view.window?.rootViewController?.present(destinationVC, animated: true) {
             }
         } else if AuthenticationController.shared.driver != nil {
             let destinationVC = DriverWorkViewController()
-            self.present(destinationVC, animated: true, completion: nil)
+            self.view.window?.rootViewController?.present(destinationVC, animated: true)
         } else if AuthenticationController.shared.pregnantMom != nil {
             let destinationVC = RequestRideViewController()
-            self.present(destinationVC, animated: true, completion: nil)
+            self.view.window?.rootViewController?.present(destinationVC, animated: true)
         }
     }
     

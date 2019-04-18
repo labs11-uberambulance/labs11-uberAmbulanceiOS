@@ -53,26 +53,38 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         searchController = UISearchController(searchResultsController: autocompleteResultsVC)
         searchController?.searchResultsUpdater = autocompleteResultsVC
         searchController?.searchBar.sizeToFit()
+        searchController?.searchBar.placeholder = "Search For Hospital"
         mapContainerView.addSubview((searchController?.searchBar)!)
         autocompleteResultsVC.delegate = self
+        
+        
         populateTextFieldsAndConfigureViewForEditing()
+        showInformationAlert()
         
         if isUpdating {
             guard let mom = AuthenticationController.shared.pregnantMom else {return}
         createDestinationMapMarker(coordinate: CLLocationCoordinate2D(latitude: 22, longitude: 22))
+
+            
         }
         // Do any additional setup after loading the view.
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startLatLong = mother?.start?.latLong as String?
         destLatLong = mother?.destination?.latLong as String?
     }
     
+    //MARK: IBActions
     @IBAction func caretakerButtonTapped(_ sender: Any) {
         caretakerTextField.isHidden = false
     }
+    
+    @IBAction func helpButtonTapped(_ sender: Any) {
+        showInformationAlert()
+    }
+    
     @IBAction func continueButtonTapped(_ sender: Any) {
         guard nameTextField.text != "", villageTextField.text != "", phoneTextField.text != "",
             userMarkerArray.count > 0,
@@ -251,6 +263,32 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         let line = GMSPolyline.init(path: path)
         line.strokeColor = .green
         line.map = mapView
+    }
+    
+    //This method was getting called in viewDidLoad, but nothing was happening. That is because you cannot successfully call `present` on a view controller until that view controller's view has fully transitioned onto the screen. That is why it is necessary to call `present(...)` in viewDidAppear, because viewDidAppear is called after that transition has been completed.
+    private func showInformationAlert() {
+        let informationAlert = UIAlertController(title: "Important Information", message: "Please fill out all available fields and select a pickup location and a destination location using the map. You may select the buttons below for more information on how to access the caretaker field and on how to use the map. None of this information is permanent and you may change it at any time.", preferredStyle: .alert)
+        informationAlert.addAction(UIAlertAction(title: "Select Pickup Location", style: .default, handler: { (alertAction) in
+            informationAlert.title = "Select Pickup Location"
+            informationAlert.message = "Tap and hold with one finger on the map to create a marker at your desired pickup location. You may tap, hold and drag with your finger to move this marker around the map once the marker has been created."
+            self.present(informationAlert, animated: true, completion: nil)
+        }))
+        informationAlert.addAction(UIAlertAction(title: "Search For Hospital", style: .default, handler: { (alertAction) in
+            informationAlert.title = "Search For Hospital"
+            informationAlert.message = "Use the search bar above the map to search for your preferred Hospital or Health Center where you would like to give birth. Once you have found your preferred Hospital or Health Center, select it and a destination marker will be placed on the map at your desired destination location."
+            self.present(informationAlert, animated: true, completion: nil)
+        }))
+        informationAlert.addAction(UIAlertAction(title: "Caretaker?", style: .default, handler: { (alertAction) in
+            informationAlert.title = "Caretaker?"
+            informationAlert.message = "The caretaker field is optional, please tap the \"Caretaker?\" button below the map to enable the Caretaker field and input a caretaker's name."
+            self.present(informationAlert, animated: true, completion: nil)
+        }))
+        informationAlert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (alertAction) in
+            informationAlert.dismiss(animated: true, completion: nil)
+        }))
+        
+        
+        present(informationAlert, animated: true, completion: nil)
     }
     
 }
