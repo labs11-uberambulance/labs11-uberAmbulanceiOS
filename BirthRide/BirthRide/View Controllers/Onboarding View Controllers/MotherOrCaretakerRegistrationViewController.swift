@@ -56,10 +56,13 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         mapContainerView.addSubview((searchController?.searchBar)!)
         autocompleteResultsVC.delegate = self
         populateTextFieldsAndConfigureViewForEditing()
+        showInformationAlert()
         
         if isUpdating {
             guard let mom = AuthenticationController.shared.pregnantMom else {return}
         createDestinationMapMarker(coordinate: CLLocationCoordinate2D(latitude: 22, longitude: 22))
+
+            
         }
         // Do any additional setup after loading the view.
     }
@@ -251,6 +254,12 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         let line = GMSPolyline.init(path: path)
         line.strokeColor = .green
         line.map = mapView
+    }
+    
+    private func showInformationAlert() {
+        let informationAlert = UIAlertController(title: "Important Information", message: "Please fill out all available fields. The caretaker field is optional, please tap the \"Caretaker\" button below the map to input a caretaker's name. After you have filled out all fields, use the search bar above the map to search for your preferred Hospital or Health Center where you would like to give birth. Then find your desired pickup location on the map. Tap and hold to create a marker at your desired pickup location. You may tap, hold and drag to move this marker once it has been made.", preferredStyle: .alert)
+        informationAlert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
+        self.view.window?.rootViewController?.present(informationAlert, animated: true)
     }
     
 }

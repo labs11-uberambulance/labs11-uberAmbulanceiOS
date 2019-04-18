@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="qy1-Rk-p4O">
-                    <rect key="frame" x="20" y="60" width="335" height="141"/>
+                    <rect key="frame" x="20" y="80" width="335" height="141"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GdR-Ju-IZg">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
@@ -118,10 +118,10 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EwS-m6-FAh">
-                    <rect key="frame" x="0.0" y="209" width="375" height="298"/>
+                    <rect key="frame" x="0.0" y="229" width="375" height="278"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZf-Hx-CvW" customClass="GMSMapView">
-                            <rect key="frame" x="0.0" y="56" width="375" height="242"/>
+                            <rect key="frame" x="0.0" y="56" width="375" height="222"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </subviews>
@@ -133,16 +133,25 @@
                         <constraint firstAttribute="bottom" secondItem="XZf-Hx-CvW" secondAttribute="bottom" id="vtb-vT-DKG"/>
                     </constraints>
                 </view>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sz4-f7-kkg">
+                    <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                    <items>
+                        <navigationItem title="Profile Information" id="ykj-zX-grL"/>
+                    </items>
+                </navigationBar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="EwS-m6-FAh" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="7Nb-fm-EK4"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qy1-Rk-p4O" secondAttribute="trailing" constant="20" id="8am-8A-6WI"/>
+                <constraint firstItem="sz4-f7-kkg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="D9x-sm-ZPH"/>
                 <constraint firstItem="EwS-m6-FAh" firstAttribute="top" secondItem="qy1-Rk-p4O" secondAttribute="bottom" constant="8" id="Fpx-LM-fo3"/>
                 <constraint firstItem="vWq-oQ-wYS" firstAttribute="top" secondItem="EwS-m6-FAh" secondAttribute="bottom" constant="8" id="MAb-v6-ElT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vWq-oQ-wYS" secondAttribute="bottom" constant="122" id="NWs-iq-5o7"/>
                 <constraint firstItem="vWq-oQ-wYS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Vo2-0S-8bX"/>
-                <constraint firstItem="qy1-Rk-p4O" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="qKB-IQ-vsG"/>
+                <constraint firstItem="sz4-f7-kkg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="kqY-Ez-XVi"/>
+                <constraint firstItem="qy1-Rk-p4O" firstAttribute="top" secondItem="sz4-f7-kkg" secondAttribute="bottom" constant="8" id="qKB-IQ-vsG"/>
+                <constraint firstItem="sz4-f7-kkg" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="rgP-Cu-fUx"/>
                 <constraint firstItem="EwS-m6-FAh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="u1D-Ts-dBS"/>
                 <constraint firstItem="qy1-Rk-p4O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="vVQ-ye-Wdj"/>
             </constraints>
