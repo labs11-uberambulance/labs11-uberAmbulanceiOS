@@ -14,12 +14,8 @@ import Firebase
 class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewControllers {
     //MARK: Private Properties
     private let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
-    
-    //MARK: IBOutlets
-    @IBOutlet weak var phoneNumberTextField: UITextField!
-    @IBOutlet weak var doneButton: UIButton!
-    
-    
+    private var didEnterPhoneNumber = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupKeyboardDismissRecognizer()
@@ -30,21 +26,6 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         showPhoneAuthAlert()
-    }
-    @IBAction func doneButtonTapped(_ sender: Any) {
-        if AuthenticationController.shared.genericUser == nil {
-            if doneButton.titleLabel?.text == "Continue" {
-                let phoneNumber = phoneNumberTextField.text
-                verifyPhoneNumber(phoneNumber: phoneNumber!)
-                phoneNumberTextField.placeholder = "Verification Code"
-                doneButton.setTitle("Done", for: .normal)
-            } else {
-                let verificationCode = phoneNumberTextField.text
-                verifyAuthenticationCodeAndID(verificationCode: verificationCode)
-            }
-        } else {
-            transition(userType: nil)
-        }
     }
     
     //MARK: Private Methods
@@ -94,6 +75,9 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
                 AuthenticationController.shared.authenticateUser()
                 
                 DispatchQueue.main.async {
+                    while AuthenticationController.shared.genericUser == nil {
+                        NSLog("Waiting for authentication networking request completion handler to finish tasks.")
+                    }
                     self.transition(userType: nil)
                 }
             })
@@ -115,6 +99,10 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     }
     
     private func showPhoneAuthAlert() {
+        if !didEnterPhoneNumber {
+            
+            didEnterPhoneNumber = true
+            
         var phoneAuthAlert = UIAlertController(title: "Phone Number", message: "Please enter your phone number in the field provided.", preferredStyle: .alert)
         phoneAuthAlert.addTextField { (textField) in
             textField.placeholder = "Phone Number Here"
@@ -139,6 +127,7 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
         
         phoneAuthAlert.addAction(phoneAuthAction)
         present(phoneAuthAlert, animated: true, completion: nil)
+    }
     }
     
     

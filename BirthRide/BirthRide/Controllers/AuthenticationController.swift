@@ -28,6 +28,8 @@ class AuthenticationController {
     public var userToken: String?
     public var FCMToken: String?
     
+    public let authenticationOperationQueue = OperationQueue()
+    
     //MARK: Private Properties
     // I am not sure if this variable belongs here. This is the ride data the app will receive via push notifications from the server. You need to be authenticated to receive this, but you have to be authenticated to do anything beyond signing in, so that's not a very good reason. Anyway, here it is until I find a better place for it.
     public var requestedRide: RequestedRide? {
@@ -64,7 +66,8 @@ class AuthenticationController {
     private func authenticationNetworkingRequest() {
 //        let backgroundOperationQueue = OperationQueue()
 //        backgroundOperationQueue.addOperation({
-            guard let userToken = self.userToken else {return}
+        guard let userToken = self.userToken else {return}
+        let authenticationOperation = BlockOperation {
             ABCNetworkingController().authenticateUser(withToken: userToken, withCompletion: { (error, userArray, userType)  in
                 if let error = error {
                     NSLog("error in AuthenticationController.authenticateUserSignIn.")
@@ -90,7 +93,9 @@ class AuthenticationController {
                     break
                 }
                 
-//            })
-        })
+                //            })
+            })
+        }
+        
     }
 }
