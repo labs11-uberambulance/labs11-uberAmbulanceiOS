@@ -14,7 +14,7 @@
 
 
 @implementation ABCNetworkingController
-- (void)fetchNearbyDriversWithToken:(NSString *)token withMother:(PregnantMom *)mother withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler {
+- (void)fetchNearbyDriversWithToken:(NSString *)token withMother:(PregnantMom *)mother withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable, BOOL isSuccessful))completionHandler {
    
    NSURL *baseURL = [NSURL URLWithString:@"https://birthrider-backend.herokuapp.com/api/rides/drivers"];
    NSMutableURLRequest *requestURL = [NSMutableURLRequest requestWithURL:baseURL];
@@ -32,16 +32,24 @@
    [[NSURLSession.sharedSession dataTaskWithRequest:requestURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
       if (error != nil) {
          NSLog(@"Error in ABCNetworkingController.m.fetchNearbyDriversWithLatitude:");
-         completionHandler(error, nil);
+         completionHandler(error, nil, NO);
          return;
       }
       if (data == nil) {
          NSLog(@"Data is nil in ABCNetworkingController.m.fetchNearbyDriversWithLatitude:");
-         completionHandler(nil, nil);
+         completionHandler(nil, nil, NO);
          return;
       }
       
       NSArray *driversDictionaryArray = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
+      
+      NSDictionary *noDriverDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error: NULL];
+      
+      if ([noDriverDictionary isKindOfClass: [NSDictionary class]]) {
+         NSLog(@"Unable to coordinate ride.");
+         completionHandler(nil, nil, YES);
+         return;
+      }
       
       NSMutableArray<Driver *> *driversArray = [[NSMutableArray alloc] init];
       
@@ -92,7 +100,7 @@
          [driversArray addObject: newDriver];
          
       }
-      completionHandler(nil, driversArray);
+      completionHandler(nil, driversArray, YES);
       
    }] resume];
 }

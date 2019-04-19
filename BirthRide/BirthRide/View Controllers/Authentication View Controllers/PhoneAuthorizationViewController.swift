@@ -111,16 +111,16 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     
     //MARK: TransitionBetweenViewControllersDelegate methods
     func transition(userType: UserType?) {
+        self.dismiss(animated: true, completion: nil)
         if AuthenticationController.shared.driver == nil && AuthenticationController.shared.pregnantMom == nil {
             let destinationVC = UserTypeViewController()
-            self.view.window?.rootViewController?.present(destinationVC, animated: true) {
-            }
-        } else if AuthenticationController.shared.driver != nil {
+            present(destinationVC, animated: true, completion: nil)
+            } else if AuthenticationController.shared.driver != nil {
             let destinationVC = DriverWorkViewController()
-            self.view.window?.rootViewController?.present(destinationVC, animated: true)
+            present(destinationVC, animated: true, completion: nil)
         } else if AuthenticationController.shared.pregnantMom != nil {
             let destinationVC = RequestRideViewController()
-            self.view.window?.rootViewController?.present(destinationVC, animated: true)
+            present(destinationVC, animated: true, completion: nil)
         }
     }
     

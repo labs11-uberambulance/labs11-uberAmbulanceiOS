@@ -16,13 +16,11 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
     private var driversArray: [Driver] = [] {
         didSet {
             DispatchQueue.main.async {
-            self.configureMapView()
             self.configureDriverMarkers()
             self.tableView.reloadData()
             }
         }
     }
-    private var count = 0
     private let authenticationController = AuthenticationController.shared
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
@@ -43,13 +41,17 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        configureMapView()
         
         let pregnantMomStart = authenticationController.pregnantMom?.start
         
         
         guard let latLongArray = pregnantMomStart?.latLong?.components(separatedBy: ",") as [NSString]? else {return}
+        
+        
         
         
         
@@ -144,12 +146,17 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         guard let token = AuthenticationController.shared.userToken,
         let mother = AuthenticationController.shared.pregnantMom else {return}
         
-        ABCNetworkingController().fetchNearbyDrivers(withToken: token, withMother: mother, withCompletion: { (error, fetchedDriversArray)  in
+        ABCNetworkingController().fetchNearbyDrivers(withToken: token, withMother: mother, withCompletion: { (error, fetchedDriversArray, didHaveSuccess)  in
             if let error = error {
                 NSLog(error.localizedDescription)
                 return
             }
             guard let driversArray = fetchedDriversArray else {
+                if didHaveSuccess {
+                    DispatchQueue.main.async {
+                    self.showNoDriversInAreaAlert()
+                    }
+                }
                 return
             }
             self.driversArray = driversArray
@@ -185,10 +192,47 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         destinationVC.isUpdating = true
         
         present(destinationVC, animated: true, completion: nil)
-        
-        
-        
     }
+    
+    private func showNoDriversInAreaAlert() {
+        let alertController = UIAlertController()
+        alertController.title = "No Available Drivers"
+        alertController.message = "It appears that there are no available drivers in your area. Please try again in a few minutes or call <BACKUP_HOTLINE_NUMBER_HERE> for assistance. Thank you for your patience."
+        alertController.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func showWeWillTextYouSoonAlert() {
+        let alertController = UIAlertController()
+        alertController.title = "Stay Tuned"
+        alertController.message = "We have sent a ride request to the selected driver. If the driver does not respond we will send the ride request to another nearby driver who charges a similar price. We will send a text to the phone number that you provided with more information as soon as a driver is on the way. Thank you for choosing BirthRide."
+        alertController.addAction(UIAlertAction(title: "Done", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc private func requestDriverButtonTapped(sender: UIButton) {
+        guard let token = authenticationController.userToken,
+        let mother = authenticationController.pregnantMom,
+        let user = authenticationController.genericUser else {return}
+        let driver = driversArray[sender.tag]
+        ABCNetworkingController().requestDriver(withToken: token, with: driver, withMother: mother, with: user) { (error) in
+            if let error = error {
+                NSLog("Error in RequestRideViewController.requestDriverButtonTapped")
+                NSLog(error.localizedDescription)
+                return
+            }
+            DispatchQueue.main.async {
+                sender.isUserInteractionEnabled = false
+                self.tableView.isUserInteractionEnabled = false
+                self.showWeWillTextYouSoonAlert()
+            }
+        }
+    }
+
+    
+    
+    
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
         guard let location = locations.last else {return}
@@ -240,20 +284,26 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         
         cell.detailTextLabel?.text = "Driver Name: \(name), Price: \(price) Distance: \(distance), Duration: \(duration)"
         
+        let requestRideButton = UIButton(type: .roundedRect)
+        requestRideButton.setTitle("Request Ride", for: .normal)
+        requestRideButton.setTitle("Ride Requested", for: .disabled)
+        requestRideButton.setTitleColor(.orange, for: .normal)
+        requestRideButton.setTitleColor(.orange, for: .disabled)
+        requestRideButton.addTarget(self, action: #selector(requestDriverButtonTapped(sender:)), for: .touchUpInside)
+        requestRideButton.tag = indexPath.row
+        
+        requestRideButton.frame = CGRect(x: Double(cell.frame.width) - 80, y: Double(cell.center.y) - 25, width: 150, height: 50)
+        
+        cell.translatesAutoresizingMaskIntoConstraints = false
+        
+        cell.addSubview(requestRideButton)
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let userToken = AuthenticationController.shared.userToken,
-            let mother = AuthenticationController.shared.pregnantMom,
-            let user = AuthenticationController.shared.genericUser else {return}
-        ABCNetworkingController().requestDriver(withToken: userToken, with: driversArray[count], withMother: mother, with: user) { (error) in
-            if let error = error {
-                NSLog("error in RequestRideViewController.requestRideButtonTapped")
-                NSLog(error.localizedDescription)
-                return
-            }
-        }
+        
+        
     }
     
     //MARK: TableView Delegate Private Helper Methods

@@ -26,25 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
         
         UNUserNotificationCenter.current().delegate = self
         
-        let tabBarController = UITabBarController()
+       
         
-        let signUpViewController = SignUpViewController()
-        
-        let signInViewController = SignInViewController()
-        
-        tabBarController.addChild(signInViewController)
-        tabBarController.addChild(signUpViewController)
-        
-        let signUpItem = UITabBarItem()
-        signUpItem.title = "Sign Up"
-        let signInItem = UITabBarItem()
-        signInItem.title = "Sign In"
-        
-        signUpViewController.tabBarItem = signUpItem
-        signInViewController.tabBarItem = signInItem
-        
-        
-        let rootViewController = tabBarController
+        let rootViewController = WelcomeViewController()
         window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
         

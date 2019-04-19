@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @param token The authentication token associated with the user. This parameter is used to find the ride associated with the user.
  @param completionHandler A completion handler to handle anything that needs to be done after the network request has finished.
  */
-- (void)fetchNearbyDriversWithToken:(NSString *)token withMother:(PregnantMom *)mother withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable))completionHandler;
+- (void)fetchNearbyDriversWithToken:(NSString *)token withMother:(PregnantMom *)mother withCompletion:(void (^)(NSError * _Nullable, NSArray<Driver *> * _Nullable, BOOL isSuccessful))completionHandler;
 
 
 /**
