@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,26 +24,19 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="513"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jpo-9h-gMQ">
-                    <rect key="frame" x="94.5" y="541" width="186" height="106"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jpo-9h-gMQ">
+                    <rect key="frame" x="62.5" y="541" width="250" height="106"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ppk-ve-S1D">
-                            <rect key="frame" x="0.0" y="0.0" width="186" height="49"/>
-                            <state key="normal" title="SIgn in with Google ID"/>
-                            <connections>
-                                <action selector="signInWithGoogleIDButtonTapped:" destination="-1" eventType="touchUpInside" id="4dZ-15-VnR"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTq-mt-3mS">
-                            <rect key="frame" x="0.0" y="57" width="186" height="49"/>
-                            <state key="normal" title="Sign in with Phone Number"/>
+                            <rect key="frame" x="11.5" y="0.0" width="227" height="106"/>
+                            <state key="normal" title="Authenticate with Phone Number"/>
                             <connections>
                                 <action selector="signInWithPhoneNumberTapped:" destination="-1" eventType="touchUpInside" id="PGQ-mw-B0Q"/>
                             </connections>
                         </button>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="width" constant="186" id="8hb-uf-01q"/>
+                        <constraint firstAttribute="width" constant="250" id="8hb-uf-01q"/>
                         <constraint firstAttribute="height" constant="106" id="HdE-bL-CwK"/>
                     </constraints>
                 </stackView>

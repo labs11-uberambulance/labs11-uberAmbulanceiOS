@@ -20,51 +20,24 @@ class SignInViewController: UIViewController {
     //MARK: IBOutlets
     @IBOutlet weak var loginFieldView: UIView!
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        AuthenticationController.shared.isNewUser = false
     }
     
-    @IBAction func signInWithGoogleIDButtonTapped(_ sender: Any) {
-        populateLoginFieldView(loginMethod: .googleID)
-    }
-    @IBAction func signInWithPhoneNumberTapped(_ sender: Any) {
-        populateLoginFieldView(loginMethod: .phoneNumber)
+    @IBAction func signUpWithPhoneNumberTapped(_ sender: Any) {
+        populateLoginFieldView()
     }
     
     //MARK: Private Methods
-    private func populateLoginFieldView(loginMethod: SignInMethod) {
-        switch loginMethod {
-        case .googleID:
-            loginFieldViewController = GoogleIDAuthorizationViewController()
-            guard loginFieldViewController != nil else {return}
-            loginFieldView.addSubview((loginFieldViewController?.view)!)
-        case .phoneNumber:
-            loginFieldViewController = PhoneAuthorizationViewController()
-            guard loginFieldViewController != nil else {return}
-            loginFieldView.addSubview((loginFieldViewController?.view)!)
-        }
+    private func populateLoginFieldView() {
+        loginFieldViewController = PhoneAuthorizationViewController()
+        guard loginFieldViewController != nil else {return}
+        loginFieldView.addSubview((loginFieldViewController?.view)!)
     }
-    
-    
-    //MARK: Private Enum
-    private enum SignInMethod {
-        case googleID
-        case phoneNumber
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

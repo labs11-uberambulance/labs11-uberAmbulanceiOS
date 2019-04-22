@@ -55,8 +55,6 @@
 		A2928330224D640300FF9C28 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A292832F224D640300FF9C28 /* OpenGLES.framework */; };
 		A2928332224D640900FF9C28 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2928331224D640900FF9C28 /* QuartzCore.framework */; };
 		A2928334224D641200FF9C28 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2928333224D641200FF9C28 /* SystemConfiguration.framework */; };
-		A2B73A73226E33F900AE9BCA /* EmailAuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B73A71226E33F900AE9BCA /* EmailAuthorizationViewController.swift */; };
-		A2B73A74226E33F900AE9BCA /* EmailAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2B73A72226E33F900AE9BCA /* EmailAuthorizationViewController.xib */; };
 		A2C19D952245589100FC20F0 /* ViewControllerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */; };
 		A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2C19D9722456B8800FC20F0 /* UserType.swift */; };
 		A2C19DAF224A881700FC20F0 /* ABCNetworkingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C19DAE224A881700FC20F0 /* ABCNetworkingController.m */; };
@@ -194,8 +192,6 @@
 		A2928331224D640900FF9C28 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A2928333224D641200FF9C28 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		A29283502253F35500FF9C28 /* BirthRide.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BirthRide.entitlements; sourceTree = "<group>"; };
-		A2B73A71226E33F900AE9BCA /* EmailAuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthorizationViewController.swift; sourceTree = "<group>"; };
-		A2B73A72226E33F900AE9BCA /* EmailAuthorizationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmailAuthorizationViewController.xib; sourceTree = "<group>"; };
 		A2C19D942245589100FC20F0 /* ViewControllerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerCoordinator.swift; sourceTree = "<group>"; };
 		A2C19D9722456B8800FC20F0 /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		A2C19DA9224A875000FC20F0 /* BirthRide-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BirthRide-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -309,7 +305,6 @@
 			children = (
 				A278042022443FF7001920A0 /* SignInViewController.swift */,
 				A29282D0224BE22400FF9C28 /* SignUpViewController.swift */,
-				A2B73A71226E33F900AE9BCA /* EmailAuthorizationViewController.swift */,
 				A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */,
 			);
 			path = "Authentication View Controllers";
@@ -331,7 +326,6 @@
 			children = (
 				A278042122443FF7001920A0 /* SignInViewController.xib */,
 				A29282D1224BE22400FF9C28 /* SignUpViewController.xib */,
-				A2B73A72226E33F900AE9BCA /* EmailAuthorizationViewController.xib */,
 				A29282C9224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib */,
 			);
 			path = "Authentication Views";
@@ -647,7 +641,6 @@
 				A278042B2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib in Resources */,
 				A278042322443FF7001920A0 /* SignInViewController.xib in Resources */,
 				A278043322444B97001920A0 /* DriverPhotoRegistrationViewController.xib in Resources */,
-				A2B73A74226E33F900AE9BCA /* EmailAuthorizationViewController.xib in Resources */,
 				A2058D6E226784920038EFC6 /* ServiceRideViewController.xib in Resources */,
 				A2082869225FFE7C009FE1CC /* GoogleService-Info.plist in Resources */,
 			);
@@ -765,7 +758,6 @@
 				A292831C224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.m in Sources */,
 				A2058D6D226784920038EFC6 /* ServiceRideViewController.swift in Sources */,
 				A2C19DAF224A881700FC20F0 /* ABCNetworkingController.m in Sources */,
-				A2B73A73226E33F900AE9BCA /* EmailAuthorizationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
