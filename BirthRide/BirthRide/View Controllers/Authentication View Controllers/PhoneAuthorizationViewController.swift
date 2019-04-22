@@ -74,12 +74,10 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
                 
                 AuthenticationController.shared.authenticateUser()
                 
-                DispatchQueue.main.async {
-                    while AuthenticationController.shared.genericUser == nil {
-                        NSLog("Waiting for authentication networking request completion handler to finish tasks.")
-                    }
-                    self.transition(userType: nil)
-                }
+                //FIXME: I probably could have implemented this better using an OperationQueue, but I have bigger fish to fry.
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.transition(userType: nil)                })
+                
             })
         }
     }
