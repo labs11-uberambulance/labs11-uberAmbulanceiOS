@@ -135,7 +135,6 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
    
     //MARK: TransitionBetweenViewControllersDelegate methods
     func transition(userType: UserType?) {
-        self.dismiss(animated: true, completion: nil)
         if AuthenticationController.shared.driver == nil && AuthenticationController.shared.pregnantMom == nil {
             let destinationVC = UserTypeViewController()
             present(destinationVC, animated: true, completion: nil)
