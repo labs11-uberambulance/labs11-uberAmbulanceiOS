@@ -31,7 +31,7 @@
                             <rect key="frame" x="11.5" y="0.0" width="227" height="106"/>
                             <state key="normal" title="Authenticate with Phone Number"/>
                             <connections>
-                                <action selector="signUpWithPhoneNumberTapped:" destination="-1" eventType="touchUpInside" id="y05-zX-sO4"/>
+                                <action selector="signUpWithPhoneNumberTapped:" destination="-1" eventType="touchUpInside" id="aqR-3h-dHT"/>
                             </connections>
                         </button>
                     </subviews>
