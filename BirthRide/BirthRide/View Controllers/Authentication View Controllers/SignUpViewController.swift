@@ -28,31 +28,17 @@ class SignUpViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        AuthenticationController.shared.isNewUser = true
     }
     
-    @IBAction func signUpWithGoogleIDButtonTapped(_ sender: Any) {
-        populateLoginFieldView(loginMethod: .googleID)
-    }
     @IBAction func signUpWithPhoneNumberTapped(_ sender: Any) {
-        populateLoginFieldView(loginMethod: .phoneNumber)
+        populateLoginFieldView()
     }
     
     //MARK: Private Methods
-    private func populateLoginFieldView(loginMethod: SignInMethod) {
-        switch loginMethod {
-        case .googleID:
-            signUpFieldViewController = GoogleIDAuthorizationViewController()
-            guard signUpFieldViewController != nil else {return}
-            signUpFieldView.addSubview((signUpFieldViewController?.view)!)
-        case .phoneNumber:
-            signUpFieldViewController = PhoneAuthorizationViewController()
-            guard signUpFieldViewController != nil else {return}
-            signUpFieldView.addSubview((signUpFieldViewController?.view)!)
-        }
-    }
-    //MARK: Private Enum
-    private enum SignInMethod {
-        case googleID
-        case phoneNumber
+    private func populateLoginFieldView() {
+        signUpFieldViewController = PhoneAuthorizationViewController()
+        guard signUpFieldViewController != nil else {return}
+        signUpFieldView.addSubview((signUpFieldViewController?.view)!)
     }
 }

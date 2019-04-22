@@ -14,12 +14,8 @@ import Firebase
 class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewControllers {
     //MARK: Private Properties
     private let verificationID = UserDefaults.standard.string(forKey: "authVerificationID")
-    
-    //MARK: IBOutlets
-    @IBOutlet weak var phoneNumberTextField: UITextField!
-    @IBOutlet weak var doneButton: UIButton!
-    
-    
+    private var didEnterPhoneNumber = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupKeyboardDismissRecognizer()
@@ -27,24 +23,12 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
         // Do any additional setup after loading the view.
         
     }
-    @IBAction func doneButtonTapped(_ sender: Any) {
-        if AuthenticationController.shared.genericUser == nil {
-            if doneButton.titleLabel?.text == "Continue" {
-                let phoneNumber = phoneNumberTextField.text
-                verifyPhoneNumber(phoneNumber: phoneNumber!)
-                phoneNumberTextField.placeholder = "Verification Code"
-                doneButton.setTitle("Done", for: .normal)
-            } else {
-                let verificationCode = phoneNumberTextField.text
-                verifyAuthenticationCodeAndID(verificationCode: verificationCode)
-            }
-        } else {
-            transition(userType: nil)
-        }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showPhoneAuthAlert()
     }
     
     //MARK: Private Methods
-    //FIXME: In order to receive the SMS with the authentication code, the user must put their country code in front. For the US, that means that all mobile US numbers must be preceded by "+1". I should programatically make sure that the number has the relevant country code at the beginning and, if it doesn't, I should add it before using it in the method.
     private func verifyPhoneNumber(phoneNumber: String?) {
         guard phoneNumber != "" else {
             return
@@ -89,6 +73,11 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
                 AuthenticationController.shared.userToken = idToken
                 
                 AuthenticationController.shared.authenticateUser()
+                
+                //FIXME: I probably could have implemented this better using an OperationQueue, but I have bigger fish to fry.
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        self.transition(userType: nil)                })
+                
             })
         }
     }
@@ -105,6 +94,38 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     private func dismissKeyboard()
     {
         view.endEditing(true)
+    }
+    
+    private func showPhoneAuthAlert() {
+        if !didEnterPhoneNumber {
+            
+            didEnterPhoneNumber = true
+            
+        var phoneAuthAlert = UIAlertController(title: "Phone Number", message: "Please enter your phone number in the field provided.", preferredStyle: .alert)
+        phoneAuthAlert.addTextField { (textField) in
+            textField.placeholder = "Phone Number Here"
+        }
+        let startOverAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        let phoneAuthAction = UIAlertAction(title: "Continue", style: .default) { (alertAction) in
+            
+            let phoneNumber = phoneAuthAlert.textFields?[0].text
+            self.verifyPhoneNumber(phoneNumber: phoneNumber)
+            
+            phoneAuthAlert = UIAlertController(title: "Verification Number", message: "Please check your phone's text messages for a verification number. Then, enter the verification number in the provided field. If you do not receive a text message, please try again.", preferredStyle: .alert)
+            phoneAuthAlert.addTextField(configurationHandler: { (textField) in
+                textField.placeholder = "Verification Number Here"
+            })
+            phoneAuthAlert.addAction(startOverAction)
+            phoneAuthAlert.addAction(UIAlertAction(title: "Done", style: .default, handler: { (alertAction) in
+                let verificationNumber = phoneAuthAlert.textFields?[0].text
+                self.verifyAuthenticationCodeAndID(verificationCode: verificationNumber)
+            }))
+            self.present(phoneAuthAlert, animated: true, completion: nil)
+        }
+        
+        phoneAuthAlert.addAction(phoneAuthAction)
+        present(phoneAuthAlert, animated: true, completion: nil)
+    }
     }
     
     
