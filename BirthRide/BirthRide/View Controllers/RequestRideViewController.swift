@@ -69,7 +69,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         }
         
         AuthenticationController.shared.deauthenticateUser()
-        logoutTransition()
+//        logoutTransition()
     }
     @IBAction func editProfileButtonTapped(_ sender: Any) {
         editProfileTransition()
@@ -162,28 +162,28 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
             self.driversArray = driversArray
         })
     }
-    private func logoutTransition() {
-        let tabBarController = UITabBarController()
-        
-        let signUpViewController = SignUpViewController()
-        
-        let signInViewController = SignInViewController()
-        
-        tabBarController.addChild(signInViewController)
-        tabBarController.addChild(signUpViewController)
-        
-        let signUpItem = UITabBarItem()
-        signUpItem.title = "Sign Up"
-        let signInItem = UITabBarItem()
-        signInItem.title = "Sign In"
-        
-        signUpViewController.tabBarItem = signUpItem
-        signInViewController.tabBarItem = signInItem
-        
-        present(tabBarController, animated: true, completion: nil)
-        
-        
-    }
+//    private func logoutTransition() {
+//        let tabBarController = UITabBarController()
+//        
+//        let signUpViewController = SignUpViewController()
+//        
+//        let signInViewController = SignInViewController()
+//        
+//        tabBarController.addChild(signInViewController)
+//        tabBarController.addChild(signUpViewController)
+//        
+//        let signUpItem = UITabBarItem()
+//        signUpItem.title = "Sign Up"
+//        let signInItem = UITabBarItem()
+//        signInItem.title = "Sign In"
+//        
+//        signUpViewController.tabBarItem = signUpItem
+//        signInViewController.tabBarItem = signInItem
+//        
+//        present(tabBarController, animated: true, completion: nil)
+//        
+//        
+//    }
     
     private func editProfileTransition() {
         let destinationVC = MotherOrCaretakerRegistrationViewController()
