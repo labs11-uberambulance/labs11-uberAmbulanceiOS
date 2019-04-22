@@ -205,6 +205,16 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
     ///This method will configure the mapView. If the app is able to get the user coordinates, then it will also create a marker to put on the map. If not it will return. The map marker will **not** be created if one already exists.
     private func configureMapView() {
+        guard let userLocation = AuthenticationController.shared.genericUser?.location?.latLong,
+            userLocation != "" else {return}
+        
+        let latLongArray = userLocation.components(separatedBy: ",")
+        let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)
+        let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)
+        
+        mapView.camera = GMSCameraPosition(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude), zoom: 6.0)
+        
+        
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
         mapView.animate(to: camera)
         if isUpdating {
