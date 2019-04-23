@@ -43,8 +43,8 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
             let phoneNumber = phoneNumberTextField.text,
             let price = priceTextField.text,
             let bio = bioTextView.text,
-            let user = AuthenticationController.shared.genericUser,
-            let userLocation = userLocation else {return}
+            let userLocation = AuthenticationController.shared.genericUser?.location?.latLong,
+            userLocation != "" else {return}
         
         let otherName = name as NSString
         let otherPhone = phoneNumber as NSString
@@ -76,6 +76,7 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         userMarker.map = mapView
         userMarkerArray.append(userMarker)
         userLocation = "\(coordinate.latitude),\(coordinate.longitude)" as NSString
+        AuthenticationController.shared.genericUser?.location?.latLong = userLocation
     }
     
     

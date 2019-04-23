@@ -92,7 +92,7 @@ class UserController {
             driver.price = newPrice
             driver.bio = bio
             driver.photoUrl = photo
-            driver.location?.latLong = userLocation
+            user.location?.latLong = userLocation
             
         }
         
