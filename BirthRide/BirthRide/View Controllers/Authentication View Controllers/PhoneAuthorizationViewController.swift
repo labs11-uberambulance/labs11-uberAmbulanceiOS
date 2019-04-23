@@ -105,7 +105,11 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
         phoneAuthAlert.addTextField { (textField) in
             textField.placeholder = "Phone Number Here"
         }
-        let startOverAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        let startOverAction = UIAlertAction(title: "Try Again", style: .destructive) { (alertAction) in
+            self.didEnterPhoneNumber = false
+            self.showPhoneAuthAlert()
+            }
+            
         let phoneAuthAction = UIAlertAction(title: "Continue", style: .default) { (alertAction) in
             
             let phoneNumber = phoneAuthAlert.textFields?[0].text
@@ -128,11 +132,9 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     }
     }
     
-    
-    
+   
     //MARK: TransitionBetweenViewControllersDelegate methods
     func transition(userType: UserType?) {
-        self.dismiss(animated: true, completion: nil)
         if AuthenticationController.shared.driver == nil && AuthenticationController.shared.pregnantMom == nil {
             let destinationVC = UserTypeViewController()
             present(destinationVC, animated: true, completion: nil)
@@ -144,16 +146,4 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
             present(destinationVC, animated: true, completion: nil)
         }
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

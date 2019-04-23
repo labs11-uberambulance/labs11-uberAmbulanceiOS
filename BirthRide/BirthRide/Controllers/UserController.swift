@@ -86,13 +86,13 @@ class UserController {
         if !isUpdating {
             let location = Start(latLong: userLocation, name: user.village ?? "", startDescription: nil)
             driver = Driver(price: newPrice, requestedDriverName: "", isActive: false, bio: bio, photo: "", driverId: nil, firebaseId: nil)
-            driver.location = location
+            user.location = location
         } else {
             driver = AuthenticationController.shared.driver!
             driver.price = newPrice
             driver.bio = bio
             driver.photoUrl = photo
-            driver.location?.latLong = userLocation
+            user.location?.latLong = userLocation
             
         }
         

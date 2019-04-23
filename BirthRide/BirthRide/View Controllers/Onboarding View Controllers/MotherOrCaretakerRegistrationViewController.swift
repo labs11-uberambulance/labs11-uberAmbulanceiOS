@@ -72,6 +72,9 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        nameTextField.frame = CGRect(x: 153.33333333333337, y: 0.0, width: 181.66666666666666, height: 30.0)
+        villageTextField.frame = CGRect(x: 153.33333333333337, y: 0.0, width: 181.66666666666666, height: 30.0)
+        phoneTextField.frame = CGRect(x: 153.33333333333337, y: 0.0, width: 181.66666666666666, height: 30.0)
         startLatLong = mother?.start?.latLong as String?
         destLatLong = mother?.destination?.latLong as String?
     }
@@ -205,6 +208,16 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
     ///This method will configure the mapView. If the app is able to get the user coordinates, then it will also create a marker to put on the map. If not it will return. The map marker will **not** be created if one already exists.
     private func configureMapView() {
+        guard let userLocation = AuthenticationController.shared.genericUser?.location?.latLong,
+            userLocation != "" else {return}
+        
+        let latLongArray = userLocation.components(separatedBy: ",")
+        let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)
+        let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)
+        
+        mapView.camera = GMSCameraPosition(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude), zoom: 6.0)
+        
+        
         let camera = GMSCameraPosition.camera(withLatitude: 1.360511, longitude: 36.847888, zoom: 6.0)
         mapView.animate(to: camera)
         if isUpdating {
@@ -214,6 +227,9 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     }
     
     private func populateTextFieldsAndConfigureViewForEditing() {
+        nameTextField.isHidden = false
+        phoneTextField.isHidden = false
+        villageTextField.isHidden = false
         if let mother = mother,
             let user = AuthenticationController.shared.genericUser {
             nameTextField.text = user.name as String?

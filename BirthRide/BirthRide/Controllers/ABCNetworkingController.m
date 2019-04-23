@@ -201,22 +201,19 @@
    if (mother == nil && driver == nil) {
       return;
    }
-   
-   NSNull *noData = [[NSNull alloc] init];
-   
+
    NSDictionary *userDictionary = [[NSDictionary alloc] init];
    
    
    NSDictionary *jsonDictionary;
    
    if (driver != nil) {
-      user.location = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:@""];
       
       userDictionary = @{
                          @"name": user.name,
                          @"phone": user.phone,
                          @"location": @{
-                               @"latlng": driver.location.latLong
+                               @"latlng": user.location.latLong
                                }
                          };
       //I was struggling for a minute with an error here. I was trying to pass the BOOL into the dictionary, but dictionaries only take objects and BOOLs are primitives.

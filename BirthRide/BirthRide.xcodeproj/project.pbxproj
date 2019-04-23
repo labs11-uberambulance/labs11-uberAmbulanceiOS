@@ -24,8 +24,6 @@
 		A276465522652C68009C30DB /* Notification.Name+DidReceiveRideRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A276465422652C68009C30DB /* Notification.Name+DidReceiveRideRequest.swift */; };
 		A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278041C22443CC5001920A0 /* UserTypeViewController.swift */; };
 		A278041F22443CC5001920A0 /* UserTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278041D22443CC5001920A0 /* UserTypeViewController.xib */; };
-		A278042222443FF7001920A0 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042022443FF7001920A0 /* SignInViewController.swift */; };
-		A278042322443FF7001920A0 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042122443FF7001920A0 /* SignInViewController.xib */; };
 		A278042622444093001920A0 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A278042422444093001920A0 /* OnboardingViewController.swift */; };
 		A278042722444093001920A0 /* OnboardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278042522444093001920A0 /* OnboardingViewController.xib */; };
 		A278042A2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27804282244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift */; };
@@ -38,8 +36,6 @@
 		A285C8BC2268EF4300C86BD6 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A285C8BA2268EF4300C86BD6 /* WelcomeViewController.xib */; };
 		A29282CA224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */; };
 		A29282CB224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29282C9224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib */; };
-		A29282D2224BE22400FF9C28 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282D0224BE22400FF9C28 /* SignUpViewController.swift */; };
-		A29282D3224BE22400FF9C28 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29282D1224BE22400FF9C28 /* SignUpViewController.xib */; };
 		A29282D5224BE4AB00FF9C28 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282D4224BE4AB00FF9C28 /* AuthenticationController.swift */; };
 		A29282F5224C244800FF9C28 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282F4224C244800FF9C28 /* UserController.swift */; };
 		A292831C224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.m in Sources */ = {isa = PBXBuildFile; fileRef = A292831B224D330500FF9C28 /* NSString+ConvertFromSnakeCaseToCamelCase.m */; };
@@ -156,8 +152,6 @@
 		A276465422652C68009C30DB /* Notification.Name+DidReceiveRideRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name+DidReceiveRideRequest.swift"; sourceTree = "<group>"; };
 		A278041C22443CC5001920A0 /* UserTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTypeViewController.swift; sourceTree = "<group>"; };
 		A278041D22443CC5001920A0 /* UserTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTypeViewController.xib; sourceTree = "<group>"; };
-		A278042022443FF7001920A0 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		A278042122443FF7001920A0 /* SignInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
 		A278042422444093001920A0 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A278042522444093001920A0 /* OnboardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingViewController.xib; sourceTree = "<group>"; };
 		A27804282244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherOrCaretakerRegistrationViewController.swift; sourceTree = "<group>"; };
@@ -170,8 +164,6 @@
 		A285C8BA2268EF4300C86BD6 /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
 		A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthorizationViewController.swift; sourceTree = "<group>"; };
 		A29282C9224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneAuthorizationViewController.xib; sourceTree = "<group>"; };
-		A29282D0224BE22400FF9C28 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		A29282D1224BE22400FF9C28 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		A29282D4224BE4AB00FF9C28 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
 		A29282D6224C030400FF9C28 /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Pods.xcodeproj; path = Pods/Pods.xcodeproj; sourceTree = "<group>"; };
 		A29282F4224C244800FF9C28 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
@@ -303,8 +295,6 @@
 		A29282C6224ACF6B00FF9C28 /* Authentication View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A278042022443FF7001920A0 /* SignInViewController.swift */,
-				A29282D0224BE22400FF9C28 /* SignUpViewController.swift */,
 				A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */,
 			);
 			path = "Authentication View Controllers";
@@ -324,8 +314,6 @@
 		A29282CC224AD39A00FF9C28 /* Authentication Views */ = {
 			isa = PBXGroup;
 			children = (
-				A278042122443FF7001920A0 /* SignInViewController.xib */,
-				A29282D1224BE22400FF9C28 /* SignUpViewController.xib */,
 				A29282C9224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib */,
 			);
 			path = "Authentication Views";
@@ -630,7 +618,6 @@
 			files = (
 				A29282CB224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib in Resources */,
 				A200D9B4225517B100E1B551 /* RequestRideViewController.xib in Resources */,
-				A29282D3224BE22400FF9C28 /* SignUpViewController.xib in Resources */,
 				A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */,
 				A285C8BC2268EF4300C86BD6 /* WelcomeViewController.xib in Resources */,
 				A200D9C52255496E00E1B551 /* DriverWorkViewController.xib in Resources */,
@@ -639,7 +626,6 @@
 				A278042722444093001920A0 /* OnboardingViewController.xib in Resources */,
 				A278041F22443CC5001920A0 /* UserTypeViewController.xib in Resources */,
 				A278042B2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.xib in Resources */,
-				A278042322443FF7001920A0 /* SignInViewController.xib in Resources */,
 				A278043322444B97001920A0 /* DriverPhotoRegistrationViewController.xib in Resources */,
 				A2058D6E226784920038EFC6 /* ServiceRideViewController.xib in Resources */,
 				A2082869225FFE7C009FE1CC /* GoogleService-Info.plist in Resources */,
@@ -735,7 +721,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A200D9C8225559F000E1B551 /* DriverWorkViewController+LoadingUI.swift in Sources */,
-				A29282D2224BE22400FF9C28 /* SignUpViewController.swift in Sources */,
 				A29282D5224BE4AB00FF9C28 /* AuthenticationController.swift in Sources */,
 				A29282CA224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift in Sources */,
 				A278042E224447A6001920A0 /* DriverRegistrationViewController.swift in Sources */,
@@ -746,7 +731,6 @@
 				A276465522652C68009C30DB /* Notification.Name+DidReceiveRideRequest.swift in Sources */,
 				A2C19DB1224A935F00FC20F0 /* Ride.swift in Sources */,
 				A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */,
-				A278042222443FF7001920A0 /* SignInViewController.swift in Sources */,
 				A200D9BF225546B300E1B551 /* IndeterminateLoadingView.swift in Sources */,
 				A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */,
 				A278042622444093001920A0 /* OnboardingViewController.swift in Sources */,

@@ -22,26 +22,7 @@ class WelcomeViewController: UIViewController {
     
     //MARK:Private Methods
     private func transitionToAuthentication() {
-        let tabBarController = UITabBarController()
-        
-        let signUpViewController = SignUpViewController()
-        
-        let signInViewController = SignInViewController()
-        
-        tabBarController.addChild(signInViewController)
-        tabBarController.addChild(signUpViewController)
-        
-        let signUpItem = UITabBarItem()
-        signUpItem.title = "Sign Up"
-        let signInItem = UITabBarItem()
-        signInItem.title = "Sign In"
-        
-        signUpViewController.tabBarItem = signUpItem
-        signInViewController.tabBarItem = signInItem
-        
-        
-        let destinationVC = tabBarController
-        
+        let destinationVC = PhoneAuthorizationViewController()
         self.view.window?.rootViewController?.present(destinationVC, animated: true, completion: nil)
     }
 
