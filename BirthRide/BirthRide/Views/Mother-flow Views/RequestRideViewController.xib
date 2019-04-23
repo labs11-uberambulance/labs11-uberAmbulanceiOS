@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="Fwz-uJ-yqc" customClass="GMSMapView">
-                    <rect key="frame" x="0.0" y="64" width="375" height="436"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="473"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ttn-sk-3v2">
@@ -43,7 +43,7 @@
                     </items>
                 </navigationBar>
                 <tableView clipsSubviews="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UzU-F1-nps">
-                    <rect key="frame" x="0.0" y="500" width="375" height="167"/>
+                    <rect key="frame" x="0.0" y="537" width="375" height="130"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
@@ -52,7 +52,7 @@
                 <constraint firstItem="ttn-sk-3v2" firstAttribute="trailing" secondItem="i5q-v8-QLy" secondAttribute="trailing" id="4mC-Wv-kCY"/>
                 <constraint firstItem="ttn-sk-3v2" firstAttribute="top" secondItem="i5q-v8-QLy" secondAttribute="top" id="4wq-JP-Ald"/>
                 <constraint firstItem="Fwz-uJ-yqc" firstAttribute="leading" secondItem="jLR-CT-NWX" secondAttribute="leading" id="ANv-fd-nRl"/>
-                <constraint firstItem="i5q-v8-QLy" firstAttribute="bottom" secondItem="Fwz-uJ-yqc" secondAttribute="bottom" constant="167" id="AVD-Xc-k8H"/>
+                <constraint firstItem="i5q-v8-QLy" firstAttribute="bottom" secondItem="Fwz-uJ-yqc" secondAttribute="bottom" constant="130" id="AVD-Xc-k8H"/>
                 <constraint firstItem="ttn-sk-3v2" firstAttribute="leading" secondItem="i5q-v8-QLy" secondAttribute="leading" id="Dig-2c-UA9"/>
                 <constraint firstItem="i5q-v8-QLy" firstAttribute="trailing" secondItem="UzU-F1-nps" secondAttribute="trailing" id="O3g-qm-eHR"/>
                 <constraint firstItem="i5q-v8-QLy" firstAttribute="bottom" secondItem="UzU-F1-nps" secondAttribute="bottom" id="VTh-ar-4eV"/>

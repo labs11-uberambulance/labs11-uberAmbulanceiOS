@@ -306,6 +306,7 @@
          NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error:NULL];
          
          NSLog(@"%@", jsonDictionary);
+         completionHandler(nil);
          return;
       }
    }] resume];
@@ -520,9 +521,9 @@
             }
          }];
          [userArray insertObject:user atIndex:0];
-         pregnantMom.start = [[Start alloc] initWithLatLong:@"555" name:@"test" startDescription:NULL];
+         pregnantMom.start = [[Start alloc] initWithLatLong:@"" name:@"" startDescription:NULL];
          
-         pregnantMom.destination = [[Destination alloc] initWithLatLong:@"555" name:@"test" destinationDescription:NULL];
+         pregnantMom.destination = [[Destination alloc] initWithLatLong:@"" name:@"" destinationDescription:NULL];
          if (user.userType != nil) {
             if ([user.userType isEqualToString:@"mothers"]) {
                [parsedData[userTypeKey] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL* stop){
@@ -546,7 +547,7 @@
                      
                   }
                   
-                  if ([key isEqualToString:@"destination"]) {
+                  if ([key isEqualToString:@"destination"] && value != NSNull.null) {
                      [parsedData[userTypeKey][@"destination"] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id  value, BOOL* stop) {
                         if ([key isEqualToString:@"latlng"]) {
                            [pregnantMom.destination setValue:value forKey:@"latLong"];

@@ -11,7 +11,7 @@ import Firebase
 import GoogleMaps
 import GooglePlaces
 
-class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
+class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
     //MARK: Private Properties
     private var driversArray: [Driver] = [] {
         didSet {
@@ -21,21 +21,20 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
             }
         }
     }
+    private var driverMarkersArray: [GMSMarker]  = []
+    private var buttonsArray: [UIButton] = []
     private let authenticationController = AuthenticationController.shared
+    
+    private var imageViewArray: [UIImageView] = []
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
-    let locationManager = CLLocationManager()
+
     //MARK: IBOutlets
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -45,13 +44,12 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         super.viewDidAppear(animated)
         
         configureMapView()
-        
+    
         let pregnantMomStart = authenticationController.pregnantMom?.start
         
         
-        guard let latLongArray = pregnantMomStart?.latLong?.components(separatedBy: ",") as [NSString]? else {return}
-        
-        
+        guard let latLongArray = pregnantMomStart?.latLong?.components(separatedBy: ",") as [NSString]?,
+        pregnantMomStart?.latLong != "" else {return}
         
         
         
@@ -69,7 +67,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         }
         
         AuthenticationController.shared.deauthenticateUser()
-//        logoutTransition()
+        logoutTransition()
     }
     @IBAction func editProfileButtonTapped(_ sender: Any) {
         editProfileTransition()
@@ -79,7 +77,9 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
     private func configureMapView() {
         
         guard let latLongString = authenticationController.pregnantMom?.start?.latLong,
-        let destLatLongString = authenticationController.pregnantMom?.destination?.latLong else {return}
+        let destLatLongString = authenticationController.pregnantMom?.destination?.latLong,
+            latLongString != "",
+        destLatLongString != "" else {return}
         
         
         let latLongArray = latLongString.components(separatedBy: ",")
@@ -92,8 +92,20 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         let destLongitude = UserController().stringToInt(intString: destLatLongArray[1] as String, viewController: self)
         
         
+        var bounds = GMSCoordinateBounds()
+        for marker in driverMarkersArray {
+            bounds = bounds.includingCoordinate(marker.position)
+        }
+        let update = GMSCameraUpdate.fit(bounds, withPadding: 60)
+        mapView.animate(with: update)
+        
+//        let bounds = GMSCoordinateBounds(region: GMSVisibleRegion(nearLeft: CLLocationCoordinate2D(latitude: -1.446665, longitude: 29.559337), nearRight: CLLocationCoordinate2D(latitude: -1.029283, longitude: 33.964854), farLeft: CLLocationCoordinate2D(latitude: 3.538722, longitude: 30.911399), farRight: CLLocationCoordinate2D(latitude: 4.307166, longitude: 35.232975)))
+        
+        
         let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 6.0)
         mapView.animate(to: camera)
+        
+        
         
         
         let destinationMarker = GMSMarker()
@@ -138,6 +150,9 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
             driverMarker.map = mapView
             driverMarker.title = name as String
             driverMarker.snippet = "Price: \(price.stringValue), Duration: \(duration)"
+            driverMarker.isFlat = true
+            
+            driverMarkersArray.append(driverMarker)
             
         }
     }
@@ -162,28 +177,10 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
             self.driversArray = driversArray
         })
     }
-//    private func logoutTransition() {
-//        let tabBarController = UITabBarController()
-//        
-//        let signUpViewController = SignUpViewController()
-//        
-//        let signInViewController = SignInViewController()
-//        
-//        tabBarController.addChild(signInViewController)
-//        tabBarController.addChild(signUpViewController)
-//        
-//        let signUpItem = UITabBarItem()
-//        signUpItem.title = "Sign Up"
-//        let signInItem = UITabBarItem()
-//        signInItem.title = "Sign In"
-//        
-//        signUpViewController.tabBarItem = signUpItem
-//        signInViewController.tabBarItem = signInItem
-//        
-//        present(tabBarController, animated: true, completion: nil)
-//        
-//        
-//    }
+    private func logoutTransition() {
+        let destinationVC = WelcomeViewController()
+        present(destinationVC, animated: true, completion: nil)
+    }
     
     private func editProfileTransition() {
         let destinationVC = MotherOrCaretakerRegistrationViewController()
@@ -215,6 +212,16 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         let mother = authenticationController.pregnantMom,
         let user = authenticationController.genericUser else {return}
         let driver = driversArray[sender.tag]
+        tableView.isUserInteractionEnabled = false
+        sender.isUserInteractionEnabled = false
+        
+        for button in buttonsArray {
+            button.isEnabled = false
+            if button.tag != sender.tag {
+                button.isHidden = true
+            }
+        }
+        
         ABCNetworkingController().requestDriver(withToken: token, with: driver, withMother: mother, with: user) { (error) in
             if let error = error {
                 NSLog("Error in RequestRideViewController.requestDriverButtonTapped")
@@ -222,42 +229,10 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
                 return
             }
             DispatchQueue.main.async {
-                sender.isUserInteractionEnabled = false
-                self.tableView.isUserInteractionEnabled = false
                 self.showWeWillTextYouSoonAlert()
             }
         }
     }
-
-    
-    
-    
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
-        guard let location = locations.last else {return}
-        let camera = GMSCameraPosition.camera(withLatitude: (location.coordinate.latitude), longitude: (location.coordinate.longitude), zoom: 17.0)
-        
-        self.mapView?.animate(to: camera)
-        
-        //Finally stop updating location otherwise it will come again and again in this delegate
-        self.locationManager.stopUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            locationManager.requestLocation()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        NSLog("Error udpating location in RequestRideViewController.locationManager:didFailWithError:")
-        NSLog(error.localizedDescription)
-        return
-    }
-    
-    
-    
     
     //MARK: TableView Delegate Methods
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -270,40 +245,30 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "ReuseIdentifier")
+        let cell = UITableViewCell()
         
-        guard let name = driversArray[indexPath.row].requestedDriverName,
-        let price = driversArray[indexPath.row].price,
-        let duration = driversArray[indexPath.row].duration,
-            let distance = driversArray[indexPath.row].distance else {return cell}
-            
-        
-        cell.imageView?.image = getImage(index: indexPath.row)
-        
-        cell.textLabel?.text = name as String
-        
-        cell.detailTextLabel?.text = "Driver Name: \(name), Price: \(price) Distance: \(distance), Duration: \(duration)"
-        
-        let requestRideButton = UIButton(type: .roundedRect)
-        requestRideButton.setTitle("Request Ride", for: .normal)
-        requestRideButton.setTitle("Ride Requested", for: .disabled)
-        requestRideButton.setTitleColor(.orange, for: .normal)
-        requestRideButton.setTitleColor(.orange, for: .disabled)
-        requestRideButton.addTarget(self, action: #selector(requestDriverButtonTapped(sender:)), for: .touchUpInside)
-        requestRideButton.tag = indexPath.row
-        
-        requestRideButton.frame = CGRect(x: Double(cell.frame.width) - 80, y: Double(cell.center.y) - 25, width: 150, height: 50)
-        
-        cell.translatesAutoresizingMaskIntoConstraints = false
-        
-        cell.addSubview(requestRideButton)
+        configureCell(cell: cell, index: indexPath.row)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        for marker in driverMarkersArray {
+            marker.isFlat = true
+        }
+        mapView.selectedMarker = driverMarkersArray[indexPath.row]
         
+        //Note the hacky latitude and longitude here. For some reason the map won't center where I want it to, so I had to add in some adjustments.
+        mapView.animate(to: GMSCameraPosition(latitude: driverMarkersArray[indexPath.row].position.latitude + 0.04, longitude: driverMarkersArray[indexPath.row].position.longitude - 0.025, zoom: 13.0))
+        driverMarkersArray[indexPath.row].isFlat = false
+        
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        guard let index = driverMarkersArray.firstIndex(of: marker) else {return false}
+        tableView.selectRow(at: IndexPath(row: index, section: 1), animated: true, scrollPosition: .top)
+        return true
     }
     
     //MARK: TableView Delegate Private Helper Methods
@@ -320,5 +285,46 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         }
         return UIImage(data: data)
         
+    }
+    private func configureImageView(cell: UITableViewCell, index: Int) {
+        let profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: cell.frame.height))
+        profileImageView.image = getImage(index: index)
+        
+        if profileImageView.image == nil {
+            profileImageView.image = UIImage(named: "placeholder_image")
+        }
+        profileImageView.contentMode = .scaleAspectFit
+        
+        cell.addSubview(profileImageView)
+    }
+    
+    private func configureTextLabel(cell: UITableViewCell, index: Int) {
+        guard let name = driversArray[index].requestedDriverName else {return}
+        
+        let nameTextLabel = UILabel(frame: CGRect(x: 58, y: (cell.center.y - 25), width: 150, height: 50))
+        
+        nameTextLabel.text = name as String
+        cell.addSubview(nameTextLabel)
+    }
+    
+    private func configureButton(cell: UITableViewCell, index: Int) {
+        let requestRideButton = UIButton(type: .roundedRect)
+        requestRideButton.setTitle("Request Ride", for: .normal)
+        requestRideButton.setTitle("Ride Requested", for: .disabled)
+        requestRideButton.setTitleColor(.orange, for: .normal)
+        requestRideButton.setTitleColor(.orange, for: .disabled)
+        requestRideButton.addTarget(self, action: #selector(requestDriverButtonTapped(sender:)), for: .touchUpInside)
+        requestRideButton.tag = index
+        
+        requestRideButton.frame = CGRect(x: Double(cell.frame.width) - 150, y: Double(cell.center.y) - 25, width: 150, height: 50)
+        
+        cell.addSubview(requestRideButton)
+        buttonsArray.append(requestRideButton)
+    }
+    
+    private func configureCell(cell: UITableViewCell, index: Int) {
+        configureImageView(cell: cell, index: index)
+        configureTextLabel(cell: cell, index: index)
+        configureButton(cell: cell, index: index)
     }
 }

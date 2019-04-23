@@ -23,7 +23,7 @@ class WelcomeViewController: UIViewController {
     //MARK:Private Methods
     private func transitionToAuthentication() {
         let destinationVC = PhoneAuthorizationViewController()
-        self.view.window?.rootViewController?.present(destinationVC, animated: true, completion: nil)
+        present(destinationVC, animated: true, completion: nil)
     }
 
 }
