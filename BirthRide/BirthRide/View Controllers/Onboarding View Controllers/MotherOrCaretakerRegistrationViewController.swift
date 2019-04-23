@@ -72,6 +72,9 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        nameTextField.frame = CGRect(x: 153.33333333333337, y: 0.0, width: 181.66666666666666, height: 30.0)
+        villageTextField.frame = CGRect(x: 153.33333333333337, y: 0.0, width: 181.66666666666666, height: 30.0)
+        phoneTextField.frame = CGRect(x: 153.33333333333337, y: 0.0, width: 181.66666666666666, height: 30.0)
         startLatLong = mother?.start?.latLong as String?
         destLatLong = mother?.destination?.latLong as String?
     }
@@ -224,6 +227,9 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     }
     
     private func populateTextFieldsAndConfigureViewForEditing() {
+        nameTextField.isHidden = false
+        phoneTextField.isHidden = false
+        villageTextField.isHidden = false
         if let mother = mother,
             let user = AuthenticationController.shared.genericUser {
             nameTextField.text = user.name as String?

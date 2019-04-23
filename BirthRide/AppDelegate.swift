@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
         
        
         
-        let rootViewController = WelcomeViewController()
+        let rootViewController = UserTypeViewController()
         window!.rootViewController = rootViewController
         window!.makeKeyAndVisible()
         
