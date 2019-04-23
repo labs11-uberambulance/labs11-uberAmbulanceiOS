@@ -306,6 +306,7 @@
          NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options: NSJSONReadingAllowFragments error:NULL];
          
          NSLog(@"%@", jsonDictionary);
+         completionHandler(nil);
          return;
       }
    }] resume];
