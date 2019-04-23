@@ -24,18 +24,13 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
     private let authenticationController = AuthenticationController.shared
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
-    let locationManager = CLLocationManager()
+
     //MARK: IBOutlets
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -69,7 +64,7 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         }
         
         AuthenticationController.shared.deauthenticateUser()
-//        logoutTransition()
+        logoutTransition()
     }
     @IBAction func editProfileButtonTapped(_ sender: Any) {
         editProfileTransition()
@@ -162,28 +157,10 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
             self.driversArray = driversArray
         })
     }
-//    private func logoutTransition() {
-//        let tabBarController = UITabBarController()
-//        
-//        let signUpViewController = SignUpViewController()
-//        
-//        let signInViewController = SignInViewController()
-//        
-//        tabBarController.addChild(signInViewController)
-//        tabBarController.addChild(signUpViewController)
-//        
-//        let signUpItem = UITabBarItem()
-//        signUpItem.title = "Sign Up"
-//        let signInItem = UITabBarItem()
-//        signInItem.title = "Sign In"
-//        
-//        signUpViewController.tabBarItem = signUpItem
-//        signInViewController.tabBarItem = signInItem
-//        
-//        present(tabBarController, animated: true, completion: nil)
-//        
-//        
-//    }
+    private func logoutTransition() {
+        let destinationVC = WelcomeViewController()
+        present(destinationVC, animated: true, completion: nil)
+    }
     
     private func editProfileTransition() {
         let destinationVC = MotherOrCaretakerRegistrationViewController()
@@ -229,33 +206,6 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         }
     }
 
-    
-    
-    
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
-        guard let location = locations.last else {return}
-        let camera = GMSCameraPosition.camera(withLatitude: (location.coordinate.latitude), longitude: (location.coordinate.longitude), zoom: 17.0)
-        
-        self.mapView?.animate(to: camera)
-        
-        //Finally stop updating location otherwise it will come again and again in this delegate
-        self.locationManager.stopUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            locationManager.requestLocation()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        NSLog("Error udpating location in RequestRideViewController.locationManager:didFailWithError:")
-        NSLog(error.localizedDescription)
-        return
-    }
-    
     
     
     

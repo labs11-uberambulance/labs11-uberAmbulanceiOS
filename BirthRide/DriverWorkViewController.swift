@@ -116,7 +116,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
             NSLog(error.localizedDescription)
         }
         AuthenticationController.shared.deauthenticateUser()
-//        logoutTransition()
+        logoutTransition()
     }
     @IBAction func editProfileButtonTapped(_ sender: Any) {
         editProfileTransition()
@@ -163,28 +163,12 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-//    private func logoutTransition() {
-//        let tabBarController = UITabBarController()
-//        
-//        let signUpViewController = SignUpViewController()
-//        
-//        let signInViewController = SignInViewController()
-//        
-//        tabBarController.addChild(signInViewController)
-//        tabBarController.addChild(signUpViewController)
-//        
-//        let signUpItem = UITabBarItem()
-//        signUpItem.title = "Sign Up"
-//        let signInItem = UITabBarItem()
-//        signInItem.title = "Sign In"
-//        
-//        signUpViewController.tabBarItem = signUpItem
-//        signInViewController.tabBarItem = signInItem
-//        
-//        present(tabBarController, animated: true, completion: nil)
+    private func logoutTransition() {
+        let destinationVC = WelcomeViewController()
+        present(destinationVC, animated: true, completion: nil)
         
         
-//    }
+    }
     
     //I ran into an error here when I was trying to set the text values for all of the textfields in the destinationVC. I was getting a fatal error telling me that nil was unexpectedly found when a property was unwrapped. This is because the UIElements don't exist right now.
     private func editProfileTransition() {
