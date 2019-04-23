@@ -167,7 +167,8 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         }
         let destinationMarker = GMSMarker()
         
-        if let latLong = mother?.destination?.latLong {
+        if let latLong = mother?.destination?.latLong,
+           latLong != "" {
             
             let latLongArray = latLong.components(separatedBy: ",")
             let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)

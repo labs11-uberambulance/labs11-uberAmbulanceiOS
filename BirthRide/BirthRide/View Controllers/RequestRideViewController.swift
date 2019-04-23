@@ -21,7 +21,10 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
             }
         }
     }
+    private var driverMarkersArray: [GMSMarker]  = []
     private let authenticationController = AuthenticationController.shared
+    
+    private var imageViewArray: [UIImageView] = []
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
 
@@ -44,7 +47,8 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         let pregnantMomStart = authenticationController.pregnantMom?.start
         
         
-        guard let latLongArray = pregnantMomStart?.latLong?.components(separatedBy: ",") as [NSString]? else {return}
+        guard let latLongArray = pregnantMomStart?.latLong?.components(separatedBy: ",") as [NSString]?,
+        pregnantMomStart?.latLong != "" else {return}
         
         
         
@@ -74,7 +78,9 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
     private func configureMapView() {
         
         guard let latLongString = authenticationController.pregnantMom?.start?.latLong,
-        let destLatLongString = authenticationController.pregnantMom?.destination?.latLong else {return}
+        let destLatLongString = authenticationController.pregnantMom?.destination?.latLong,
+            latLongString != "",
+        destLatLongString != "" else {return}
         
         
         let latLongArray = latLongString.components(separatedBy: ",")
@@ -192,6 +198,9 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
         let mother = authenticationController.pregnantMom,
         let user = authenticationController.genericUser else {return}
         let driver = driversArray[sender.tag]
+        tableView.isUserInteractionEnabled = false
+        sender.isUserInteractionEnabled = false
+        
         ABCNetworkingController().requestDriver(withToken: token, with: driver, withMother: mother, with: user) { (error) in
             if let error = error {
                 NSLog("Error in RequestRideViewController.requestDriverButtonTapped")
@@ -220,19 +229,28 @@ class RequestRideViewController: UIViewController, CLLocationManagerDelegate, UI
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "ReuseIdentifier")
+        let cell = UITableViewCell()
         
-        guard let name = driversArray[indexPath.row].requestedDriverName,
-        let price = driversArray[indexPath.row].price,
-        let duration = driversArray[indexPath.row].duration,
-            let distance = driversArray[indexPath.row].distance else {return cell}
-            
+        let profileImageView = UIImageView(frame: CGRect(x: 0, y: cell.center.y, width: 40, height: 40))
         
-        cell.imageView?.image = getImage(index: indexPath.row)
+        guard let name = driversArray[indexPath.row].requestedDriverName else {return cell}
+        
+        profileImageView.image = getImage(index: indexPath.row)
+        
+        if profileImageView.image == nil {
+            profileImageView.image = UIImage(named: "placeholder_image")
+        }
+        profileImageView.contentMode = .scaleAspectFill
+        
+        cell.addSubview(profileImageView)
+        
+        
+        
         
         cell.textLabel?.text = name as String
+        cell.textLabel?.frame = CGRect(x: 48, y: cell.center.y, width: 80, height: 20)
+        cell.contentMode = .center
         
-        cell.detailTextLabel?.text = "Driver Name: \(name), Price: \(price) Distance: \(distance), Duration: \(duration)"
         
         let requestRideButton = UIButton(type: .roundedRect)
         requestRideButton.setTitle("Request Ride", for: .normal)
