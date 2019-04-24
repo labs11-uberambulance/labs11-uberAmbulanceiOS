@@ -198,7 +198,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         destinationMarker.map = mapView
         mapView.settings.myLocationButton = true
         destinationMarkerArray.append(destinationMarker)
-        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude + 0.04, longitude: coordinate.longitude - 0.025, zoom: 6.0)
+        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude + 0.04, longitude: coordinate.longitude - 0.025, zoom: 13.0)
         mapView.animate(to: camera)
         }
     }
