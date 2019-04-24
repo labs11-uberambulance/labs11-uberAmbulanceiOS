@@ -118,17 +118,6 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         userMarker.icon = GMSMarker.markerImage(with: .red)
         userMarker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         userMarker.map = mapView
-        
-        
-        let path = GMSMutablePath()
-        path.add(CLLocationCoordinate2D(latitude: CLLocationDegrees(destLatitude), longitude: CLLocationDegrees(destLongitude)))
-        path.add(CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude)))
-        
-        let line = GMSPolyline.init(path: path)
-        line.strokeColor = .green
-        line.map = mapView
-        
-        
     }
     
     //The profile pictures of the drivers need to be resized in order to be used as icons for the markers. Some of the images are enormous.
@@ -211,6 +200,12 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         guard let token = authenticationController.userToken,
         let mother = authenticationController.pregnantMom,
         let user = authenticationController.genericUser else {return}
+        
+        if mother.didRequestRide == true {
+            showWeWillTextYouSoonAlert()
+            return
+        }
+        
         let driver = driversArray[sender.tag]
         tableView.isUserInteractionEnabled = false
         sender.isUserInteractionEnabled = false
@@ -231,6 +226,7 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
             DispatchQueue.main.async {
                 self.showWeWillTextYouSoonAlert()
             }
+            mother.didRequestRide = true
         }
     }
     

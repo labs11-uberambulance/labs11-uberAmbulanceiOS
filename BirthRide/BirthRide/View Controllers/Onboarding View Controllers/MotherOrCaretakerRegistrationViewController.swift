@@ -128,7 +128,6 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
             startName = name
         }
         createDestinationMapMarker(coordinate: place.coordinate)
-        createRoute()
         resultsController.dismiss(animated: true, completion: nil)
     }
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
@@ -147,7 +146,6 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         userMarker.isDraggable = true
         userMarker.map = mapView
         userMarkerArray.append(userMarker)
-        createRoute()
         let latLong = "\(coordinate.latitude),\(coordinate.longitude)"
         startLatLong = latLong
     }
@@ -157,7 +155,6 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         let latLong = "\(marker.position.latitude),\(marker.position.longitude)"
         startLatLong = latLong
         
-        createRoute()
     }
     
     //MARK: Private Methods
@@ -255,22 +252,6 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
             userMarkerArray.append(userMarker)
             return
         }
-    }
-    
-    
-    //FIXME: The existing paths are not removed when the new path is created.
-    private func createRoute() {
-        
-        guard userMarkerArray.count > 0,
-            destinationMarkerArray.count > 0 else {return}
-        
-        path.removeAllCoordinates()
-        path.add(CLLocationCoordinate2D(latitude: CLLocationDegrees(destinationMarkerArray[0].position.latitude), longitude: CLLocationDegrees(destinationMarkerArray[0].position.longitude)))
-        path.add(CLLocationCoordinate2D(latitude: userMarkerArray[0].position.latitude, longitude: userMarkerArray[0].position.longitude))
-        
-        let line = GMSPolyline.init(path: path)
-        line.strokeColor = .green
-        line.map = mapView
     }
     
     //This method was getting called in viewDidLoad, but nothing was happening. That is because you cannot successfully call `present` on a view controller until that view controller's view has fully transitioned onto the screen. That is why it is necessary to call `present(...)` in viewDidAppear, because viewDidAppear is called after that transition has been completed.
