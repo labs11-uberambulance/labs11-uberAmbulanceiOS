@@ -119,7 +119,7 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         userMarker.isDraggable = true
         userMarker.map = mapView
         
-        mapView.camera = GMSCameraPosition(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude), zoom: 6.0)
+        mapView.camera = GMSCameraPosition(latitude: CLLocationDegrees(latitude) + 0.04, longitude: CLLocationDegrees(longitude) - 0.025, zoom: 13.0)
         userMarkerArray.append(userMarker)
         
     }

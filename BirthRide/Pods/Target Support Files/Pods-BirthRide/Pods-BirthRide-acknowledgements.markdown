@@ -1457,11 +1457,11 @@ Copyright 2019 Google
 
 ## GoogleMaps
 
-Copyright 2018 Google
+Copyright 2019 Google
 
 ## GooglePlaces
 
-Copyright 2018 Google
+Copyright 2019 Google
 
 ## GoogleSignIn
 

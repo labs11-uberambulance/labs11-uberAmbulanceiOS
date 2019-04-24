@@ -56,6 +56,9 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
             if let error = error {
                 NSLog("Error in PhoneAuthorizationViewController.verifyAuthenticationCodeAndID")
                 NSLog("%@", error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.showInvalidAuthenticationNumberAlert()
+                }
                 return
             }
             guard let authResult = authResult else {return}
@@ -94,6 +97,24 @@ class PhoneAuthorizationViewController: UIViewController, TransitionBetweenViewC
     private func dismissKeyboard()
     {
         view.endEditing(true)
+    }
+    
+    private func showInvalidAuthenticationNumberAlert() {
+        let invAuthAlert = UIAlertController(title: "Invalid Verification Number", message: "You have entered the wrong verification number. Please check your phone for the text containing the number, and try entering it in again. If you have not received a text, please tap the 'Try Again' button to enter in your phone number again. Thank you.", preferredStyle: .alert)
+        let tryAgainAction = UIAlertAction(title: "Try Again", style: .destructive) { (alertAction) in
+            self.didEnterPhoneNumber = false
+            self.showPhoneAuthAlert()
+        }
+        let doneAction = UIAlertAction(title: "Done", style: .default) { (alertAction) in
+            let verificationNumber = invAuthAlert.textFields?[0].text
+            self.verifyAuthenticationCodeAndID(verificationCode: verificationNumber)
+        }
+        invAuthAlert.addAction(tryAgainAction)
+        invAuthAlert.addAction(doneAction)
+        invAuthAlert.addTextField { (textField) in
+            textField.placeholder = "Verification Number Here"
+        }
+        present(invAuthAlert, animated: true, completion: nil)
     }
     
     private func showPhoneAuthAlert() {

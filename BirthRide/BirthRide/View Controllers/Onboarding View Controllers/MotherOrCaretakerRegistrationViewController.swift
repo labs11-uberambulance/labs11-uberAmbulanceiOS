@@ -128,7 +128,6 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
             startName = name
         }
         createDestinationMapMarker(coordinate: place.coordinate)
-        createRoute()
         resultsController.dismiss(animated: true, completion: nil)
     }
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
@@ -147,7 +146,6 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         userMarker.isDraggable = true
         userMarker.map = mapView
         userMarkerArray.append(userMarker)
-        createRoute()
         let latLong = "\(coordinate.latitude),\(coordinate.longitude)"
         startLatLong = latLong
     }
@@ -157,7 +155,6 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         let latLong = "\(marker.position.latitude),\(marker.position.longitude)"
         startLatLong = latLong
         
-        createRoute()
     }
     
     //MARK: Private Methods
@@ -257,22 +254,6 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         }
     }
     
-    
-    //FIXME: The existing paths are not removed when the new path is created.
-    private func createRoute() {
-        
-        guard userMarkerArray.count > 0,
-            destinationMarkerArray.count > 0 else {return}
-        
-        path.removeAllCoordinates()
-        path.add(CLLocationCoordinate2D(latitude: CLLocationDegrees(destinationMarkerArray[0].position.latitude), longitude: CLLocationDegrees(destinationMarkerArray[0].position.longitude)))
-        path.add(CLLocationCoordinate2D(latitude: userMarkerArray[0].position.latitude, longitude: userMarkerArray[0].position.longitude))
-        
-        let line = GMSPolyline.init(path: path)
-        line.strokeColor = .green
-        line.map = mapView
-    }
-    
     //This method was getting called in viewDidLoad, but nothing was happening. That is because you cannot successfully call `present` on a view controller until that view controller's view has fully transitioned onto the screen. That is why it is necessary to call `present(...)` in viewDidAppear, because viewDidAppear is called after that transition has been completed.
     private func showInformationAlert() {
         let informationAlert = UIAlertController(title: "Important Information", message: "Please fill out all available fields and select a pickup location and a destination location using the map. You may select the buttons below for more information on how to access the caretaker field and on how to use the map. None of this information is permanent and you may change it at any time.", preferredStyle: .alert)
@@ -297,6 +278,26 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         
         
         present(informationAlert, animated: true, completion: nil)
+    }
+    private func showMissingInformationAlert() {
+        let missingInfoAlert = UIAlertController(title: "Please Complete Your Profile", message: "You have not filled out all required fields. The caretaker field is optional, but all others must be filled out. Please tap to the 'Help' button in the bottom left corner of this window for help filling out all required fields. Thank you.", preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Continue", style: .default, handler: nil)
+        let helpAction = UIAlertAction(title: "Help", style: .default) { (alertAction) in
+            self.showInformationAlert()
+        }
+        missingInfoAlert.addAction(continueAction)
+        missingInfoAlert.addAction(helpAction)
+        present(missingInfoAlert, animated: true, completion: nil)
+    }
+    private func showMissingCoordinatesAlert() {
+        let missingCoordAlert = UIAlertController(title: "Please Select a Destination and a Pickup Location", message: "You have not selected both a destination and a pickup location. Please refer to the 'Help' button in the bottom left corner of this window for help selecting a destination and a pickup location.", preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Continue", style: .default, handler: nil)
+        let helpAction = UIAlertAction(title: "Help", style: .default) { (alertAction) in
+            self.showInformationAlert()
+        }
+        missingCoordAlert.addAction(continueAction)
+        missingCoordAlert.addAction(helpAction)
+        present(missingCoordAlert, animated: true, completion: nil)
     }
     
 }

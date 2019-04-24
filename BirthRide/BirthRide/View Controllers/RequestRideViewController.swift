@@ -26,6 +26,12 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
     private let authenticationController = AuthenticationController.shared
     
     private var imageViewArray: [UIImageView] = []
+    private var profileImageView = UIImageView()
+    
+    private let photoFetchQueue = OperationQueue()
+    private let cache = Cache<NSNumber, UIImage>()
+    private var operations = [NSNumber : Operation]()
+    
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
 
@@ -42,6 +48,7 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        mapView.delegate = self
         
         configureMapView()
     
@@ -92,21 +99,6 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         let destLongitude = UserController().stringToInt(intString: destLatLongArray[1] as String, viewController: self)
         
         
-        var bounds = GMSCoordinateBounds()
-        for marker in driverMarkersArray {
-            bounds = bounds.includingCoordinate(marker.position)
-        }
-        let update = GMSCameraUpdate.fit(bounds, withPadding: 60)
-        mapView.animate(with: update)
-        
-//        let bounds = GMSCoordinateBounds(region: GMSVisibleRegion(nearLeft: CLLocationCoordinate2D(latitude: -1.446665, longitude: 29.559337), nearRight: CLLocationCoordinate2D(latitude: -1.029283, longitude: 33.964854), farLeft: CLLocationCoordinate2D(latitude: 3.538722, longitude: 30.911399), farRight: CLLocationCoordinate2D(latitude: 4.307166, longitude: 35.232975)))
-        
-        
-        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 6.0)
-        mapView.animate(to: camera)
-        
-        
-        
         
         let destinationMarker = GMSMarker()
         destinationMarker.icon = GMSMarker.markerImage(with: .blue)
@@ -119,14 +111,7 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         userMarker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         userMarker.map = mapView
         
-        
-        let path = GMSMutablePath()
-        path.add(CLLocationCoordinate2D(latitude: CLLocationDegrees(destLatitude), longitude: CLLocationDegrees(destLongitude)))
-        path.add(CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude)))
-        
-        let line = GMSPolyline.init(path: path)
-        line.strokeColor = .green
-        line.map = mapView
+         mapView.animate(to: GMSCameraPosition(latitude: userMarker.position.latitude + 0.04, longitude: userMarker.position.longitude - 0.025, zoom: 13.0))
         
         
     }
@@ -211,6 +196,12 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         guard let token = authenticationController.userToken,
         let mother = authenticationController.pregnantMom,
         let user = authenticationController.genericUser else {return}
+        
+        if mother.didRequestRide == true {
+            showWeWillTextYouSoonAlert()
+            return
+        }
+        
         let driver = driversArray[sender.tag]
         tableView.isUserInteractionEnabled = false
         sender.isUserInteractionEnabled = false
@@ -220,6 +211,7 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
             if button.tag != sender.tag {
                 button.isHidden = true
             }
+            mapView.isUserInteractionEnabled = false
         }
         
         ABCNetworkingController().requestDriver(withToken: token, with: driver, withMother: mother, with: user) { (error) in
@@ -231,6 +223,7 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
             DispatchQueue.main.async {
                 self.showWeWillTextYouSoonAlert()
             }
+            mother.didRequestRide = true
         }
     }
     
@@ -247,7 +240,7 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         
         let cell = UITableViewCell()
         
-        configureCell(cell: cell, index: indexPath.row)
+        configureCell(cell: cell, imageView: profileImageView, indexPath: indexPath)
         
         return cell
     }
@@ -265,30 +258,25 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         
     }
     
+    //MARK: MapView Delegate Methods
+    
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         guard let index = driverMarkersArray.firstIndex(of: marker) else {return false}
-        tableView.selectRow(at: IndexPath(row: index, section: 1), animated: true, scrollPosition: .top)
+        tableView.selectRow(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .top)
+        
+        for marker in driverMarkersArray {
+            marker.isFlat = true
+        }
+        mapView.animate(to: GMSCameraPosition(latitude: marker.position.latitude + 0.04, longitude: marker.position.longitude - 0.025, zoom: 13.0))
+        marker.isFlat = false
+        mapView.selectedMarker = marker
+        
         return true
     }
     
     //MARK: TableView Delegate Private Helper Methods
-    private func getImage(index: Int) -> UIImage? {
-        guard let urlString = driversArray[index].photoUrl else {return nil}
-        guard let url = URL(string: urlString as String) else {return nil}
-        let data: Data
-        do {
-            data = try Data(contentsOf: url)
-        } catch {
-            NSLog("Error getting driver profile image in RequestRideViewController.getImage")
-            NSLog(error.localizedDescription)
-            return nil
-        }
-        return UIImage(data: data)
-        
-    }
     private func configureImageView(cell: UITableViewCell, index: Int) {
         let profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: cell.frame.height))
-        profileImageView.image = getImage(index: index)
         
         if profileImageView.image == nil {
             profileImageView.image = UIImage(named: "placeholder_image")
@@ -296,6 +284,7 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         profileImageView.contentMode = .scaleAspectFit
         
         cell.addSubview(profileImageView)
+        self.profileImageView = profileImageView
     }
     
     private func configureTextLabel(cell: UITableViewCell, index: Int) {
@@ -322,9 +311,49 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         buttonsArray.append(requestRideButton)
     }
     
-    private func configureCell(cell: UITableViewCell, index: Int) {
-        configureImageView(cell: cell, index: index)
-        configureTextLabel(cell: cell, index: index)
-        configureButton(cell: cell, index: index)
+    private func configureCell(cell: UITableViewCell, imageView: UIImageView, indexPath: IndexPath) {
+        configureImageView(cell: cell, index: indexPath.row)
+        loadImage(forCell: cell, forImageView: imageView, forCellAt: indexPath)
+        configureTextLabel(cell: cell, index: indexPath.row)
+        configureButton(cell: cell, index: indexPath.row)
+    }
+    
+    private func loadImage(forCell cell: UITableViewCell, forImageView imageView: UIImageView, forCellAt indexPath: IndexPath) {
+        let driver = driversArray[indexPath.row]
+        guard let driverId = driver.driverId else {return}
+        // Check for image in cache
+        if let cachedImage = cache.value(for: driverId) {
+            imageView.image = cachedImage
+            return
+        }
+        
+        // Start an operation to fetch image data
+        let fetchOp = FetchPhotoOperation(driver: driver)
+        let cacheOp = BlockOperation {
+            if let image = fetchOp.image {
+                self.cache.cache(value: image, for: driverId)
+            }
+        }
+        let completionOp = BlockOperation {
+            defer { self.operations.removeValue(forKey: driverId) }
+            
+            if let currentIndexPath = self.tableView?.indexPath(for: cell),
+                currentIndexPath != indexPath {
+                return // Cell has been reused
+            }
+            
+            if let image = fetchOp.image {
+                imageView.image = image
+            }
+        }
+        
+        cacheOp.addDependency(fetchOp)
+        completionOp.addDependency(fetchOp)
+        
+        photoFetchQueue.addOperation(fetchOp)
+        photoFetchQueue.addOperation(cacheOp)
+        OperationQueue.main.addOperation(completionOp)
+        
+        operations[driverId] = fetchOp
     }
 }

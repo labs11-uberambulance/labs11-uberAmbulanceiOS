@@ -119,7 +119,7 @@ class ServiceRideViewController: UIViewController {
             driverMapMarker.position = CLLocationCoordinate2D(latitude: drivertLatitude, longitude: driverLongitude)
             driverMapMarker.map = mapView
             
-            let camera = GMSCameraPosition(latitude: driverMapMarker.position.latitude, longitude: driverMapMarker.position.longitude, zoom: 6.0)
+            let camera = GMSCameraPosition(latitude: driverMapMarker.position.latitude + 0.04, longitude: driverMapMarker.position.longitude - 0.025, zoom: 13.0)
             mapView.animate(to: camera)
             
             let startMapMarker = GMSMarker()

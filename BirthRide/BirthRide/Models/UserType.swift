@@ -55,6 +55,7 @@ class PregnantMom: NSObject {
 //    var dueDate: String?
     var start: Start?
     var destination: Destination?
+    var didRequestRide: Bool = false
     
 
     required init(start: Start?, destination: Destination?, caretakerName: NSString?, motherId: NSNumber?) {
