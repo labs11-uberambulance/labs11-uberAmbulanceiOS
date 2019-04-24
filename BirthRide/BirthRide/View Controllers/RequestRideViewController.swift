@@ -92,21 +92,6 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         let destLongitude = UserController().stringToInt(intString: destLatLongArray[1] as String, viewController: self)
         
         
-        var bounds = GMSCoordinateBounds()
-        for marker in driverMarkersArray {
-            bounds = bounds.includingCoordinate(marker.position)
-        }
-        let update = GMSCameraUpdate.fit(bounds, withPadding: 60)
-        mapView.animate(with: update)
-        
-//        let bounds = GMSCoordinateBounds(region: GMSVisibleRegion(nearLeft: CLLocationCoordinate2D(latitude: -1.446665, longitude: 29.559337), nearRight: CLLocationCoordinate2D(latitude: -1.029283, longitude: 33.964854), farLeft: CLLocationCoordinate2D(latitude: 3.538722, longitude: 30.911399), farRight: CLLocationCoordinate2D(latitude: 4.307166, longitude: 35.232975)))
-        
-        
-        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 6.0)
-        mapView.animate(to: camera)
-        
-        
-        
         
         let destinationMarker = GMSMarker()
         destinationMarker.icon = GMSMarker.markerImage(with: .blue)
@@ -118,6 +103,10 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         userMarker.icon = GMSMarker.markerImage(with: .red)
         userMarker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         userMarker.map = mapView
+        
+         mapView.animate(to: GMSCameraPosition(latitude: userMarker.position.latitude + 0.04, longitude: userMarker.position.longitude - 0.025, zoom: 13.0))
+        
+        
     }
     
     //The profile pictures of the drivers need to be resized in order to be used as icons for the markers. Some of the images are enormous.
@@ -261,9 +250,18 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         
     }
     
+    //MARK: MapView Delegate Methods
+    
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         guard let index = driverMarkersArray.firstIndex(of: marker) else {return false}
         tableView.selectRow(at: IndexPath(row: index, section: 1), animated: true, scrollPosition: .top)
+        
+        for marker in driverMarkersArray {
+            marker.isFlat = true
+        }
+        mapView.animate(to: GMSCameraPosition(latitude: marker.position.latitude + 0.04, longitude: marker.position.longitude - 0.025, zoom: 13.0))
+        marker.isFlat = false
+        
         return true
     }
     
