@@ -48,6 +48,7 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        mapView.delegate = self
         
         configureMapView()
     
@@ -210,6 +211,7 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
             if button.tag != sender.tag {
                 button.isHidden = true
             }
+            mapView.isUserInteractionEnabled = false
         }
         
         ABCNetworkingController().requestDriver(withToken: token, with: driver, withMother: mother, with: user) { (error) in
@@ -260,13 +262,14 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         guard let index = driverMarkersArray.firstIndex(of: marker) else {return false}
-        tableView.selectRow(at: IndexPath(row: index, section: 1), animated: true, scrollPosition: .top)
+        tableView.selectRow(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .top)
         
         for marker in driverMarkersArray {
             marker.isFlat = true
         }
         mapView.animate(to: GMSCameraPosition(latitude: marker.position.latitude + 0.04, longitude: marker.position.longitude - 0.025, zoom: 13.0))
         marker.isFlat = false
+        mapView.selectedMarker = marker
         
         return true
     }
