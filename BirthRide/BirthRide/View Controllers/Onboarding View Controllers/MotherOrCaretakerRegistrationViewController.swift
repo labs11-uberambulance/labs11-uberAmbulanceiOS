@@ -89,13 +89,23 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
     @IBAction func continueButtonTapped(_ sender: Any) {
         guard nameTextField.text != "", villageTextField.text != "", phoneTextField.text != "",
-            userMarkerArray.count > 0,
-            destinationMarkerArray.count > 0,
         let name = nameTextField.text,
         let phone = phoneTextField.text,
-        let village = villageTextField.text,
-        let startLatLong = startLatLong,
-        let destLatLong = destLatLong else {return}
+            let village = villageTextField.text else {
+                showMissingInformationAlert()
+                return
+                
+        }
+        
+        
+        guard let startLatLong = startLatLong,
+            userMarkerArray.count > 0,
+            destinationMarkerArray.count > 0,
+        let destLatLong = destLatLong else {
+            showMissingCoordinatesAlert()
+            return
+            
+        }
        
         var caretakerName = caretakerTextField.text
 
@@ -188,7 +198,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         destinationMarker.map = mapView
         mapView.settings.myLocationButton = true
         destinationMarkerArray.append(destinationMarker)
-        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 6.0)
+        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude + 0.04, longitude: coordinate.longitude - 0.025, zoom: 6.0)
         mapView.animate(to: camera)
         }
     }
@@ -278,6 +288,26 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         
         
         present(informationAlert, animated: true, completion: nil)
+    }
+    private func showMissingInformationAlert() {
+        let missingInfoAlert = UIAlertController(title: "Please Complete Your Profile", message: "You have not filled out all required fields. The caretaker field is optional, but all others must be filled out. Please tap to the 'Help' button in the bottom left corner of this window for help filling out all required fields. Thank you.", preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Continue", style: .default, handler: nil)
+        let helpAction = UIAlertAction(title: "Help", style: .default) { (alertAction) in
+            self.showInformationAlert()
+        }
+        missingInfoAlert.addAction(continueAction)
+        missingInfoAlert.addAction(helpAction)
+        present(missingInfoAlert, animated: true, completion: nil)
+    }
+    private func showMissingCoordinatesAlert() {
+        let missingCoordAlert = UIAlertController(title: "Please Select a Destination and a Pickup Location", message: "You have not selected both a destination and a pickup location. Please refer to the 'Help' button in the bottom left corner of this window for help selecting a destination and a pickup location.", preferredStyle: .alert)
+        let continueAction = UIAlertAction(title: "Continue", style: .default, handler: nil)
+        let helpAction = UIAlertAction(title: "Help", style: .default) { (alertAction) in
+            self.showInformationAlert()
+        }
+        missingCoordAlert.addAction(continueAction)
+        missingCoordAlert.addAction(helpAction)
+        present(missingCoordAlert, animated: true, completion: nil)
     }
     
 }
