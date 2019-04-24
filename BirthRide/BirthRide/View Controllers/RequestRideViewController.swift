@@ -26,6 +26,12 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
     private let authenticationController = AuthenticationController.shared
     
     private var imageViewArray: [UIImageView] = []
+    private var profileImageView = UIImageView()
+    
+    private let photoFetchQueue = OperationQueue()
+    private let cache = Cache<NSNumber, UIImage>()
+    private var operations = [NSNumber : Operation]()
+    
     //MARK: Other Properties
     var pregnantMom: PregnantMom?
 
@@ -232,7 +238,7 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         
         let cell = UITableViewCell()
         
-        configureCell(cell: cell, index: indexPath.row)
+        configureCell(cell: cell, imageView: profileImageView, indexPath: indexPath)
         
         return cell
     }
@@ -266,23 +272,8 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
     }
     
     //MARK: TableView Delegate Private Helper Methods
-    private func getImage(index: Int) -> UIImage? {
-        guard let urlString = driversArray[index].photoUrl else {return nil}
-        guard let url = URL(string: urlString as String) else {return nil}
-        let data: Data
-        do {
-            data = try Data(contentsOf: url)
-        } catch {
-            NSLog("Error getting driver profile image in RequestRideViewController.getImage")
-            NSLog(error.localizedDescription)
-            return nil
-        }
-        return UIImage(data: data)
-        
-    }
     private func configureImageView(cell: UITableViewCell, index: Int) {
         let profileImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: cell.frame.height))
-        profileImageView.image = getImage(index: index)
         
         if profileImageView.image == nil {
             profileImageView.image = UIImage(named: "placeholder_image")
@@ -290,6 +281,7 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         profileImageView.contentMode = .scaleAspectFit
         
         cell.addSubview(profileImageView)
+        self.profileImageView = profileImageView
     }
     
     private func configureTextLabel(cell: UITableViewCell, index: Int) {
@@ -316,9 +308,49 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
         buttonsArray.append(requestRideButton)
     }
     
-    private func configureCell(cell: UITableViewCell, index: Int) {
-        configureImageView(cell: cell, index: index)
-        configureTextLabel(cell: cell, index: index)
-        configureButton(cell: cell, index: index)
+    private func configureCell(cell: UITableViewCell, imageView: UIImageView, indexPath: IndexPath) {
+        configureImageView(cell: cell, index: indexPath.row)
+        loadImage(forCell: cell, forImageView: imageView, forCellAt: indexPath)
+        configureTextLabel(cell: cell, index: indexPath.row)
+        configureButton(cell: cell, index: indexPath.row)
+    }
+    
+    private func loadImage(forCell cell: UITableViewCell, forImageView imageView: UIImageView, forCellAt indexPath: IndexPath) {
+        let driver = driversArray[indexPath.row]
+        guard let driverId = driver.driverId else {return}
+        // Check for image in cache
+        if let cachedImage = cache.value(for: driverId) {
+            imageView.image = cachedImage
+            return
+        }
+        
+        // Start an operation to fetch image data
+        let fetchOp = FetchPhotoOperation(driver: driver)
+        let cacheOp = BlockOperation {
+            if let image = fetchOp.image {
+                self.cache.cache(value: image, for: driverId)
+            }
+        }
+        let completionOp = BlockOperation {
+            defer { self.operations.removeValue(forKey: driverId) }
+            
+            if let currentIndexPath = self.tableView?.indexPath(for: cell),
+                currentIndexPath != indexPath {
+                return // Cell has been reused
+            }
+            
+            if let image = fetchOp.image {
+                imageView.image = image
+            }
+        }
+        
+        cacheOp.addDependency(fetchOp)
+        completionOp.addDependency(fetchOp)
+        
+        photoFetchQueue.addOperation(fetchOp)
+        photoFetchQueue.addOperation(cacheOp)
+        OperationQueue.main.addOperation(completionOp)
+        
+        operations[driverId] = fetchOp
     }
 }

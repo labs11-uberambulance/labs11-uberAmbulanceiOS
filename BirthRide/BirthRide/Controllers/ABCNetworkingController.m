@@ -61,6 +61,9 @@
             if ([key containsString:@"_"]) {
                key = [key convertFromSnakeCaseToCamelCase];
             }
+            if ([key isEqualToString:@"id"]) {
+               [newDriver setValue:value forKey:@"driverId"];
+            }
             if ([key isEqualToString:@"name"]) {
                [newDriver setValue:value forKey:@"requestedDriverName"];
             }

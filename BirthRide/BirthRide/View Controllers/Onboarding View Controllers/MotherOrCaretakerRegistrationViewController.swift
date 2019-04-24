@@ -89,23 +89,13 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
     @IBAction func continueButtonTapped(_ sender: Any) {
         guard nameTextField.text != "", villageTextField.text != "", phoneTextField.text != "",
-        let name = nameTextField.text,
-        let phone = phoneTextField.text,
-            let village = villageTextField.text else {
-                showMissingInformationAlert()
-                return
-                
-        }
-        
-        
-        guard let startLatLong = startLatLong,
             userMarkerArray.count > 0,
             destinationMarkerArray.count > 0,
-        let destLatLong = destLatLong else {
-            showMissingCoordinatesAlert()
-            return
-            
-        }
+        let name = nameTextField.text,
+        let phone = phoneTextField.text,
+        let village = villageTextField.text,
+        let startLatLong = startLatLong,
+        let destLatLong = destLatLong else {return}
        
         var caretakerName = caretakerTextField.text
 
@@ -198,7 +188,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         destinationMarker.map = mapView
         mapView.settings.myLocationButton = true
         destinationMarkerArray.append(destinationMarker)
-        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude + 0.04, longitude: coordinate.longitude - 0.025, zoom: 13.0)
+        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 6.0)
         mapView.animate(to: camera)
         }
     }
