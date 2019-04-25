@@ -183,4 +183,4 @@ class ServiceRideViewController: UIViewController {
         AuthenticationController.shared.requestedRide = nil
         present(destinationVC, animated: true, completion: nil)
     }
-}
+    }

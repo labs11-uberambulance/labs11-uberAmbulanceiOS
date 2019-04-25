@@ -15,6 +15,7 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     //MARK: Private Properties
     private var userMarkerArray: [GMSMarker] = []
     private var userLocation: NSString?
+    private var destinationVC: UIViewController?
     
     //MARK: Other Properties
     var driver: Driver?
@@ -34,6 +35,10 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         populateLabelsAndTextFields()
         configureMapView()
         // Do any additional setup after loading the view.
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showRideRequestAlert), name: .didReceiveRideRequest, object: nil)
+        
+        
     }
     
     
@@ -61,9 +66,13 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     }
     
     func transition(userType: UserType?) {
+        guard let destinationVC = destinationVC else {
         let driverPhotoRegistrationViewController = DriverPhotoRegistrationViewController()
         self.present(driverPhotoRegistrationViewController, animated: true) {
         }
+            return
+        }
+        present(destinationVC, animated: true, completion: nil)
     }
     
     
@@ -152,4 +161,19 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         
         present(informationAlert, animated: true, completion: nil)
     }
+    @objc private func showRideRequestAlert() {
+        guard let name = AuthenticationController.shared.requestedRide?.name,
+            let distance = AuthenticationController.shared.requestedRide?.distance,
+            let hospital = AuthenticationController.shared.requestedRide?.hospital else {return}
+        let rideRequestAlert = UIAlertController(title: "Ride Request", message: "\(name as String) is \(distance as String) miles away and wants to be taken to \(hospital as String)", preferredStyle: .alert)
+        
+        rideRequestAlert.addAction(UIAlertAction(title: "Accept", style: .default, handler: { (alertAction) in
+            self.destinationVC = ServiceRideViewController()
+        }))
+        rideRequestAlert.addAction(UIAlertAction(title: "Reject", style: .default, handler: { (alertAction) in
+            AuthenticationController.shared.requestedRide = nil
+        }))
+     present(rideRequestAlert, animated: true, completion: nil)
+    }
+
 }
