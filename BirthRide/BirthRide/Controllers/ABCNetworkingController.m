@@ -627,9 +627,9 @@
    
    [requestURL setHTTPMethod:@"POST"];
    [requestURL setValue:FIRtoken forHTTPHeaderField:@"Authorization"];
+   [requestURL setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
    
-   NSDictionary *jsonDictionary = fcmTokenDictionary;
-   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDictionary options:NSJSONWritingPrettyPrinted error:nil];
+   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:fcmTokenDictionary options:NSJSONWritingPrettyPrinted error:nil];
    
    [requestURL setHTTPBody:jsonData];
    
