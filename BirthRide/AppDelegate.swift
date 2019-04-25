@@ -45,10 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance()?.signOut()
         
-        
-        //Register with APNs
-        registerForPushNotifications()
-        
         // Check if launched from notification
         let notificationOption = launchOptions?[.remoteNotification]
         
@@ -63,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
             let newRootViewController: UIViewController = DriverWorkViewController()
             window?.rootViewController = newRootViewController
         }
-
+        registerForPushNotifications()
         
         return true
     }
@@ -180,14 +176,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
  
         
     }
-
     
-    
-    
-    
-    
-    
-    func registerForPushNotifications() {
+    private func registerForPushNotifications() {
         UNUserNotificationCenter.current() // 1
             .requestAuthorization(options: [.alert, .sound, .badge]) { // 2
                 granted, error in
@@ -208,7 +198,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
                 self.getNotificationSettings()
         }
     }
-    func getNotificationSettings() {
+    private func getNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             print("Notification settings: \(settings)")
             guard settings.authorizationStatus == .authorized else { return }
@@ -217,11 +207,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
             }
         }
     }
-    
-    
-    
-    
-
 }
 
 

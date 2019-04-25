@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleMaps
+import UserNotifications
 
 class DriverRegistrationViewController: UIViewController, TransitionBetweenViewControllers, GMSMapViewDelegate {
     
@@ -43,7 +44,7 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
             let phoneNumber = phoneNumberTextField.text,
             let price = priceTextField.text,
             let bio = bioTextView.text,
-            let userLocation = AuthenticationController.shared.genericUser?.location?.latLong,
+            let userLocation = userLocation,
             userLocation != "" else {return}
         
         let otherName = name as NSString
@@ -76,7 +77,10 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         userMarker.map = mapView
         userMarkerArray.append(userMarker)
         userLocation = "\(coordinate.latitude),\(coordinate.longitude)" as NSString
-        AuthenticationController.shared.genericUser?.location?.latLong = userLocation
+    }
+    
+    func mapView(_ mapView: GMSMapView, didEndDragging marker: GMSMarker) {
+        userLocation = "\(marker.position.latitude),\(marker.position.longitude)" as NSString
     }
     
     

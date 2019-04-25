@@ -16,7 +16,6 @@
                 <outlet property="isWorkingSwitch" destination="ZDg-5C-d3Y" id="reT-dj-9FS"/>
                 <outlet property="rejectRideButton" destination="LKo-y4-Nz8" id="hWZ-NF-6Af"/>
                 <outlet property="requestTimeLabel" destination="Is1-Hq-Niy" id="C0Z-8A-eJg"/>
-                <outlet property="searchingForRidesLabel" destination="5Kb-Pe-aHQ" id="vc6-cB-8rx"/>
                 <outlet property="startVillageLabel" destination="xag-G2-RxG" id="etT-6w-DPM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -46,12 +45,6 @@
                         <constraint firstAttribute="height" constant="31" id="aYi-Ox-3Xf"/>
                     </constraints>
                 </stackView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching for rides..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="5Kb-Pe-aHQ">
-                    <rect key="frame" x="77" y="430.5" width="221.5" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mqD-5a-l6Y">
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     <items>
@@ -70,7 +63,7 @@
                     </items>
                 </navigationBar>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="30l-zd-L8i">
-                    <rect key="frame" x="135" y="257" width="105" height="153.5"/>
+                    <rect key="frame" x="135" y="155" width="105" height="153.5"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LKo-y4-Nz8">
                             <rect key="frame" x="13.5" y="0.0" width="78" height="30"/>
@@ -111,14 +104,12 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="JLI-wi-GFu" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="5OM-TE-A8D"/>
+                <constraint firstItem="30l-zd-L8i" firstAttribute="top" secondItem="JLI-wi-GFu" secondAttribute="bottom" constant="20" id="6Gg-Ku-cNP"/>
+                <constraint firstItem="30l-zd-L8i" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="CAx-Ed-1Zz"/>
                 <constraint firstItem="mqD-5a-l6Y" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Jt0-yQ-vwJ"/>
                 <constraint firstItem="JLI-wi-GFu" firstAttribute="top" secondItem="mqD-5a-l6Y" secondAttribute="bottom" constant="40" id="MqD-pH-SzU"/>
-                <constraint firstItem="5Kb-Pe-aHQ" firstAttribute="top" secondItem="30l-zd-L8i" secondAttribute="bottom" constant="20" id="eeE-6C-uXP"/>
-                <constraint firstItem="30l-zd-L8i" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="esR-aV-OvI"/>
                 <constraint firstItem="mqD-5a-l6Y" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="qcq-Yc-HYQ"/>
                 <constraint firstItem="mqD-5a-l6Y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="s34-uj-RU9"/>
-                <constraint firstItem="5Kb-Pe-aHQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wOK-Nu-J2K"/>
-                <constraint firstItem="30l-zd-L8i" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="wZ8-Mo-5sD"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
         </view>
