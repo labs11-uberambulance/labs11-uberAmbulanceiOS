@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
             let newRootViewController: UIViewController = DriverWorkViewController()
             window?.rootViewController = newRootViewController
         }
-
+        registerForPushNotifications()
         
         return true
     }
@@ -175,6 +175,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
         UserDefaults.standard.set(dataDict, forKey: "FCMToken")
  
         
+    }
+    
+    private func registerForPushNotifications() {
+        UNUserNotificationCenter.current() // 1
+            .requestAuthorization(options: [.alert, .sound, .badge]) { // 2
+                granted, error in
+                print("Permission granted: \(granted)") // 3
+                guard granted else { return }
+                // 1
+                let viewAction = UNNotificationAction(
+                    identifier: "viewAction", title: "View",
+                    options: [.foreground])
+                
+                // 2
+                let rideCategory = UNNotificationCategory(
+                    identifier: "rideCategory", actions: [viewAction],
+                    intentIdentifiers: [], options: [])
+                
+                // 3
+                UNUserNotificationCenter.current().setNotificationCategories([rideCategory])
+                self.getNotificationSettings()
+        }
+    }
+    private func getNotificationSettings() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            print("Notification settings: \(settings)")
+            guard settings.authorizationStatus == .authorized else { return }
+            DispatchQueue.main.async {
+                UIApplication.shared.registerForRemoteNotifications()
+            }
+        }
     }
 }
 

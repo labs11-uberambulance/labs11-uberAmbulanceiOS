@@ -641,7 +641,7 @@
          return;
       }
       if (data != nil) {
-         NSString *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
+         NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:NULL];
          NSLog(@"%@", jsonDictionary);
          completionHandler(nil);
       }

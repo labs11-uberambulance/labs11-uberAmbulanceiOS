@@ -129,7 +129,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
             let price = AuthenticationController.shared.driver?.price,
             let bio = AuthenticationController.shared.driver?.bio,
             let photo = AuthenticationController.shared.driver?.photoUrl,
-            let userLocation = AuthenticationController.shared.driver?.location?.latLong else {return}
+            let userLocation = AuthenticationController.shared.genericUser?.location?.latLong else {return}
         
         switch isWorkingSwitch.isOn {
         case true:
