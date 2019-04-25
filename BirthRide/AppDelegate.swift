@@ -58,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
             // 3
             let newRootViewController: UIViewController = PhoneAuthorizationViewController()
             window?.rootViewController = newRootViewController
+            
         }
         registerForPushNotifications()
         
@@ -219,8 +220,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void) {
-        
+        let audioPlayer = AudioPlayer()
         // 1
+        audioPlayer.play(url: Bundle.main.url(forResource: "notification_sound", withExtension: "wav"))
         let userInfo = response.notification.request.content.userInfo
         UserDefaults.standard.set(userInfo, forKey: "UserInfoKey")
         AuthenticationController.shared.requestedRide = RequestedRide.createRideWithDictionary(dictionary: userInfo as! [String : AnyObject])

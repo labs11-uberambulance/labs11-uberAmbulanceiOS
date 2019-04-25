@@ -35,6 +35,8 @@
 		A278043322444B97001920A0 /* DriverPhotoRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278043122444B97001920A0 /* DriverPhotoRegistrationViewController.xib */; };
 		A285C8BB2268EF4300C86BD6 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285C8B92268EF4300C86BD6 /* WelcomeViewController.swift */; };
 		A285C8BC2268EF4300C86BD6 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A285C8BA2268EF4300C86BD6 /* WelcomeViewController.xib */; };
+		A28E5D3522726AAA00B38F60 /* notification_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = A28E5D2222726AA900B38F60 /* notification_sound.wav */; };
+		A28E5D3722726ADC00B38F60 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28E5D3622726ADC00B38F60 /* AudioPlayer.swift */; };
 		A29282CA224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */; };
 		A29282CB224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29282C9224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib */; };
 		A29282D5224BE4AB00FF9C28 /* AuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282D4224BE4AB00FF9C28 /* AuthenticationController.swift */; };
@@ -164,6 +166,8 @@
 		A278043122444B97001920A0 /* DriverPhotoRegistrationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverPhotoRegistrationViewController.xib; sourceTree = "<group>"; };
 		A285C8B92268EF4300C86BD6 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		A285C8BA2268EF4300C86BD6 /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
+		A28E5D2222726AA900B38F60 /* notification_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = notification_sound.wav; path = ../notification_sound.wav; sourceTree = "<group>"; };
+		A28E5D3622726ADC00B38F60 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthorizationViewController.swift; sourceTree = "<group>"; };
 		A29282C9224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneAuthorizationViewController.xib; sourceTree = "<group>"; };
 		A29282D4224BE4AB00FF9C28 /* AuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationController.swift; sourceTree = "<group>"; };
@@ -235,6 +239,8 @@
 			children = (
 				A215501E2242CE5C00DDF613 /* BirthRide */,
 				A215501F2242CE5C00DDF613 /* AppDelegate.swift */,
+				A28E5D3622726ADC00B38F60 /* AudioPlayer.swift */,
+				A28E5D2222726AA900B38F60 /* notification_sound.wav */,
 				A2082868225FFE7C009FE1CC /* GoogleService-Info.plist */,
 				A215501D2242CE5C00DDF613 /* Products */,
 				A2C19DA9224A875000FC20F0 /* BirthRide-Bridging-Header.h */,
@@ -624,6 +630,7 @@
 				A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */,
 				A285C8BC2268EF4300C86BD6 /* WelcomeViewController.xib in Resources */,
 				A200D9C52255496E00E1B551 /* DriverWorkViewController.xib in Resources */,
+				A28E5D3522726AAA00B38F60 /* notification_sound.wav in Resources */,
 				A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */,
 				A278042F224447A6001920A0 /* DriverRegistrationViewController.xib in Resources */,
 				A278042722444093001920A0 /* OnboardingViewController.xib in Resources */,
@@ -734,6 +741,7 @@
 				A278042A2244424E001920A0 /* MotherOrCaretakerRegistrationViewController.swift in Sources */,
 				A276465522652C68009C30DB /* Notification.Name+DidReceiveRideRequest.swift in Sources */,
 				A2C19DB1224A935F00FC20F0 /* Ride.swift in Sources */,
+				A28E5D3722726ADC00B38F60 /* AudioPlayer.swift in Sources */,
 				A278041E22443CC5001920A0 /* UserTypeViewController.swift in Sources */,
 				A2C19D9822456B8800FC20F0 /* UserType.swift in Sources */,
 				A278042622444093001920A0 /* OnboardingViewController.swift in Sources */,
