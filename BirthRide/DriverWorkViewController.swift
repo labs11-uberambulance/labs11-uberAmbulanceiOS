@@ -15,8 +15,6 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var startVillageLabel: UILabel!
     @IBOutlet weak var destinationLabel: UILabel!
     @IBOutlet weak var acceptRideButton: UIButton!
-    @IBOutlet weak var rideInformationView: UIView!
-    @IBOutlet weak var searchingForRidesLabel: UILabel!
     @IBOutlet weak var rejectRideButton: UIButton!
     //MARK: Private Properties
     
@@ -34,7 +32,6 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         destinationLabel.isHidden = true
         acceptRideButton.isHidden = true
         rejectRideButton.isHidden = true
-        searchingForRidesLabel.isHidden = true
         guard let fcmTokenDictionary = UserDefaults.standard.dictionary(forKey: "FCMToken"),
         let firToken = AuthenticationController.shared.userToken else {return}
         ABCNetworkingController().refreshToken(withFIRToken: firToken, withFCMToken: fcmTokenDictionary) { (error) in
@@ -55,21 +52,18 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
             isWorkingSwitch.isOn = true
         }
         if isWorkingSwitch.isOn && AuthenticationController.shared.requestedRide == nil {
-            searchingForRidesLabel.isHidden = false
             requestTimeLabel.isHidden = true
             startVillageLabel.isHidden = true
             destinationLabel.isHidden = true
             acceptRideButton.isHidden = true
             rejectRideButton.isHidden = true
         } else if AuthenticationController.shared.requestedRide != nil {
-            searchingForRidesLabel.isHidden = true
             requestTimeLabel.isHidden = false
             startVillageLabel.isHidden = false
             destinationLabel.isHidden = false
             acceptRideButton.isHidden = false
             rejectRideButton.isHidden = false
         } else if !isWorkingSwitch.isOn {
-            searchingForRidesLabel.isHidden = true
             requestTimeLabel.isHidden = true
             startVillageLabel.isHidden = true
             destinationLabel.isHidden = true
@@ -134,13 +128,11 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         switch isWorkingSwitch.isOn {
         case true:
             if AuthenticationController.shared.requestedRide == nil {
-                searchingForRidesLabel.isHidden = false
                 AuthenticationController.shared.driver?.isActive = true
                 
                 UserController().configureDriver(isUpdating: true, name: name, address: nil, email: nil, phoneNumber: phone, price: price.stringValue as NSString, bio: bio, photo: photo, userLocation: userLocation)
             }
         case false:
-                searchingForRidesLabel.isHidden = true
                 AuthenticationController.shared.driver?.isActive = false
                 
                 UserController().configureDriver(isUpdating: true, name: name, address: nil, email: nil, phoneNumber: phone, price: price.stringValue as NSString, bio: bio, photo: photo, userLocation: userLocation)
