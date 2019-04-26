@@ -26,16 +26,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="JLI-wi-GFu">
-                    <rect key="frame" x="84.5" y="104" width="206.5" height="31"/>
+                    <rect key="frame" x="81.5" y="104" width="212.5" height="31"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you working?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogc-Kf-aqe">
-                            <rect key="frame" x="0.0" y="0.0" width="131.5" height="31"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you available?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogc-Kf-aqe">
+                            <rect key="frame" x="0.0" y="0.0" width="137.5" height="31"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZDg-5C-d3Y">
-                            <rect key="frame" x="157.5" y="0.0" width="51" height="31"/>
+                            <rect key="frame" x="163.5" y="0.0" width="51" height="31"/>
                             <connections>
                                 <action selector="isWorkingSwitchToggled:" destination="-1" eventType="valueChanged" id="7dT-fN-TTP"/>
                             </connections>
