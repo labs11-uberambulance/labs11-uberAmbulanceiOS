@@ -33,7 +33,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         acceptRideButton.isHidden = true
         rejectRideButton.isHidden = true
         guard let fcmTokenDictionary = UserDefaults.standard.dictionary(forKey: "FCMToken"),
-        let firToken = AuthenticationController.shared.userToken else {return}
+            let firToken = AuthenticationController.shared.userToken else {return}
         ABCNetworkingController().refreshToken(withFIRToken: firToken, withFCMToken: fcmTokenDictionary) { (error) in
             if let error = error {
                 NSLog("Error in DriverWorkViewController.viewDidLoad")
@@ -46,29 +46,38 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        guard let isActive = AuthenticationController.shared.driver?.isActive else {return}
-        if isActive.boolValue {
-            isWorkingSwitch.isOn = true
+        if AuthenticationController.shared.driver == nil {
+            present(PhoneAuthorizationViewController(), animated: true, completion: nil)
+            return
         }
-        if isWorkingSwitch.isOn && AuthenticationController.shared.requestedRide == nil {
-            requestTimeLabel.isHidden = true
-            startVillageLabel.isHidden = true
-            destinationLabel.isHidden = true
-            acceptRideButton.isHidden = true
-            rejectRideButton.isHidden = true
-        } else if AuthenticationController.shared.requestedRide != nil {
-            requestTimeLabel.isHidden = false
-            startVillageLabel.isHidden = false
-            destinationLabel.isHidden = false
-            acceptRideButton.isHidden = false
-            rejectRideButton.isHidden = false
-        } else if !isWorkingSwitch.isOn {
-            requestTimeLabel.isHidden = true
-            startVillageLabel.isHidden = true
-            destinationLabel.isHidden = true
-            acceptRideButton.isHidden = true
-            rejectRideButton.isHidden = true
+        if AuthenticationController.shared.requestedRide != nil {
+            updateViews()
+        }
+        else {
+            
+            guard let isActive = AuthenticationController.shared.driver?.isActive else {return}
+            if isActive.boolValue {
+                isWorkingSwitch.isOn = true
+            }
+            if isWorkingSwitch.isOn && AuthenticationController.shared.requestedRide == nil {
+                requestTimeLabel.isHidden = true
+                startVillageLabel.isHidden = true
+                destinationLabel.isHidden = true
+                acceptRideButton.isHidden = true
+                rejectRideButton.isHidden = true
+            } else if AuthenticationController.shared.requestedRide != nil {
+                requestTimeLabel.isHidden = false
+                startVillageLabel.isHidden = false
+                destinationLabel.isHidden = false
+                acceptRideButton.isHidden = false
+                rejectRideButton.isHidden = false
+            } else if !isWorkingSwitch.isOn {
+                requestTimeLabel.isHidden = true
+                startVillageLabel.isHidden = true
+                destinationLabel.isHidden = true
+                acceptRideButton.isHidden = true
+                rejectRideButton.isHidden = true
+            }
         }
     }
     
@@ -133,11 +142,11 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
                 UserController().configureDriver(isUpdating: true, name: name, address: nil, email: nil, phoneNumber: phone, price: price.stringValue as NSString, bio: bio, photo: photo, userLocation: userLocation)
             }
         case false:
-                AuthenticationController.shared.driver?.isActive = false
-                
-                UserController().configureDriver(isUpdating: true, name: name, address: nil, email: nil, phoneNumber: phone, price: price.stringValue as NSString, bio: bio, photo: photo, userLocation: userLocation)
-            }
+            AuthenticationController.shared.driver?.isActive = false
+            
+            UserController().configureDriver(isUpdating: true, name: name, address: nil, email: nil, phoneNumber: phone, price: price.stringValue as NSString, bio: bio, photo: photo, userLocation: userLocation)
         }
+    }
     
     //MARK: Private Methods
     @objc
@@ -147,7 +156,7 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
             requestTimeLabel.isHidden = false
             requestTimeLabel.text = ride.name as String
             startVillageLabel.isHidden = false
-//            startVillageLabel.text = ride.
+            //            startVillageLabel.text = ride.
             destinationLabel.isHidden = false
             destinationLabel.text = ride.distance as String
             acceptRideButton.isHidden = false
@@ -179,7 +188,8 @@ class DriverWorkViewController: UIViewController, UITableViewDelegate {
         
         present(destinationVC, animated: true, completion: nil)
     }
+    
 }
-    
-    
+
+
 

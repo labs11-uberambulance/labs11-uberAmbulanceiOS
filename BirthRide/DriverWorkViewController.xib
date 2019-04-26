@@ -48,7 +48,7 @@
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mqD-5a-l6Y">
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     <items>
-                        <navigationItem title="Driver Work Screen" id="Q13-Zp-8k9">
+                        <navigationItem id="Q13-Zp-8k9">
                             <barButtonItem key="leftBarButtonItem" title="Log Out" id="8Yd-WU-Vd1">
                                 <connections>
                                     <action selector="logoutButtonTapped:" destination="-1" id="HFq-Ju-4VE"/>

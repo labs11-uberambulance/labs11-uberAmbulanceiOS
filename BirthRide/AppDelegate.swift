@@ -56,8 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
             AuthenticationController.shared.requestedRide = RequestedRide.createRideWithDictionary(dictionary: aps)
             
             // 3
-            let newRootViewController: UIViewController = DriverWorkViewController()
+            let newRootViewController: UIViewController = PhoneAuthorizationViewController()
             window?.rootViewController = newRootViewController
+            
         }
         registerForPushNotifications()
         
@@ -219,12 +220,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void) {
-        
+        let audioPlayer = AudioPlayer()
         // 1
+        audioPlayer.play(url: Bundle.main.url(forResource: "notification_sound", withExtension: "wav"))
         let userInfo = response.notification.request.content.userInfo
-        
+        UserDefaults.standard.set(userInfo, forKey: "UserInfoKey")
+        AuthenticationController.shared.requestedRide = RequestedRide.createRideWithDictionary(dictionary: userInfo as! [String : AnyObject])
         // 2
-        let rootViewController = DriverWorkViewController()
 //        if let aps = userInfo["aps"] as? [String: [String: AnyObject]] {
 //            rootViewController.ride = RequestedRide.createRideWithDictionary(dictionary: aps["data"] as! [String : AnyObject]) as RequestedRide?
 //            window?.rootViewController = rootViewController
