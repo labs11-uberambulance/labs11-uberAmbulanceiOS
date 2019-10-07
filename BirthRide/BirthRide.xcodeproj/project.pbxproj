@@ -35,7 +35,6 @@
 		A278043322444B97001920A0 /* DriverPhotoRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A278043122444B97001920A0 /* DriverPhotoRegistrationViewController.xib */; };
 		A285C8BB2268EF4300C86BD6 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285C8B92268EF4300C86BD6 /* WelcomeViewController.swift */; };
 		A285C8BC2268EF4300C86BD6 /* WelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A285C8BA2268EF4300C86BD6 /* WelcomeViewController.xib */; };
-		A28E5D3522726AAA00B38F60 /* notification_sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = A28E5D2222726AA900B38F60 /* notification_sound.wav */; };
 		A28E5D3722726ADC00B38F60 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28E5D3622726ADC00B38F60 /* AudioPlayer.swift */; };
 		A29282CA224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */; };
 		A29282CB224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A29282C9224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib */; };
@@ -75,13 +74,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = E544339490BF9A7904C14BD94B64C7DC;
 			remoteInfo = FirebaseCore;
-		};
-		A29282EA224C030400FF9C28 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8848581FDD440C2260A73A69C2C8E4E2;
-			remoteInfo = GoogleToolboxForMac;
 		};
 		A29282EC224C030400FF9C28 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -132,6 +124,41 @@
 			remoteGlobalIDString = C09B835B1F7A7245224E721B6881CC9E;
 			remoteInfo = FirebaseInstanceID;
 		};
+		A2EFED632346B2FD00E72FBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CB1B05FC6638F2FC57FC09A5A690BE5F;
+			remoteInfo = AppAuth;
+		};
+		A2EFED652346B2FD00E72FBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BB14AAA86D2D06A029D6E8475C56D91C;
+			remoteInfo = FirebaseCoreDiagnostics;
+		};
+		A2EFED672346B2FD00E72FBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A854832BB390E93653598060AC5E9C23;
+			remoteInfo = GoogleDataTransport;
+		};
+		A2EFED692346B2FD00E72FBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D6EEB469ED696ADF4AEC9257A14E6713;
+			remoteInfo = GoogleDataTransportCCTSupport;
+		};
+		A2EFED6B2346B2FD00E72FBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A1F474926EEEE6DEC5EF08620EBF0D91;
+			remoteInfo = GTMAppAuth;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -166,7 +193,6 @@
 		A278043122444B97001920A0 /* DriverPhotoRegistrationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DriverPhotoRegistrationViewController.xib; sourceTree = "<group>"; };
 		A285C8B92268EF4300C86BD6 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		A285C8BA2268EF4300C86BD6 /* WelcomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WelcomeViewController.xib; sourceTree = "<group>"; };
-		A28E5D2222726AA900B38F60 /* notification_sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = notification_sound.wav; path = ../notification_sound.wav; sourceTree = "<group>"; };
 		A28E5D3622726ADC00B38F60 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		A29282C8224AD38B00FF9C28 /* PhoneAuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthorizationViewController.swift; sourceTree = "<group>"; };
 		A29282C9224AD38B00FF9C28 /* PhoneAuthorizationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhoneAuthorizationViewController.xib; sourceTree = "<group>"; };
@@ -240,7 +266,6 @@
 				A215501E2242CE5C00DDF613 /* BirthRide */,
 				A215501F2242CE5C00DDF613 /* AppDelegate.swift */,
 				A28E5D3622726ADC00B38F60 /* AudioPlayer.swift */,
-				A28E5D2222726AA900B38F60 /* notification_sound.wav */,
 				A2082868225FFE7C009FE1CC /* GoogleService-Info.plist */,
 				A215501D2242CE5C00DDF613 /* Products */,
 				A2C19DA9224A875000FC20F0 /* BirthRide-Bridging-Header.h */,
@@ -340,16 +365,20 @@
 		A29282D7224C030400FF9C28 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				A2EFED642346B2FD00E72FBF /* AppAuth.framework */,
 				A29282E7224C030400FF9C28 /* FirebaseAuth.framework */,
 				A29282E9224C030400FF9C28 /* FirebaseCore.framework */,
+				A2EFED662346B2FD00E72FBF /* FirebaseCoreDiagnostics.framework */,
 				A2E7C1EC225F9CAB00429C13 /* FirebaseInstanceID.framework */,
 				A2E7C1D4225E493400429C13 /* FirebaseMessaging.framework */,
-				A29282EB224C030400FF9C28 /* GoogleToolboxForMac.framework */,
+				A2EFED682346B2FD00E72FBF /* GoogleDataTransport.framework */,
+				A2EFED6A2346B2FD00E72FBF /* GoogleDataTransportCCTSupport.framework */,
 				A29282ED224C030400FF9C28 /* GoogleUtilities.framework */,
+				A2EFED6C2346B2FD00E72FBF /* GTMAppAuth.framework */,
 				A29282EF224C030400FF9C28 /* GTMSessionFetcher.framework */,
 				A29282F1224C030400FF9C28 /* nanopb.framework */,
 				A29282F3224C030400FF9C28 /* Pods_BirthRide.framework */,
-				A2E7C1D6225E493400429C13 /* Protobuf.framework */,
+				A2E7C1D6225E493400429C13 /* protobuf.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -487,8 +516,6 @@
 				A21550182242CE5C00DDF613 /* Sources */,
 				A21550192242CE5C00DDF613 /* Frameworks */,
 				A215501A2242CE5C00DDF613 /* Resources */,
-				82F08386F5AFA178727AC80B /* [CP] Embed Pods Frameworks */,
-				206A6FA4904CFFD569AD6DB4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -506,7 +533,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = "Austin Cole";
 				TargetAttributes = {
 					A215501B2242CE5C00DDF613 = {
@@ -562,13 +589,6 @@
 			remoteRef = A29282E8224C030400FF9C28 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A29282EB224C030400FF9C28 /* GoogleToolboxForMac.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = GoogleToolboxForMac.framework;
-			remoteRef = A29282EA224C030400FF9C28 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		A29282ED224C030400FF9C28 /* GoogleUtilities.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -604,10 +624,10 @@
 			remoteRef = A2E7C1D3225E493400429C13 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A2E7C1D6225E493400429C13 /* Protobuf.framework */ = {
+		A2E7C1D6225E493400429C13 /* protobuf.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = Protobuf.framework;
+			path = protobuf.framework;
 			remoteRef = A2E7C1D5225E493400429C13 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -616,6 +636,41 @@
 			fileType = wrapper.framework;
 			path = FirebaseInstanceID.framework;
 			remoteRef = A2E7C1EB225F9CAB00429C13 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A2EFED642346B2FD00E72FBF /* AppAuth.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AppAuth.framework;
+			remoteRef = A2EFED632346B2FD00E72FBF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A2EFED662346B2FD00E72FBF /* FirebaseCoreDiagnostics.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FirebaseCoreDiagnostics.framework;
+			remoteRef = A2EFED652346B2FD00E72FBF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A2EFED682346B2FD00E72FBF /* GoogleDataTransport.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleDataTransport.framework;
+			remoteRef = A2EFED672346B2FD00E72FBF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A2EFED6A2346B2FD00E72FBF /* GoogleDataTransportCCTSupport.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GoogleDataTransportCCTSupport.framework;
+			remoteRef = A2EFED692346B2FD00E72FBF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A2EFED6C2346B2FD00E72FBF /* GTMAppAuth.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GTMAppAuth.framework;
+			remoteRef = A2EFED6B2346B2FD00E72FBF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -630,7 +685,6 @@
 				A215502A2242CE5C00DDF613 /* LaunchScreen.storyboard in Resources */,
 				A285C8BC2268EF4300C86BD6 /* WelcomeViewController.xib in Resources */,
 				A200D9C52255496E00E1B551 /* DriverWorkViewController.xib in Resources */,
-				A28E5D3522726AAA00B38F60 /* notification_sound.wav in Resources */,
 				A21550272242CE5C00DDF613 /* Assets.xcassets in Resources */,
 				A278042F224447A6001920A0 /* DriverRegistrationViewController.xib in Resources */,
 				A278042722444093001920A0 /* OnboardingViewController.xib in Resources */,
@@ -645,62 +699,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		206A6FA4904CFFD569AD6DB4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BirthRide/Pods-BirthRide-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BirthRide/Pods-BirthRide-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		82F08386F5AFA178727AC80B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BirthRide/Pods-BirthRide-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BirthRide/Pods-BirthRide-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		AC88E9032420FA7BB0867D1F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
