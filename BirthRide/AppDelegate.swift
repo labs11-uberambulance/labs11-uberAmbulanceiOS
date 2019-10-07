@@ -66,16 +66,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, Messag
     }
     //This method is calling the `handleURL` method of the GIDSignIn instance, which will properly handle the URL that the application receives at the end of the authentication process.
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url,
-                                                 sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                                                 annotation: [:])
+        return GIDSignIn.sharedInstance().handle(url)
     }
     
     //This deprecated method is being used so that the app can run on iOS 8 and older with the GIDSignIn object
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url,
-                                                 sourceApplication: sourceApplication,
-                                                 annotation: annotation)
+        return GIDSignIn.sharedInstance().handle(url)
     }
     
     //MARK: GIDSignInDelegate methods
@@ -222,7 +218,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         withCompletionHandler completionHandler: @escaping () -> Void) {
         let audioPlayer = AudioPlayer()
         // 1
-        audioPlayer.play(url: Bundle.main.url(forResource: "notification_sound", withExtension: "wav"))
         let userInfo = response.notification.request.content.userInfo
         UserDefaults.standard.set(userInfo, forKey: "UserInfoKey")
         AuthenticationController.shared.requestedRide = RequestedRide.createRideWithDictionary(dictionary: userInfo as! [String : AnyObject])
