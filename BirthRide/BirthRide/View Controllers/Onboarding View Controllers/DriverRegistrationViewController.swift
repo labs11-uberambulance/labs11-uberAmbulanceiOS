@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import GoogleMaps
+import MapKit
 import UserNotifications
 
 class DriverRegistrationViewController: UIViewController, TransitionBetweenViewControllers, GMSMapViewDelegate {
@@ -26,7 +26,7 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var bioTextView: UITextView!
-    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

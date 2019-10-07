@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DriverRegistrationViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
                 <outlet property="bioTextView" destination="0VZ-aM-dWD" id="wCi-Ch-FnA"/>
+                <outlet property="mapView" destination="Tbl-Sk-toP" id="8UR-19-Bbg"/>
                 <outlet property="nameTextField" destination="Oah-EL-73u" id="8GN-Fu-ALL"/>
                 <outlet property="phoneNumberTextField" destination="In9-fj-Hjn" id="vav-tj-Vup"/>
                 <outlet property="priceTextField" destination="ZF4-df-JoC" id="0gc-6x-lfb"/>

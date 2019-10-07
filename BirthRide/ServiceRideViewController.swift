@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import GoogleMaps
+import MapKit
 
 class ServiceRideViewController: UIViewController {
 
@@ -16,7 +16,7 @@ class ServiceRideViewController: UIViewController {
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var startAndDestinationNameLabel: UILabel!
     @IBOutlet weak var rideStatusButton: UIButton!
-    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var mapView: MKMapView!
     
     //MARK: Private Properties
     private var currentRide: Ride?

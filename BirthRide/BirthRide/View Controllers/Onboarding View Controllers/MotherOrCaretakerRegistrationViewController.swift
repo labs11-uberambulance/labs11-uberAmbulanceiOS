@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import GoogleMaps
-import GooglePlaces
+import MapKit
 
 class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
     //MARK: Private Properties
@@ -22,8 +21,8 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     var mother: PregnantMom?
     var isUpdating: Bool = false
     //MARK: IBOutlets
-    @IBOutlet weak var mapView: GMSMapView!
     
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var villageTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
@@ -105,21 +104,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         }
     }
     
-    //MARK: GMSAutocompleteResultsViewControllerDelegate methods
-//    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
-//        let latLong = "\(place.coordinate.latitude),\(place.coordinate.longitude)"
-//        destLatLong = latLong
-//
-//        if let name = place.name {
-//            startName = name
-//        }
-//        createDestinationMapMarker(coordinate: place.coordinate)
-//        resultsController.dismiss(animated: true, completion: nil)
-//    }
-//    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
-//        NSLog("Error in MotherOrCaretakerController.resultsController:didFailautocompleteWithError.")
-//        NSLog(error.localizedDescription)
-//    }
+    ///MARK
     
     ///This method will create a map marker when the user touches and holds on a position on the mapView. If a map marker already exists, the existing map marker will be deleted a the new map marker will pop up on the map.
     func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {

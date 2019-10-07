@@ -8,8 +8,7 @@
 
 import UIKit
 import Firebase
-import GoogleMaps
-import GooglePlaces
+import MapKit
 
 class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
     //MARK: Private Properties
@@ -36,8 +35,8 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
     var pregnantMom: PregnantMom?
 
     //MARK: IBOutlets
-    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

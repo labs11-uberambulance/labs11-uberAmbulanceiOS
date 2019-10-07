@@ -124,13 +124,6 @@
 			remoteGlobalIDString = C09B835B1F7A7245224E721B6881CC9E;
 			remoteInfo = FirebaseInstanceID;
 		};
-		A2EFED632346B2FD00E72FBF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CB1B05FC6638F2FC57FC09A5A690BE5F;
-			remoteInfo = AppAuth;
-		};
 		A2EFED652346B2FD00E72FBF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
@@ -151,13 +144,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = D6EEB469ED696ADF4AEC9257A14E6713;
 			remoteInfo = GoogleDataTransportCCTSupport;
-		};
-		A2EFED6B2346B2FD00E72FBF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A29282D6224C030400FF9C28 /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A1F474926EEEE6DEC5EF08620EBF0D91;
-			remoteInfo = GTMAppAuth;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -287,7 +273,6 @@
 			children = (
 				A29283502253F35500FF9C28 /* BirthRide.entitlements */,
 				A2E277902242D59A00F3460D /* View Controllers */,
-				A2928305224C438700FF9C28 /* Mother-flow View Controllers */,
 				A27804172243FDD9001920A0 /* Views */,
 				A22455C92270CA5800C5BE43 /* Operations */,
 				A2C19D962245589700FC20F0 /* Coordinators */,
@@ -365,7 +350,6 @@
 		A29282D7224C030400FF9C28 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A2EFED642346B2FD00E72FBF /* AppAuth.framework */,
 				A29282E7224C030400FF9C28 /* FirebaseAuth.framework */,
 				A29282E9224C030400FF9C28 /* FirebaseCore.framework */,
 				A2EFED662346B2FD00E72FBF /* FirebaseCoreDiagnostics.framework */,
@@ -374,7 +358,6 @@
 				A2EFED682346B2FD00E72FBF /* GoogleDataTransport.framework */,
 				A2EFED6A2346B2FD00E72FBF /* GoogleDataTransportCCTSupport.framework */,
 				A29282ED224C030400FF9C28 /* GoogleUtilities.framework */,
-				A2EFED6C2346B2FD00E72FBF /* GTMAppAuth.framework */,
 				A29282EF224C030400FF9C28 /* GTMSessionFetcher.framework */,
 				A29282F1224C030400FF9C28 /* nanopb.framework */,
 				A29282F3224C030400FF9C28 /* Pods_BirthRide.framework */,
@@ -397,7 +380,6 @@
 				A200D9B1225517B100E1B551 /* RequestRideViewController.swift */,
 			);
 			name = "Mother-flow View Controllers";
-			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		A2928316224D327600FF9C28 /* Categories/Extensions */ = {
@@ -479,6 +461,7 @@
 				A29282C6224ACF6B00FF9C28 /* Authentication View Controllers */,
 				A29282C7224ACF7E00FF9C28 /* Onboarding View Controllers */,
 				A292835722542A3400FF9C28 /* Driver-flow View Controllers */,
+				A2928305224C438700FF9C28 /* Mother-flow View Controllers */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -639,13 +622,6 @@
 			remoteRef = A2E7C1EB225F9CAB00429C13 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A2EFED642346B2FD00E72FBF /* AppAuth.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = AppAuth.framework;
-			remoteRef = A2EFED632346B2FD00E72FBF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		A2EFED662346B2FD00E72FBF /* FirebaseCoreDiagnostics.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -665,13 +641,6 @@
 			fileType = wrapper.framework;
 			path = GoogleDataTransportCCTSupport.framework;
 			remoteRef = A2EFED692346B2FD00E72FBF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		A2EFED6C2346B2FD00E72FBF /* GTMAppAuth.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = GTMAppAuth.framework;
-			remoteRef = A2EFED6B2346B2FD00E72FBF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

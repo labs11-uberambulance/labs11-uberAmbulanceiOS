@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RequestRideViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
+                <outlet property="mapView" destination="gj8-qo-Wpc" id="CK5-G9-vCw"/>
                 <outlet property="tableView" destination="UzU-F1-nps" id="b7R-V3-bir"/>
                 <outlet property="view" destination="jLR-CT-NWX" id="K3P-bT-KUL"/>
             </connections>

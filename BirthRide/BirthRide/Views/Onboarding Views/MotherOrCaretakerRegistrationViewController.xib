@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="caretakerTextField" destination="GSc-jJ-13N" id="IDH-n9-HVJ"/>
                 <outlet property="mapContainerView" destination="EwS-m6-FAh" id="Fvx-h3-jQj"/>
+                <outlet property="mapView" destination="I7S-yA-EyK" id="jeL-Rd-Pv6"/>
                 <outlet property="nameTextField" destination="49n-a9-pVs" id="9eW-Yc-Yyg"/>
                 <outlet property="phoneTextField" destination="Wf3-d0-DJL" id="Ez7-l2-zI6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
