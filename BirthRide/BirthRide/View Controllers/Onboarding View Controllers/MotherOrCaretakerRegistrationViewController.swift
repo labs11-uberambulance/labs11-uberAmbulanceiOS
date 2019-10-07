@@ -10,15 +10,11 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
-class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionBetweenViewControllers, GMSMapViewDelegate, GMSAutocompleteResultsViewControllerDelegate {
+class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
     //MARK: Private Properties
     private var networkingController = ABCNetworkingController()
     private let locationManager = CLLocationManager()
-    private var userMarkerArray: [GMSMarker] = []
-    private var destinationMarkerArray: [GMSMarker] = []
-    private let autocompleteResultsVC = GMSAutocompleteResultsViewController()
     private var searchController: UISearchController?
-    private var path = GMSMutablePath()
     private var startName: String?
     private var startLatLong: String?
     private var destLatLong: String?
@@ -41,21 +37,11 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         super.viewDidLoad()
         caretakerTextField.isHidden = true
         setupKeyboardDismissRecognizer()
-        mapView.delegate = self
         configureMapView()
         
         let filter = GMSAutocompleteFilter()
         filter.country = "UG"
         filter.type = .establishment
-        
-        
-        autocompleteResultsVC.autocompleteFilter = filter
-        searchController = UISearchController(searchResultsController: autocompleteResultsVC)
-        searchController?.searchResultsUpdater = autocompleteResultsVC
-        searchController?.searchBar.sizeToFit()
-        searchController?.searchBar.placeholder = "Search For Hospital"
-        mapContainerView.addSubview((searchController?.searchBar)!)
-        autocompleteResultsVC.delegate = self
         
         
         populateTextFieldsAndConfigureViewForEditing()
@@ -120,20 +106,20 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     }
     
     //MARK: GMSAutocompleteResultsViewControllerDelegate methods
-    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
-        let latLong = "\(place.coordinate.latitude),\(place.coordinate.longitude)"
-        destLatLong = latLong
-        
-        if let name = place.name {
-            startName = name
-        }
-        createDestinationMapMarker(coordinate: place.coordinate)
-        resultsController.dismiss(animated: true, completion: nil)
-    }
-    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
-        NSLog("Error in MotherOrCaretakerController.resultsController:didFailautocompleteWithError.")
-        NSLog(error.localizedDescription)
-    }
+//    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
+//        let latLong = "\(place.coordinate.latitude),\(place.coordinate.longitude)"
+//        destLatLong = latLong
+//
+//        if let name = place.name {
+//            startName = name
+//        }
+//        createDestinationMapMarker(coordinate: place.coordinate)
+//        resultsController.dismiss(animated: true, completion: nil)
+//    }
+//    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
+//        NSLog("Error in MotherOrCaretakerController.resultsController:didFailautocompleteWithError.")
+//        NSLog(error.localizedDescription)
+//    }
     
     ///This method will create a map marker when the user touches and holds on a position on the mapView. If a map marker already exists, the existing map marker will be deleted a the new map marker will pop up on the map.
     func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
