@@ -17,6 +17,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     private var startName: String?
     private var startLatLong: String?
     private var destLatLong: String?
+    private var userMarkerArray: [MKPointAnnotation] = []
     //MARK: Other Properties
     var mother: PregnantMom?
     var isUpdating: Bool = false
@@ -106,35 +107,13 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
     ///MARK
     
-    ///This method will create a map marker when the user touches and holds on a position on the mapView. If a map marker already exists, the existing map marker will be deleted a the new map marker will pop up on the map.
-    func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
-        guard userMarkerArray.count == 0 else {
-            return
-        }
-        let userMarker = GMSMarker()
-        userMarker.position = coordinate
-        userMarker.appearAnimation = .pop
-        userMarker.isDraggable = true
-        userMarker.map = mapView
-        userMarkerArray.append(userMarker)
-        let latLong = "\(coordinate.latitude),\(coordinate.longitude)"
-        startLatLong = latLong
-    }
-    
-    func mapView(_ mapView: GMSMapView, didDrag marker: GMSMarker) {
-        
-        let latLong = "\(marker.position.latitude),\(marker.position.longitude)"
-        startLatLong = latLong
-        
-    }
-    
     //MARK: Private Methods
     private func createDestinationMapMarker(coordinate: CLLocationCoordinate2D){
         
         if destinationMarkerArray.count > 0 {
             destinationMarkerArray.removeAll()
         }
-        let destinationMarker = GMSMarker()
+        let destinationMarker = MKPointAnnotation()
         
         if let latLong = mother?.destination?.latLong,
            latLong != "" {
@@ -142,25 +121,10 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
             let latLongArray = latLong.components(separatedBy: ",")
             let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)
             let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)
-            destinationMarker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
-            destinationMarker.appearAnimation = .pop
-            destinationMarker.isDraggable = true
-            destinationMarker.map = mapView
-            destinationMarker.icon = GMSMarker.markerImage(with: .blue)
-            destinationMarkerArray.append(destinationMarker)
+            destinationMarker.coordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+            mapView.addAnnotation(destinationMarker)
             return
             
-        }
-        else {
-        destinationMarker.position = coordinate
-        destinationMarker.appearAnimation = .pop
-        destinationMarker.isDraggable = false
-        destinationMarker.icon = GMSMarker.markerImage(with: .blue)
-        destinationMarker.map = mapView
-        mapView.settings.myLocationButton = true
-        destinationMarkerArray.append(destinationMarker)
-        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 6.0)
-        mapView.animate(to: camera)
         }
     }
     
