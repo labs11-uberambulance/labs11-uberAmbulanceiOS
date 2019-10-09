@@ -11,8 +11,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MotherOrCaretakerViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
                 <outlet property="caretakerTextField" destination="GSc-jJ-13N" id="IDH-n9-HVJ"/>
-                <outlet property="mapContainerView" destination="EwS-m6-FAh" id="Fvx-h3-jQj"/>
-                <outlet property="mapView" destination="I7S-yA-EyK" id="jeL-Rd-Pv6"/>
                 <outlet property="nameTextField" destination="49n-a9-pVs" id="9eW-Yc-Yyg"/>
                 <outlet property="phoneTextField" destination="Wf3-d0-DJL" id="Ez7-l2-zI6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -25,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillProportionally" alignment="top" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="qy1-Rk-p4O">
-                    <rect key="frame" x="20" y="60" width="335" height="157"/>
+                    <rect key="frame" x="20" y="72" width="335" height="157"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GdR-Ju-IZg">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="34"/>
@@ -115,7 +113,7 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="vWq-oQ-wYS">
-                    <rect key="frame" x="116" y="511" width="143" height="30"/>
+                    <rect key="frame" x="116" y="249" width="143" height="30"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5v-6k-Wta">
                             <rect key="frame" x="0.0" y="0.0" width="75" height="30"/>
@@ -133,22 +131,6 @@
                         </button>
                     </subviews>
                 </stackView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EwS-m6-FAh">
-                    <rect key="frame" x="0.0" y="225" width="375" height="278"/>
-                    <subviews>
-                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="I7S-yA-EyK">
-                            <rect key="frame" x="0.0" y="56" width="375" height="222"/>
-                        </mapView>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="I7S-yA-EyK" firstAttribute="top" secondItem="EwS-m6-FAh" secondAttribute="top" constant="56" id="4ey-Pu-5jd"/>
-                        <constraint firstAttribute="bottom" secondItem="I7S-yA-EyK" secondAttribute="bottom" id="UCH-Lz-gYS"/>
-                        <constraint firstItem="I7S-yA-EyK" firstAttribute="leading" secondItem="EwS-m6-FAh" secondAttribute="leading" id="bbI-u7-abn"/>
-                        <constraint firstAttribute="height" constant="278" id="r4J-Xw-DD0"/>
-                        <constraint firstAttribute="trailing" secondItem="I7S-yA-EyK" secondAttribute="trailing" id="tfC-gP-DCS"/>
-                    </constraints>
-                </view>
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sz4-f7-kkg">
                     <rect key="frame" x="0.0" y="8" width="375" height="44"/>
                     <items>
@@ -164,18 +146,13 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vWq-oQ-wYS" firstAttribute="top" secondItem="EwS-m6-FAh" secondAttribute="bottom" constant="8" id="0ga-uq-MOW"/>
-                <constraint firstItem="EwS-m6-FAh" firstAttribute="top" secondItem="qy1-Rk-p4O" secondAttribute="bottom" constant="8" id="2Ok-S0-1ll"/>
-                <constraint firstItem="EwS-m6-FAh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2j3-iE-J38"/>
-                <constraint firstItem="EwS-m6-FAh" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="F6P-Xi-cHC"/>
+                <constraint firstItem="vWq-oQ-wYS" firstAttribute="top" secondItem="qy1-Rk-p4O" secondAttribute="bottom" constant="20" id="9VW-dX-lZV"/>
                 <constraint firstItem="sz4-f7-kkg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="Gxp-9u-5KC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qy1-Rk-p4O" secondAttribute="trailing" constant="20" id="KZj-ss-wTh"/>
                 <constraint firstItem="vWq-oQ-wYS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UOZ-xJ-ExR"/>
                 <constraint firstItem="sz4-f7-kkg" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Vgi-0i-7aZ"/>
                 <constraint firstItem="qy1-Rk-p4O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="dYx-tK-ZF5"/>
-                <constraint firstItem="EwS-m6-FAh" firstAttribute="top" secondItem="qy1-Rk-p4O" secondAttribute="bottom" constant="8" id="gqf-9t-9cB"/>
-                <constraint firstItem="qy1-Rk-p4O" firstAttribute="top" secondItem="sz4-f7-kkg" secondAttribute="bottom" constant="8" id="kip-q7-cDb"/>
-                <constraint firstItem="qy1-Rk-p4O" firstAttribute="top" secondItem="sz4-f7-kkg" secondAttribute="bottom" constant="8" id="q6S-dV-ioA"/>
+                <constraint firstItem="qy1-Rk-p4O" firstAttribute="top" secondItem="sz4-f7-kkg" secondAttribute="bottom" constant="20" id="kip-q7-cDb"/>
                 <constraint firstItem="sz4-f7-kkg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="xsB-2D-p2Y"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

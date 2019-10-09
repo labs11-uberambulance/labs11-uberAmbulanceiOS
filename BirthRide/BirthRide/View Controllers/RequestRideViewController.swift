@@ -10,17 +10,15 @@ import UIKit
 import Firebase
 import MapKit
 
-class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class RequestRideViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //MARK: Private Properties
     private var driversArray: [Driver] = [] {
         didSet {
             DispatchQueue.main.async {
-            self.configureDriverMarkers()
             self.tableView.reloadData()
             }
         }
     }
-    private var driverMarkersArray: [GMSMarker]  = []
     private var buttonsArray: [UIButton] = []
     private let authenticationController = AuthenticationController.shared
     
@@ -47,10 +45,7 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        mapView.delegate = self
         
-        configureMapView()
-    
         let pregnantMomStart = authenticationController.pregnantMom?.start
         
         
@@ -80,66 +75,6 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
     }
     
     //MARK: Private Methods
-    private func configureMapView() {
-        
-        guard let latLongString = authenticationController.pregnantMom?.start?.latLong,
-        let destLatLongString = authenticationController.pregnantMom?.destination?.latLong,
-            latLongString != "",
-        destLatLongString != "" else {return}
-        
-        
-        let latLongArray = latLongString.components(separatedBy: ",")
-        let destLatLongArray = destLatLongString.components(separatedBy: ",")
-        
-        let latitude = UserController().stringToInt(intString: latLongArray[0] as String, viewController: self)
-        let destLatitude = UserController().stringToInt(intString: destLatLongArray[0] as String, viewController: self)
-        
-        let longitude = UserController().stringToInt(intString: latLongArray[1] as String, viewController: self)
-        let destLongitude = UserController().stringToInt(intString: destLatLongArray[1] as String, viewController: self)
-        
-        
-        
-        let destinationMarker = GMSMarker()
-        destinationMarker.icon = GMSMarker.markerImage(with: .blue)
-        destinationMarker.position = CLLocationCoordinate2D(latitude: destLatitude, longitude: destLongitude)
-        destinationMarker.map = mapView
-        
-        
-        let userMarker = GMSMarker()
-        userMarker.icon = GMSMarker.markerImage(with: .red)
-        userMarker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        userMarker.map = mapView
-        
-         mapView.animate(to: GMSCameraPosition(latitude: userMarker.position.latitude + 0.04, longitude: userMarker.position.longitude - 0.025, zoom: 13.0))
-        
-        
-    }
-    
-    //The profile pictures of the drivers need to be resized in order to be used as icons for the markers. Some of the images are enormous.
-    private func configureDriverMarkers() {
-        for driver in driversArray {
-            guard let latLongString = driver.location?.latLong,
-            let name = driver.requestedDriverName,
-            let price = driver.price,
-            let duration = driver.duration else{ return}
-            
-            let latLongArray = latLongString.components(separatedBy: ",")
-            
-            let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)
-            let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)
-            
-            let driverMarker = GMSMarker()
-            driverMarker.icon = GMSMarker.markerImage(with: .orange)
-            driverMarker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-            driverMarker.map = mapView
-            driverMarker.title = name as String
-            driverMarker.snippet = "Price: \(price.stringValue), Duration: \(duration)"
-            driverMarker.isFlat = true
-            
-            driverMarkersArray.append(driverMarker)
-            
-        }
-    }
     
     private func fetchDrivers(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
         guard let token = AuthenticationController.shared.userToken,
@@ -246,31 +181,8 @@ class RequestRideViewController: UIViewController, GMSMapViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        for marker in driverMarkersArray {
-            marker.isFlat = true
-        }
-        mapView.selectedMarker = driverMarkersArray[indexPath.row]
+       
         
-        //Note the hacky latitude and longitude here. For some reason the map won't center where I want it to, so I had to add in some adjustments.
-        mapView.animate(to: GMSCameraPosition(latitude: driverMarkersArray[indexPath.row].position.latitude + 0.04, longitude: driverMarkersArray[indexPath.row].position.longitude - 0.025, zoom: 13.0))
-        driverMarkersArray[indexPath.row].isFlat = false
-        
-    }
-    
-    //MARK: MapView Delegate Methods
-    
-    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        guard let index = driverMarkersArray.firstIndex(of: marker) else {return false}
-        tableView.selectRow(at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .top)
-        
-        for marker in driverMarkersArray {
-            marker.isFlat = true
-        }
-        mapView.animate(to: GMSCameraPosition(latitude: marker.position.latitude + 0.04, longitude: marker.position.longitude - 0.025, zoom: 13.0))
-        marker.isFlat = false
-        mapView.selectedMarker = marker
-        
-        return true
     }
     
     //MARK: TableView Delegate Private Helper Methods

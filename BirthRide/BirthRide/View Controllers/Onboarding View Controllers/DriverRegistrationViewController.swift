@@ -10,10 +10,9 @@ import UIKit
 import MapKit
 import UserNotifications
 
-class DriverRegistrationViewController: UIViewController, TransitionBetweenViewControllers, GMSMapViewDelegate {
+class DriverRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
     
     //MARK: Private Properties
-    private var userMarkerArray: [GMSMarker] = []
     private var userLocation: NSString?
     private var destinationVC: UIViewController?
     
@@ -30,10 +29,8 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.delegate = self
         setupKeyboardDismissRecognizer()
         populateLabelsAndTextFields()
-        configureMapView()
         // Do any additional setup after loading the view.
         
         NotificationCenter.default.addObserver(self, selector: #selector(showRideRequestAlert), name: .didReceiveRideRequest, object: nil)
@@ -76,21 +73,6 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
     }
     
     
-    ///This method will create a map marker when the user touches and holds on a position on the mapView. The map marker will **not** be created if one already exists.
-    func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
-        guard userMarkerArray.count == 0 else {return}
-        let userMarker = GMSMarker()
-        userMarker.position = coordinate
-        userMarker.appearAnimation = .pop
-        userMarker.isDraggable = true
-        userMarker.map = mapView
-        userMarkerArray.append(userMarker)
-        userLocation = "\(coordinate.latitude),\(coordinate.longitude)" as NSString
-    }
-    
-    func mapView(_ mapView: GMSMapView, didEndDragging marker: GMSMarker) {
-        userLocation = "\(marker.position.latitude),\(marker.position.longitude)" as NSString
-    }
     
     
     //MARK: Private Methods
@@ -118,24 +100,6 @@ class DriverRegistrationViewController: UIViewController, TransitionBetweenViewC
         }
     }
     
-    ///This method will configure the mapView. If the app is able to get the user coordinates, then it will also create a marker to put on the map. If not it will return. The map marker will **not** be created if one already exists.
-    private func configureMapView() {
-        let userMarker = GMSMarker()
-        guard let userLocation = AuthenticationController.shared.genericUser?.location?.latLong,
-            userLocation != "" else {return}
-        self.userLocation = userLocation
-        let latLongArray = userLocation.components(separatedBy: ",")
-        let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)
-        let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)
-        userMarker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
-        userMarker.appearAnimation = .pop
-        userMarker.isDraggable = true
-        userMarker.map = mapView
-        
-        mapView.camera = GMSCameraPosition(latitude: CLLocationDegrees(latitude) + 0.04, longitude: CLLocationDegrees(longitude) - 0.025, zoom: 13.0)
-        userMarkerArray.append(userMarker)
-        
-    }
     
     private func showInformationAlert() {
         let informationAlert = UIAlertController(title: "Important Information", message: "Please fill out all available fields and select a \"home\" location using the map. You may select the buttons below for more information about different fields and on how to use the map. None of this information is permanent and you may change it at any time.", preferredStyle: .alert)

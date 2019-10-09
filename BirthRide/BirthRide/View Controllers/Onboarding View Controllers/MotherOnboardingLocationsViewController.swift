@@ -46,7 +46,7 @@ class MotherOnboardingLocationsViewController: UIViewController, UISearchBarDele
         dismiss(animated: true, completion: nil)
         
         // Create the search request
-        let searchRequest = MKLocalSearch.Request
+        //let searchRequest = MKLocalSearch.Request
         
     }
 
