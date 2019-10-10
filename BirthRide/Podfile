@@ -6,6 +6,9 @@ target 'BirthRide' do
   use_frameworks!
 
   # Pods for LambdaTimeline
-
+pod 'Firebase/Core'
+pod 'Firebase/Messaging'
+pod 'Firebase/Auth'
+pod 'FirebaseInstanceID'
 
 end

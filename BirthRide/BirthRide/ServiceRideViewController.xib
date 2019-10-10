@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ServiceRideViewController" customModule="BirthRide" customModuleProvider="target">
             <connections>
-                <outlet property="mapView" destination="1YF-hN-lGR" id="hhp-MR-abF"/>
+                <outlet property="mapView" destination="RMl-gZ-5Hq" id="CIW-XT-mRe"/>
                 <outlet property="nameLabel" destination="yHT-wU-RyA" id="qDg-rO-ix7"/>
                 <outlet property="phoneLabel" destination="biu-QQ-OZe" id="vKC-97-DC8"/>
                 <outlet property="rideStatusButton" destination="ngN-n8-rl7" id="uE0-zq-Fly"/>
@@ -24,10 +23,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1YF-hN-lGR" customClass="GMSMapView">
-                    <rect key="frame" x="0.0" y="275.5" width="414" height="586.5"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngN-n8-rl7">
                     <rect key="frame" x="184.5" y="225.5" width="45" height="30"/>
                     <state key="normal" title="Onsite"/>
@@ -66,22 +61,25 @@
                         <constraint firstAttribute="trailing" secondItem="nm6-e8-NWc" secondAttribute="trailing" id="dwa-20-wz9"/>
                     </constraints>
                 </stackView>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RMl-gZ-5Hq">
+                    <rect key="frame" x="0.0" y="275.5" width="414" height="586.5"/>
+                </mapView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="1YF-hN-lGR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7iu-8J-WKx"/>
-                <constraint firstItem="1YF-hN-lGR" firstAttribute="top" secondItem="ngN-n8-rl7" secondAttribute="bottom" constant="20" id="9G2-lz-4JJ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="RMl-gZ-5Hq" secondAttribute="bottom" id="7Zx-az-XPD"/>
+                <constraint firstItem="RMl-gZ-5Hq" firstAttribute="top" secondItem="ngN-n8-rl7" secondAttribute="bottom" constant="20" id="F99-Wt-hbv"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RMl-gZ-5Hq" secondAttribute="trailing" id="OQm-7l-UhI"/>
                 <constraint firstItem="tGd-gn-lh1" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="60" id="SDZ-gt-ne0"/>
-                <constraint firstItem="1YF-hN-lGR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Yr0-pZ-n8B"/>
                 <constraint firstItem="ngN-n8-rl7" firstAttribute="top" secondItem="tGd-gn-lh1" secondAttribute="bottom" constant="20" id="YtU-vN-UBM"/>
                 <constraint firstItem="tGd-gn-lh1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bv6-V4-54E"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="1YF-hN-lGR" secondAttribute="bottom" id="j5r-EI-6xh"/>
+                <constraint firstItem="RMl-gZ-5Hq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hw5-we-obw"/>
                 <constraint firstItem="tGd-gn-lh1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="jHY-pI-gGW"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1YF-hN-lGR" secondAttribute="trailing" id="lCL-DV-Zcz"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tGd-gn-lh1" secondAttribute="trailing" constant="20" id="lR7-J0-yib"/>
                 <constraint firstItem="ngN-n8-rl7" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vir-v3-Km3"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="133" y="119"/>
         </view>
     </objects>
 </document>

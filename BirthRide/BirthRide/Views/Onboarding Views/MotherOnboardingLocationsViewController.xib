@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MotherOnboardingLocationsViewController" customModule="BirthRide" customModuleProvider="target">
+            <connections>
+                <outlet property="mapView" destination="VSi-VW-S1P" id="Ng3-Ev-D8E"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nRl-xq-l0d">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <items>
+                        <navigationItem title="Start and End Locations" id="ABT-z6-ihf">
+                            <barButtonItem key="rightBarButtonItem" systemItem="search" id="7sp-f1-A5G">
+                                <connections>
+                                    <action selector="searchButtonTapped:" destination="-1" id="u8J-T4-ydb"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="VSi-VW-S1P">
+                    <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                </mapView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="VSi-VW-S1P" secondAttribute="bottom" id="2WR-yL-ZKr"/>
+                <constraint firstItem="nRl-xq-l0d" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="82g-EW-thZ"/>
+                <constraint firstItem="nRl-xq-l0d" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="GXW-ou-NhR"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VSi-VW-S1P" secondAttribute="trailing" id="eVd-47-gca"/>
+                <constraint firstItem="VSi-VW-S1P" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hXk-vo-WYP"/>
+                <constraint firstItem="nRl-xq-l0d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="j4A-yn-Eb0"/>
+                <constraint firstItem="VSi-VW-S1P" firstAttribute="top" secondItem="nRl-xq-l0d" secondAttribute="bottom" id="kbm-Rf-Gan"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="132" y="119"/>
+        </view>
+        <navigationItem title="Title" id="s2w-GH-rYq"/>
+    </objects>
+</document>

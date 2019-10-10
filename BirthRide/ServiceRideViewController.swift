@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import GoogleMaps
+import MapKit
 
 class ServiceRideViewController: UIViewController {
 
@@ -16,7 +16,7 @@ class ServiceRideViewController: UIViewController {
     @IBOutlet weak var phoneLabel: UILabel!
     @IBOutlet weak var startAndDestinationNameLabel: UILabel!
     @IBOutlet weak var rideStatusButton: UIButton!
-    @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var mapView: MKMapView!
     
     //MARK: Private Properties
     private var currentRide: Ride?
@@ -46,7 +46,6 @@ class ServiceRideViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.rideStatusButton.setTitle("Drop Off", for: .normal)
                     self.rideStatusButton.isUserInteractionEnabled = true
-                    self.updateMapView()
                 }
                 
             }
@@ -90,81 +89,8 @@ class ServiceRideViewController: UIViewController {
             let currentRide = ridesArray.filter{$0.rideId == rideId}
             self.currentRide = currentRide[0]
             DispatchQueue.main.async {
-                self.configureMapView()
                 self.configureLabels()
             }
-        }
-    }
-    private func updateMapView() {
-        mapView.clear()
-        guard let currentRide = currentRide else {return}
-        
-        let startLatLongArray = currentRide.start.components(separatedBy: ",")
-        let destLatLongArray = currentRide.destination.components(separatedBy: ",")
-        
-        let startLatitude = UserController().stringToInt(intString: startLatLongArray[0], viewController: self)
-        let startLongitude = UserController().stringToInt(intString: startLatLongArray[1], viewController: self)
-        
-        let destLatitude = UserController().stringToInt(intString: destLatLongArray[0], viewController: self)
-        let destLongitude = UserController().stringToInt(intString: destLatLongArray[1], viewController: self)
-        
-        let driverMapMarker = GMSMarker()
-        driverMapMarker.icon = GMSMarker.markerImage(with: .red)
-        driverMapMarker.position = CLLocationCoordinate2D(latitude: startLatitude, longitude: startLongitude)
-        driverMapMarker.map = mapView
-        
-        let camera = GMSCameraPosition(latitude: driverMapMarker.position.latitude + 0.04, longitude: driverMapMarker.position.longitude - 0.025, zoom: 13.0)
-        mapView.animate(to: camera)
-        
-        let destMapMarker = GMSMarker()
-        destMapMarker.icon = GMSMarker.markerImage(with: .blue)
-        destMapMarker.position = CLLocationCoordinate2D(latitude: destLatitude, longitude: destLongitude)
-        destMapMarker.map = mapView
-    }
-    private func configureMapView() {
-        mapView.clear()
-        guard let currentRide = currentRide,
-        let driverLatLong = AuthenticationController.shared.genericUser?.location?.latLong else {return}
-        
-        let driverLatLongArray = driverLatLong.components(separatedBy: ",")
-        let startLatLongArray = currentRide.start.components(separatedBy: ",")
-        let destLatLongArray = currentRide.destination.components(separatedBy: ",")
-        
-        let drivertLatitude = UserController().stringToInt(intString: driverLatLongArray[0], viewController: self)
-        let driverLongitude = UserController().stringToInt(intString: driverLatLongArray[1], viewController: self)
-        
-        let startLatitude = UserController().stringToInt(intString: startLatLongArray[0], viewController: self)
-        let startLongitude = UserController().stringToInt(intString: startLatLongArray[1], viewController: self)
-        
-        let destLatitude = UserController().stringToInt(intString: destLatLongArray[0], viewController: self)
-        let destLongitude = UserController().stringToInt(intString: destLatLongArray[1], viewController: self)
-        
-        if rideStatusButton.titleLabel?.text == "Onsite" {
-            let driverMapMarker = GMSMarker()
-            driverMapMarker.icon = GMSMarker.markerImage(with: .red)
-            driverMapMarker.position = CLLocationCoordinate2D(latitude: drivertLatitude, longitude: driverLongitude)
-            driverMapMarker.map = mapView
-            
-            let camera = GMSCameraPosition(latitude: driverMapMarker.position.latitude + 0.04, longitude: driverMapMarker.position.longitude - 0.025, zoom: 13.0)
-            mapView.animate(to: camera)
-            
-            let startMapMarker = GMSMarker()
-            startMapMarker.icon = GMSMarker.markerImage(with: .blue)
-            startMapMarker.position = CLLocationCoordinate2D(latitude: startLatitude, longitude: startLongitude)
-            startMapMarker.map = mapView
-        } else if rideStatusButton.titleLabel?.text == "Drop Off"{
-            let driverMapMarker = GMSMarker()
-            driverMapMarker.icon = GMSMarker.markerImage(with: .red)
-            driverMapMarker.position = CLLocationCoordinate2D(latitude: startLatitude, longitude: startLongitude)
-            driverMapMarker.map = mapView
-            
-            let camera = GMSCameraPosition(latitude: driverMapMarker.position.latitude, longitude: driverMapMarker.position.longitude, zoom: 6.0)
-            mapView.animate(to: camera)
-            
-            let destMapMarker = GMSMarker()
-            destMapMarker.icon = GMSMarker.markerImage(with: .blue)
-            destMapMarker.position = CLLocationCoordinate2D(latitude: destLatitude, longitude: destLongitude)
-            destMapMarker.map = mapView
         }
     }
     private func configureLabels() {

@@ -7,26 +7,18 @@
 //
 
 import UIKit
-import GoogleMaps
-import GooglePlaces
+import MapKit
 
-class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionBetweenViewControllers, GMSMapViewDelegate, GMSAutocompleteResultsViewControllerDelegate {
+class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionBetweenViewControllers {
     //MARK: Private Properties
     private var networkingController = ABCNetworkingController()
     private let locationManager = CLLocationManager()
-    private var userMarkerArray: [GMSMarker] = []
-    private var destinationMarkerArray: [GMSMarker] = []
-    private let autocompleteResultsVC = GMSAutocompleteResultsViewController()
     private var searchController: UISearchController?
-    private var path = GMSMutablePath()
     private var startName: String?
-    private var startLatLong: String?
-    private var destLatLong: String?
     //MARK: Other Properties
     var mother: PregnantMom?
     var isUpdating: Bool = false
     //MARK: IBOutlets
-    @IBOutlet weak var mapView: GMSMapView!
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var villageTextField: UITextField!
@@ -34,28 +26,10 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     @IBOutlet weak var caretakerTextField: UITextField!
     @IBOutlet weak var destinationSearchBar: UISearchBar!
     
-    @IBOutlet weak var mapContainerView: UIView!
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         caretakerTextField.isHidden = true
         setupKeyboardDismissRecognizer()
-        mapView.delegate = self
-        configureMapView()
-        
-        let filter = GMSAutocompleteFilter()
-        filter.country = "UG"
-        filter.type = .establishment
-        
-        
-        autocompleteResultsVC.autocompleteFilter = filter
-        searchController = UISearchController(searchResultsController: autocompleteResultsVC)
-        searchController?.searchResultsUpdater = autocompleteResultsVC
-        searchController?.searchBar.sizeToFit()
-        searchController?.searchBar.placeholder = "Search For Hospital"
-        mapContainerView.addSubview((searchController?.searchBar)!)
-        autocompleteResultsVC.delegate = self
         
         
         populateTextFieldsAndConfigureViewForEditing()
@@ -74,8 +48,6 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         villageTextField.frame = CGRect(x: 153.33333333333337, y: 0.0, width: 181.66666666666666, height: 30.0)
         phoneTextField.frame = CGRect(x: 153.33333333333337, y: 0.0, width: 181.66666666666666, height: 30.0)
         caretakerTextField.frame = CGRect(x: 153.33333333333337, y: 0.0, width: 181.66666666666666, height: 30.0)
-        startLatLong = mother?.start?.latLong as String?
-        destLatLong = mother?.destination?.latLong as String?
     }
     
     //MARK: IBActions
@@ -89,13 +61,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
     
     @IBAction func continueButtonTapped(_ sender: Any) {
         guard nameTextField.text != "", villageTextField.text != "", phoneTextField.text != "",
-            userMarkerArray.count > 0,
-            destinationMarkerArray.count > 0,
-        let name = nameTextField.text,
-        let phone = phoneTextField.text,
-        let village = villageTextField.text,
-        let startLatLong = startLatLong,
-        let destLatLong = destLatLong else {return}
+            let name = nameTextField.text, let village = villageTextField.text, let phone = phoneTextField.text else {return}
        
         var caretakerName = caretakerTextField.text
 
@@ -106,7 +72,7 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         if caretakerName == nil {
             caretakerName = ""
         }
-        UserController().configurePregnantMom(isUpdating: isUpdating, name: name as NSString, village: village as NSString, phone: phone as NSString, caretakerName: caretakerName as NSString?, startLatLong: startLatLong as NSString, destinationLatLong: destLatLong as NSString, startDescription: "")
+        UserController().configurePregnantMom(isUpdating: isUpdating, name: name as NSString, village: village as NSString, phone: phone as NSString, caretakerName: caretakerName as NSString?, startLatLong: "0, 0", destinationLatLong: "0, 0" as NSString, startDescription: "")
 
         transition(userType: nil)
     }
@@ -114,84 +80,15 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
 
     //MARK: TransitionBetweenViewControllers Protocol Method
     func transition(userType: UserType?) {
-        let destinationVC = RequestRideViewController()
+        let destinationVC = MotherOnboardingLocationsViewController()
         self.present(destinationVC, animated: true) {
         }
     }
     
-    //MARK: GMSAutocompleteResultsViewControllerDelegate methods
-    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didAutocompleteWith place: GMSPlace) {
-        let latLong = "\(place.coordinate.latitude),\(place.coordinate.longitude)"
-        destLatLong = latLong
-        
-        if let name = place.name {
-            startName = name
-        }
-        createDestinationMapMarker(coordinate: place.coordinate)
-        resultsController.dismiss(animated: true, completion: nil)
-    }
-    func resultsController(_ resultsController: GMSAutocompleteResultsViewController, didFailAutocompleteWithError error: Error) {
-        NSLog("Error in MotherOrCaretakerController.resultsController:didFailautocompleteWithError.")
-        NSLog(error.localizedDescription)
-    }
-    
-    ///This method will create a map marker when the user touches and holds on a position on the mapView. If a map marker already exists, the existing map marker will be deleted a the new map marker will pop up on the map.
-    func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
-        guard userMarkerArray.count == 0 else {
-            return
-        }
-        let userMarker = GMSMarker()
-        userMarker.position = coordinate
-        userMarker.appearAnimation = .pop
-        userMarker.isDraggable = true
-        userMarker.map = mapView
-        userMarkerArray.append(userMarker)
-        let latLong = "\(coordinate.latitude),\(coordinate.longitude)"
-        startLatLong = latLong
-    }
-    
-    func mapView(_ mapView: GMSMapView, didDrag marker: GMSMarker) {
-        
-        let latLong = "\(marker.position.latitude),\(marker.position.longitude)"
-        startLatLong = latLong
-        
-    }
+    ///MARK
     
     //MARK: Private Methods
-    private func createDestinationMapMarker(coordinate: CLLocationCoordinate2D){
-        
-        if destinationMarkerArray.count > 0 {
-            destinationMarkerArray.removeAll()
-        }
-        let destinationMarker = GMSMarker()
-        
-        if let latLong = mother?.destination?.latLong,
-           latLong != "" {
-            
-            let latLongArray = latLong.components(separatedBy: ",")
-            let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)
-            let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)
-            destinationMarker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
-            destinationMarker.appearAnimation = .pop
-            destinationMarker.isDraggable = true
-            destinationMarker.map = mapView
-            destinationMarker.icon = GMSMarker.markerImage(with: .blue)
-            destinationMarkerArray.append(destinationMarker)
-            return
-            
-        }
-        else {
-        destinationMarker.position = coordinate
-        destinationMarker.appearAnimation = .pop
-        destinationMarker.isDraggable = false
-        destinationMarker.icon = GMSMarker.markerImage(with: .blue)
-        destinationMarker.map = mapView
-        mapView.settings.myLocationButton = true
-        destinationMarkerArray.append(destinationMarker)
-        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude, longitude: coordinate.longitude, zoom: 6.0)
-        mapView.animate(to: camera)
-        }
-    }
+    
     
     ///This method will set up a tap gesture recognizer to dismiss the keyboard whenever the user touches a view outside of it.
     private func setupKeyboardDismissRecognizer(){
@@ -207,22 +104,6 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
         view.endEditing(true)
     }
     
-    ///This method will configure the mapView. If the app is able to get the user coordinates, then it will also create a marker to put on the map. If not it will return. The map marker will **not** be created if one already exists.
-    private func configureMapView() {
-        guard let userLocation = AuthenticationController.shared.genericUser?.location?.latLong,
-            userLocation != "" else {return}
-        
-        let latLongArray = userLocation.components(separatedBy: ",")
-        let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)
-        let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)
-        
-        mapView.camera = GMSCameraPosition(latitude: CLLocationDegrees(latitude) + 0.04, longitude: CLLocationDegrees(longitude) - 0.025, zoom: 6.0)
-        if isUpdating {
-        configureUserMarker()
-        }
-        
-    }
-    
     private func populateTextFieldsAndConfigureViewForEditing() {
         nameTextField.isHidden = false
         phoneTextField.isHidden = false
@@ -234,23 +115,6 @@ class MotherOrCaretakerRegistrationViewController: UIViewController, TransitionB
             villageTextField.text = mother.start?.name as String?
             caretakerTextField.text = mother.caretakerName as String?
             caretakerTextField.isHidden = false
-        }
-    }
-    
-    private func configureUserMarker() {
-        let userMarker = GMSMarker()
-        if let mother = mother,
-            let userLocation = mother.start?.latLong {
-            let latLongArray = userLocation.components(separatedBy: ",")
-            let latitude = UserController().stringToInt(intString: latLongArray[0], viewController: self)
-            let longitude = UserController().stringToInt(intString: latLongArray[1], viewController: self)
-            userMarker.position = CLLocationCoordinate2D(latitude: CLLocationDegrees(longitude), longitude: CLLocationDegrees(latitude))
-            userMarker.appearAnimation = .pop
-            userMarker.isDraggable = true
-            userMarker.map = mapView
-            userMarker.icon = GMSMarker.markerImage(with: .blue)
-            userMarkerArray.append(userMarker)
-            return
         }
     }
     
